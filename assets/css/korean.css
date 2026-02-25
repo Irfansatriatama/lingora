@@ -343,3 +343,78 @@
     font-size: 0.75rem;
   }
 }
+
+/* ── Vocab KR — Badge TOPIK ── */
+.kr-badge-topik1 {
+  background: rgba(26, 111, 187, 0.12);
+  color: var(--kr-blue);
+  border: 1px solid rgba(26, 111, 187, 0.25);
+}
+
+.kr-badge-topik2 {
+  background: rgba(142, 68, 173, 0.12);
+  color: #8e44ad;
+  border: 1px solid rgba(142, 68, 173, 0.25);
+}
+
+/* ── Vocab KR — Card elements ── */
+.kr-word {
+  font-family: var(--font-cjk);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: 0.02em;
+}
+
+.kr-romanization {
+  font-size: 0.82rem;
+  color: var(--kr-blue);
+  font-style: italic;
+}
+
+.kr-example {
+  font-family: var(--font-cjk);
+  color: var(--text-1);
+  font-size: 0.9rem;
+}
+
+.vocab-example-roman {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* ── SRS Korean word ── */
+.kr-srs-char {
+  font-family: var(--font-cjk);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--kr-blue);
+  letter-spacing: 0.04em;
+}
+
+/* ── Grammar KR ── */
+.kr-pattern {
+  font-family: var(--font-cjk);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--kr-blue);
+}
+
+.kr-ex-kr {
+  font-family: var(--font-cjk);
+  font-size: 0.95rem;
+  color: var(--text-1);
+}
+
+.kr-ex-roman {
+  font-size: 0.8rem;
+  color: var(--kr-blue);
+  font-style: italic;
+}
+
+.kr-cat-badge {
+  font-size: 1rem;
+  line-height: 1;
+}
