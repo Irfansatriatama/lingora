@@ -1,0 +1,345 @@
+/* ============================================================
+   LINGORA — Korean Module CSS
+   Hangul, Kosakata KR, Grammar KR, Dialog KR
+   Fase 21.3
+   ============================================================ */
+
+/* ── Korean color accents ── */
+:root {
+  --kr-blue: #1a6fbb;
+  --kr-blue-dark: #125494;
+  --kr-blue-light: #e8f2fb;
+  --kr-red: #c0392b;
+}
+
+[data-theme="dark"] {
+  --kr-blue-light: #0d2d4a;
+}
+
+/* ── Page header – Korean (biru) ── */
+.module-page-header.kr-header {
+  background: linear-gradient(135deg, var(--kr-blue) 0%, var(--kr-blue-dark) 100%);
+}
+
+.module-page-header.kr-header .module-header-pct {
+  color: #8ecaff;
+}
+
+/* ── Hangul grid ── */
+.hangul-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-2);
+  margin: 24px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--kr-blue);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hangul-section-title span {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-3);
+}
+
+/* Hangul char cell — lebih lebar karena info lebih banyak */
+.hangul-cell {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 10px 10px;
+  cursor: pointer;
+  transition: border-color var(--dur), box-shadow var(--dur), transform var(--dur);
+  position: relative;
+  text-align: center;
+  min-width: 0;
+}
+
+.hangul-cell:hover {
+  border-color: var(--kr-blue);
+  box-shadow: 0 4px 12px rgba(26, 111, 187, 0.15);
+  transform: translateY(-2px);
+}
+
+.hangul-cell.learned {
+  border-color: var(--kr-blue);
+  background: var(--kr-blue-light);
+}
+
+.hangul-cell .char-main {
+  font-size: 1.8rem;
+  font-family: var(--font-cjk);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.hangul-cell .char-romaji {
+  font-size: 0.7rem;
+  color: var(--kr-blue);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.hangul-cell .char-name {
+  font-size: 0.65rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.hangul-cell .fav-btn {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  background: none;
+  border: none;
+  color: var(--text-3);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 2px;
+  line-height: 1;
+  transition: color var(--dur);
+  opacity: 0;
+}
+
+.hangul-cell:hover .fav-btn,
+.hangul-cell .fav-btn.active {
+  opacity: 1;
+}
+
+.hangul-cell .fav-btn.active {
+  color: var(--gold);
+}
+
+.hangul-cell .fav-btn:hover {
+  color: var(--gold);
+}
+
+/* Grid layout */
+.hangul-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+/* ── Syllable table ── */
+.syllable-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 24px;
+}
+
+.syllable-table {
+  border-collapse: collapse;
+  min-width: 560px;
+  width: 100%;
+  font-size: 0.82rem;
+}
+
+.syllable-table th {
+  background: var(--kr-blue);
+  color: #fff;
+  padding: 8px 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.syllable-table td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: center;
+  background: var(--surface);
+  vertical-align: middle;
+}
+
+.syllable-table tr:hover td {
+  background: var(--kr-blue-light);
+}
+
+.syllable-table .syl-block {
+  font-family: var(--font-cjk);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+}
+
+.syllable-table .syl-roman {
+  font-size: 0.7rem;
+  color: var(--text-3);
+  display: block;
+}
+
+.syllable-table .syl-batchim {
+  background: var(--surface-2);
+}
+
+/* ── Modal detail Hangul ── */
+.hangul-modal-jamo {
+  font-family: var(--font-cjk);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--kr-blue);
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.hangul-modal-name {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 4px;
+}
+
+.hangul-modal-roman {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--kr-blue);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.hangul-modal-type-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hangul-modal-type-badge.consonant {
+  background: rgba(26, 111, 187, 0.12);
+  color: var(--kr-blue);
+}
+
+.hangul-modal-type-badge.vowel {
+  background: rgba(192, 57, 43, 0.1);
+  color: var(--kr-red);
+}
+
+.hangul-modal-example {
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-top: 8px;
+}
+
+.hangul-modal-example .ex-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hangul-modal-example .ex-syllable {
+  font-family: var(--font-cjk);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.hangul-modal-example .ex-word {
+  font-family: var(--font-cjk);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.hangul-modal-example .ex-meaning {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  margin-top: 4px;
+}
+
+/* ── Flashcard Korean ── */
+.flashcard-front .kr-jamo {
+  font-family: var(--font-cjk);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--kr-blue);
+  line-height: 1;
+}
+
+.flashcard-back .kr-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.flashcard-back .kr-roman {
+  font-size: 1rem;
+  color: var(--kr-blue);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.flashcard-back .kr-example-word {
+  font-family: var(--font-cjk);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.flashcard-back .kr-example-meaning {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  margin-top: 4px;
+}
+
+/* ── SRS Korean ── */
+.srs-char.kr {
+  color: var(--kr-blue);
+  font-family: var(--font-cjk);
+  font-size: 4rem;
+}
+
+/* ── Filter tab pill ── */
+.hangul-filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* ── Badge type labels ── */
+.badge-kr-consonant {
+  background: rgba(26, 111, 187, 0.12);
+  color: var(--kr-blue);
+  border: 1px solid rgba(26, 111, 187, 0.25);
+}
+
+.badge-kr-vowel {
+  background: rgba(192, 57, 43, 0.1);
+  color: var(--kr-red);
+  border: 1px solid rgba(192, 57, 43, 0.2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hangul-grid {
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    gap: 8px;
+  }
+
+  .hangul-cell .char-main {
+    font-size: 1.5rem;
+  }
+
+  .syllable-table {
+    font-size: 0.75rem;
+  }
+}

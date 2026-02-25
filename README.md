@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 21.1 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Rename & Rebranding → Lingora (Phase 21.1) |
+| **Fase Saat Ini** | FASE 21.3 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Modul Hangul — halaman 3 tab, CSS Korea, Audio KR (Fase 21.3) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -120,7 +120,7 @@ lingora/
 │   │   ├── dialog.html                 ← Percakapan situasional 7 dialog
 │   │   └── quiz.html                   ← Quiz ZH: pilih/ketik, modul pilihan
 │   └── korean/                         ← [BARU — Fase 21]
-│       ├── hangul.html                 ← Tab: Tabel / Flashcard / SRS (Jamo dasar)
+│       ├── hangul.html                 ← Tab: Tabel / Flashcard / SRS (Jamo dasar) ✅
 │       ├── vocabulary.html             ← Tab: Jelajah / SRS | Filter tema & level
 │       ├── grammar.html                ← Accordion pola grammar dasar–menengah
 │       ├── dialog.html                 ← Percakapan situasional 6+ dialog
@@ -626,7 +626,7 @@ Fase 33 (Leaderboard — eks Fase 25)        ← Dulu di-hold
 |----------|------|-----|--------|
 | **21.1** | Rename & Rebranding | Update nama di semua file (HTML, JS, manifest, sw.js) | ✅ SELESAI |
 | **21.2** | Data Korea | 4 file data: `hangul.js`, `kr-vocab.js`, `kr-grammar.js`, `kr-dialogs.js` | ✅ SELESAI |
-| **21.3** | Modul Hangul | `hangul.html` + `hangul.js` + `korean.css` (3 tab: Tabel, Flashcard, SRS) | 🔲 Belum |
+| **21.3** | Modul Hangul | `hangul.html` + `hangul.js` + `korean.css` (3 tab: Tabel, Flashcard, SRS) | ✅ SELESAI |
 | **21.4** | Modul Vocab & Grammar | `vocabulary.html` + `kr-vocab.js`, `grammar.html` + `kr-grammar.js` | 🔲 Belum |
 | **21.5** | Modul Dialog & Quiz | `dialog.html` + `kr-dialog.js`, `quiz.html` + `quiz-kr.js` | 🔲 Belum |
 | **21.6** | Integrasi Penuh | Sidebar semua halaman, Dashboard KR, Stats, Settings, Badge, Challenge | 🔲 Belum |
@@ -729,22 +729,33 @@ const KrGrammarData = (() => {
 
 ---
 
-#### FASE 21.3 — Modul Hangul 🔲
-
-Buat halaman Hangul lengkap dengan 3 tab, CSS Korea, dan script halaman.
+#### FASE 21.3 — Modul Hangul ✅ SELESAI (2026-02-25)
 
 **File baru:**
-```
-pages/korean/hangul.html          ← 3 tab: Tabel / Flashcard / SRS
-assets/js/pages/hangul.js         ← Grid, flashcard 3D, SRS, favorit, audio
-assets/css/korean.css             ← Semua style Korea (dipakai semua halaman KR)
-```
+- `pages/korean/hangul.html` — halaman Hangul lengkap dengan 3 tab (Tabel, Flashcard, SRS)
+- `assets/js/pages/hangul.js` — grid jamo, modal detail suku kata, flashcard 3D, SRS, favorit, audio ko-KR
+- `assets/css/korean.css` — seluruh style modul Korea (dipakai semua halaman KR ke depan)
 
-**Tab "Tabel":** Grid konsonan (14 baris) + grid vokal (21 baris). Kolom: Jamo, Nama, Romanisasi, Contoh Suku Kata. Tombol 🔊 per sel (`ko-KR`).
+**Update:**
+- `assets/js/modules/audio.js` — tambah `koVoice` (ko-KR), `speakKR()`, `hasKRVoice()`. Update `loadVoices()` dan exports.
+- 20 halaman HTML (semua kecuali login/register/report) — sidebar update: tambah section 🇰🇷 Bahasa Korea (Hangul, Kosakata KR, Grammar KR, Dialog KR) + link Quiz Korea di section Latihan.
 
-**Tab "Flashcard":** 3D flip — depan: Jamo besar, belakang: nama + romanisasi + contoh kata. Filter konsonan/vokal/semua. Mode favorit.
+**Fitur Tab "Tabel":**
+- Grid konsonan (14 jamo, biru) + grid vokal (21 jamo, merah)
+- Tabel suku kata dasar dengan visualisasi struktur C+V+(받침)
+- Klik suku kata → modal detail: visualisasi komponen, audio ko-KR
+- Tombol ★ favorit per jamo
+- Filter: Semua / Konsonan / Vokal / Favorit
 
-**Tab "SRS":** SRS Engine (SM-2) untuk semua Jamo. Rating Lupa/Sulit/Mudah/Hafal. Konsisten dengan Hiragana dan Hanzi.
+**Fitur Tab "Flashcard":**
+- 3D flip — depan: jamo besar, belakang: nama + romanisasi + contoh kata
+- Filter konsonan/vokal/semua/belum hafal/favorit
+- Integrasi `Progress.markLearned()` dan `XPSystem`
+
+**Fitur Tab "SRS":**
+- SRS Engine SM-2 untuk semua 35 jamo
+- Rating Lupa/Sulit/Mudah/Hafal
+- Audio ko-KR di sisi belakang kartu
 
 ---
 
@@ -1215,6 +1226,7 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v1.19 — Fase 20.4** | — | Live Clock di Topbar Dashboard | ✅ |
 | **v2.0 — Fase 21.1** | 2026-02-25 | Rename & Rebranding NihonHan → Lingora. Update: semua 23 HTML, 43 JS, manifest.json (v3 bump), sw.js (lingora-v3), index.html, 404.html. Tagline diupdate ke 3 bahasa. Folder proyek: `lingora/`. | ✅ |
 | **v2.1 — Fase 21.2** | 2026-02-25 | Data Korea: `hangul.js` (14 konsonan + 21 vokal + 70 suku kata), `kr-vocab.js` (155 kata, 15 tema, TOPIK1/2), `kr-grammar.js` (27 pola, 5 kategori), `kr-dialogs.js` (6 dialog situasional TOPIK I). | ✅ |
+| **v2.2 — Fase 21.3** | 2026-02-25 | Modul Hangul: `pages/korean/hangul.html` (3 tab: Tabel/Flashcard/SRS), `assets/js/pages/hangul.js` (grid jamo, modal detail, flashcard, SRS, favorit, audio ko-KR), `assets/css/korean.css` (semua style Korea). Update `audio.js`: tambah `koVoice`, `speakKR()`, `hasKRVoice()`. Update sidebar 20 halaman: tambah section 🇰🇷 Korea + Quiz Korea. | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 

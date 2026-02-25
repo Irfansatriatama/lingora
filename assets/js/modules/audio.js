@@ -1,13 +1,14 @@
 /**
- * Lingora - Audio Engine (Fase 9)
+ * Lingora - Audio Engine (Fase 9, update Fase 21.3)
  * Wrapper untuk Web Speech API (SpeechSynthesis).
- * Mendukung suara Jepang (ja-JP) dan Mandarin (zh-CN).
+ * Mendukung suara Jepang (ja-JP), Mandarin (zh-CN), Korea (ko-KR).
  */
 const AudioEngine = (() => {
 
   let voicesLoaded  = false;
   let jaVoice       = null;
   let zhVoice       = null;
+  let koVoice       = null;
   let _autoPlay     = false;   // diisi dari settings saat init
 
   // ── Muat voices ──────────────────────────────────────────
@@ -15,6 +16,7 @@ const AudioEngine = (() => {
     const voices = window.speechSynthesis.getVoices();
     jaVoice = voices.find(v => v.lang.startsWith('ja')) || null;
     zhVoice = voices.find(v => v.lang === 'zh-CN' || v.lang === 'zh-TW' || v.lang.startsWith('zh')) || null;
+    koVoice = voices.find(v => v.lang === 'ko-KR' || v.lang.startsWith('ko')) || null;
     voicesLoaded = true;
   }
 
@@ -42,6 +44,7 @@ const AudioEngine = (() => {
     // Pilih voice yang sesuai jika ada
     if (lang.startsWith('ja') && jaVoice) utt.voice = jaVoice;
     if (lang.startsWith('zh') && zhVoice) utt.voice = zhVoice;
+    if (lang.startsWith('ko') && koVoice) utt.voice = koVoice;
 
     window.speechSynthesis.speak(utt);
     return true;
@@ -55,6 +58,10 @@ const AudioEngine = (() => {
     return speak(text, 'zh-CN', 0.8);
   }
 
+  function speakKR(text) {
+    return speak(text, 'ko-KR', 0.85);
+  }
+
   // ── Cek ketersediaan voice ────────────────────────────────
   function hasJPVoice() {
     if (!window.speechSynthesis) return false;
@@ -66,6 +73,12 @@ const AudioEngine = (() => {
     if (!window.speechSynthesis) return false;
     loadVoices();
     return zhVoice !== null || window.speechSynthesis.getVoices().some(v => v.lang.startsWith('zh'));
+  }
+
+  function hasKRVoice() {
+    if (!window.speechSynthesis) return false;
+    loadVoices();
+    return koVoice !== null || window.speechSynthesis.getVoices().some(v => v.lang.startsWith('ko'));
   }
 
   function isSupported() {
@@ -86,7 +99,7 @@ const AudioEngine = (() => {
   }
 
   // ── Helper: buat tombol speaker HTML ─────────────────────
-  // lang: 'jp' | 'zh'
+  // lang: 'jp' | 'zh' | 'ko'
   // text: teks yang akan diucapkan
   // kelas tambahan opsional
   function btnHTML(text, lang, extraClass = '') {
@@ -97,8 +110,8 @@ const AudioEngine = (() => {
   }
 
   return {
-    speak, speakJP, speakZH,
-    hasJPVoice, hasZHVoice, isSupported,
+    speak, speakJP, speakZH, speakKR,
+    hasJPVoice, hasZHVoice, hasKRVoice, isSupported,
     setAutoPlay, getAutoPlay,
     init, btnHTML,
   };
