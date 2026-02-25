@@ -25,11 +25,30 @@ const ZhVocabData = (() => {
 
   const vocab = [
     // ── Greetings ──
-    { word:'你好',     pinyin:'nǐ hǎo',    meaning:'halo',                  theme:'greetings', example:{ sentence:'你好！很高兴认识你！', pinyin:'Nǐ hǎo! Hěn gāoxìng rènshi nǐ!', meaning:'Halo! Senang bertemu kamu!' } },
-    { word:'你好吗',   pinyin:'nǐ hǎo ma', meaning:'apa kabar',             theme:'greetings', example:{ sentence:'你好吗？我很好，谢谢！', pinyin:'Nǐ hǎo ma? Wǒ hěn hǎo, xièxie!', meaning:'Apa kabar? Saya baik, terima kasih!' } },
-    { word:'谢谢',     pinyin:'xièxie',    meaning:'terima kasih',          theme:'greetings', example:{ sentence:'谢谢你的帮助！', pinyin:'Xièxie nǐ de bāngzhù!', meaning:'Terima kasih atas bantuanmu!' } },
+    { word:'你好',     pinyin:'nǐ hǎo',    meaning:'halo',                  theme:'greetings', example:{ sentence:'你好！很高兴认识你！', pinyin:'Nǐ hǎo! Hěn gāoxìng rènshi nǐ!', meaning:'Halo! Senang bertemu kamu!' },
+      sentences: [
+        { original:'你好！今天天气很好，对不对？', romanization:'Nǐ hǎo! Jīntiān tiānqì hěn hǎo, duì bu duì?', translation:'Halo! Cuaca hari ini bagus sekali, betul tidak?', level:'HSK1' },
+        { original:'你好，请问你叫什么名字？', romanization:'Nǐ hǎo, qǐng wèn nǐ jiào shénme míngzi?', translation:'Halo, boleh saya tahu namamu?', level:'HSK1' },
+        { original:'第一次见面，你好！', romanization:'Dì yī cì jiànmiàn, nǐ hǎo!', translation:'Pertama kali bertemu, halo!', level:'HSK2' }
+      ] },
+    { word:'你好吗',   pinyin:'nǐ hǎo ma', meaning:'apa kabar',             theme:'greetings', example:{ sentence:'你好吗？我很好，谢谢！', pinyin:'Nǐ hǎo ma? Wǒ hěn hǎo, xièxie!', meaning:'Apa kabar? Saya baik, terima kasih!' },
+      sentences: [
+        { original:'你好吗？好久不见！', romanization:'Nǐ hǎo ma? Hǎojiǔ bú jiàn!', translation:'Apa kabar? Sudah lama tidak bertemu!', level:'HSK1' },
+        { original:'你最近好吗？工作顺利吗？', romanization:'Nǐ zuìjìn hǎo ma? Gōngzuò shùnlì ma?', translation:'Bagaimana kabarmu belakangan? Pekerjaan lancar?', level:'HSK2' }
+      ] },
+    { word:'谢谢',     pinyin:'xièxie',    meaning:'terima kasih',          theme:'greetings', example:{ sentence:'谢谢你的帮助！', pinyin:'Xièxie nǐ de bāngzhù!', meaning:'Terima kasih atas bantuanmu!' },
+      sentences: [
+        { original:'谢谢你的礼物！我很喜欢。', romanization:'Xièxie nǐ de lǐwù! Wǒ hěn xǐhuan.', translation:'Terima kasih atas hadiahnya! Saya sangat suka.', level:'HSK1' },
+        { original:'谢谢你教我汉语。', romanization:'Xièxie nǐ jiāo wǒ Hànyǔ.', translation:'Terima kasih sudah mengajariku bahasa Mandarin.', level:'HSK2' },
+        { original:'非常谢谢你，没有你我不行。', romanization:'Fēicháng xièxie nǐ, méiyǒu nǐ wǒ bùxíng.', translation:'Terima kasih banyak, tanpamu aku tidak bisa.', level:'HSK3' }
+      ] },
     { word:'不客气',   pinyin:'bù kèqi',   meaning:'sama-sama',             theme:'greetings', example:{ sentence:'A: 谢谢！B: 不客气！', pinyin:'A: Xièxie! B: Bù kèqi!', meaning:'A: Terima kasih! B: Sama-sama!' } },
-    { word:'对不起',   pinyin:'duìbuqǐ',   meaning:'maaf',                  theme:'greetings', example:{ sentence:'对不起，我迟到了。', pinyin:'Duìbuqǐ, wǒ chídào le.', meaning:'Maaf, saya terlambat.' } },
+    { word:'对不起',   pinyin:'duìbuqǐ',   meaning:'maaf',                  theme:'greetings', example:{ sentence:'对不起，我迟到了。', pinyin:'Duìbuqǐ, wǒ chídào le.', meaning:'Maaf, saya terlambat.' },
+      sentences: [
+        { original:'对不起，我来晚了！', romanization:'Duìbuqǐ, wǒ lái wǎn le!', translation:'Maaf, aku datang terlambat!', level:'HSK1' },
+        { original:'对不起，我不小心打碎了你的杯子。', romanization:'Duìbuqǐ, wǒ bù xiǎoxīn dǎsuì le nǐ de bēizi.', translation:'Maaf, aku tidak sengaja memecahkan gelasmu.', level:'HSK2' },
+        { original:'真的很对不起，是我的错。', romanization:'Zhēn de hěn duìbuqǐ, shì wǒ de cuò.', translation:'Saya benar-benar minta maaf, ini salahku.', level:'HSK3' }
+      ] },
     { word:'没关系',   pinyin:'méiguānxi', meaning:'tidak apa-apa',         theme:'greetings', example:{ sentence:'没关系，没事的！', pinyin:'Méiguānxi, méi shì de!', meaning:'Tidak apa-apa, tidak masalah!' } },
     { word:'再见',     pinyin:'zàijiàn',   meaning:'sampai jumpa',          theme:'greetings', example:{ sentence:'明天再见！', pinyin:'Míngtiān zàijiàn!', meaning:'Sampai jumpa besok!' } },
     { word:'早上好',   pinyin:'zǎoshang hǎo', meaning:'selamat pagi',     theme:'greetings', example:{ sentence:'早上好！今天天气很好。', pinyin:'Zǎoshang hǎo! Jīntiān tiānqì hěn hǎo.', meaning:'Selamat pagi! Cuaca hari ini bagus.' } },
@@ -45,9 +64,22 @@ const ZhVocabData = (() => {
     { word:'表哥', pinyin:'biǎogē', meaning:'sepupu laki-laki (lebih tua)', theme:'family', example:{ sentence:'我表哥在北京。', pinyin:'Wǒ biǎogē zài Běijīng.', meaning:'Sepupu laki-lakiku ada di Beijing.' } },
     { word:'结婚', pinyin:'jiéhūn', meaning:'menikah',            theme:'family', example:{ sentence:'他们结婚了。', pinyin:'Tāmen jiéhūn le.', meaning:'Mereka sudah menikah.' } },
     // ── Food ──
-    { word:'早饭', pinyin:'zǎofàn',   meaning:'sarapan',          theme:'food', example:{ sentence:'吃早饭了吗？', pinyin:'Chī zǎofàn le ma?', meaning:'Sudah sarapan?' } },
-    { word:'午饭', pinyin:'wǔfàn',    meaning:'makan siang',      theme:'food', example:{ sentence:'中午吃午饭。', pinyin:'Zhōngwǔ chī wǔfàn.', meaning:'Makan siang di tengah hari.' } },
-    { word:'晚饭', pinyin:'wǎnfàn',   meaning:'makan malam',      theme:'food', example:{ sentence:'我们一起吃晚饭。', pinyin:'Wǒmen yīqǐ chī wǎnfàn.', meaning:'Kita makan malam bersama.' } },
+    { word:'早饭', pinyin:'zǎofàn',   meaning:'sarapan',          theme:'food', example:{ sentence:'吃早饭了吗？', pinyin:'Chī zǎofàn le ma?', meaning:'Sudah sarapan?' },
+      sentences: [
+        { original:'你每天吃早饭吗？', romanization:'Nǐ měitiān chī zǎofàn ma?', translation:'Apakah kamu makan sarapan setiap hari?', level:'HSK1' },
+        { original:'早饭很重要，不能不吃。', romanization:'Zǎofàn hěn zhòngyào, bù néng bù chī.', translation:'Sarapan itu penting, tidak boleh tidak makan.', level:'HSK2' }
+      ] },
+    { word:'午饭', pinyin:'wǔfàn',    meaning:'makan siang',      theme:'food', example:{ sentence:'中午吃午饭。', pinyin:'Zhōngwǔ chī wǔfàn.', meaning:'Makan siang di tengah hari.' },
+      sentences: [
+        { original:'我们一起去吃午饭吧！', romanization:'Wǒmen yīqǐ qù chī wǔfàn ba!', translation:'Ayo kita pergi makan siang bersama!', level:'HSK1' },
+        { original:'午饭吃什么好？', romanization:'Wǔfàn chī shénme hǎo?', translation:'Makan siang mau makan apa enaknya?', level:'HSK2' }
+      ] },
+    { word:'晚饭', pinyin:'wǎnfàn',   meaning:'makan malam',      theme:'food', example:{ sentence:'我们一起吃晚饭。', pinyin:'Wǒmen yīqǐ chī wǎnfàn.', meaning:'Kita makan malam bersama.' },
+      sentences: [
+        { original:'晚饭准备好了！', romanization:'Wǎnfàn zhǔnbèi hǎo le!', translation:'Makan malam sudah siap!', level:'HSK1' },
+        { original:'我在家做晚饭，你来吃吗？', romanization:'Wǒ zài jiā zuò wǎnfàn, nǐ lái chī ma?', translation:'Aku masak makan malam di rumah, mau datang makan?', level:'HSK2' },
+        { original:'晚饭后我们去散步吧。', romanization:'Wǎnfàn hòu wǒmen qù sànbù ba.', translation:'Setelah makan malam kita jalan-jalan ya.', level:'HSK2' }
+      ] },
     { word:'米饭', pinyin:'mǐfàn',    meaning:'nasi putih',        theme:'food', example:{ sentence:'一碗米饭。', pinyin:'Yī wǎn mǐfàn.', meaning:'Sesangkir nasi.' } },
     { word:'面包', pinyin:'miànbāo',  meaning:'roti',              theme:'food', example:{ sentence:'吃面包。', pinyin:'Chī miànbāo.', meaning:'Makan roti.' } },
     { word:'牛奶', pinyin:'niúnǎi',   meaning:'susu sapi',         theme:'food', example:{ sentence:'喝牛奶。', pinyin:'Hē niúnǎi.', meaning:'Minum susu.' } },

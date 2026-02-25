@@ -26,15 +26,43 @@ const JpVocabData = (() => {
 
   const vocab = [
     // ── Greetings ───────────────────────────────────────────
-    { word:'おはよう',     reading:'おはよう',       romaji:'ohayou',         meaning:'selamat pagi (kasual)',     theme:'greetings', level:'N5', example:{ jp:'おはよう！元気？', romaji:'Ohayou! Genki?', id:'Pagi! Apa kabar?' } },
-    { word:'おはようございます', reading:'おはようございます', romaji:'ohayou gozaimasu', meaning:'selamat pagi (sopan)', theme:'greetings', level:'N5', example:{ jp:'おはようございます、先生。', romaji:'Ohayou gozaimasu, sensei.', id:'Selamat pagi, Sensei.' } },
-    { word:'こんにちは',   reading:'こんにちは',     romaji:'konnichiwa',     meaning:'halo / selamat siang',     theme:'greetings', level:'N5', example:{ jp:'こんにちは、田中さん！', romaji:'Konnichiwa, Tanaka-san!', id:'Halo, Tanaka!' } },
+    { word:'おはよう',     reading:'おはよう',       romaji:'ohayou',         meaning:'selamat pagi (kasual)',     theme:'greetings', level:'N5', example:{ jp:'おはよう！元気？', romaji:'Ohayou! Genki?', id:'Pagi! Apa kabar?' },
+      sentences: [
+        { original:'おはよう！今日もいい天気だね。', romanization:'Ohayou! Kyou mo ii tenki da ne.', translation:'Pagi! Cuacanya bagus lagi hari ini ya.', level:'N5' },
+        { original:'おはよう。ちゃんと寝られた？', romanization:'Ohayou. Chanto nerareta?', translation:'Pagi. Kamu sudah tidur nyenyak?', level:'N5' },
+        { original:'おはよう！早いね、もう来たの？', romanization:'Ohayou! Hayai ne, mou kita no?', translation:'Pagi! Kamu sudah datang, cepat sekali ya?', level:'N4' }
+      ] },
+    { word:'おはようございます', reading:'おはようございます', romaji:'ohayou gozaimasu', meaning:'selamat pagi (sopan)', theme:'greetings', level:'N5', example:{ jp:'おはようございます、先生。', romaji:'Ohayou gozaimasu, sensei.', id:'Selamat pagi, Sensei.' },
+      sentences: [
+        { original:'おはようございます。今日もよろしくお願いします。', romanization:'Ohayou gozaimasu. Kyou mo yoroshiku onegaishimasu.', translation:'Selamat pagi. Mohon kerja samanya hari ini juga.', level:'N5' },
+        { original:'おはようございます、山田部長。', romanization:'Ohayou gozaimasu, Yamada buchou.', translation:'Selamat pagi, Pak Manajer Yamada.', level:'N4' }
+      ] },
+    { word:'こんにちは',   reading:'こんにちは',     romaji:'konnichiwa',     meaning:'halo / selamat siang',     theme:'greetings', level:'N5', example:{ jp:'こんにちは、田中さん！', romaji:'Konnichiwa, Tanaka-san!', id:'Halo, Tanaka!' },
+      sentences: [
+        { original:'こんにちは！久しぶりですね。', romanization:'Konnichiwa! Hisashiburi desu ne.', translation:'Halo! Sudah lama tidak bertemu ya.', level:'N5' },
+        { original:'こんにちは、お元気ですか？', romanization:'Konnichiwa, o-genki desu ka?', translation:'Halo, apa kabar?', level:'N5' },
+        { original:'こんにちは！今日はどこへ行くんですか？', romanization:'Konnichiwa! Kyou wa doko e ikun desu ka?', translation:'Halo! Hari ini mau pergi ke mana?', level:'N4' }
+      ] },
     { word:'こんばんは',   reading:'こんばんは',     romaji:'konbanwa',       meaning:'selamat malam',            theme:'greetings', level:'N5', example:{ jp:'こんばんは、お元気ですか？', romaji:'Konbanwa, o-genki desu ka?', id:'Selamat malam, apa kabar?' } },
     { word:'さようなら',   reading:'さようなら',     romaji:'sayounara',      meaning:'selamat tinggal',          theme:'greetings', level:'N5', example:{ jp:'さようなら、また明日。', romaji:'Sayounara, mata ashita.', id:'Selamat tinggal, sampai besok.' } },
     { word:'またね',       reading:'またね',         romaji:'matane',         meaning:'sampai nanti (kasual)',    theme:'greetings', level:'N5', example:{ jp:'またね！気をつけてね。', romaji:'Matane! Ki wo tsukete ne.', id:'Sampai nanti! Hati-hati.' } },
-    { word:'ありがとう',   reading:'ありがとう',     romaji:'arigatou',       meaning:'terima kasih (kasual)',    theme:'greetings', level:'N5', example:{ jp:'ありがとう、助かった！', romaji:'Arigatou, tasukatta!', id:'Terima kasih, kamu menolongku!' } },
-    { word:'ありがとうございます', reading:'ありがとうございます', romaji:'arigatou gozaimasu', meaning:'terima kasih (sopan)', theme:'greetings', level:'N5', example:{ jp:'ありがとうございます。', romaji:'Arigatou gozaimasu.', id:'Terima kasih banyak.' } },
-    { word:'すみません',   reading:'すみません',     romaji:'sumimasen',      meaning:'maaf / permisi',          theme:'greetings', level:'N5', example:{ jp:'すみません、ちょっと聞いてもいいですか？', romaji:'Sumimasen, chotto kiite mo ii desu ka?', id:'Permisi, boleh saya tanya sebentar?' } },
+    { word:'ありがとう',   reading:'ありがとう',     romaji:'arigatou',       meaning:'terima kasih (kasual)',    theme:'greetings', level:'N5', example:{ jp:'ありがとう、助かった！', romaji:'Arigatou, tasukatta!', id:'Terima kasih, kamu menolongku!' },
+      sentences: [
+        { original:'ありがとう！本当に助かったよ。', romanization:'Arigatou! Hontou ni tasukatta yo.', translation:'Terima kasih! Kamu benar-benar menolongku.', level:'N5' },
+        { original:'プレゼントありがとう。すごくうれしい！', romanization:'Purezento arigatou. Sugoku ureshii!', translation:'Terima kasih hadiahnya. Aku sangat senang!', level:'N5' },
+        { original:'助けてくれてありがとう。一人じゃ無理だった。', romanization:'Tasukete kurete arigatou. Hitori ja muri datta.', translation:'Terima kasih sudah membantu. Aku tidak bisa sendiri.', level:'N4' }
+      ] },
+    { word:'ありがとうございます', reading:'ありがとうございます', romaji:'arigatou gozaimasu', meaning:'terima kasih (sopan)', theme:'greetings', level:'N5', example:{ jp:'ありがとうございます。', romaji:'Arigatou gozaimasu.', id:'Terima kasih banyak.' },
+      sentences: [
+        { original:'先生、いつもありがとうございます。', romanization:'Sensei, itsumo arigatou gozaimasu.', translation:'Sensei, terima kasih selalu (atas bimbingannya).', level:'N5' },
+        { original:'こんなに助けていただいて、ありがとうございます。', romanization:'Konna ni tasukete itadaite, arigatou gozaimasu.', translation:'Terima kasih banyak sudah membantu sebegini banyak.', level:'N4' }
+      ] },
+    { word:'すみません',   reading:'すみません',     romaji:'sumimasen',      meaning:'maaf / permisi',          theme:'greetings', level:'N5', example:{ jp:'すみません、ちょっと聞いてもいいですか？', romaji:'Sumimasen, chotto kiite mo ii desu ka?', id:'Permisi, boleh saya tanya sebentar?' },
+      sentences: [
+        { original:'すみません、駅はどこですか？', romanization:'Sumimasen, eki wa doko desu ka?', translation:'Permisi, di mana stasiun?', level:'N5' },
+        { original:'すみません、遅れてしまいました。', romanization:'Sumimasen, okurete shimaimashita.', translation:'Maaf, saya sudah terlambat.', level:'N5' },
+        { original:'すみません、この席は空いていますか？', romanization:'Sumimasen, kono seki wa aite imasu ka?', translation:'Permisi, apakah kursi ini kosong?', level:'N4' }
+      ] },
     { word:'ごめんなさい', reading:'ごめんなさい',   romaji:'gomennasai',     meaning:'maaf (minta maaf)',       theme:'greetings', level:'N5', example:{ jp:'ごめんなさい、遅れました。', romaji:'Gomennasai, okuremashita.', id:'Maaf, saya terlambat.' } },
     { word:'どうぞ',       reading:'どうぞ',         romaji:'douzo',          meaning:'silakan',                 theme:'greetings', level:'N5', example:{ jp:'どうぞ、お座りください。', romaji:'Douzo, o-suwari kudasai.', id:'Silakan duduk.' } },
     { word:'どういたしまして', reading:'どういたしまして', romaji:'dou itashimashite', meaning:'sama-sama',     theme:'greetings', level:'N5', example:{ jp:'「ありがとう。」「どういたしまして。」', romaji:'"Arigatou." "Dou itashimashite."', id:'"Terima kasih." "Sama-sama."' } },
@@ -63,9 +91,23 @@ const JpVocabData = (() => {
     { word:'友達',   reading:'ともだち', romaji:'tomodachi', meaning:'teman',              theme:'family', level:'N5', example:{ jp:'友達とご飯を食べました。', romaji:'Tomodachi to gohan wo tabemashita.', id:'Makan bersama teman.' } },
 
     // ── Food ────────────────────────────────────────────────
-    { word:'ご飯',   reading:'ごはん',   romaji:'gohan',     meaning:'nasi / makan',        theme:'food', level:'N5', example:{ jp:'ご飯を食べましょう。', romaji:'Gohan wo tabemashou.', id:'Mari makan nasi.' } },
-    { word:'パン',   reading:'パン',     romaji:'pan',       meaning:'roti',                theme:'food', level:'N5', example:{ jp:'朝ごはんにパンを食べます。', romaji:'Asagohan ni pan wo tabemasu.', id:'Saya makan roti untuk sarapan.' } },
-    { word:'魚',     reading:'さかな',   romaji:'sakana',    meaning:'ikan',                theme:'food', level:'N5', example:{ jp:'魚が好きですか？', romaji:'Sakana ga suki desu ka?', id:'Apakah kamu suka ikan?' } },
+    { word:'ご飯',   reading:'ごはん',   romaji:'gohan',     meaning:'nasi / makan',        theme:'food', level:'N5', example:{ jp:'ご飯を食べましょう。', romaji:'Gohan wo tabemashou.', id:'Mari makan nasi.' },
+      sentences: [
+        { original:'毎日ご飯を食べます。', romanization:'Mainichi gohan wo tabemasu.', translation:'Saya makan nasi setiap hari.', level:'N5' },
+        { original:'友達と一緒にご飯を食べるのが好きです。', romanization:'Tomodachi to issho ni gohan wo taberu no ga suki desu.', translation:'Saya suka makan bersama teman.', level:'N4' },
+        { original:'ご飯の前に手を洗ってください。', romanization:'Gohan no mae ni te wo aratte kudasai.', translation:'Tolong cuci tangan sebelum makan.', level:'N4' }
+      ] },
+    { word:'パン',   reading:'パン',     romaji:'pan',       meaning:'roti',                theme:'food', level:'N5', example:{ jp:'朝ごはんにパンを食べます。', romaji:'Asagohan ni pan wo tabemasu.', id:'Saya makan roti untuk sarapan.' },
+      sentences: [
+        { original:'朝ごはんにパンを食べます。', romanization:'Asagohan ni pan wo tabemasu.', translation:'Saya makan roti untuk sarapan.', level:'N5' },
+        { original:'このパン屋さんのパンはとてもおいしいです。', romanization:'Kono panya-san no pan wa totemo oishii desu.', translation:'Roti dari toko roti ini sangat enak.', level:'N4' }
+      ] },
+    { word:'魚',     reading:'さかな',   romaji:'sakana',    meaning:'ikan',                theme:'food', level:'N5', example:{ jp:'魚が好きですか？', romaji:'Sakana ga suki desu ka?', id:'Apakah kamu suka ikan?' },
+      sentences: [
+        { original:'魚が好きですか？', romanization:'Sakana ga suki desu ka?', translation:'Apakah kamu suka ikan?', level:'N5' },
+        { original:'今日の夕食は魚料理です。', romanization:'Kyou no yuushoku wa sakana ryouri desu.', translation:'Makan malam hari ini adalah masakan ikan.', level:'N4' },
+        { original:'市場で新鮮な魚を買いました。', romanization:'Ichiba de shinsen na sakana wo kaimashita.', translation:'Saya membeli ikan segar di pasar.', level:'N4' }
+      ] },
     { word:'肉',     reading:'にく',     romaji:'niku',      meaning:'daging',              theme:'food', level:'N5', example:{ jp:'肉は毎日食べます。', romaji:'Niku wa mainichi tabemasu.', id:'Saya makan daging setiap hari.' } },
     { word:'野菜',   reading:'やさい',   romaji:'yasai',     meaning:'sayuran',             theme:'food', level:'N5', example:{ jp:'野菜を食べてください。', romaji:'Yasai wo tabete kudasai.', id:'Tolong makan sayurannya.' } },
     { word:'果物',   reading:'くだもの', romaji:'kudamono',  meaning:'buah-buahan',         theme:'food', level:'N5', example:{ jp:'果物は体にいいです。', romaji:'Kudamono wa karada ni ii desu.', id:'Buah-buahan baik untuk tubuh.' } },
@@ -253,9 +295,23 @@ const JpVocabData = (() => {
     { word:'嫌い',   reading:'きらい',   romaji:'kirai',     meaning:'tidak suka',        theme:'adjectives', level:'N5', example:{ jp:'虫が嫌いです。', romaji:'Mushi ga kirai desu.', id:'Saya tidak suka serangga.' } },
 
     // ── Verbs ────────────────────────────────────────────────
-    { word:'食べる', reading:'たべる',   romaji:'taberu',    meaning:'makan',             theme:'verbs', level:'N5', example:{ jp:'寿司を食べます。', romaji:'Sushi wo tabemasu.', id:'Makan sushi.' } },
-    { word:'飲む',   reading:'のむ',     romaji:'nomu',      meaning:'minum',             theme:'verbs', level:'N5', example:{ jp:'水を飲みます。', romaji:'Mizu wo nomimasu.', id:'Minum air.' } },
-    { word:'行く',   reading:'いく',     romaji:'iku',       meaning:'pergi',             theme:'verbs', level:'N5', example:{ jp:'学校に行きます。', romaji:'Gakkou ni ikimasu.', id:'Pergi ke sekolah.' } },
+    { word:'食べる', reading:'たべる',   romaji:'taberu',    meaning:'makan',             theme:'verbs', level:'N5', example:{ jp:'寿司を食べます。', romaji:'Sushi wo tabemasu.', id:'Makan sushi.' },
+      sentences: [
+        { original:'毎日野菜を食べています。', romanization:'Mainichi yasai wo tabete imasu.', translation:'Saya makan sayuran setiap hari.', level:'N5' },
+        { original:'もっとゆっくり食べてください。', romanization:'Motto yukkuri tabete kudasai.', translation:'Tolong makan lebih pelan.', level:'N5' },
+        { original:'夜遅く食べると太りますよ。', romanization:'Yoru osoku taberu to futorimasu yo.', translation:'Kalau makan terlambat malam nanti gemuk lho.', level:'N4' }
+      ] },
+    { word:'飲む',   reading:'のむ',     romaji:'nomu',      meaning:'minum',             theme:'verbs', level:'N5', example:{ jp:'水を飲みます。', romaji:'Mizu wo nomimasu.', id:'Minum air.' },
+      sentences: [
+        { original:'水をたくさん飲んでください。', romanization:'Mizu wo takusan nonde kudasai.', translation:'Tolong minum banyak air.', level:'N5' },
+        { original:'朝、コーヒーを飲む習慣があります。', romanization:'Asa, koohii wo nomu shuukan ga arimasu.', translation:'Saya punya kebiasaan minum kopi di pagi hari.', level:'N4' }
+      ] },
+    { word:'行く',   reading:'いく',     romaji:'iku',       meaning:'pergi',             theme:'verbs', level:'N5', example:{ jp:'学校に行きます。', romaji:'Gakkou ni ikimasu.', id:'Pergi ke sekolah.' },
+      sentences: [
+        { original:'明日、図書館に行きます。', romanization:'Ashita, toshokan ni ikimasu.', translation:'Besok saya pergi ke perpustakaan.', level:'N5' },
+        { original:'どこへ行くんですか？', romanization:'Doko e ikun desu ka?', translation:'Kamu mau pergi ke mana?', level:'N5' },
+        { original:'一緒に映画を見に行きませんか？', romanization:'Issho ni eiga wo mi ni ikimasen ka?', translation:'Mau pergi nonton film bersama?', level:'N4' }
+      ] },
     { word:'来る',   reading:'くる',     romaji:'kuru',      meaning:'datang',            theme:'verbs', level:'N5', example:{ jp:'友達が来ます。', romaji:'Tomodachi ga kimasu.', id:'Teman datang.' } },
     { word:'帰る',   reading:'かえる',   romaji:'kaeru',     meaning:'pulang',            theme:'verbs', level:'N5', example:{ jp:'家に帰ります。', romaji:'Ie ni kaerimasu.', id:'Pulang ke rumah.' } },
     { word:'見る',   reading:'みる',     romaji:'miru',      meaning:'melihat',           theme:'verbs', level:'N5', example:{ jp:'テレビを見ます。', romaji:'Terebi wo mimasu.', id:'Menonton TV.' } },

@@ -95,9 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="vocab-ex-sentence cjk">${v.example.sentence}</div>
             <div class="vocab-ex-meaning">${v.example.meaning}</div>
           </div>
+          ${window.VocabBuilder ? VocabBuilder.renderSentences(v, 'zh') : ''}
         </div>
       `;
     }).join('');
+
+    // Init VocabBuilder sentence toggles
+    if (window.VocabBuilder) VocabBuilder.initToggles(grid);
 
     // Click delegation
     grid.addEventListener('click', e => {
@@ -162,7 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGrid();
   updateHeader();
 
-  // ── Tabs (Browse / SRS) ───────────────────────────────────
+  // ── Tabs (Browse / SRS / Kalimat) ───────────────────────────────────────
+  let kalimatQuizInited = false;
+  const _zhvocab_user2 = Auth.getActiveUser();
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -170,6 +176,19 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       if (btn.dataset.tab === 'srs') initSrsTab();
+      if (btn.dataset.tab === 'kalimat' && !kalimatQuizInited) {
+        kalimatQuizInited = true;
+        const container = document.getElementById('kalimat-quiz-container');
+        if (container && window.VocabBuilder) {
+          VocabBuilder.startQuiz(container, ZhVocabData.vocab, 'zh', (score, total) => {
+            const xpGained = score * 5;
+            if (xpGained > 0) {
+              XPSystem.addXP(_zhvocab_user2.id, 'quiz_complete', xpGained, 'Kalimat Quiz ZH');
+              App.toastXP('+' + xpGained + ' XP', 'Kalimat Quiz ZH');
+            }
+          });
+        }
+      }
     });
   });
 

@@ -173,15 +173,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ${showRoman ? `<div class="vocab-example-roman">${v.example.roman}</div>` : ''}
             <div class="vocab-example-tr">${v.example.id}</div>
           </div>
+          ${window.VocabBuilder ? VocabBuilder.renderSentences(v, 'kr') : ''}
         </div>
       `;
     }).join('');
+
+    // Init VocabBuilder sentence toggles
+    if (window.VocabBuilder) VocabBuilder.initToggles(grid);
 
     // Event delegation untuk klik
     grid.onclick = null;
     grid.addEventListener('click', e => {
       // Audio button
-      const aBtn = e.target.closest('.audio-btn');
+      const aBtn = e.target.closest('.audio-btn:not(.vb-audio-btn)');
       if (aBtn) {
         e.stopPropagation();
         if (typeof AudioEngine.speakKR === 'function') {
@@ -237,7 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderGrid();
 
-  // ── Tabs (Browse / SRS) ───────────────────────────────────
+  // ── Tabs (Browse / SRS / Kalimat) ───────────────────────────────────────
+  let kalimatQuizInited = false;
+  const _krvocab_user = Auth.getActiveUser();
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -245,6 +251,19 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       if (btn.dataset.tab === 'srs') initSrsTab();
+      if (btn.dataset.tab === 'kalimat' && !kalimatQuizInited) {
+        kalimatQuizInited = true;
+        const container = document.getElementById('kalimat-quiz-container');
+        if (container && window.VocabBuilder) {
+          VocabBuilder.startQuiz(container, KrVocabData.getAll(), 'kr', (score, total) => {
+            const xpGained = score * 5;
+            if (xpGained > 0) {
+              XPSystem.addXP(_krvocab_user.id, 'quiz_complete', xpGained, 'Kalimat Quiz KR');
+              App.toastXP('+' + xpGained + ' XP', 'Kalimat Quiz KR');
+            }
+          });
+        }
+      }
     });
   });
 

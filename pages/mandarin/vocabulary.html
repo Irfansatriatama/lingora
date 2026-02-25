@@ -97,6 +97,7 @@
       <div class="tabs" style="margin-bottom:16px;">
         <button class="tab-btn active" data-tab="browse">Jelajah</button>
         <button class="tab-btn" data-tab="srs">🔁 SRS</button>
+        <button class="tab-btn" data-tab="kalimat">🧩 Kalimat Quiz</button>
       </div>
 
       <!-- Browse Panel -->
@@ -125,6 +126,17 @@
         <!-- Rendered by JS -->
       </div>
 
+      <!-- Kalimat Quiz Panel -->
+      <div class="tab-panel" id="tab-kalimat">
+        <div class="vb-quiz-section">
+          <div class="vb-quiz-section-header">
+            <div class="vb-quiz-section-title">🧩 Kalimat Quiz</div>
+            <div class="vb-quiz-section-sub">Lengkapi kalimat dengan kata yang tepat. Tersedia untuk kata yang punya contoh kalimat kontekstual.</div>
+          </div>
+          <div id="kalimat-quiz-container"></div>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -150,6 +162,7 @@
 <script src="../../assets/js/modules/challenge.js"></script>
 <script src="../../assets/js/modules/srs.js"></script>
 <script src="../../assets/js/modules/srs-ui.js"></script>
+<script src="../../assets/js/modules/vocab-builder.js"></script>
 <script src="../../assets/js/pages/zh-vocab.js"></script>
 <script src="../../assets/js/modules/pwa.js"></script>
 <script>document.addEventListener("DOMContentLoaded", () => PWAManager.init());</script>

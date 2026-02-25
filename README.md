@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 23 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Stroke Order Animasi Hiragana & Katakana (Fase 23) |
+| **Fase Saat Ini** | FASE 24 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Vocabulary Builder — Kalimat Kontekstual & Quiz (Fase 24) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -582,9 +582,9 @@ Fase 21 (Penambahan Korea + Rename Proyek)  ← ✅ SELESAI
   ↓
 Fase 22 (Listening Quiz)                    ← ✅ SELESAI
   ↓
-Fase 23 (Stroke Animasi Kana)               ← Visual menarik
+Fase 23 (Stroke Animasi Kana)               ← ✅ SELESAI
   ↓
-Fase 24 (Kalimat Kontekstual Vocab)         ← Depth konten
+Fase 24 (Kalimat Kontekstual Vocab)         ← ✅ SELESAI
   ↓
 Fase 26 (Onboarding & Placement Test)       ← First impression UX
   ↓
@@ -927,7 +927,43 @@ assets/css/japanese.css              [UPDATE] — animasi stroke + canvas trace
 
 ---
 
-### FASE 24 — Vocabulary Builder (Kalimat Kontekstual)
+### FASE 24 — Vocabulary Builder (Kalimat Kontekstual) ✅ SELESAI (2026-02-25)
+
+**Tujuan:** Setiap kata kosakata punya 2–3 contoh kalimat dengan level kesulitan berbeda, memperlihatkan kata dalam konteks nyata. Ditambah Kalimat Quiz (fill-in-the-blank) sebagai mode latihan baru.
+
+**Yang dikerjakan:**
+- `assets/js/data/jp-vocab.js` [UPDATE] — Tambah field `sentences` ke kata-kata kunci: greetings (おはよう, こんにちは, ありがとう, すみません), food (ご飯, パン, 魚), verbs (食べる, 飲む, 行く). Format: `[{ original, romanization, translation, level }]`
+- `assets/js/data/zh-vocab.js` [UPDATE] — Tambah `sentences` ke kata kunci: greetings (你好, 你好吗, 谢谢, 对不起), food (早饭, 午饭, 晚饭)
+- `assets/js/data/kr-vocab.js` [UPDATE] — Tambah `sentences` ke kata kunci: greetings (안녕하세요, 안녕, 감사합니다, 고마워요, 죄송합니다)
+- `assets/js/modules/vocab-builder.js` [BARU] — `VocabBuilder` module:
+  - `renderSentences(vocab, lang)` — render HTML expandable section "📖 Kalimat Kontekstual" (collapsible, dengan audio button per kalimat)
+  - `initToggles(container)` — init event listener toggle & audio di container
+  - `buildQuizItems(vocabArray)` — ekstrak soal fill-in-the-blank dari vocab dengan sentences
+  - `startQuiz(container, vocabArray, lang, onDone)` — mulai Kalimat Quiz
+  - UI quiz: progress bar, petunjuk, input jawaban, hint button, feedback benar/salah, navigasi
+- `assets/css/components.css` [UPDATE] — Tambah section Fase 24: `.vb-sentences-wrap`, `.vb-toggle-btn`, `.vb-sentence`, `.vb-quiz-*`, animasi, responsive
+- `pages/japanese/vocabulary.html` [UPDATE] — Tab baru "🧩 Kalimat Quiz", panel `#tab-kalimat`, script `vocab-builder.js`
+- `assets/js/pages/jp-vocab.js` [UPDATE] — Render `VocabBuilder.renderSentences()` di setiap vocab card, `initToggles()` setelah render, `initKalimatQuizTab()` (lazy-init)
+- `pages/mandarin/vocabulary.html` [UPDATE] — Idem untuk ZH
+- `assets/js/pages/zh-vocab.js` [UPDATE] — Idem untuk ZH
+- `pages/korean/vocabulary.html` [UPDATE] — Idem untuk KR
+- `assets/js/pages/kr-vocab.js` [UPDATE] — Idem untuk KR
+- `sw.js` [UPDATE] — Cache bump `lingora-v6` → `lingora-v7`, tambah `vocab-builder.js`
+
+**Fitur Section "Kalimat Kontekstual" di vocab card:**
+- Tombol expandable "📖 Kalimat Kontekstual (N)" — klik untuk expand/collapse
+- Setiap kalimat menampilkan: kalimat asli (CJK), romanisasi, terjemahan Indonesia, badge level
+- Tombol 🔊 per kalimat untuk dengar audio (JP/ZH/KR)
+- Desain clean: border-left accent, numbered badge per kalimat
+
+**Fitur Kalimat Quiz (Tab "🧩 Kalimat Quiz"):**
+- Soal: kalimat dengan satu kata dikosongkan (___), romanisasi ditampilkan sebagai panduan
+- User mengetik jawaban (kata asli atau romanisasi diterima)
+- Tombol "💡 Tampilkan petunjuk" — tampilkan huruf pertama dan terakhir kata
+- Feedback langsung: ✅ Benar / ❌ Salah + tampilkan kalimat lengkap
+- Progress bar, skor real-time, 10 soal per sesi (diacak)
+- Layar hasil: emoji, skor, pesan motivasi, tombol Coba Lagi
+- XP +5 per soal benar dikurangi (diberikan saat selesai)
 
 **Tujuan:** Setiap kata kosakata punya 2–3 contoh kalimat dengan level kesulitan berbeda, memperlihatkan kata dalam konteks nyata.
 
@@ -1265,6 +1301,7 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.5 — Fase 22** | 2026-02-25 | **Listening Mode (Audio Quiz)** untuk semua 3 quiz (JP, ZH, KR). **Perubahan utama:** Tombol mode baru `🎧 Listening` di selector mode setiap halaman quiz. Mode Listening: karakter soal **disembunyikan** (blur CSS), tombol 🔊 besar beranimasi pulse auto-play audio saat soal muncul, user jawab pilihan arti. Karakter terungkap setelah menjawab. Bonus XP **+5 per soal benar** di Listening mode, terakumulasi ditampilkan di layar hasil. Timer 25 detik (lebih panjang dari mode normal 20 detik). **File baru:** Tidak ada (semua update). **File diupdate:** `assets/css/quiz.css` (Fase 22 section: `.quiz-char-hidden`, `.listening-play-btn`, `.listening-mode-badge`, `.listening-bonus-badge`, `.listening-stat`, animasi `listenPulse`), `pages/japanese/quiz.html` (mode btn + `listeningWrap` + `statListeningXP` + audio.js), `pages/mandarin/quiz.html` (idem), `pages/korean/quiz.html` (idem), `assets/js/pages/quiz-jp.js` (listening state, `playListeningAudio`, `onAnswerListening`, update `buildKanaQuestion` + `buildKanjiQuestion`), `assets/js/pages/quiz-zh.js` (listening penuh, update `buildHanziQuestion` + `buildVocabQuestion`), `assets/js/pages/quiz-kr.js` (listening penuh, `renderListeningChoices`, `onAnswerListening`), `sw.js` (cache bump `lingora-v3` → `lingora-v4`). | ✅ |
 | **v2.6 — Fase 21.6** | 2026-02-25 | **Integrasi Penuh Korea** — menghubungkan semua modul KR ke sistem inti app. **Dashboard:** Tambah section Bahasa Korea (4 modul: Hangul, Kosakata KR, Grammar KR, Dialog KR) dengan progress bar di `dashboard.html` + `dashboard.js`. Tambah kutipan motivasi Korea (꿈). **Stats:** Update `stats.js` MODULES (tambah 4 modul KR) + ALL_BADGES (tambah 🌙 Hanŭl + 🌏 Poliglot) + quiz history name map KR. **Settings:** Tambah toggle `showRomanization` (romanisasi Hangul/Revised Romanization) di `settings.html` + `settings.js`. Update MODULES reset list (tambah 4 modul KR). **Report/PDF:** Update `report.js` MODULES (tambah 4 modul KR), ALL_BADGES (tambah 🌙 + 🌏), MODULE_NAME_MAP (KR + quiz-kr). **Badge System:** Tambah badge 🌙 `hangul_master` (hafal item di semua modul KR) + 🌏 `polyglot` (hafal item dari 3 bahasa JP+ZH+KR) ke `quiz.js` BadgeSystem.BADGES dengan `check()` function berbasis progress data. Update `checkAndAward()` untuk pass `progress` object ke check functions. **Progress:** Tambah panggilan `BadgeSystem.checkAndAward()` di `progress.js` `markLearned()` agar badge KR dicek saat belajar (bukan hanya saat quiz). **Challenge:** Tambah 3 template KR (Hangul, Kosakata KR, Grammar Korea) ke `challenge.js` TEMPLATES. **Manifest:** Tambah shortcut Quiz Korea di `manifest.json`. **SW:** Cache bump `lingora-v4` → `lingora-v5`. Tambah 4 data file KR, 5 page JS KR, 5 HTML KR ke `ASSETS_TO_CACHE`. | ✅ |
 | **v2.7 — Fase 23** | 2026-02-25 | **Stroke Order Animasi Hiragana & Katakana** — Tab "✍️ Menulis" baru di kedua halaman. **File baru:** `assets/js/data/kana-strokes.js` (data SVG path 46 hiragana + 46 katakana dasar), `assets/js/modules/kana-stroke-ui.js` (KanaStrokeUI: render panel animasi SVG, grid karakter, kontrol play/step/reset, animasi strokeDashoffset, panah arah). **File update:** `pages/japanese/hiragana.html` + `katakana.html` (tab baru + scripts baru), `assets/js/pages/hiragana.js` + `katakana.js` (fungsi `initWritingTab()` dengan lazy-init), `assets/css/japanese.css` (section Fase 23: layout dua kolom, SVG wrap, controls, stroke list, responsive), `sw.js` (cache bump v5→v6, tambah 2 file baru). | ✅ |
+| **v2.8 — Fase 24** | 2026-02-25 | **Vocabulary Builder — Kalimat Kontekstual & Quiz** — Menambahkan 2-3 kalimat kontekstual per kata kunci + tab Kalimat Quiz (fill-in-the-blank). **File baru:** `assets/js/modules/vocab-builder.js` (VocabBuilder: renderSentences, initToggles, startQuiz, buildQuizItems). **Data update:** `jp-vocab.js` (sentences untuk 10 kata: greetings + food + verbs), `zh-vocab.js` (sentences untuk 7 kata: greetings + food), `kr-vocab.js` (sentences untuk 5 kata: greetings). **CSS:** `components.css` (section Fase 24: vb-sentences-wrap, vb-toggle-btn, vb-sentence, vb-quiz-*, dll). **HTML update:** `pages/japanese/vocabulary.html`, `mandarin/vocabulary.html`, `korean/vocabulary.html` (tab "🧩 Kalimat Quiz" baru + panel tab-kalimat + script vocab-builder.js). **Page JS update:** `jp-vocab.js`, `zh-vocab.js`, `kr-vocab.js` (render sentences, initToggles, initKalimatQuizTab). **SW:** cache bump v6→v7 + tambah vocab-builder.js. | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 

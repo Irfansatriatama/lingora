@@ -31,35 +31,56 @@ const KrVocabData = (() => {
       romanization: 'annyeonghaseyo',
       meaning: 'halo (formal)',
       theme: 'greetings', level: 'TOPIK1',
-      example: { kr: '안녕하세요, 선생님.', roman: 'Annyeonghaseyo, seonsaengnim.', id: 'Halo, Pak/Bu Guru.' }
+      example: { kr: '안녕하세요, 선생님.', roman: 'Annyeonghaseyo, seonsaengnim.', id: 'Halo, Pak/Bu Guru.' },
+      sentences: [
+        { original: '안녕하세요! 처음 뵙겠습니다.', romanization: 'Annyeonghaseyo! Cheoeum boepgesseumnida.', translation: 'Halo! Senang bertemu untuk pertama kalinya.', level: 'TOPIK1' },
+        { original: '안녕하세요, 저는 인도네시아 사람이에요.', romanization: 'Annyeonghaseyo, jeoneun Indonesiya saramieyo.', translation: 'Halo, saya orang Indonesia.', level: 'TOPIK1' },
+        { original: '선생님, 안녕하세요. 오늘 수업 잘 부탁드립니다.', romanization: 'Seonsaengnim, annyeonghaseyo. Oneul sueop jal butakdeurimnida.', translation: 'Pak/Bu Guru, halo. Mohon bimbingannya untuk pelajaran hari ini.', level: 'TOPIK1' }
+      ]
     },
     {
       word: '안녕',
       romanization: 'annyeong',
       meaning: 'halo / sampai jumpa (informal)',
       theme: 'greetings', level: 'TOPIK1',
-      example: { kr: '친구야, 안녕!', roman: 'Chinguya, annyeong!', id: 'Hei teman, halo!' }
+      example: { kr: '친구야, 안녕!', roman: 'Chinguya, annyeong!', id: 'Hei teman, halo!' },
+      sentences: [
+        { original: '안녕! 오랜만이야!', romanization: 'Annyeong! Oraenmaniya!', translation: 'Halo! Sudah lama tidak bertemu!', level: 'TOPIK1' },
+        { original: '잘 가! 또 보자!', romanization: 'Jal ga! Ddo boja!', translation: 'Hati-hati! Sampai jumpa lagi!', level: 'TOPIK1' }
+      ]
     },
     {
       word: '감사합니다',
       romanization: 'gamsahamnida',
       meaning: 'terima kasih (sangat formal)',
       theme: 'greetings', level: 'TOPIK1',
-      example: { kr: '도와주셔서 감사합니다.', roman: 'Dowajusyeoseo gamsahamnida.', id: 'Terima kasih sudah membantu.' }
+      example: { kr: '도와주셔서 감사합니다.', roman: 'Dowajusyeoseo gamsahamnida.', id: 'Terima kasih sudah membantu.' },
+      sentences: [
+        { original: '도움을 주셔서 감사합니다.', romanization: 'Doeumeul jusyeoseo gamsahamnida.', translation: 'Terima kasih sudah memberikan bantuan.', level: 'TOPIK1' },
+        { original: '정말 감사합니다. 덕분에 잘 됐어요.', romanization: 'Jeongmal gamsahamnida. Deokbune jal dwaesseoyo.', translation: 'Terima kasih banyak. Berkat Anda semuanya berjalan baik.', level: 'TOPIK1' }
+      ]
     },
     {
       word: '고마워요',
       romanization: 'gomawoyo',
       meaning: 'terima kasih (sopan-informal)',
       theme: 'greetings', level: 'TOPIK1',
-      example: { kr: '선물 고마워요!', roman: 'Seonmul gomawoyo!', id: 'Terima kasih hadiahnya!' }
+      example: { kr: '선물 고마워요!', roman: 'Seonmul gomawoyo!', id: 'Terima kasih hadiahnya!' },
+      sentences: [
+        { original: '도와줘서 고마워요!', romanization: 'Dowajwoseo gomawoyo!', translation: 'Terima kasih sudah membantu!', level: 'TOPIK1' },
+        { original: '항상 응원해줘서 정말 고마워요.', romanization: 'Hangsang eungwonhaejwoseo jeongmal gomawoyo.', translation: 'Terima kasih selalu mendukung saya.', level: 'TOPIK2' }
+      ]
     },
     {
       word: '죄송합니다',
       romanization: 'joesonghamnida',
       meaning: 'maaf (sangat formal)',
       theme: 'greetings', level: 'TOPIK1',
-      example: { kr: '늦어서 죄송합니다.', roman: 'Neujeoseo joesonghamnida.', id: 'Maaf karena terlambat.' }
+      example: { kr: '늦어서 죄송합니다.', roman: 'Neujeoseo joesonghamnida.', id: 'Maaf karena terlambat.' },
+      sentences: [
+        { original: '늦어서 정말 죄송합니다.', romanization: 'Neujeoseo jeongmal joesonghamnida.', translation: 'Saya benar-benar minta maaf karena terlambat.', level: 'TOPIK1' },
+        { original: '실수를 해서 죄송합니다.', romanization: 'Silsureul haeseo joesonghamnida.', translation: 'Maaf karena telah membuat kesalahan.', level: 'TOPIK1' }
+      ]
     },
     {
       word: '미안해요',
