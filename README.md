@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 24 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Vocabulary Builder — Kalimat Kontekstual & Quiz (Fase 24) |
+| **Fase Saat Ini** | FASE 25 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Onboarding & Placement Test (Fase 25) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -586,19 +586,19 @@ Fase 23 (Stroke Animasi Kana)               ← ✅ SELESAI
   ↓
 Fase 24 (Kalimat Kontekstual Vocab)         ← ✅ SELESAI
   ↓
-Fase 26 (Onboarding & Placement Test)       ← First impression UX
+Fase 25 (Onboarding & Placement Test)       ← ✅ SELESAI
   ↓
-Fase 27 (Study Planner)                     ← Untuk user serius
+Fase 26 (Study Planner)                     ← Untuk user serius
   ↓
-Fase 28 (Mini Game)                         ← Fun factor
+Fase 27 (Mini Game)                         ← Fun factor
   ↓
-Fase 29 (Tema & Kustomisasi)                ← Polish
+Fase 28 (Tema & Kustomisasi)                ← Polish
   ↓
-Fase 30 (Backup & Restore)                  ← Keamanan data
+Fase 29 (Backup & Restore)                  ← Keamanan data
   ↓
-Fase 31 (Konten Lanjutan JP — eks Fase 16)  ← Dulu di-hold
-Fase 32 (Konten Lanjutan ZH — eks Fase 21) ← Dulu di-hold
-Fase 33 (Leaderboard — eks Fase 25)        ← Dulu di-hold
+Fase 30 (Konten Lanjutan JP — eks Fase 16)  ← Dulu di-hold
+Fase 31 (Konten Lanjutan ZH — eks Fase 21) ← Dulu di-hold
+Fase 32 (Leaderboard — eks Fase lama)        ← Dulu di-hold
 ```
 
 | Prioritas | Fase | Nama | Kategori | Estimasi Effort |
@@ -607,14 +607,14 @@ Fase 33 (Leaderboard — eks Fase 25)        ← Dulu di-hold
 | 🔴 Tinggi | 22 | Listening Mode (Audio Quiz) | Fitur Belajar | Sedang |
 | 🔴 Tinggi | 23 | Stroke Order Animasi (Hiragana/Katakana) | UX | Sedang-Besar |
 | 🟡 Sedang | 24 | Vocabulary Builder (Kalimat Kontekstual) | Konten | Sedang |
-| 🟡 Sedang | 26 | Onboarding & Placement Test | UX | Sedang |
-| 🟡 Sedang | 27 | Study Planner / Jadwal Belajar | Produktivitas | Sedang-Besar |
-| 🟢 Rendah | 28 | Mini Game | Gamifikasi | Sedang |
-| 🟢 Rendah | 29 | Tema & Kustomisasi UI | UX | Kecil-Sedang |
-| 🟢 Rendah | 30 | Backup & Restore Progress | Data | Kecil |
-| ⏸️ Hold | 31 | Konten Lanjutan JP N3 (eks Fase 16) | Konten | Besar |
-| ⏸️ Hold | 32 | Konten Lanjutan ZH HSK4 (eks Fase 21) | Konten | Besar |
-| ⏸️ Hold | 33 | Leaderboard Lokal (eks Fase 25) | Gamifikasi | Sedang |
+| 🟡 Sedang | 25 | Onboarding & Placement Test | UX | Sedang | ✅ |
+| 🟡 Sedang | 26 | Study Planner / Jadwal Belajar | Produktivitas | Sedang-Besar |
+| 🟢 Rendah | 27 | Mini Game | Gamifikasi | Sedang |
+| 🟢 Rendah | 28 | Tema & Kustomisasi UI | UX | Kecil-Sedang |
+| 🟢 Rendah | 29 | Backup & Restore Progress | Data | Kecil |
+| ⏸️ Hold | 30 | Konten Lanjutan JP N3 (eks Fase 16) | Konten | Besar |
+| ⏸️ Hold | 31 | Konten Lanjutan ZH HSK4 (eks Fase 21) | Konten | Besar |
+| ⏸️ Hold | 32 | Leaderboard Lokal (eks Fase lama) | Gamifikasi | Sedang |
 
 ---
 
@@ -1012,7 +1012,7 @@ assets/css/korean.css               [UPDATE]
 
 ---
 
-### FASE 26 — Onboarding & Placement Test
+### FASE 25 — Onboarding & Placement Test ✅ SELESAI (2026-02-25)
 
 **Tujuan:** User baru tidak langsung "nyemplung" ke semua konten. Ada proses onboarding yang menentukan level awal dan memberikan rekomendasi modul.
 
@@ -1045,7 +1045,7 @@ assets/js/pages/dashboard.js        [UPDATE]
 
 ---
 
-### FASE 27 — Study Planner / Jadwal Belajar
+### FASE 26 — Study Planner / Jadwal Belajar
 
 **Tujuan:** User bisa set target ujian (JLPT N5/N4/N3, HSK 1–4, TOPIK I/II) + tanggal ujian → sistem buatkan jadwal belajar harian otomatis.
 
@@ -1078,7 +1078,7 @@ assets/js/pages/dashboard.js        [UPDATE]
 
 ---
 
-### FASE 28 — Mini Game
+### FASE 27 — Mini Game
 
 **Tujuan:** Variasi belajar melalui game ringan yang tetap melatih hafalan.
 
@@ -1114,7 +1114,7 @@ assets/css/games.css                [BARU]
 
 ---
 
-### FASE 29 — Tema & Kustomisasi UI
+### FASE 28 — Tema & Kustomisasi UI
 
 **Tujuan:** User bisa ganti tema warna sesuai preferensi.
 
@@ -1140,7 +1140,7 @@ assets/js/pages/settings.js         [UPDATE]
 
 ---
 
-### FASE 30 — Backup & Restore Progress
+### FASE 29 — Backup & Restore Progress
 
 **Tujuan:** User bisa export semua data progress ke file JSON dan import kembali di device lain — mengatasi ketakutan kehilangan progress jika localStorage terhapus.
 
@@ -1180,9 +1180,9 @@ assets/js/pages/settings.js         [UPDATE]
 
 ---
 
-### FASE 31 — Konten Lanjutan JP: Kosakata & Grammar N3 (eks Fase 16)
+### FASE 30 — Konten Lanjutan JP: Kosakata & Grammar N3 (eks Fase 16)
 
-> ⏸️ **Di-hold** — dikerjakan setelah Fase 30 selesai dan app sudah stabil dengan tiga bahasa.
+> ⏸️ **Di-hold** — dikerjakan setelah Fase 29 selesai dan app sudah stabil dengan tiga bahasa.
 
 **Tujuan:** Membuka konten intermediate untuk pelajar Jepang yang sudah kuasai N5/N4.
 
@@ -1203,9 +1203,9 @@ pages/dashboard.html                [UPDATE] — progress card N3
 
 ---
 
-### FASE 32 — Konten Lanjutan ZH: Hanzi & Kosakata HSK 4 (eks Fase 21 lama)
+### FASE 31 — Konten Lanjutan ZH: Hanzi & Kosakata HSK 4 (eks Fase 21 lama)
 
-> ⏸️ **Di-hold** — dikerjakan bersamaan atau setelah Fase 31.
+> ⏸️ **Di-hold** — dikerjakan bersamaan atau setelah Fase 30.
 
 **Tujuan:** Membuka konten intermediate untuk pelajar Mandarin yang sudah kuasai HSK 1–3.
 
@@ -1224,7 +1224,7 @@ pages/dashboard.html                [UPDATE] — progress card HSK4
 
 ---
 
-### FASE 33 — Leaderboard Lokal & Tantangan Teman (eks Fase 25 lama)
+### FASE 32 — Leaderboard Lokal & Tantangan Teman (eks Fase 24-lama)
 
 > ⏸️ **Di-hold** — dikerjakan setelah tiga bahasa stabil dan konten lanjutan ada.
 
@@ -1302,6 +1302,7 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.6 — Fase 21.6** | 2026-02-25 | **Integrasi Penuh Korea** — menghubungkan semua modul KR ke sistem inti app. **Dashboard:** Tambah section Bahasa Korea (4 modul: Hangul, Kosakata KR, Grammar KR, Dialog KR) dengan progress bar di `dashboard.html` + `dashboard.js`. Tambah kutipan motivasi Korea (꿈). **Stats:** Update `stats.js` MODULES (tambah 4 modul KR) + ALL_BADGES (tambah 🌙 Hanŭl + 🌏 Poliglot) + quiz history name map KR. **Settings:** Tambah toggle `showRomanization` (romanisasi Hangul/Revised Romanization) di `settings.html` + `settings.js`. Update MODULES reset list (tambah 4 modul KR). **Report/PDF:** Update `report.js` MODULES (tambah 4 modul KR), ALL_BADGES (tambah 🌙 + 🌏), MODULE_NAME_MAP (KR + quiz-kr). **Badge System:** Tambah badge 🌙 `hangul_master` (hafal item di semua modul KR) + 🌏 `polyglot` (hafal item dari 3 bahasa JP+ZH+KR) ke `quiz.js` BadgeSystem.BADGES dengan `check()` function berbasis progress data. Update `checkAndAward()` untuk pass `progress` object ke check functions. **Progress:** Tambah panggilan `BadgeSystem.checkAndAward()` di `progress.js` `markLearned()` agar badge KR dicek saat belajar (bukan hanya saat quiz). **Challenge:** Tambah 3 template KR (Hangul, Kosakata KR, Grammar Korea) ke `challenge.js` TEMPLATES. **Manifest:** Tambah shortcut Quiz Korea di `manifest.json`. **SW:** Cache bump `lingora-v4` → `lingora-v5`. Tambah 4 data file KR, 5 page JS KR, 5 HTML KR ke `ASSETS_TO_CACHE`. | ✅ |
 | **v2.7 — Fase 23** | 2026-02-25 | **Stroke Order Animasi Hiragana & Katakana** — Tab "✍️ Menulis" baru di kedua halaman. **File baru:** `assets/js/data/kana-strokes.js` (data SVG path 46 hiragana + 46 katakana dasar), `assets/js/modules/kana-stroke-ui.js` (KanaStrokeUI: render panel animasi SVG, grid karakter, kontrol play/step/reset, animasi strokeDashoffset, panah arah). **File update:** `pages/japanese/hiragana.html` + `katakana.html` (tab baru + scripts baru), `assets/js/pages/hiragana.js` + `katakana.js` (fungsi `initWritingTab()` dengan lazy-init), `assets/css/japanese.css` (section Fase 23: layout dua kolom, SVG wrap, controls, stroke list, responsive), `sw.js` (cache bump v5→v6, tambah 2 file baru). | ✅ |
 | **v2.8 — Fase 24** | 2026-02-25 | **Vocabulary Builder — Kalimat Kontekstual & Quiz** — Menambahkan 2-3 kalimat kontekstual per kata kunci + tab Kalimat Quiz (fill-in-the-blank). **File baru:** `assets/js/modules/vocab-builder.js` (VocabBuilder: renderSentences, initToggles, startQuiz, buildQuizItems). **Data update:** `jp-vocab.js` (sentences untuk 10 kata: greetings + food + verbs), `zh-vocab.js` (sentences untuk 7 kata: greetings + food), `kr-vocab.js` (sentences untuk 5 kata: greetings). **CSS:** `components.css` (section Fase 24: vb-sentences-wrap, vb-toggle-btn, vb-sentence, vb-quiz-*, dll). **HTML update:** `pages/japanese/vocabulary.html`, `mandarin/vocabulary.html`, `korean/vocabulary.html` (tab "🧩 Kalimat Quiz" baru + panel tab-kalimat + script vocab-builder.js). **Page JS update:** `jp-vocab.js`, `zh-vocab.js`, `kr-vocab.js` (render sentences, initToggles, initKalimatQuizTab). **SW:** cache bump v6→v7 + tambah vocab-builder.js. | ✅ |
+| **v2.9 — Fase 25** | 2026-02-25 | **Onboarding & Placement Test** — Wizard 5 langkah untuk user baru. **File baru:** `pages/onboarding.html` (wizard 5 step), `assets/js/pages/onboarding.js` (logika wizard, bank soal placement 30 soal, 3 bahasa), `assets/css/onboarding.css` (card, step dots, progress bar, lang selector, quiz UI, dark mode). **Fitur:** Step 1 Welcome; Step 2 Pilih bahasa fokus (JP/ZH/KR/Semua); Step 3 Placement Test 10 soal + skip; Step 4 Hasil (level Pemula/Menengah + 3 rekomendasi modul); Step 5 Target harian (5–60 mnt). Data: `nh_user_{id}_onboarding`. Bonus +50 XP saat selesai. **Dashboard:** Section Profil Belajarmu (tampil status atau prompt onboarding). **register.html:** Redirect ke onboarding setelah daftar. **Sidebar:** Link Profil Belajar di 23 halaman. **SW:** cache bump v7→v8. | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 

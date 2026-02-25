@@ -117,6 +117,51 @@ document.addEventListener('DOMContentLoaded', () => {
   renderModules(zhModules, 'zh-modules');
   renderModules(krModules, 'kr-modules');
 
+  // ── Fase 25: Onboarding Status & Rekomendasi ─────────────
+  (function() {
+    const onboarding = Storage.getUser(user.id, 'onboarding', null);
+    const recSection = document.getElementById('ob-rec-section');
+    if (!recSection) return;
+
+    if (!onboarding || !onboarding.completed) {
+      recSection.innerHTML = `
+        <div class="ob-rec-banner" style="background:linear-gradient(135deg,var(--red-soft),var(--gold-soft));border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+          <span style="font-size:2.5rem">🚀</span>
+          <div style="flex:1;min-width:180px;">
+            <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Mulai dengan Onboarding!</div>
+            <div style="font-size:0.85rem;color:var(--text-2);">Ikuti tes penempatan singkat untuk rekomendasi modul yang sesuai levelmu.</div>
+          </div>
+          <a href="onboarding.html" style="padding:10px 18px;background:var(--red);color:#fff;border-radius:var(--radius);font-weight:600;font-size:0.88rem;white-space:nowrap;text-decoration:none;">Mulai →</a>
+        </div>`;
+      return;
+    }
+
+    const lang = onboarding.focusLang || 'all';
+    const level = onboarding.level || 'beginner';
+    const goal = onboarding.dailyGoal || 15;
+    const langLabels  = { jp: '🇯🇵 Jepang', zh: '🇨🇳 Mandarin', kr: '🇰🇷 Korea', all: '🌏 Semua Bahasa' };
+    const levelLabels = { beginner: '🌱 Pemula', intermediate: '🌿 Menengah' };
+
+    recSection.innerHTML = `
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;font-size:0.83rem;">
+          <span style="color:var(--text-3);font-size:0.73rem;display:block;">Fokus Bahasa</span>
+          <strong>${langLabels[lang] || lang}</strong>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;font-size:0.83rem;">
+          <span style="color:var(--text-3);font-size:0.73rem;display:block;">Level</span>
+          <strong>${levelLabels[level] || level}</strong>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;font-size:0.83rem;">
+          <span style="color:var(--text-3);font-size:0.73rem;display:block;">Target Harian</span>
+          <strong>⏱ ${goal} menit/hari</strong>
+        </div>
+        <a href="onboarding.html" style="background:transparent;border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;font-size:0.83rem;color:var(--text-3);display:flex;align-items:center;text-decoration:none;">
+          ✏️ Ubah
+        </a>
+      </div>`;
+  })();
+
   // ── Daily quote ──────────────────────────────────────────
   const quotes = [
     { char: '学', text: 'Belajar tanpa berpikir adalah sia-sia. Berpikir tanpa belajar adalah berbahaya.', src: '— Konfusius' },

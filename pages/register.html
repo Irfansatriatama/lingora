@@ -390,7 +390,8 @@
         registerBtn.innerHTML = '&#10003; Akun Dibuat!';
         registerBtn.style.background = '#27AE60';
         App.toast('Akun berhasil dibuat! Selamat belajar 🎉', 'success');
-        setTimeout(() => Router.go('pages/dashboard.html'), 700);
+        // Fase 25: Redirect ke onboarding untuk user baru
+        setTimeout(() => Router.go('pages/onboarding.html'), 700);
       } else {
         showAlert(result.error || 'Gagal membuat akun. Coba lagi.');
         registerBtn.disabled = false;
