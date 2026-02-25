@@ -53,7 +53,7 @@
 .settings-divider {
   height: 1px;
   background: var(--border);
-  margin: 0 20px;
+  margin: 0;
 }
 
 /* ── Toggle Switch ──────────────────────────────────────────── */
@@ -566,7 +566,7 @@
   padding: 10px 20px;
   border-radius: var(--radius);
   font-size: 0.85rem;
-  margin: 0 20px 16px;
+  margin: 16px 20px;
   display: flex;
   align-items: center;
   gap: 8px;

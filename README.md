@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Versi App** | 3.3.3 |
-| **Fase Saat Ini** | FASE 29.3 ✅ Bug Fix Korea UI + Enhancement Hangul Matriks |
+| **Versi App** | 3.3.4 |
+| **Fase Saat Ini** | FASE 29.4 ✅ Bug Fix Settings Layout |
 | **Fase Terakhir** | Backup & Restore Progress (Fase 29) |
 | **Fokus Berikutnya** | 🐛 Bug Fixing — **tidak ada fase baru untuk sementara** |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
@@ -981,6 +981,7 @@ Cache: `lingora-v11` → `lingora-v12`
 | BF-015 | Settings — halaman settings | Section "Snapshot Otomatis" menggunakan `.settings-row-info` langsung di dalam card tanpa padding — teks nempel ke kiri | Fase 29.2 | ✅ Selesai |
 | BF-016 | Settings — halaman settings | Beberapa section title menggunakan HTML entity icon yang kecil/tidak terlihat jelas (`★`, `⚠`, `ℹ`) — diganti emoji yang lebih jelas | Fase 29.2 | ✅ Selesai |
 | BF-018 | Kosakata KR & Grammar KR | `vocabulary.html` dan `grammar.html` Korea tidak meng-include `japanese.css` dan `kanji.css` — menyebabkan `.vocab-grid`, `.vocab-card`, `.theme-tab`, `.grammar-card`, `.vocab-toolbar`, `.grid-count`, dll tidak punya styling sehingga tampilan berantakan | Fase 29.3 | ✅ Selesai — ditambah `japanese.css` + `kanji.css` ke kedua halaman KR |
+| BF-019 | Settings — halaman settings | `.theme-picker-section` (Tema Warna & Gaya Font) tidak punya padding sehingga konten nempel ke tepi kiri/kanan card. `.customization-live-preview` hanya punya `margin-top: 8px` tanpa margin kiri/kanan sehingga melebar penuh ke tepi card. `.settings-divider` menggunakan `margin: 0 20px` sehingga tidak konsisten dengan elemen lain. `.backup-status-bar` tidak punya margin atas sehingga nempel ke atas card. | Fase 29.4 | ✅ Selesai — padding konsisten 20px di semua elemen theme/font section, preview margin diperbaiki, divider full-width, backup status bar punya top margin |
 | ENH-001 | Hangul — Tab Tabel | Tabel suku kata dasar monoton, scrollable panjang, tidak interaktif — diganti dengan **matriks interaktif konsonan × vokal** yang dapat di-hover untuk highlight baris/kolom, klik per sel untuk audio + detail, serta bagian batchim terpisah dalam grid kartu | Fase 29.3 | ✅ Selesai |
 
 ### Area yang Perlu Diperiksa di Sesi Bug Fixing
@@ -1194,6 +1195,7 @@ CSS per fitur   → assets/css/{nama-fitur}.css
 | **v3.3.3 — Fase 29.3** | 2026-02-26 | 🐛 Bug Fix Korea UI + Enhancement Hangul: (1) Tambah `japanese.css` + `kanji.css` ke `vocabulary.html` & `grammar.html` Korea — perbaiki layout berantakan (vocab-grid, vocab-card, grammar-card, theme-tabs, toolbar, dll tidak ter-style). (2) Tambah `data-lang="kr"` ke semua halaman Korea + override warna biru di korean.css. (3) Ganti tabel suku kata hangul dengan **matriks interaktif** konsonan × vokal: hover highlight, klik per sel untuk audio+detail, batchim jadi grid kartu terpisah. Cache: `lingora-v12` → `lingora-v13` | ✅ |
 | **v3.3.2 — Fase 29.2** | 2026-02-26 | 🐛 Bug Fix Settings & Tema Global: padding/margin teks nempel kiri di settings (backup-status-bar, auto-backup-list, snapshot otomatis), icon section title diperbaiki, `themes.css` ditambahkan ke semua 32 halaman agar tema berlaku global | ✅ |
 | **v3.3.1 — Fase 29.1** | 2026-02-26 | 🐛 Bug Fix Sidebar: HTML korup di 15+ halaman, Quiz Korea hilang di 4 halaman, link duplikat di bottom-nav (dashboard/quiz-jp/quiz-zh/profile), update template sidebar.html | ✅ |
+| **v3.3.4 — Fase 29.4** | 2026-02-26 | 🐛 Bug Fix Settings UI — Rapikan tata letak halaman pengaturan: (1) `.theme-picker-section` ditambah `padding: 16px 20px` agar konten Tema Warna & Gaya Font tidak nempel ke tepi card. (2) `.customization-live-preview` diubah dari `margin-top: 8px` ke `margin: 16px 20px` agar preview tema punya jarak konsisten dari tepi card. (3) `.settings-divider` diubah dari `margin: 0 20px` ke `margin: 0` (full-width) agar pemisah antar section konsisten dan rapi. (4) `.backup-status-bar` diubah dari `margin: 0 20px 16px` ke `margin: 16px 20px` agar ada jarak atas di dalam card. | ✅ |
 | **Bug Fixing** | TBD | 🐛 Review menyeluruh berlanjut — tidak ada fase baru untuk sementara | 🔄 In Progress |
 
 ---

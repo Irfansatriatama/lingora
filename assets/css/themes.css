@@ -138,7 +138,7 @@
 
 /* ── Theme Picker UI ── */
 .theme-picker-section {
-  margin-bottom: 16px;
+  padding: 16px 20px;
 }
 
 .theme-picker-label {
@@ -372,7 +372,7 @@ html.theme-transitioning {
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
   padding: 16px;
-  margin-top: 8px;
+  margin: 16px 20px;
   display: flex;
   align-items: center;
   gap: 12px;
