@@ -7,13 +7,17 @@
 // ── Constants ──────────────────────────────────────────────────────────
 
 const MODULES = [
-  { id: 'hiragana',  char: 'あ', name: 'Hiragana',      total: 104,  lang: 'jp' },
-  { id: 'katakana',  char: 'ア', name: 'Katakana',      total: 104,  lang: 'jp' },
-  { id: 'kanji',     char: '漢', name: 'Kanji',          total: 278,  lang: 'jp' },
-  { id: 'jp-vocab',  char: '語', name: 'Kosakata JP',   total: 225,  lang: 'jp' },
-  { id: 'pinyin',    char: '拼', name: 'Pinyin',         total: 59,   lang: 'zh' },
-  { id: 'hanzi',     char: '汉', name: 'Hanzi',          total: 208,  lang: 'zh' },
-  { id: 'zh-vocab',  char: '词', name: 'Kosakata ZH',   total: 600,  lang: 'zh' },
+  { id: 'hiragana',   char: 'あ', name: 'Hiragana',      total: 104,  lang: 'jp' },
+  { id: 'katakana',   char: 'ア', name: 'Katakana',      total: 104,  lang: 'jp' },
+  { id: 'kanji',      char: '漢', name: 'Kanji',          total: 278,  lang: 'jp' },
+  { id: 'jp-vocab',   char: '語', name: 'Kosakata JP',   total: 225,  lang: 'jp' },
+  { id: 'pinyin',     char: '拼', name: 'Pinyin',         total: 59,   lang: 'zh' },
+  { id: 'hanzi',      char: '汉', name: 'Hanzi',          total: 208,  lang: 'zh' },
+  { id: 'zh-vocab',   char: '词', name: 'Kosakata ZH',   total: 600,  lang: 'zh' },
+  { id: 'hangul',     char: '한', name: 'Hangul',         total: 35,   lang: 'kr' },
+  { id: 'kr-vocab',   char: '어', name: 'Kosakata KR',   total: 155,  lang: 'kr' },
+  { id: 'kr-grammar', char: '문', name: 'Grammar KR',    total: 27,   lang: 'kr' },
+  { id: 'kr-dialog',  char: '대', name: 'Dialog KR',     total: 6,    lang: 'kr' },
 ];
 
 const ALL_BADGES = [
@@ -29,6 +33,8 @@ const ALL_BADGES = [
   { id: 'streak_30',        name: 'Master Dedikasi',    icon: '👑', desc: 'Streak 30 hari' },
   { id: 'accuracy_80',      name: 'Akurat',             icon: '🎯', desc: 'Akurasi ≥80%' },
   { id: 'perfect_streak',   name: 'Streak Sempurna',    icon: '⭐', desc: 'Streak sempurna' },
+  { id: 'hangul_master',    name: 'Hanŭl',              icon: '🌙', desc: 'Selesaikan semua modul Korea' },
+  { id: 'polyglot',         name: 'Poliglot',           icon: '🌏', desc: 'Hafal item dari 3 bahasa' },
 ];
 
 const LEVELS = [
@@ -44,9 +50,11 @@ const LEVELS = [
 const MODULE_NAME_MAP = {
   hiragana: 'Hiragana', katakana: 'Katakana', kanji: 'Kanji',
   hanzi: 'Hanzi', 'jp-vocab': 'Kosakata JP', 'zh-vocab': 'Kosakata ZH',
+  hangul: 'Hangul', 'kr-vocab': 'Kosakata KR', 'kr-grammar': 'Grammar KR', 'kr-dialog': 'Dialog KR',
   'quiz-jp-hiragana': 'Quiz Hiragana', 'quiz-jp-katakana': 'Quiz Katakana',
   'quiz-jp-kanji': 'Quiz Kanji', 'quiz-zh-hanzi': 'Quiz Hanzi',
   'quiz-zh-vocab': 'Quiz Kosakata ZH', 'quiz-zh-pinyin': 'Quiz Pinyin',
+  'quiz-kr-hangul': 'Quiz Hangul', 'quiz-kr-vocab': 'Quiz Kosakata KR',
 };
 
 // ── Helpers ────────────────────────────────────────────────────────────

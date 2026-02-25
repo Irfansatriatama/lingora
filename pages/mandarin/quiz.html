@@ -119,6 +119,7 @@
               <div class="quiz-mode-selector" id="modeOptions">
                 <button class="quiz-mode-btn active" data-mode="choice">🔘 Pilih Jawaban</button>
                 <button class="quiz-mode-btn" data-mode="input">⌨️ Ketik Jawaban</button>
+                <button class="quiz-mode-btn" data-mode="listening">🎧 Listening</button>
               </div>
             </div>
             <div style="margin-bottom:14px;">
@@ -187,6 +188,14 @@
             <div class="quiz-q-hint" id="qHint"></div>
           </div>
 
+          <!-- Mode Listening -->
+          <div id="listeningWrap" style="display:none; text-align:center;">
+            <div class="listening-mode-badge">🎧 Mode Listening — dengar lalu jawab</div>
+            <div class="listening-play-label">Klik untuk mendengar kata</div>
+            <button class="listening-play-btn" id="listeningPlayBtn" title="Putar audio">🔊</button>
+            <div class="listening-play-count" id="listeningPlayCount"></div>
+          </div>
+
           <div class="quiz-choices" id="choicesGrid"></div>
 
           <!-- Mode Ketik Jawaban -->
@@ -228,6 +237,10 @@
               <div class="result-stat"><div class="stat-val" id="statCorrect">0</div><div class="stat-lbl">Benar</div></div>
               <div class="result-stat"><div class="stat-val" id="statWrong">0</div><div class="stat-lbl">Salah</div></div>
             </div>
+            <div class="result-stat listening-stat" id="listeningXpStat" style="display:none;margin-bottom:16px;">
+              <div class="stat-val" id="statListeningXP">+0 XP</div>
+              <div class="stat-lbl">🎧 Bonus Listening</div>
+            </div>
             <div class="result-actions">
               <button class="btn btn-primary" id="retryBtn">Ulangi Quiz</button>
               <button class="btn btn-outline" id="backToSelectBtn">Pilih Modul</button>
@@ -258,6 +271,7 @@
 <script src="../../assets/js/core/app.js"></script>
 <script src="../../assets/js/data/hanzi.js"></script>
 <script src="../../assets/js/data/zh-vocab.js"></script>
+<script src="../../assets/js/modules/audio.js"></script>
 <script src="../../assets/js/modules/progress.js"></script>
 <script src="../../assets/js/modules/xp.js"></script>
 <script src="../../assets/js/modules/challenge.js"></script>

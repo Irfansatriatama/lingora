@@ -8,11 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   App.init('settings');
 
   const MODULES = [
-    { id: 'hiragana', char: 'あ', name: 'Hiragana', total: 104 },
-    { id: 'katakana', char: 'ア', name: 'Katakana', total: 104 },
-    { id: 'kanji',    char: '漢', name: 'Kanji',    total: 153 },
-    { id: 'hanzi',   char: '汉', name: 'Hanzi',    total: 208 },
-    { id: 'zh-vocab',char: '词', name: 'Kosakata ZH', total: 600 },
+    { id: 'hiragana',   char: 'あ', name: 'Hiragana', total: 104 },
+    { id: 'katakana',   char: 'ア', name: 'Katakana', total: 104 },
+    { id: 'kanji',      char: '漢', name: 'Kanji',    total: 153 },
+    { id: 'hanzi',      char: '汉', name: 'Hanzi',    total: 208 },
+    { id: 'zh-vocab',   char: '词', name: 'Kosakata ZH', total: 600 },
+    { id: 'hangul',     char: '한', name: 'Hangul',   total: 35 },
+    { id: 'kr-vocab',   char: '어', name: 'Kosakata KR', total: 155 },
+    { id: 'kr-grammar', char: '문', name: 'Grammar KR',  total: 27 },
+    { id: 'kr-dialog',  char: '대', name: 'Dialog KR',   total: 6 },
   ];
 
   // ── Load settings ────────────────────────────────────────
@@ -42,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bindToggle('toggle-romaji', 'showRomaji');
   bindToggle('toggle-pinyin', 'showPinyin');
+  bindToggle('toggle-romanization', 'showRomanization');
   bindToggle('toggle-animation', 'animationEnabled');
   bindToggle('toggle-timer', 'timerEnabled');
   bindToggle('toggle-autoplay', 'audioAutoPlay');

@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 21.5 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Modul Dialog & Quiz KR (Fase 21.5) |
+| **Fase Saat Ini** | FASE 21.6 ✅ + FASE 22 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Integrasi Penuh Korea (Fase 21.6) — dikerjakan setelah Fase 22 |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -576,9 +576,9 @@ Nav-item Hiragana di `katakana.html` punya class `active` dan `href` salah → f
 ### Gambaran Urutan Prioritas
 
 ```
-Fase 21 (Penambahan Korea + Rename Proyek)  ← PRIORITAS UTAMA
+Fase 21 (Penambahan Korea + Rename Proyek)  ← ✅ SELESAI
   ↓
-Fase 22 (Listening Quiz)                    ← Fitur belajar baru
+Fase 22 (Listening Quiz)                    ← ✅ SELESAI
   ↓
 Fase 23 (Stroke Animasi Kana)               ← Visual menarik
   ↓
@@ -629,7 +629,7 @@ Fase 33 (Leaderboard — eks Fase 25)        ← Dulu di-hold
 | **21.3** | Modul Hangul | `hangul.html` + `hangul.js` + `korean.css` (3 tab: Tabel, Flashcard, SRS) | ✅ SELESAI |
 | **21.4** | Modul Vocab & Grammar | `vocabulary.html` + `kr-vocab.js`, `grammar.html` + `kr-grammar.js` | ✅ SELESAI |
 | **21.5** | Modul Dialog & Quiz | `dialog.html` + `kr-dialog.js`, `quiz.html` + `quiz-kr.js` | ✅ SELESAI |
-| **21.6** | Integrasi Penuh | Sidebar semua halaman, Dashboard KR, Stats, Settings, Badge, Challenge | 🔲 Belum |
+| **21.6** | Integrasi Penuh | Sidebar semua halaman, Dashboard KR, Stats, Settings, Badge, Challenge | ✅ SELESAI |
 
 ---
 
@@ -791,37 +791,38 @@ assets/js/pages/quiz-kr.js        ← Quiz KR, normalisasi romanisasi RR
 
 ---
 
-#### FASE 21.6 — Integrasi Penuh 🔲
+#### FASE 21.6 — Integrasi Penuh ✅ SELESAI (2026-02-25)
 
-Update semua bagian app yang sudah ada agar mengenal modul Korea.
+Update semua bagian app yang sudah ada agar mengenal modul Korea sepenuhnya.
 
 **File yang diupdate:**
 
 ```
-components/sidebar.html           ← Tambah section 🇰🇷 Korea (5 link)
-SEMUA halaman HTML (24 file)      ← Sidebar update: link Korea
-pages/dashboard.html              ← Card progress KR + badge baru
-assets/js/pages/dashboard.js      ← Render progress KR, badge Hanŭl & Poliglot
-pages/stats.html                  ← Progress bar modul KR
-assets/js/pages/stats.js          ← Data modul KR di statistik
-pages/settings.html               ← Toggle showRomanization
-assets/js/pages/settings.js       ← Handler showRomanization
-pages/report.html                 ← Konten KR di laporan PDF
-assets/js/pages/report.js         ← Data KR masuk laporan
-assets/js/modules/xp.js           ← Badge 🌙 Hanŭl + 🌏 Poliglot
-assets/js/modules/challenge.js    ← Challenge dari modul KR
-manifest.json                     ← Tambah shortcut Quiz Korea
-sw.js                             ← Cache file-file Korea baru
+pages/dashboard.html              ← Tambah section 🇰🇷 Korea (4 modul KR)
+assets/js/pages/dashboard.js     ← krModules array, renderModules KR, kutipan Korea
+pages/stats.html                  ← (sidebar sudah ada KR dari Fase 21.3)
+assets/js/pages/stats.js          ← MODULES +4 KR, ALL_BADGES +Hanŭl+Poliglot, quiz name map KR
+pages/settings.html               ← Toggle showRomanization (Hangul)
+assets/js/pages/settings.js      ← bindToggle romanization, MODULES +4 KR di reset grid
+pages/report.html                 ← (render via JS, otomatis)
+assets/js/pages/report.js        ← MODULES +4 KR, ALL_BADGES +2, MODULE_NAME_MAP +KR
+assets/js/modules/quiz.js         ← Badge 🌙 hangul_master + 🌏 polyglot, checkAndAward pass progress
+assets/js/modules/progress.js    ← Panggil BadgeSystem.checkAndAward() di markLearned()
+assets/js/modules/challenge.js   ← 3 template KR baru (Hangul, Kosakata KR, Grammar Korea)
+manifest.json                     ← Shortcut Quiz Korea
+sw.js                             ← Cache bump v4→v5, tambah 4 data KR + 5 page JS KR + 5 HTML KR
 ```
 
 **Badge baru:**
 
 | Badge | Kondisi | Sistem |
 |-------|---------|--------|
-| 🌙 Hanŭl | Selesaikan semua modul KR | `xp.js` BadgeSystem |
-| 🌏 Poliglot | Hafal item dari 3 bahasa (JP + ZH + KR) | `xp.js` BadgeSystem |
+| 🌙 Hanŭl | Hafal item di semua modul KR (hangul, kr-vocab, kr-grammar, kr-dialog) | BadgeSystem di `quiz.js` |
+| 🌏 Poliglot | Hafal item dari 3 bahasa (JP + ZH + KR) | BadgeSystem di `quiz.js` |
 
 **Setting baru:** `showRomanization` (boolean, default: `true`) di `nh_user_{id}_settings` — konsisten dengan `showRomaji` (JP) dan `showPinyin` (ZH).
+
+**Challenge baru:** 3 template Korea ditambahkan ke pool harian: Kuasai Hangul (5 karakter, +35 XP), Kosakata KR (5 kata, +50 XP), Grammar Korea (3 pola, +40 XP).
 
 ---
 
@@ -1229,6 +1230,8 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.2 — Fase 21.3** | 2026-02-25 | Modul Hangul: `pages/korean/hangul.html` (3 tab: Tabel/Flashcard/SRS), `assets/js/pages/hangul.js` (grid jamo, modal detail, flashcard, SRS, favorit, audio ko-KR), `assets/css/korean.css` (semua style Korea). Update `audio.js`: tambah `koVoice`, `speakKR()`, `hasKRVoice()`. Update sidebar 20 halaman: tambah section 🇰🇷 Korea + Quiz Korea. | ✅ |
 | **v2.3 — Fase 21.4** | 2026-02-25 | Modul Vocab & Grammar Korea. **File baru:** `pages/korean/vocabulary.html` (Tab Jelajah + SRS, filter tema & TOPIK, favorit, audio ko-KR), `assets/js/pages/kr-vocab.js` (grid kartu, toggle learned, SRS, event delegation), `pages/korean/grammar.html` (accordion 5 kategori, search, filter TOPIK), `assets/js/pages/kr-grammar.js` (accordion expand, mark hafal, search, XP). **Update:** `assets/css/korean.css` (badge TOPIK I/II, kr-word, kr-pattern, kr-ex-kr, kr-romanization, kr-srs-char). | ✅ |
 | **v2.4 — Fase 21.5** | 2026-02-25 | Modul Dialog & Quiz Korea. **File baru:** `pages/korean/dialog.html` (viewer dialog A/B, filter level TOPIK, playthrough dengan TTS ko-KR, toggle romanisasi & terjemahan), `assets/js/pages/kr-dialog.js` (grid dialog, viewer, step prev/next, auto-speak TTS, XP), `pages/korean/quiz.html` (quiz KR: pilih/ketik, modul Hangul & Vocab KR, pilih jumlah soal & level TOPIK), `assets/js/pages/quiz-kr.js` (2 modul: hangul & kr-vocab, 3 tipe soal, normalisasi romanisasi, timer, feedback, review akhir). | ✅ |
+| **v2.5 — Fase 22** | 2026-02-25 | **Listening Mode (Audio Quiz)** untuk semua 3 quiz (JP, ZH, KR). **Perubahan utama:** Tombol mode baru `🎧 Listening` di selector mode setiap halaman quiz. Mode Listening: karakter soal **disembunyikan** (blur CSS), tombol 🔊 besar beranimasi pulse auto-play audio saat soal muncul, user jawab pilihan arti. Karakter terungkap setelah menjawab. Bonus XP **+5 per soal benar** di Listening mode, terakumulasi ditampilkan di layar hasil. Timer 25 detik (lebih panjang dari mode normal 20 detik). **File baru:** Tidak ada (semua update). **File diupdate:** `assets/css/quiz.css` (Fase 22 section: `.quiz-char-hidden`, `.listening-play-btn`, `.listening-mode-badge`, `.listening-bonus-badge`, `.listening-stat`, animasi `listenPulse`), `pages/japanese/quiz.html` (mode btn + `listeningWrap` + `statListeningXP` + audio.js), `pages/mandarin/quiz.html` (idem), `pages/korean/quiz.html` (idem), `assets/js/pages/quiz-jp.js` (listening state, `playListeningAudio`, `onAnswerListening`, update `buildKanaQuestion` + `buildKanjiQuestion`), `assets/js/pages/quiz-zh.js` (listening penuh, update `buildHanziQuestion` + `buildVocabQuestion`), `assets/js/pages/quiz-kr.js` (listening penuh, `renderListeningChoices`, `onAnswerListening`), `sw.js` (cache bump `lingora-v3` → `lingora-v4`). | ✅ |
+| **v2.6 — Fase 21.6** | 2026-02-25 | **Integrasi Penuh Korea** — menghubungkan semua modul KR ke sistem inti app. **Dashboard:** Tambah section Bahasa Korea (4 modul: Hangul, Kosakata KR, Grammar KR, Dialog KR) dengan progress bar di `dashboard.html` + `dashboard.js`. Tambah kutipan motivasi Korea (꿈). **Stats:** Update `stats.js` MODULES (tambah 4 modul KR) + ALL_BADGES (tambah 🌙 Hanŭl + 🌏 Poliglot) + quiz history name map KR. **Settings:** Tambah toggle `showRomanization` (romanisasi Hangul/Revised Romanization) di `settings.html` + `settings.js`. Update MODULES reset list (tambah 4 modul KR). **Report/PDF:** Update `report.js` MODULES (tambah 4 modul KR), ALL_BADGES (tambah 🌙 + 🌏), MODULE_NAME_MAP (KR + quiz-kr). **Badge System:** Tambah badge 🌙 `hangul_master` (hafal item di semua modul KR) + 🌏 `polyglot` (hafal item dari 3 bahasa JP+ZH+KR) ke `quiz.js` BadgeSystem.BADGES dengan `check()` function berbasis progress data. Update `checkAndAward()` untuk pass `progress` object ke check functions. **Progress:** Tambah panggilan `BadgeSystem.checkAndAward()` di `progress.js` `markLearned()` agar badge KR dicek saat belajar (bukan hanya saat quiz). **Challenge:** Tambah 3 template KR (Hangul, Kosakata KR, Grammar Korea) ke `challenge.js` TEMPLATES. **Manifest:** Tambah shortcut Quiz Korea di `manifest.json`. **SW:** Cache bump `lingora-v4` → `lingora-v5`. Tambah 4 data file KR, 5 page JS KR, 5 HTML KR ke `ASSETS_TO_CACHE`. | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 

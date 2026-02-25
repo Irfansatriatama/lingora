@@ -4,8 +4,8 @@
  * Data pengguna tetap di localStorage (tidak diurus SW)
  */
 
-const CACHE_NAME = 'lingora-v3';
-const CACHE_VERSION = 3;
+const CACHE_NAME = 'lingora-v5';
+const CACHE_VERSION = 5;
 
 // Semua aset yang perlu di-cache untuk offline
 const ASSETS_TO_CACHE = [
@@ -60,6 +60,10 @@ const ASSETS_TO_CACHE = [
   './assets/js/data/jp-grammar.js',
   './assets/js/data/jp-dialogs.js',
   './assets/js/data/zh-dialogs.js',
+  './assets/js/data/hangul.js',
+  './assets/js/data/kr-vocab.js',
+  './assets/js/data/kr-grammar.js',
+  './assets/js/data/kr-dialogs.js',
 
   // Page JS
   './assets/js/pages/dashboard.js',
@@ -76,6 +80,11 @@ const ASSETS_TO_CACHE = [
   './assets/js/pages/zh-vocab.js',
   './assets/js/pages/quiz-jp.js',
   './assets/js/pages/quiz-zh.js',
+  './assets/js/pages/hangul.js',
+  './assets/js/pages/kr-vocab.js',
+  './assets/js/pages/kr-grammar.js',
+  './assets/js/pages/kr-dialog.js',
+  './assets/js/pages/quiz-kr.js',
   './assets/js/pages/settings.js',
   './assets/js/pages/stats.js',
   './assets/js/pages/report.js',
@@ -102,6 +111,11 @@ const ASSETS_TO_CACHE = [
   './pages/mandarin/vocabulary.html',
   './pages/mandarin/dialog.html',
   './pages/mandarin/quiz.html',
+  './pages/korean/hangul.html',
+  './pages/korean/vocabulary.html',
+  './pages/korean/grammar.html',
+  './pages/korean/dialog.html',
+  './pages/korean/quiz.html',
 
   // Icons
   './assets/icons/icon-192.png',

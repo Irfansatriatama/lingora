@@ -1,18 +1,23 @@
 /**
  * Lingora - Quiz Jepang Page
  * Hiragana, Katakana, Kanji quiz dengan multiple choice.
+ * Fase 22: Tambah Listening Mode (Audio Quiz)
  */
 (() => {
   if (!Router.guard()) return;
   App.init('quiz-jp');
+
+  const user = Auth.getActiveUser();
 
   // ── State ──────────────────────────────────────────────
   let selectedModule = null;
   let selectedType   = 'char-to-romaji';
   let selectedCount  = 10;
   let selectedKLevel = 'all';
-  let selectedMode   = 'choice'; // 'choice' | 'input'
+  let selectedMode   = 'choice'; // 'choice' | 'input' | 'listening'
   let isSessionActive = false;
+  let listeningPlayCount = 0;   // Fase 22: berapa kali audio diputar
+  let listeningXpBonus  = 0;    // Fase 22: akumulasi bonus XP listening
 
   // ── DOM ────────────────────────────────────────────────
   const selectScreen  = document.getElementById('selectScreen');
@@ -116,10 +121,22 @@
       return;
     }
 
+    // Fase 22: validasi listening mode — perlu audio support
+    if (selectedMode === 'listening' && !AudioEngine.isSupported()) {
+      App.toast('Browser kamu tidak mendukung audio. Coba Chrome atau Safari.', 'error');
+      return;
+    }
+
+    // Listening mode paksa tipe char-to-romaji (karakter disembunyikan, jawab arti/romaji)
+    const effectiveType = selectedMode === 'listening' ? 'char-to-meaning-or-romaji' : selectedType;
+
+    const timerSecs = selectedMode === 'input' ? 30 : selectedMode === 'listening' ? 25 : 20;
+    listeningXpBonus = 0;
+
     const ok = QuizEngine.start(
       items,
       (item, all) => buildQuestion(item, all),
-      { totalQuestions: selectedCount, timerSeconds: selectedMode === 'input' ? 30 : 20, moduleId: `quiz-jp-${selectedModule}` },
+      { totalQuestions: selectedCount, timerSeconds: timerSecs, moduleId: `quiz-jp-${selectedModule}` },
       onFinish
     );
 
@@ -154,6 +171,20 @@
   }
 
   function buildKanaQuestion(item, allItems) {
+    // Fase 22: Listening mode selalu soal arti/romaji dari audio karakter
+    if (selectedMode === 'listening') {
+      const wrongs = QuizEngine.pickWrongAnswers(allItems, item.romaji, x => x.romaji, 3);
+      return {
+        question    : item.char,
+        questionType: 'char',
+        answer      : item.romaji,
+        choices     : QuizEngine.shuffleChoices([item.romaji, ...wrongs]),
+        hint        : '',
+        explanation : `${item.char} dibaca "${item.romaji}"`,
+        _listeningText: item.char, // teks untuk TTS
+      };
+    }
+
     if (selectedType === 'char-to-romaji') {
       const wrongs = QuizEngine.pickWrongAnswers(allItems, item.romaji, x => x.romaji, 3);
       return {
@@ -178,6 +209,21 @@
   }
 
   function buildKanjiQuestion(item, allItems) {
+    // Fase 22: Listening mode — soal dari audio kanji, jawab artinya
+    if (selectedMode === 'listening') {
+      const wrongs = QuizEngine.pickWrongAnswers(allItems, item.meaning[0], x => x.meaning[0], 3);
+      const reading = item.onyomi[0] || item.kunyomi[0] || item.char;
+      return {
+        question    : item.char,
+        questionType: 'char',
+        answer      : item.meaning[0],
+        choices     : QuizEngine.shuffleChoices([item.meaning[0], ...wrongs]),
+        hint        : '',
+        explanation : `${item.char} (${reading}) berarti "${item.meaning.join(', ')}"`,
+        _listeningText: reading, // baca onyomi agar terdengar jelas
+      };
+    }
+
     if (selectedType === 'char-to-meaning') {
       const wrongs = QuizEngine.pickWrongAnswers(allItems, item.meaning[0], x => x.meaning[0], 3);
       return {
@@ -234,24 +280,65 @@
     document.getElementById('progressFill').style.width  = `${(p.current / p.total) * 100}%`;
     document.getElementById('scoreNum').textContent       = p.score;
 
-    // Question
+    // Question card
     const qChar = document.getElementById('qChar');
     const qText = document.getElementById('qText');
     const qHint = document.getElementById('qHint');
 
-    if (q.questionType === 'char') {
-      qChar.textContent     = q.question;
-      qChar.style.display   = 'flex';
-      qText.style.display   = 'none';
-      document.getElementById('qLabel').textContent = selectedType === 'char-to-meaning'
-        ? 'Apa arti kanji ini?' : 'Apa bacaan dari karakter ini?';
+    const listeningWrap  = document.getElementById('listeningWrap');
+    const listeningPlayBtn   = document.getElementById('listeningPlayBtn');
+    const listeningPlayCount = document.getElementById('listeningPlayCount');
+
+    if (selectedMode === 'listening') {
+      // ── Mode Listening: sembunyikan karakter, tampilkan tombol play ──
+      // Tetap render karakter (tersembunyi via CSS)
+      if (q.questionType === 'char') {
+        qChar.innerHTML = `<span class="quiz-char-hidden" id="hiddenChar">${q.question}</span>`;
+        qChar.style.display = 'flex';
+        qText.style.display = 'none';
+      } else {
+        qText.innerHTML = `<span class="quiz-char-hidden" id="hiddenChar">${q.question}</span>`;
+        qText.style.display = 'block';
+        qChar.style.display = 'none';
+      }
+      document.getElementById('qLabel').textContent = 'Dengar dan pilih arti yang benar';
+      qHint.textContent = '';
+
+      // Tampilkan listening wrap
+      listeningWrap.style.display = 'block';
+      let playCount = 0;
+      listeningPlayCount.textContent = '';
+      listeningPlayBtn.classList.remove('playing');
+
+      // Auto-play pertama kali
+      setTimeout(() => {
+        playListeningAudio(q, listeningPlayBtn, listeningPlayCount, ++playCount);
+      }, 400);
+
+      // Click handler tombol play
+      listeningPlayBtn.onclick = () => {
+        playCount++;
+        playListeningAudio(q, listeningPlayBtn, listeningPlayCount, playCount);
+      };
+
     } else {
-      qText.textContent     = q.question;
-      qText.style.display   = 'block';
-      qChar.style.display   = 'none';
-      document.getElementById('qLabel').textContent = 'Pilih karakter yang sesuai';
+      // Mode normal (choice / input)
+      listeningWrap.style.display = 'none';
+
+      if (q.questionType === 'char') {
+        qChar.textContent     = q.question;
+        qChar.style.display   = 'flex';
+        qText.style.display   = 'none';
+        document.getElementById('qLabel').textContent = selectedType === 'char-to-meaning'
+          ? 'Apa arti kanji ini?' : 'Apa bacaan dari karakter ini?';
+      } else {
+        qText.textContent     = q.question;
+        qText.style.display   = 'block';
+        qChar.style.display   = 'none';
+        document.getElementById('qLabel').textContent = 'Pilih karakter yang sesuai';
+      }
+      qHint.textContent = q.hint || '';
     }
-    qHint.textContent = q.hint || '';
 
     // Reset feedback & next
     const fb = document.getElementById('feedback');
@@ -294,6 +381,20 @@
         if (e.key === 'Enter' && !inputField.disabled) submitInputAnswer(q);
       };
 
+    } else if (selectedMode === 'listening') {
+      // ── Mode Listening: tampilkan choices (pilih arti) ──
+      choicesGrid.style.display = '';
+      inputWrap.style.display   = 'none';
+
+      choicesGrid.innerHTML = '';
+      q.choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-choice';
+        btn.textContent = choice;
+        btn.addEventListener('click', () => onAnswerListening(choice, q));
+        choicesGrid.appendChild(btn);
+      });
+
     } else {
       // ── Mode Pilih ───────────────────────────────────
       choicesGrid.style.display = '';
@@ -321,11 +422,68 @@
         // Time expired
         if (selectedMode === 'input') {
           submitInputAnswer(QuizEngine.getQuestion(), true);
+        } else if (selectedMode === 'listening') {
+          onAnswerListening(null, QuizEngine.getQuestion());
         } else {
           onAnswer(null);
         }
       }
     );
+  }
+
+  // ── Fase 22: Play listening audio ─────────────────────
+  function playListeningAudio(q, btn, countEl, count) {
+    // Teks yang diputar adalah karakter asli (tersembunyi dari tampilan)
+    const text = q._listeningText || q.question;
+    const lang = 'ja-JP';
+
+    btn.classList.add('playing');
+    AudioEngine.speak(text, lang);
+
+    // Update play count
+    if (count > 1) {
+      countEl.textContent = `Diputar ${count}x`;
+    }
+
+    setTimeout(() => btn.classList.remove('playing'), 2000);
+  }
+
+  // ── Fase 22: Answer handler untuk listening mode ────
+  function onAnswerListening(choice, q) {
+    const result = QuizEngine.answer(choice);
+    if (!result) return;
+
+    // Reveal karakter tersembunyi
+    const hiddenChar = document.getElementById('hiddenChar');
+    if (hiddenChar) hiddenChar.classList.add('revealed');
+
+    // Highlight choices
+    document.querySelectorAll('.quiz-choice').forEach(btn => {
+      btn.disabled = true;
+      if (btn.textContent === result.answer) btn.classList.add('correct');
+      if (btn.textContent === choice && !result.correct) btn.classList.add('wrong');
+    });
+
+    // Feedback
+    const fb     = document.getElementById('feedback');
+    const fbIcon = document.getElementById('feedbackIcon');
+    const fbText = document.getElementById('feedbackText');
+
+    if (result.correct) {
+      listeningXpBonus += 5;
+      XPSystem.addXP('listening_correct', 5, '🎧 Listening benar');
+      fb.className    = 'quiz-feedback correct show';
+      fbIcon.textContent = '✅';
+      fbText.innerHTML   = `<strong>Benar!</strong> <span class="listening-bonus-badge">+5 XP Listening</span><br>${result.explanation}`;
+      App.toast('Benar! +5 XP 🎧', 'success', 1500);
+    } else {
+      fb.className    = 'quiz-feedback wrong show';
+      fbIcon.textContent = choice === null ? '⏰' : '❌';
+      fbText.innerHTML   = `<strong>${choice === null ? 'Waktu habis!' : 'Kurang tepat.'}</strong>${result.explanation}`;
+    }
+
+    document.getElementById('scoreNum').textContent = QuizEngine.getProgress().score;
+    document.getElementById('nextBtn').style.display = 'block';
   }
 
   // ── Submit Input Answer ────────────────────────────────
@@ -437,8 +595,10 @@
     document.getElementById('retryBtn').addEventListener('click', () => {
       showScreen('session');
       const items = getDataset();
+      listeningXpBonus = 0;
+      const timerSecs = selectedMode === 'input' ? 30 : selectedMode === 'listening' ? 25 : 20;
       QuizEngine.start(items, (item, all) => buildQuestion(item, all), {
-        totalQuestions: selectedCount, timerSeconds: selectedMode === 'input' ? 30 : 20, moduleId: `quiz-jp-${selectedModule}`
+        totalQuestions: selectedCount, timerSeconds: timerSecs, moduleId: `quiz-jp-${selectedModule}`
       }, onFinish);
       renderQuestion();
     });
@@ -471,6 +631,15 @@
     document.getElementById('statAccuracy').textContent   = pct + '%';
     document.getElementById('statCorrect').textContent    = score;
     document.getElementById('statWrong').textContent      = total - score;
+
+    // Fase 22: tampilkan bonus XP listening jika ada
+    const listeningXpStat = document.getElementById('listeningXpStat');
+    if (selectedMode === 'listening' && listeningXpBonus > 0) {
+      listeningXpStat.style.display = '';
+      document.getElementById('statListeningXP').textContent = `+${listeningXpBonus} XP`;
+    } else {
+      listeningXpStat.style.display = 'none';
+    }
 
     // Ring
     const circumference = 2 * Math.PI * 60; // r=60

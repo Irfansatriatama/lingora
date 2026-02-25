@@ -651,6 +651,161 @@
   font-family: var(--font-cjk);
 }
 
+/* ============================================================
+   FASE 22 — Listening Mode (Audio Quiz)
+   ============================================================ */
+
+/* ── Listening mode button ── */
+.quiz-mode-btn[data-mode="listening"] {
+  position: relative;
+}
+
+/* ── Hidden character card (listening mode) ── */
+.quiz-char-hidden {
+  font-size: 5rem;
+  line-height: 1.1;
+  color: transparent;
+  text-shadow: 0 0 24px var(--text-3);
+  background: repeating-linear-gradient(90deg, var(--border) 0px, var(--border) 8px, transparent 8px, transparent 14px);
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+  margin-bottom: 8px;
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-cjk);
+  filter: blur(10px) grayscale(1);
+  user-select: none;
+  transition: filter 0.5s ease, text-shadow 0.4s ease;
+  cursor: default;
+}
+
+.quiz-char-hidden.revealed {
+  filter: none;
+  color: var(--text);
+  background: none;
+  text-shadow: none;
+}
+
+/* ── Listening play button ── */
+.listening-play-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid var(--red);
+  background: var(--red-soft);
+  cursor: pointer;
+  margin: 16px auto 8px;
+  font-size: 2.2rem;
+  color: var(--red);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background 0.15s;
+  animation: listenPulse 2s ease-in-out infinite;
+}
+.listening-play-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(192,57,43,0.3);
+  background: var(--red);
+  color: #fff;
+  animation: none;
+}
+.listening-play-btn:active {
+  transform: scale(0.96);
+}
+.listening-play-btn.playing {
+  background: var(--red);
+  color: #fff;
+  animation: none;
+  box-shadow: 0 0 0 6px rgba(192,57,43,0.2);
+}
+
+@keyframes listenPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(192,57,43,0.25); }
+  50%       { box-shadow: 0 0 0 10px rgba(192,57,43,0); }
+}
+
+.listening-play-label {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 2px;
+  letter-spacing: 0.04em;
+}
+
+.listening-play-count {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* ── Listening mode badge in quiz topbar ── */
+.listening-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: #7d3fc8;
+  font-weight: 600;
+  background: rgba(108,63,197,0.1);
+  border: 1px solid rgba(108,63,197,0.2);
+  border-radius: 99px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* ── Listening XP bonus badge ── */
+.listening-bonus-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #6c3fc5, #9b59b6);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Listening stat box in result ── */
+.listening-stat {
+  background: linear-gradient(135deg, rgba(108,63,197,0.12), rgba(155,89,182,0.08));
+  border: 1px solid rgba(108,63,197,0.2);
+}
+.listening-stat .stat-val {
+  color: #7d3fc8 !important;
+}
+
+/* ── Dark mode overrides for listening ── */
+[data-theme="dark"] .listening-play-btn {
+  border-color: #e05c4c;
+  background: rgba(224,92,76,0.15);
+  color: #ff9084;
+}
+[data-theme="dark"] .listening-play-btn:hover,
+[data-theme="dark"] .listening-play-btn.playing {
+  background: #e05c4c;
+  color: #fff;
+}
+[data-theme="dark"] .quiz-char-hidden.revealed {
+  color: #e8e8f0;
+}
+[data-theme="dark"] .listening-mode-badge {
+  color: #b580ff;
+  background: rgba(108,63,197,0.2);
+  border-color: rgba(108,63,197,0.35);
+}
+[data-theme="dark"] .listening-stat .stat-val {
+  color: #b580ff !important;
+}
+
 /* ── Dark mode overrides ── */
 [data-theme="dark"] .quiz-input-field {
   background: #1a1a22;

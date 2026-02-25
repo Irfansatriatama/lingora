@@ -41,6 +41,10 @@ const Progress = (() => {
         ChallengeSystem.onLearnItem(moduleId);
         ChallengeSystem.onModuleVisit(moduleId);
       }
+      // Badge KR (Fase 21.6) — cek badge Hangul & Poliglot
+      if (typeof BadgeSystem !== 'undefined') {
+        BadgeSystem.checkAndAward(moduleId, 0, 0);
+      }
     }
   }
 

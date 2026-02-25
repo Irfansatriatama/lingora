@@ -203,6 +203,20 @@ const BadgeSystem = (() => {
 
     // Accuracy
     { id:'accuracy_80',      name:'Akurat',             icon:'🎯', desc:'Jawab 80% soal benar secara keseluruhan.', check: (stats) => stats.totalQuestions >= 20 && (stats.totalCorrect / stats.totalQuestions) >= 0.8 },
+
+    // Korea milestones (Fase 21.6)
+    { id:'hangul_master',    name:'Hanŭl',              icon:'🌙', desc:'Selesaikan semua modul Bahasa Korea.', check: (stats, last, streak, progress) => {
+      if (!progress) return false;
+      const krMods = ['hangul', 'kr-vocab', 'kr-grammar', 'kr-dialog'];
+      return krMods.every(m => progress[m] && progress[m].learned && progress[m].learned.length > 0);
+    }},
+    { id:'polyglot',         name:'Poliglot',           icon:'🌏', desc:'Hafal item dari 3 bahasa (JP, ZH, dan KR).', check: (stats, last, streak, progress) => {
+      if (!progress) return false;
+      const hasJP = ['hiragana','katakana','kanji','jp-vocab'].some(m => progress[m] && progress[m].learned && progress[m].learned.length > 0);
+      const hasZH = ['hanzi','zh-vocab','pinyin'].some(m => progress[m] && progress[m].learned && progress[m].learned.length > 0);
+      const hasKR = ['hangul','kr-vocab','kr-grammar'].some(m => progress[m] && progress[m].learned && progress[m].learned.length > 0);
+      return hasJP && hasZH && hasKR;
+    }},
   ];
 
   function getUserId() {
@@ -238,13 +252,14 @@ const BadgeSystem = (() => {
     const uid = getUserId();
     if (!uid) return;
 
-    const stats  = Storage.getUser(uid, 'stats', {});
-    const streak = _getStreak(uid);
+    const stats    = Storage.getUser(uid, 'stats', {});
+    const streak   = _getStreak(uid);
+    const progress = Storage.getUser(uid, 'progress', {});
     const last   = { score, total, moduleId };
 
     BADGES.forEach(badge => {
       if (!hasBadge(badge.id)) {
-        if (badge.check(stats, last, streak)) {
+        if (badge.check(stats, last, streak, progress)) {
           awardBadge(badge.id);
         }
       }

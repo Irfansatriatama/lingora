@@ -106,8 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
   }
 
+  const krModules = [
+    { id: 'hangul',     char: '한', name: 'Hangul',    total: 35,  href: 'korean/hangul.html',     lang: 'KR' },
+    { id: 'kr-vocab',   char: '어', name: 'Kosakata',  total: 155, href: 'korean/vocabulary.html',  lang: 'KR' },
+    { id: 'kr-grammar', char: '문', name: 'Grammar',   total: 27,  href: 'korean/grammar.html',     lang: 'KR' },
+    { id: 'kr-dialog',  char: '대', name: 'Dialog',    total: 6,   href: 'korean/dialog.html',      lang: 'KR' },
+  ];
+
   renderModules(jpModules, 'jp-modules');
   renderModules(zhModules, 'zh-modules');
+  renderModules(krModules, 'kr-modules');
 
   // ── Daily quote ──────────────────────────────────────────
   const quotes = [
@@ -118,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { char: '志', text: 'Orang yang belajar bahasa baru membuka jendela baru ke dunia.', src: '— Pepatah Ceko' },
     { char: '歩', text: 'Tidak peduli seberapa lambat kamu melangkah, selama kamu tidak berhenti.', src: '— Konfusius' },
     { char: '努', text: 'Rajin melatih diri adalah kunci menguasai bahasa apa pun.', src: '— Peribahasa Umum' },
+    { char: '꿈', text: 'Mimpi besar dimulai dari satu kata yang dipelajari hari ini.', src: '— Peribahasa Korea' },
   ];
 
   const today = new Date().getDay();

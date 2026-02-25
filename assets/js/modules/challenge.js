@@ -17,6 +17,10 @@ const ChallengeSystem = (() => {
     { type: 'learn_items', module: 'jp-vocab', target: 5,  icon: '語', title: 'Kosakata JP',      desc: 'Hafal 5 kata kosakata Jepang baru',                   xp: 50 },
     { type: 'learn_items', module: 'hanzi',    target: 3,  icon: '汉', title: 'Pemburu Hanzi',    desc: 'Hafal 3 hanzi baru hari ini',                         xp: 40 },
     { type: 'learn_items', module: 'zh-vocab', target: 5,  icon: '词', title: 'Kosakata ZH',      desc: 'Hafal 5 kata kosakata Mandarin baru',                 xp: 50 },
+    // Korea (Fase 21.6)
+    { type: 'learn_items', module: 'hangul',   target: 5,  icon: '한', title: 'Kuasai Hangul',    desc: 'Hafal 5 karakter Hangul baru',                        xp: 35 },
+    { type: 'learn_items', module: 'kr-vocab', target: 5,  icon: '어', title: 'Kosakata KR',      desc: 'Hafal 5 kata kosakata Korea baru',                    xp: 50 },
+    { type: 'learn_items', module: 'kr-grammar',target: 3, icon: '문', title: 'Grammar Korea',    desc: 'Hafal 3 pola grammar Korea baru',                     xp: 40 },
     // quiz
     { type: 'quiz_complete', count: 1,         icon: '🎯', title: 'Quiz Pertama',     desc: 'Selesaikan 1 sesi quiz manapun',                      xp: 30 },
     { type: 'quiz_complete', count: 2,         icon: '🏆', title: 'Double Quiz',      desc: 'Selesaikan 2 sesi quiz hari ini',                     xp: 55 },

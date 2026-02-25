@@ -8,12 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
   App.init('stats');
 
   const MODULES = [
-    { id: 'hiragana', char: 'あ', name: 'Hiragana',     total: 104 },
-    { id: 'katakana', char: 'ア', name: 'Katakana',     total: 104 },
-    { id: 'kanji',    char: '漢', name: 'Kanji',         total: 153 },
-    { id: 'pinyin',   char: '拼', name: 'Pinyin',        total: 59  },
-    { id: 'hanzi',    char: '汉', name: 'Hanzi',         total: 208 },
-    { id: 'zh-vocab', char: '词', name: 'Kosakata ZH',  total: 600 },
+    { id: 'hiragana',   char: 'あ', name: 'Hiragana',     total: 104 },
+    { id: 'katakana',   char: 'ア', name: 'Katakana',     total: 104 },
+    { id: 'kanji',      char: '漢', name: 'Kanji',         total: 153 },
+    { id: 'pinyin',     char: '拼', name: 'Pinyin',        total: 59  },
+    { id: 'hanzi',      char: '汉', name: 'Hanzi',         total: 208 },
+    { id: 'zh-vocab',   char: '词', name: 'Kosakata ZH',  total: 600 },
+    { id: 'hangul',     char: '한', name: 'Hangul',        total: 35  },
+    { id: 'kr-vocab',   char: '어', name: 'Kosakata KR',  total: 155 },
+    { id: 'kr-grammar', char: '문', name: 'Grammar KR',   total: 27  },
+    { id: 'kr-dialog',  char: '대', name: 'Dialog KR',    total: 6   },
   ];
 
   // ── Summary stats ─────────────────────────────────────────
@@ -83,9 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const moduleNames = {
         hiragana: 'Hiragana', katakana: 'Katakana', kanji: 'Kanji',
         hanzi: 'Hanzi', 'zh-vocab': 'Kosakata ZH',
+        hangul: 'Hangul', 'kr-vocab': 'Kosakata KR', 'kr-grammar': 'Grammar KR', 'kr-dialog': 'Dialog KR',
         'quiz-jp-hiragana': 'Quiz Hiragana', 'quiz-jp-katakana': 'Quiz Katakana',
         'quiz-jp-kanji': 'Quiz Kanji', 'quiz-zh-hanzi': 'Quiz Hanzi',
         'quiz-zh-vocab': 'Quiz Kosakata ZH', 'quiz-zh-pinyin': 'Quiz Pinyin',
+        'quiz-kr-hangul': 'Quiz Hangul', 'quiz-kr-vocab': 'Quiz Kosakata KR',
       };
       historyEl.innerHTML = recent.map(s => {
         const acc = Math.round((s.score / s.total) * 100);
@@ -130,6 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { id:'streak_30',        name:'Master Dedikasi',    icon:'👑' },
     { id:'accuracy_80',      name:'Akurat',             icon:'🎯' },
     { id:'perfect_streak',   name:'Streak Sempurna',    icon:'⭐' },
+    { id:'hangul_master',    name:'Hanŭl',              icon:'🌙' },
+    { id:'polyglot',         name:'Poliglot',           icon:'🌏' },
   ];
 
   const earnedBadges = Storage.getUser(user.id, 'badges', {});

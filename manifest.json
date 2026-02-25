@@ -46,6 +46,13 @@
       "description": "Mulai quiz bahasa Mandarin",
       "url": "./pages/mandarin/quiz.html",
       "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Quiz Korea",
+      "short_name": "Quiz KR",
+      "description": "Mulai quiz bahasa Korea",
+      "url": "./pages/korean/quiz.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
