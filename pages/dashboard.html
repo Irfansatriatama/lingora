@@ -74,6 +74,7 @@
       <div class="nav-section-label">Latihan</div>
       <a class="nav-item" href="japanese/quiz.html"  data-page="quiz-jp"><span class="nav-icon">&#9733;</span>Quiz Jepang</a>
       <a class="nav-item" href="mandarin/quiz.html"  data-page="quiz-zh"><span class="nav-icon">&#9733;</span>Quiz Mandarin</a>
+      <a class="nav-item" href="games.html" data-page="games"><span class="nav-icon">&#127918;</span>Mini Game</a>
 
       <div class="nav-section-label">Akun</div>
       <a class="nav-item" href="profile.html"         data-page="profile"><span class="nav-icon">&#128100;</span>Profil</a>
@@ -234,6 +235,31 @@
 
       <!-- Konfeti container (CSS only animation) -->
       <div class="confetti-wrap" id="confetti-wrap" aria-hidden="true"></div>
+
+      <!-- Fase 27: Mini Game Quick Access -->
+      <div style="margin-bottom:28px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🎮 Mini Game</div>
+            <a href="games.html" style="font-size:0.8rem;color:var(--red);font-weight:600;">Lihat Semua →</a>
+          </div>
+          <p style="font-size:0.85rem;color:var(--text-3);margin-bottom:14px;">Belajar sambil bermain! Tiga game seru untuk melatih hafalan.</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;">
+            <a href="games/memory.html" style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem;text-align:center;text-decoration:none;display:block;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem;">🃏</div>
+              <div style="font-size:0.75rem;font-weight:600;color:var(--text);margin-top:4px;">Memory</div>
+            </a>
+            <a href="games/scramble.html" style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem;text-align:center;text-decoration:none;display:block;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem;">🔤</div>
+              <div style="font-size:0.75rem;font-weight:600;color:var(--text);margin-top:4px;">Scramble</div>
+            </a>
+            <a href="games/falling-kana.html" style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem;text-align:center;text-decoration:none;display:block;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem;">⬇️</div>
+              <div style="font-size:0.75rem;font-weight:600;color:var(--text);margin-top:4px;">Falling</div>
+            </a>
+          </div>
+        </div>
+      </div>
 
       <!-- SRS Due Today -->
       <div class="srs-due-section" id="srs-due-section" style="display:none;">

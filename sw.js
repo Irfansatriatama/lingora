@@ -4,7 +4,7 @@
  * Data pengguna tetap di localStorage (tidak diurus SW)
  */
 
-const CACHE_NAME = 'lingora-v9';
+const CACHE_NAME = 'lingora-v10';
 const CACHE_VERSION = 8;
 
 // Semua aset yang perlu di-cache untuk offline
@@ -22,6 +22,7 @@ const ASSETS_TO_CACHE = [
   './assets/css/auth.css',
   './assets/css/onboarding.css',
   './assets/css/planner.css',
+  './assets/css/games.css',
   './assets/css/dashboard.css',
   './assets/css/transitions.css',
   './assets/css/japanese.css',
@@ -93,6 +94,9 @@ const ASSETS_TO_CACHE = [
   './assets/js/pages/quiz-kr.js',
   './assets/js/pages/onboarding.js',
   './assets/js/pages/planner.js',
+  './assets/js/pages/game-memory.js',
+  './assets/js/pages/game-scramble.js',
+  './assets/js/pages/game-falling.js',
   './assets/js/pages/settings.js',
   './assets/js/pages/stats.js',
   './assets/js/pages/report.js',
@@ -102,6 +106,10 @@ const ASSETS_TO_CACHE = [
   './pages/register.html',
   './pages/onboarding.html',
   './pages/planner.html',
+  './pages/games.html',
+  './pages/games/memory.html',
+  './pages/games/scramble.html',
+  './pages/games/falling-kana.html',
   './pages/dashboard.html',
   './pages/profile.html',
   './pages/change-password.html',

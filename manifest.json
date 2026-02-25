@@ -88,6 +88,18 @@
           "sizes": "192x192"
         }
       ]
+    },
+    {
+      "name": "Mini Game",
+      "short_name": "Game",
+      "description": "Belajar sambil bermain",
+      "url": "./pages/games.html",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

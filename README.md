@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 26 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Study Planner - Jadwal Belajar (Fase 26) |
+| **Fase Saat Ini** | FASE 27 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Mini Game (Fase 27) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -125,6 +125,10 @@ lingora/
 │       ├── grammar.html                ← Accordion pola grammar dasar–menengah ✅
 │       ├── dialog.html                 ← Percakapan situasional 6+ dialog ✅
 │       └── quiz.html                   ← Quiz KR: pilih/ketik, modul pilihan ✅
+│   └── games/                          ← [BARU — Fase 27] Mini Game
+│       ├── memory.html                 ← Memory Match: cocokkan kartu pasangan ✅
+│       ├── scramble.html               ← Word Scramble: susun huruf acak ✅
+│       └── falling-kana.html           ← Falling Kana: ketik romanisasi sebelum jatuh ✅
 │
 ├── assets/
 │   ├── css/
@@ -141,7 +145,9 @@ lingora/
 │   │   ├── quiz.css                    ← Quiz engine UI, mode pilih & ketik
 │   │   ├── settings.css                ← Settings page, reminder, dark mode
 │   │   ├── dialog.css                  ← Dialog viewer, playthrough, vocab chip
-│   │   └── report.css                  ← Laporan PDF, @media print
+│   │   ├── report.css                  ← Laporan PDF, @media print
+│   │   ├── planner.css                 ← Study Planner, exam options, timeline, countdown
+│   │   └── games.css                   ← [BARU — Fase 27] Memory Match, Scramble, Falling Kana
 │   │
 │   ├── js/
 │   │   ├── core/
@@ -1078,38 +1084,52 @@ assets/js/pages/dashboard.js        [UPDATE]
 
 ---
 
-### FASE 27 — Mini Game
+### FASE 27 — Mini Game ✅ SELESAI (2026-02-25)
 
 **Tujuan:** Variasi belajar melalui game ringan yang tetap melatih hafalan.
 
-**Tiga game yang direncanakan:**
+**Yang dikerjakan:**
 
 **Game 1 — Memory Match (Kartu Pasangan):**
-- Grid 4×4 atau 6×6 kartu terbalik
+- Grid 4×4, 4×3, atau 6×3 kartu terbalik
 - Klik 2 kartu: cocok (karakter + artinya) → menghilang
-- Timer + skor combo
-- Berlaku untuk Hiragana, Katakana, Hangul, dan Kosakata
+- Timer + skor combo, level Hiragana / Katakana / Hangul / Kanji N5
+- XP: 20 + skor/20 per sesi
 
 **Game 2 — Word Scramble:**
-- Kata/kalimat diacak hurufnya
-- User susun kembali dengan drag-and-drop
-- Tingkat kesulitan bertahap
+- Huruf romanisasi diacak, user klik tile untuk menyusun jawaban
+- Klik jawaban untuk mengambil kembali, Clear untuk reset
+- 3 bahasa (JP/ZH/KR), 5/10/15 soal per sesi
+- XP: +3 per kata benar
 
 **Game 3 — Falling Kana (Arcade):**
-- Karakter hiragana/katakana/hangul jatuh dari atas layar
-- User ketik romanisasi sebelum menyentuh garis bawah
-- Semakin lama semakin cepat
+- Karakter hiragana/katakana/hangul jatuh dari atas layar via Canvas API
+- User ketik romanisasi, Enter untuk cek
+- Nyawa (3/5/10), leveling (speed naik setiap 10 benar)
+- XP: +1 per karakter benar + bonus dari skor
 
-**File yang dibuat:**
+**File baru:**
 ```
-pages/games.html                    [BARU] — hub semua game
-pages/games/memory.html             [BARU]
-pages/games/scramble.html           [BARU]
-pages/games/falling-kana.html       [BARU]
-assets/js/pages/game-memory.js      [BARU]
-assets/js/pages/game-scramble.js    [BARU]
-assets/js/pages/game-falling.js     [BARU]
-assets/css/games.css                [BARU]
+pages/games.html                    [BARU] — Hub game dengan 3 game card
+pages/games/memory.html             [BARU] — Memory Match
+pages/games/scramble.html           [BARU] — Word Scramble
+pages/games/falling-kana.html       [BARU] — Falling Kana
+assets/js/pages/game-memory.js      [BARU] — Logic Memory Match
+assets/js/pages/game-scramble.js    [BARU] — Logic Word Scramble
+assets/js/pages/game-falling.js     [BARU] — Logic Falling Kana (Canvas API)
+assets/css/games.css                [BARU] — Semua style game
+```
+
+**File diupdate:**
+```
+pages/dashboard.html                [UPDATE] — Tambah mini game quick-access card (3 icon)
+pages/planner.html                  [UPDATE] — Tambah Mini Game link di sidebar
+pages/dashboard.html + stats.html + settings.html + profile.html + change-password.html  [UPDATE] — Sidebar +Mini Game
+pages/japanese/*.html (7 file)      [UPDATE] — Sidebar +Mini Game
+pages/mandarin/*.html (6 file)      [UPDATE] — Sidebar +Mini Game
+pages/korean/*.html (5 file)        [UPDATE] — Sidebar +Mini Game
+manifest.json                       [UPDATE] — Shortcut Mini Game
+sw.js                               [UPDATE] — Cache bump v9→v10, tambah games.css + 3 game JS + 4 game HTML
 ```
 
 ---
@@ -1304,10 +1324,11 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.8 — Fase 24** | 2026-02-25 | **Vocabulary Builder — Kalimat Kontekstual & Quiz** — Menambahkan 2-3 kalimat kontekstual per kata kunci + tab Kalimat Quiz (fill-in-the-blank). **File baru:** `assets/js/modules/vocab-builder.js` (VocabBuilder: renderSentences, initToggles, startQuiz, buildQuizItems). **Data update:** `jp-vocab.js` (sentences untuk 10 kata: greetings + food + verbs), `zh-vocab.js` (sentences untuk 7 kata: greetings + food), `kr-vocab.js` (sentences untuk 5 kata: greetings). **CSS:** `components.css` (section Fase 24: vb-sentences-wrap, vb-toggle-btn, vb-sentence, vb-quiz-*, dll). **HTML update:** `pages/japanese/vocabulary.html`, `mandarin/vocabulary.html`, `korean/vocabulary.html` (tab "🧩 Kalimat Quiz" baru + panel tab-kalimat + script vocab-builder.js). **Page JS update:** `jp-vocab.js`, `zh-vocab.js`, `kr-vocab.js` (render sentences, initToggles, initKalimatQuizTab). **SW:** cache bump v6→v7 + tambah vocab-builder.js. | ✅ |
 | **v2.9 — Fase 25** | 2026-02-25 | **Onboarding & Placement Test** — Wizard 5 langkah untuk user baru. **File baru:** `pages/onboarding.html` (wizard 5 step), `assets/js/pages/onboarding.js` (logika wizard, bank soal placement 30 soal, 3 bahasa), `assets/css/onboarding.css` (card, step dots, progress bar, lang selector, quiz UI, dark mode). **Fitur:** Step 1 Welcome; Step 2 Pilih bahasa fokus (JP/ZH/KR/Semua); Step 3 Placement Test 10 soal + skip; Step 4 Hasil (level Pemula/Menengah + 3 rekomendasi modul); Step 5 Target harian (5–60 mnt). Data: `nh_user_{id}_onboarding`. Bonus +50 XP saat selesai. **Dashboard:** Section Profil Belajarmu (tampil status atau prompt onboarding). **register.html:** Redirect ke onboarding setelah daftar. **Sidebar:** Link Profil Belajar di 23 halaman. **SW:** cache bump v7→v8. | ✅ |
 | **v3.0 — Fase 26** | 2026-02-25 | **Study Planner / Jadwal Belajar** — Sistem jadwal belajar otomatis berdasarkan target ujian. **File baru:** `pages/planner.html` (halaman planner lengkap), `assets/js/pages/planner.js` (logika halaman: setup wizard, active view, to-do harian, timeline, catch-up), `assets/js/modules/planner.js` (StudyPlanner engine: `calcSchedule`, `calcTodayTodo`, `calcTimeline`, `savePlanner`, `loadPlanner`), `assets/css/planner.css` (semua style planner: exam options grid, preview, todo list, timeline chart, countdown, module breakdown). **Fitur:** 9 target ujian (JLPT N5/N4/N3, HSK 1/2/3/4, TOPIK I/II); kalkulasi kuota item/hari otomatis; daily to-do per modul dengan direct link; Catch-up Mode (jadwal menyesuaikan jika ada hari terlewat); progress timeline chart 7 hari; countdown hari tersisa; overall progress bar; module breakdown per modul. **Data:** `nh_user_{id}_planner` → `{examId, targetDate, startDate, createdAt}`. **Dashboard:** Section "📅 Target Planner Hari Ini" (tampil jika planner aktif) dengan direct link per modul. **Sidebar:** Link Study Planner ditambahkan ke semua 24 halaman HTML. **Manifest:** Shortcut Study Planner ditambahkan. **SW:** cache bump v8→v9, tambah 3 file planner baru. | ✅ |
+| **v3.1 — Fase 27** | 2026-02-25 | **Mini Game** — 3 game interaktif untuk belajar sambil bermain. **File baru:** `pages/games.html` (hub 3 game), `pages/games/memory.html` (Memory Match), `pages/games/scramble.html` (Word Scramble), `pages/games/falling-kana.html` (Falling Kana arcade), `assets/js/pages/game-memory.js` (logika kartu pasangan: flip 3D CSS, timer, skor, XP +20/sesi), `assets/js/pages/game-scramble.js` (logika susun huruf: klik tile, cek jawaban, JP/ZH/KR, XP +3/kata), `assets/js/pages/game-falling.js` (arcade Canvas API: karakter jatuh, level speed, nyawa, XP per karakter), `assets/css/games.css` (semua style: memory-grid, kartu flip 3D, scramble-tile, falling canvas, dark mode support). **Game 1 Memory Match:** kategori Hiragana/Katakana/Hangul/Kanji N5, ukuran 8/12/18 pasang, animasi flip 3D CSS, shake on mismatch, glow on match. **Game 2 Word Scramble:** romanisasi diacak per karakter, tile klik untuk susun/ambil kembali, 3 bahasa, 5/10/15 soal. **Game 3 Falling Kana:** Canvas requestAnimationFrame, spawn karakter dengan interval adaptif, leveling setiap 10 benar, nyawa 3/5/10, gameover overlay. **Dashboard:** Quick-access card 3 icon game. **Sidebar:** Link Mini Game ditambahkan ke 24 halaman. **Manifest:** Shortcut Mini Game. **SW:** cache bump v9→v10, tambah games.css + 3 game JS + 4 game HTML. | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 
-> **Fase saat ini:** FASE 26 ✅ SELESAI
+> **Fase saat ini:** FASE 27 ✅ SELESAI
 
 ### Konteks Proyek Saat Ini
 

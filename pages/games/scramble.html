@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="../../manifest.json">
+  <meta name="theme-color" content="#C0392B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Lingora">
+  <link rel="apple-touch-icon" href="../../assets/icons/icon-192.png">
+  <title>Word Scramble — Lingora</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/games.css">
+  <link rel="stylesheet" href="../../assets/css/transitions.css">
+  <script>
+    (function() {
+      try {
+        var theme = localStorage.getItem('nh_last_theme');
+        if (!theme) theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch(e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-main">Lingora</div>
+      <div class="logo-sub">Jepang, Mandarin &amp; Korea</div>
+    </div>
+    <div class="sidebar-user">
+      <div class="avatar-circle" data-user-avatar>日</div>
+      <div class="sidebar-user-info">
+        <div class="user-name" data-user-name>Pengguna</div>
+        <div class="user-level" data-user-email>-</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Umum</div>
+      <a class="nav-item" href="../dashboard.html" data-page="dashboard"><span class="nav-icon">&#9632;</span>Dashboard</a>
+      <a class="nav-item" href="../stats.html" data-page="stats"><span class="nav-icon">&#128202;</span>Statistik</a>
+      <a class="nav-item" href="../settings.html" data-page="settings"><span class="nav-icon">&#9881;</span>Pengaturan</a>
+      <div class="nav-section-label">Bahasa Jepang</div>
+      <a class="nav-item" href="../japanese/hiragana.html" data-page="hiragana"><span class="nav-icon cjk">あ</span>Hiragana</a>
+      <a class="nav-item" href="../japanese/katakana.html" data-page="katakana"><span class="nav-icon cjk">ア</span>Katakana</a>
+      <a class="nav-item" href="../japanese/kanji.html" data-page="kanji"><span class="nav-icon cjk">漢</span>Kanji</a>
+      <a class="nav-item" href="../japanese/vocabulary.html" data-page="jp-vocab"><span class="nav-icon">&#128218;</span>Kosakata JP</a>
+      <a class="nav-item" href="../japanese/grammar.html" data-page="jp-grammar"><span class="nav-icon">&#128221;</span>Grammar JP</a>
+      <a class="nav-item" href="../japanese/dialog.html" data-page="jp-dialog"><span class="nav-icon">&#128172;</span>Dialog JP</a>
+      <div class="nav-section-label">Bahasa Mandarin</div>
+      <a class="nav-item" href="../mandarin/pinyin.html" data-page="pinyin"><span class="nav-icon cjk">拼</span>Pinyin</a>
+      <a class="nav-item" href="../mandarin/tones.html" data-page="tones"><span class="nav-icon">&#9835;</span>Nada (Tones)</a>
+      <a class="nav-item" href="../mandarin/hanzi.html" data-page="hanzi"><span class="nav-icon cjk">汉</span>Hanzi</a>
+      <a class="nav-item" href="../mandarin/vocabulary.html" data-page="zh-vocab"><span class="nav-icon">&#128218;</span>Kosakata ZH</a>
+      <a class="nav-item" href="../mandarin/dialog.html" data-page="zh-dialog"><span class="nav-icon">&#128172;</span>Dialog ZH</a>
+      <div class="nav-section-label">Bahasa Korea</div>
+      <a class="nav-item" href="../korean/hangul.html" data-page="hangul"><span class="nav-icon cjk">한</span>Hangul</a>
+      <a class="nav-item" href="../korean/vocabulary.html" data-page="kr-vocab"><span class="nav-icon">&#128218;</span>Kosakata KR</a>
+      <a class="nav-item" href="../korean/grammar.html" data-page="kr-grammar"><span class="nav-icon">&#128221;</span>Grammar KR</a>
+      <a class="nav-item" href="../korean/dialog.html" data-page="kr-dialog"><span class="nav-icon">&#128172;</span>Dialog KR</a>
+      <div class="nav-section-label">Latihan</div>
+      <a class="nav-item" href="../japanese/quiz.html" data-page="quiz-jp"><span class="nav-icon">&#9733;</span>Quiz Jepang</a>
+      <a class="nav-item" href="../mandarin/quiz.html" data-page="quiz-zh"><span class="nav-icon">&#9733;</span>Quiz Mandarin</a>
+      <a class="nav-item" href="../korean/quiz.html" data-page="quiz-kr"><span class="nav-icon">&#9733;</span>Quiz Korea</a>
+      <a class="nav-item active" href="../games.html" data-page="games"><span class="nav-icon">&#127918;</span>Mini Game</a>
+      <div class="nav-section-label">Akun</div>
+      <a class="nav-item" href="../profile.html" data-page="profile"><span class="nav-icon">&#128100;</span>Profil</a>
+      <a class="nav-item" href="../onboarding.html" data-page="onboarding"><span class="nav-icon">&#127919;</span>Profil Belajar</a>
+      <a class="nav-item" href="../planner.html" data-page="planner"><span class="nav-icon">&#128197;</span>Study Planner</a>
+      <a class="nav-item" href="../change-password.html" data-page="change-password"><span class="nav-icon">&#128274;</span>Ganti Password</a>
+      <a class="nav-item" href="#" data-action="logout"><span class="nav-icon">&#128682;</span>Keluar</a>
+    </nav>
+  </nav>
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <div class="main-content">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      <span class="topbar-title">🔤 Word Scramble</span>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Beralih Tema">🌙</button>
+    </header>
+
+    <main class="content-area page-enter">
+      <div class="game-wrap">
+
+        <!-- Setup Screen -->
+        <div id="setup-screen">
+          <div class="section-header">
+            <h2 class="section-title">🔤 Word Scramble</h2>
+            <p class="section-sub">Susun huruf yang diacak menjadi kata yang benar</p>
+          </div>
+
+          <div class="game-setup-card">
+            <h3>Pilih Bahasa</h3>
+            <div class="game-option-grid" id="lang-btns">
+              <button class="game-option-btn active" data-lang="jp">🇯🇵 Jepang</button>
+              <button class="game-option-btn" data-lang="zh">🇨🇳 Mandarin</button>
+              <button class="game-option-btn" data-lang="kr">🇰🇷 Korea</button>
+            </div>
+          </div>
+
+          <div class="game-setup-card">
+            <h3>Jumlah Soal</h3>
+            <div class="game-option-grid" id="count-btns">
+              <button class="game-option-btn active" data-count="5">5 kata</button>
+              <button class="game-option-btn" data-count="10">10 kata</button>
+              <button class="game-option-btn" data-count="15">15 kata</button>
+            </div>
+          </div>
+
+          <button class="game-btn game-btn-primary" id="start-btn" style="width:100%;justify-content:center;padding:0.9rem;">
+            🎮 Mulai Bermain
+          </button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" style="display:none;">
+          <div class="game-stat-bar">
+            <div class="game-stat">📝 <span id="q-num" class="game-stat-val">1</span> / <span id="q-total">5</span></div>
+            <div class="game-stat">✅ <span id="score-val" class="game-stat-val">0</span> benar</div>
+            <button class="game-btn game-btn-outline" id="quit-btn" style="margin-left:auto;">✕ Keluar</button>
+          </div>
+
+          <div class="scramble-progress-bar">
+            <div class="scramble-progress-fill" id="progress-fill" style="width:0%"></div>
+          </div>
+
+          <div class="scramble-display">
+            <div class="scramble-question-label">Susun huruf berikut menjadi sebuah kata:</div>
+            <div class="scramble-hint" id="scramble-hint"></div>
+          </div>
+
+          <!-- Answer area: click to place tiles -->
+          <div style="margin-bottom:0.5rem; font-size:0.8rem; color:var(--text-3);">Jawaban kamu:</div>
+          <div class="scramble-answer-area" id="answer-area"></div>
+
+          <!-- Tile pool -->
+          <div style="margin-bottom:0.5rem; font-size:0.8rem; color:var(--text-3);">Klik huruf untuk menempatkan/mengambil kembali:</div>
+          <div class="scramble-tiles-area" id="tiles-area"></div>
+
+          <div id="scramble-feedback" class="scramble-feedback" style="display:none;"></div>
+
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <button class="game-btn game-btn-outline" id="clear-btn">🔄 Reset</button>
+            <button class="game-btn game-btn-primary" id="check-btn">✓ Cek Jawaban</button>
+          </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" style="display:none;"></div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="../../assets/js/core/storage.js"></script>
+<script src="../../assets/js/core/auth.js"></script>
+<script src="../../assets/js/core/router.js"></script>
+<script src="../../assets/js/core/app.js"></script>
+<script src="../../assets/js/modules/xp.js"></script>
+<script src="../../assets/js/modules/pwa.js"></script>
+<script src="../../assets/js/data/jp-vocab.js"></script>
+<script src="../../assets/js/data/zh-vocab.js"></script>
+<script src="../../assets/js/data/kr-vocab.js"></script>
+<script src="../../assets/js/pages/game-scramble.js"></script>
+<script>
+  Router.guard();
+  App.init('games');
+  GameScramble.init();
+</script>
+
+</body>
+</html>
