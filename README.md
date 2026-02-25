@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Versi App** | 3.3 |
-| **Fase Saat Ini** | FASE 29 ✅ SELESAI |
+| **Versi App** | 3.3.1 |
+| **Fase Saat Ini** | FASE 29.1 ✅ Bug Fix Sidebar |
 | **Fase Terakhir** | Backup & Restore Progress (Fase 29) |
 | **Fokus Berikutnya** | 🐛 Bug Fixing — **tidak ada fase baru untuk sementara** |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
@@ -973,6 +973,11 @@ Cache: `lingora-v11` → `lingora-v12`
 | BF-006 | Dark mode | Flash putih (FOUC) saat halaman pertama load | Fase 10 | ✅ Anti-FOUC inline script |
 | BF-007 | Path | File tidak ditemukan di GitHub Pages (path relatif salah) | Fase 20 | ✅ `getBase()` universal |
 | BF-008 | Service Worker | App versi lama masih terserve setelah update | Fase 20 | ✅ Update detection flow |
+| BF-009 | Sidebar — semua halaman | HTML korup: teks sisa `#127919;</span>Profil Belajar</a>` menempel setelah link Study Planner di 15+ halaman | Fase 29.1 | ✅ Selesai |
+| BF-010 | Sidebar — stats, settings, profile, change-password | Menu Quiz Korea (🇰🇷) tidak muncul di section Latihan | Fase 29.1 | ✅ Selesai |
+| BF-011 | Sidebar — dashboard | Link ganda `Profil Belajar` dan `Study Planner` muncul di dalam area `bottom-nav` (mobile) | Fase 29.1 | ✅ Selesai |
+| BF-012 | Sidebar — quiz-jp, quiz-zh, profile | Link ganda `nav-item` onboarding + planner di dalam `bottom-nav` | Fase 29.1 | ✅ Selesai |
+| BF-013 | components/sidebar.html | Template referensi sidebar sudah usang (tidak ada KR, Quiz Korea, Mini Game, Planner, dll) | Fase 29.1 | ✅ Diperbarui lengkap |
 
 ### Area yang Perlu Diperiksa di Sesi Bug Fixing
 
@@ -1182,7 +1187,8 @@ CSS per fitur   → assets/css/{nama-fitur}.css
 | **v3.1 — Fase 27** | 2026-02-25 | Mini Game 3x: Memory Match (flip 3D), Word Scramble (tile), Falling Kana (Canvas), SW v10 | ✅ |
 | **v3.2 — Fase 28** | 2026-02-25 | Tema & Kustomisasi: 5 tema+4 font+3 radius, themes.css, theme.js, anti-FOUC 30 halaman, SW v11 | ✅ |
 | **v3.3 — Fase 29** | 2026-02-25 | Backup & Restore: BackupSystem export/import JSON, auto-snapshot 3x, drag-drop UI, SW v12 | ✅ |
-| **Bug Fixing** | TBD | 🐛 Review menyeluruh — tidak ada fase baru untuk sementara | 🔄 In Progress |
+| **v3.3.1 — Fase 29.1** | 2026-02-26 | 🐛 Bug Fix Sidebar: HTML korup di 15+ halaman, Quiz Korea hilang di 4 halaman, link duplikat di bottom-nav (dashboard/quiz-jp/quiz-zh/profile), update template sidebar.html | ✅ |
+| **Bug Fixing** | TBD | 🐛 Review menyeluruh berlanjut — tidak ada fase baru untuk sementara | 🔄 In Progress |
 
 ---
 
