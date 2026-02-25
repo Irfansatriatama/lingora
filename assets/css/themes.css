@@ -1,0 +1,421 @@
+/* ============================================================
+   LINGORA — themes.css (Fase 28)
+   5 Tema Warna: Sakura, Zen, Neon Seoul, Bamboo, Midnight
+   ============================================================ */
+
+/* ── Tema Sakura (Default) ── merah tradisional Jepang */
+[data-color-theme="sakura"] {
+  --red:        #C0392B;
+  --red-dark:   #922B21;
+  --red-light:  #E74C3C;
+  --red-soft:   #FADBD8;
+  --gold:       #D4AF37;
+  --gold-dark:  #B7950B;
+  --gold-light: #F4D03F;
+  --gold-soft:  #FEF9E7;
+  --bg:         #F7F4F0;
+  --surface:    #FFFFFF;
+  --surface-2:  #F5F0EB;
+  --border:     #E8DDD0;
+  --border-2:   #D5C9BC;
+  --text:       #1A1208;
+  --text-2:     #5A4A3A;
+  --text-3:     #9A8A7A;
+  --accent:     #C0392B;
+  --accent-soft:#FADBD8;
+}
+
+/* ── Tema Zen ── abu gelap, hijau sage */
+[data-color-theme="zen"] {
+  --red:        #4A7C59;
+  --red-dark:   #2E5C3A;
+  --red-light:  #6BA07A;
+  --red-soft:   #D9EDE1;
+  --gold:       #8E9A7B;
+  --gold-dark:  #6A7A5B;
+  --gold-light: #B0BDA0;
+  --gold-soft:  #EEF2EA;
+  --bg:         #F2F3F0;
+  --surface:    #FFFFFF;
+  --surface-2:  #EDF0EA;
+  --border:     #DAE0D5;
+  --border-2:   #C5CEC0;
+  --text:       #1A201A;
+  --text-2:     #4A5A4A;
+  --text-3:     #8A9A8A;
+  --accent:     #4A7C59;
+  --accent-soft:#D9EDE1;
+}
+
+/* ── Tema Neon Seoul ── ungu tua, cyan neon */
+[data-color-theme="neon-seoul"] {
+  --red:        #7C3AED;
+  --red-dark:   #5B21B6;
+  --red-light:  #A855F7;
+  --red-soft:   #EDE9FE;
+  --gold:       #06B6D4;
+  --gold-dark:  #0891B2;
+  --gold-light: #22D3EE;
+  --gold-soft:  #CFFAFE;
+  --bg:         #F5F3FF;
+  --surface:    #FFFFFF;
+  --surface-2:  #F0EDFF;
+  --border:     #DDD6FE;
+  --border-2:   #C4B5FD;
+  --text:       #1E1030;
+  --text-2:     #4C3080;
+  --text-3:     #8B7BAA;
+  --accent:     #7C3AED;
+  --accent-soft:#EDE9FE;
+}
+
+/* ── Tema Bamboo ── hijau tua, kuning hangat */
+[data-color-theme="bamboo"] {
+  --red:        #2D6A4F;
+  --red-dark:   #1B4332;
+  --red-light:  #40916C;
+  --red-soft:   #D8F3DC;
+  --gold:       #D4A017;
+  --gold-dark:  #B7860F;
+  --gold-light: #E8C55A;
+  --gold-soft:  #FFF3CD;
+  --bg:         #F0F7F2;
+  --surface:    #FFFFFF;
+  --surface-2:  #E8F5EC;
+  --border:     #C8E6D0;
+  --border-2:   #A8CDB4;
+  --text:       #0A1F10;
+  --text-2:     #2A5035;
+  --text-3:     #6A9070;
+  --accent:     #2D6A4F;
+  --accent-soft:#D8F3DC;
+}
+
+/* ── Tema Midnight ── hitam pekat, oranye menyala */
+[data-color-theme="midnight"] {
+  --red:        #FF6B35;
+  --red-dark:   #E84E1B;
+  --red-light:  #FF8A5C;
+  --red-soft:   rgba(255,107,53,0.15);
+  --gold:       #FFB347;
+  --gold-dark:  #E09020;
+  --gold-light: #FFC96A;
+  --gold-soft:  rgba(255,179,71,0.12);
+  --bg:         #0A0A0F;
+  --surface:    #12121A;
+  --surface-2:  #1A1A28;
+  --border:     #252535;
+  --border-2:   #333348;
+  --text:       #F0F0F8;
+  --text-2:     #B0B0C8;
+  --text-3:     #606080;
+  --accent:     #FF6B35;
+  --accent-soft:rgba(255,107,53,0.15);
+}
+
+/* ── Dark mode kombinasi dengan tema warna ── */
+/* Saat dark mode + tema non-midnight, gunakan surface gelap dari dark mode */
+[data-theme="dark"][data-color-theme="sakura"],
+[data-theme="dark"][data-color-theme="zen"],
+[data-theme="dark"][data-color-theme="neon-seoul"],
+[data-theme="dark"][data-color-theme="bamboo"] {
+  --bg:         #0f0f13;
+  --surface:    #1a1a22;
+  --surface-2:  #222230;
+  --border:     #2e2e3a;
+  --border-2:   #3a3a4a;
+  --text:       #e8e8f0;
+  --text-2:     #a8a8c0;
+  --text-3:     #686880;
+}
+
+/* Midnight sudah gelap — override soft colors saja di dark mode */
+[data-theme="dark"][data-color-theme="midnight"] {
+  --bg:         #050508;
+  --surface:    #0D0D14;
+  --surface-2:  #141420;
+}
+
+/* ── Theme Picker UI ── */
+.theme-picker-section {
+  margin-bottom: 16px;
+}
+
+.theme-picker-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.theme-card {
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  background: var(--surface);
+  position: relative;
+}
+
+.theme-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow-md);
+}
+
+.theme-card.active {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px var(--red-soft);
+}
+
+.theme-card.active::after {
+  content: '✓';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  text-align: center;
+}
+
+.theme-preview {
+  height: 60px;
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+}
+
+.theme-preview-dot {
+  flex: 1;
+  border-radius: 4px;
+}
+
+.theme-name {
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+}
+
+/* Preview colors per tema */
+.tp-sakura .theme-preview { background: #F7F4F0; }
+.tp-sakura .tp-d1 { background: #C0392B; }
+.tp-sakura .tp-d2 { background: #D4AF37; }
+.tp-sakura .tp-d3 { background: #F5F0EB; }
+.tp-sakura .tp-d4 { background: #E8DDD0; }
+
+.tp-zen .theme-preview { background: #F2F3F0; }
+.tp-zen .tp-d1 { background: #4A7C59; }
+.tp-zen .tp-d2 { background: #8E9A7B; }
+.tp-zen .tp-d3 { background: #EDF0EA; }
+.tp-zen .tp-d4 { background: #DAE0D5; }
+
+.tp-neon-seoul .theme-preview { background: #F5F3FF; }
+.tp-neon-seoul .tp-d1 { background: #7C3AED; }
+.tp-neon-seoul .tp-d2 { background: #06B6D4; }
+.tp-neon-seoul .tp-d3 { background: #EDE9FE; }
+.tp-neon-seoul .tp-d4 { background: #DDD6FE; }
+
+.tp-bamboo .theme-preview { background: #F0F7F2; }
+.tp-bamboo .tp-d1 { background: #2D6A4F; }
+.tp-bamboo .tp-d2 { background: #D4A017; }
+.tp-bamboo .tp-d3 { background: #E8F5EC; }
+.tp-bamboo .tp-d4 { background: #C8E6D0; }
+
+.tp-midnight .theme-preview { background: #0A0A0F; }
+.tp-midnight .tp-d1 { background: #FF6B35; }
+.tp-midnight .tp-d2 { background: #FFB347; }
+.tp-midnight .tp-d3 { background: #1A1A28; }
+.tp-midnight .tp-d4 { background: #252535; }
+
+/* Font picker */
+.font-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.font-card {
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+  background: var(--surface);
+}
+
+.font-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--red-light);
+}
+
+.font-card.active {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+
+.font-card-preview {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.font-card-label {
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+
+/* Font variants */
+.font-default .font-card-preview { font-family: 'DM Sans', 'Noto Sans JP', sans-serif; }
+.font-rounded .font-card-preview { font-family: 'Nunito', 'DM Sans', sans-serif; }
+.font-serif .font-card-preview   { font-family: 'Playfair Display', serif; }
+.font-mono .font-card-preview    { font-family: 'JetBrains Mono', monospace; }
+
+/* Compact mode preview */
+.compact-preview {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.compact-chip {
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  color: var(--text-2);
+  transition: all 0.2s;
+}
+
+.compact-chip.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+
+/* Radius picker */
+.radius-picker {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.radius-btn {
+  padding: 8px 16px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-2);
+  background: var(--surface);
+  transition: all 0.2s;
+}
+
+.radius-btn:hover { border-color: var(--red-light); color: var(--text); }
+.radius-btn.active { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+
+/* ── Sidebar width kustomisasi ── */
+[data-sidebar-compact="true"] .sidebar { --sidebar-w: 220px; }
+
+/* ── Radius override ── */
+[data-radius="sharp"] { --radius: 4px; --radius-lg: 8px; --radius-xl: 12px; }
+[data-radius="default"] { --radius: 10px; --radius-lg: 16px; --radius-xl: 24px; }
+[data-radius="rounded"] { --radius: 16px; --radius-lg: 24px; --radius-xl: 32px; }
+
+/* ── Font override ── */
+[data-font="rounded"] {
+  --font-body: 'Nunito', 'DM Sans', 'Noto Sans JP', sans-serif;
+}
+[data-font="serif"] {
+  --font-body: 'Playfair Display', 'Noto Sans JP', serif;
+  --font-display: 'Playfair Display', serif;
+}
+[data-font="mono"] {
+  --font-body: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ── Animasi masuk tema ── */
+@keyframes themeChange {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+html.theme-transitioning {
+  animation: themeChange 0.25s ease both;
+}
+
+/* ── Settings tema section ── */
+.customization-live-preview {
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.preview-char {
+  font-family: var(--font-cjk);
+  font-size: 2rem;
+  color: var(--red);
+  line-height: 1;
+}
+
+.preview-text {
+  flex: 1;
+}
+
+.preview-text .preview-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.preview-text .preview-sub {
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+
+.preview-badge {
+  padding: 4px 10px;
+  background: var(--red-soft);
+  color: var(--red);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.preview-btn-sample {
+  padding: 6px 14px;
+  background: var(--red);
+  color: white;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+}

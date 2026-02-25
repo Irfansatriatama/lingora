@@ -97,6 +97,21 @@ const App = (() => {
     }
     document.documentElement.setAttribute('data-theme', theme);
     _updateThemeToggleBtns(theme);
+
+    // Fase 28: Terapkan kustomisasi warna, font, radius
+    if (window.ThemeSystem && user) {
+      ThemeSystem.applyAll(user.id);
+    } else {
+      // Anti-FOUC: ambil dari localStorage langsung
+      try {
+        const ct = localStorage.getItem('nh_color_theme') || 'sakura';
+        document.documentElement.setAttribute('data-color-theme', ct);
+        const font = localStorage.getItem('nh_font');
+        if (font && font !== 'default') document.documentElement.setAttribute('data-font', font);
+        const radius = localStorage.getItem('nh_radius') || 'default';
+        document.documentElement.setAttribute('data-radius', radius);
+      } catch(e) {}
+    }
   }
 
   function toggleTheme() {

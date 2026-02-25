@@ -15,8 +15,9 @@
   <link rel="stylesheet" href="../assets/css/dashboard.css">
   <link rel="stylesheet" href="../assets/css/transitions.css">
   <link rel="stylesheet" href="../assets/css/settings.css">
+  <link rel="stylesheet" href="../assets/css/themes.css">
   <script>
-    // Fase 10: Apply theme sebelum render untuk mencegah FOUC
+    // Fase 10+28: Apply theme & kustomisasi sebelum render untuk mencegah FOUC
     (function() {
       try {
         var theme = localStorage.getItem('nh_last_theme');
@@ -24,6 +25,13 @@
           theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
         document.documentElement.setAttribute('data-theme', theme);
+        // Fase 28: color theme, font, radius
+        var ct = localStorage.getItem('nh_color_theme') || 'sakura';
+        document.documentElement.setAttribute('data-color-theme', ct);
+        var font = localStorage.getItem('nh_font');
+        if (font && font !== 'default') document.documentElement.setAttribute('data-font', font);
+        var radius = localStorage.getItem('nh_radius') || 'default';
+        document.documentElement.setAttribute('data-radius', radius);
       } catch(e) {}
     })();
   </script>
@@ -105,6 +113,70 @@
 
     <!-- Page body -->
     <main class="page-body fade-in">
+
+      <!-- Tema & Kustomisasi UI (Fase 28) -->
+      <div class="settings-section">
+        <div class="settings-section-title">🎨 Tema &amp; Kustomisasi</div>
+
+        <div class="settings-card">
+
+          <!-- Live Preview -->
+          <div class="customization-live-preview" id="theme-live-preview">
+            <div class="preview-char">日</div>
+            <div class="preview-text">
+              <div class="preview-title">Lingora — Preview Tema</div>
+              <div class="preview-sub">Perubahan tema diterapkan secara langsung</div>
+            </div>
+            <span class="preview-badge" id="preview-theme-name">Sakura</span>
+            <span class="preview-btn-sample">Belajar</span>
+          </div>
+
+          <div class="settings-divider"></div>
+
+          <!-- Color Theme Picker -->
+          <div class="theme-picker-section">
+            <div class="theme-picker-label">Tema Warna</div>
+            <div class="theme-grid" id="color-theme-grid">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <div class="settings-divider"></div>
+
+          <!-- Font Picker -->
+          <div class="theme-picker-section">
+            <div class="theme-picker-label">Gaya Font</div>
+            <div class="font-picker-grid" id="font-picker-grid">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <div class="settings-divider"></div>
+
+          <!-- Radius Picker -->
+          <div class="settings-row" style="align-items:flex-start;flex-direction:column;gap:10px;">
+            <div class="settings-row-info">
+              <div class="settings-row-label">Sudut Kartu & Tombol</div>
+              <div class="settings-row-desc">Pilih seberapa membulat sudut elemen UI</div>
+            </div>
+            <div class="radius-picker" id="radius-picker">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <div class="settings-divider"></div>
+
+          <!-- Reset theme -->
+          <div class="settings-row" style="align-items:center;">
+            <div class="settings-row-info">
+              <div class="settings-row-label">Reset ke Default</div>
+              <div class="settings-row-desc">Kembalikan semua kustomisasi ke tampilan awal (Sakura)</div>
+            </div>
+            <button class="btn btn-outline btn-sm" id="btn-reset-theme">Reset</button>
+          </div>
+
+        </div>
+      </div>
 
       <!-- Tampilan -->
       <div class="settings-section">
@@ -340,8 +412,8 @@
             <div class="about-logo cjk">日</div>
             <div class="about-info">
               <div class="about-name">Lingora</div>
-              <div class="about-version">Versi 2.1 — Fase 18 (Streak Reminder)</div>
-              <div class="about-desc">Aplikasi belajar Bahasa Jepang & Mandarin offline. Pure localStorage, tanpa server.</div>
+              <div class="about-version">Versi 3.2 — Fase 28 (Tema & Kustomisasi UI)</div>
+              <div class="about-desc">Aplikasi belajar Bahasa Jepang, Mandarin &amp; Korea offline. Pure localStorage, tanpa server.</div>
             </div>
           </div>
         </div>
@@ -392,6 +464,7 @@
 <script src="../assets/js/core/auth.js"></script>
 <script src="../assets/js/core/router.js"></script>
 <script src="../assets/js/core/app.js"></script>
+<script src="../assets/js/modules/theme.js"></script>
 <script src="../assets/js/modules/audio.js"></script>
 <script src="../assets/js/modules/reminder.js"></script>
 <script src="../assets/js/pages/settings.js"></script>

@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 27 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Mini Game (Fase 27) |
+| **Fase Saat Ini** | FASE 28 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Tema & Kustomisasi UI (Fase 28) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -147,7 +147,8 @@ lingora/
 │   │   ├── dialog.css                  ← Dialog viewer, playthrough, vocab chip
 │   │   ├── report.css                  ← Laporan PDF, @media print
 │   │   ├── planner.css                 ← Study Planner, exam options, timeline, countdown
-│   │   └── games.css                   ← [BARU — Fase 27] Memory Match, Scramble, Falling Kana
+│   │   ├── games.css                   ← [BARU — Fase 27] Memory Match, Scramble, Falling Kana
+│   │   └── themes.css                  ← [BARU — Fase 28] 5 tema warna, font, radius override
 │   │
 │   ├── js/
 │   │   ├── core/
@@ -186,7 +187,8 @@ lingora/
 │   │   │   ├── xp.js                   ← XPSystem (level, history, toast)
 │   │   │   ├── challenge.js            ← ChallengeSystem (harian, seed tanggal)
 │   │   │   ├── reminder.js             ← ReminderSystem (notifikasi browser)
-│   │   │   └── pwa.js                  ← PWA Manager (install, update, offline)
+│   │   │   ├── pwa.js                  ← PWA Manager (install, update, offline)
+│   │   │   └── theme.js                ← [BARU — Fase 28] ThemeSystem (5 tema, font, radius)
 │   │   │
 │   │   └── pages/
 │   │       ├── dashboard.js            ← XP, streak, challenge, SRS due, clock
@@ -594,11 +596,11 @@ Fase 24 (Kalimat Kontekstual Vocab)         ← ✅ SELESAI
   ↓
 Fase 25 (Onboarding & Placement Test)       ← ✅ SELESAI
   ↓
-Fase 26 (Study Planner)                     ← Untuk user serius
+Fase 26 (Study Planner)                     ← ✅ SELESAI
   ↓
-Fase 27 (Mini Game)                         ← Fun factor
+Fase 27 (Mini Game)                         ← ✅ SELESAI
   ↓
-Fase 28 (Tema & Kustomisasi)                ← Polish
+Fase 28 (Tema & Kustomisasi)                ← ✅ SELESAI
   ↓
 Fase 29 (Backup & Restore)                  ← Keamanan data
   ↓
@@ -615,8 +617,8 @@ Fase 32 (Leaderboard — eks Fase lama)        ← Dulu di-hold
 | 🟡 Sedang | 24 | Vocabulary Builder (Kalimat Kontekstual) | Konten | Sedang |
 | 🟡 Sedang | 25 | Onboarding & Placement Test | UX | Sedang | ✅ |
 | 🟡 Sedang | 26 | Study Planner / Jadwal Belajar | Produktivitas | Sedang-Besar |
-| 🟢 Rendah | 27 | Mini Game | Gamifikasi | Sedang |
-| 🟢 Rendah | 28 | Tema & Kustomisasi UI | UX | Kecil-Sedang |
+| 🟢 Rendah | 27 | Mini Game | Gamifikasi | Sedang | ✅ |
+| 🟢 Rendah | 28 | Tema & Kustomisasi UI | UX | Kecil-Sedang | ✅ |
 | 🟢 Rendah | 29 | Backup & Restore Progress | Data | Kecil |
 | ⏸️ Hold | 30 | Konten Lanjutan JP N3 (eks Fase 16) | Konten | Besar |
 | ⏸️ Hold | 31 | Konten Lanjutan ZH HSK4 (eks Fase 21) | Konten | Besar |
@@ -1134,28 +1136,57 @@ sw.js                               [UPDATE] — Cache bump v9→v10, tambah gam
 
 ---
 
-### FASE 28 — Tema & Kustomisasi UI
+### FASE 28 — Tema & Kustomisasi UI ✅ SELESAI (2026-02-25)
 
-**Tujuan:** User bisa ganti tema warna sesuai preferensi.
+**Tujuan:** User bisa ganti tema warna sesuai preferensi, lengkap dengan pilihan font, sudut UI, dan preview real-time.
 
-**5 tema yang direncanakan:**
+**5 tema yang diimplementasikan:**
 
 | Tema | Warna Utama | Aksen | Vibe |
 |------|-------------|-------|------|
-| Sakura (default) | Merah #C0392B | Gold #D4AF37 | Tradisional Jepang |
-| Zen | Abu gelap | Hijau sage | Minimalis |
-| Neon Seoul | Ungu tua | Cyan neon | Futuristik |
-| Bamboo | Hijau tua | Kuning | Alam Asia Timur |
-| Midnight | Hitam | Oranye | Dark mode kuat |
+| 🌸 Sakura (default) | Merah #C0392B | Gold #D4AF37 | Tradisional Jepang |
+| 🍃 Zen | Hijau sage #4A7C59 | Sage muted | Minimalis |
+| 🌆 Neon Seoul | Ungu #7C3AED | Cyan #06B6D4 | Futuristik |
+| 🎋 Bamboo | Hijau tua #2D6A4F | Kuning #D4A017 | Alam Asia Timur |
+| 🌙 Midnight | Hitam #0A0A0F | Oranye #FF6B35 | Dark mode kuat |
 
-**Implementasi:** CSS custom properties di `main.css` sudah ada — tinggal buat override per tema. Pilihan di Settings → Tampilan dengan preview real-time.
+**Fitur kustomisasi:**
+- Color theme picker dengan preview 4 warna per tema + nama
+- Font picker: DM Sans (default), Nunito (bulat), Playfair (serif elegan), Monospace
+- Sudut UI: Tajam / Default / Bulat (via `data-radius`)
+- Live preview real-time di bagian atas settings
+- Reset ke default (Sakura) dengan 1 klik
+- Tema Midnight otomatis mengaktifkan dark mode
 
-**File yang diupdate:**
+**Implementasi teknis:**
+- CSS custom properties `[data-color-theme]` di `themes.css` — semua elemen otomatis mengikuti
+- `data-radius` attribute mengoverride `--radius`, `--radius-lg`, `--radius-xl` global
+- `data-font` attribute mengoverride `--font-body` global
+- Anti-FOUC: semua tema disimpan di `localStorage` (`nh_color_theme`, `nh_font`, `nh_radius`) dan diapply inline script `<head>` sebelum render
+- Per-user storage: `nh_user_{id}_customization` → `{colorTheme, font, radius, compactSidebar}`
+- Kompatibel penuh dengan dark mode — dark mode + color theme berjalan independen
+
+**File baru:**
 ```
-assets/css/themes.css               [BARU] — semua theme variable overrides
-assets/js/modules/theme.js          [BARU] — ThemeSystem
-pages/settings.html                 [UPDATE] — theme picker + preview
-assets/js/pages/settings.js         [UPDATE]
+assets/css/themes.css               ← 5 tema CSS variables, theme picker UI, font/radius override
+assets/js/modules/theme.js          ← ThemeSystem: getThemes, applyAll, setColorTheme, setFont, setRadius
+```
+
+**File diupdate:**
+```
+pages/settings.html                 ← Section "Tema & Kustomisasi" baru (color picker, font, radius, preview, reset)
+assets/js/pages/settings.js        ← Logika render & interaksi theme picker, font picker, radius picker
+assets/js/core/app.js              ← loadTheme() diperluas: apply color theme + font + radius dari ThemeSystem
+30 file HTML (semua pages)         ← Anti-FOUC script diupdate: tambah nh_color_theme, nh_font, nh_radius
+sw.js                               ← Cache bump v10→v11, tambah themes.css + theme.js
+```
+
+**localStorage keys baru:**
+```
+nh_color_theme                     → 'sakura' | 'zen' | 'neon-seoul' | 'bamboo' | 'midnight' (global)
+nh_font                            → 'default' | 'rounded' | 'serif' | 'mono' (global)
+nh_radius                          → 'sharp' | 'default' | 'rounded' (global)
+nh_user_{id}_customization         → { colorTheme, font, radius, compactSidebar }
 ```
 
 ---
@@ -1325,10 +1356,11 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.9 — Fase 25** | 2026-02-25 | **Onboarding & Placement Test** — Wizard 5 langkah untuk user baru. **File baru:** `pages/onboarding.html` (wizard 5 step), `assets/js/pages/onboarding.js` (logika wizard, bank soal placement 30 soal, 3 bahasa), `assets/css/onboarding.css` (card, step dots, progress bar, lang selector, quiz UI, dark mode). **Fitur:** Step 1 Welcome; Step 2 Pilih bahasa fokus (JP/ZH/KR/Semua); Step 3 Placement Test 10 soal + skip; Step 4 Hasil (level Pemula/Menengah + 3 rekomendasi modul); Step 5 Target harian (5–60 mnt). Data: `nh_user_{id}_onboarding`. Bonus +50 XP saat selesai. **Dashboard:** Section Profil Belajarmu (tampil status atau prompt onboarding). **register.html:** Redirect ke onboarding setelah daftar. **Sidebar:** Link Profil Belajar di 23 halaman. **SW:** cache bump v7→v8. | ✅ |
 | **v3.0 — Fase 26** | 2026-02-25 | **Study Planner / Jadwal Belajar** — Sistem jadwal belajar otomatis berdasarkan target ujian. **File baru:** `pages/planner.html` (halaman planner lengkap), `assets/js/pages/planner.js` (logika halaman: setup wizard, active view, to-do harian, timeline, catch-up), `assets/js/modules/planner.js` (StudyPlanner engine: `calcSchedule`, `calcTodayTodo`, `calcTimeline`, `savePlanner`, `loadPlanner`), `assets/css/planner.css` (semua style planner: exam options grid, preview, todo list, timeline chart, countdown, module breakdown). **Fitur:** 9 target ujian (JLPT N5/N4/N3, HSK 1/2/3/4, TOPIK I/II); kalkulasi kuota item/hari otomatis; daily to-do per modul dengan direct link; Catch-up Mode (jadwal menyesuaikan jika ada hari terlewat); progress timeline chart 7 hari; countdown hari tersisa; overall progress bar; module breakdown per modul. **Data:** `nh_user_{id}_planner` → `{examId, targetDate, startDate, createdAt}`. **Dashboard:** Section "📅 Target Planner Hari Ini" (tampil jika planner aktif) dengan direct link per modul. **Sidebar:** Link Study Planner ditambahkan ke semua 24 halaman HTML. **Manifest:** Shortcut Study Planner ditambahkan. **SW:** cache bump v8→v9, tambah 3 file planner baru. | ✅ |
 | **v3.1 — Fase 27** | 2026-02-25 | **Mini Game** — 3 game interaktif untuk belajar sambil bermain. **File baru:** `pages/games.html` (hub 3 game), `pages/games/memory.html` (Memory Match), `pages/games/scramble.html` (Word Scramble), `pages/games/falling-kana.html` (Falling Kana arcade), `assets/js/pages/game-memory.js` (logika kartu pasangan: flip 3D CSS, timer, skor, XP +20/sesi), `assets/js/pages/game-scramble.js` (logika susun huruf: klik tile, cek jawaban, JP/ZH/KR, XP +3/kata), `assets/js/pages/game-falling.js` (arcade Canvas API: karakter jatuh, level speed, nyawa, XP per karakter), `assets/css/games.css` (semua style: memory-grid, kartu flip 3D, scramble-tile, falling canvas, dark mode support). **Game 1 Memory Match:** kategori Hiragana/Katakana/Hangul/Kanji N5, ukuran 8/12/18 pasang, animasi flip 3D CSS, shake on mismatch, glow on match. **Game 2 Word Scramble:** romanisasi diacak per karakter, tile klik untuk susun/ambil kembali, 3 bahasa, 5/10/15 soal. **Game 3 Falling Kana:** Canvas requestAnimationFrame, spawn karakter dengan interval adaptif, leveling setiap 10 benar, nyawa 3/5/10, gameover overlay. **Dashboard:** Quick-access card 3 icon game. **Sidebar:** Link Mini Game ditambahkan ke 24 halaman. **Manifest:** Shortcut Mini Game. **SW:** cache bump v9→v10, tambah games.css + 3 game JS + 4 game HTML. | ✅ |
+| **v3.2 — Fase 28** | 2026-02-25 | **Tema & Kustomisasi UI** — 5 tema warna + font picker + radius picker dengan preview real-time. **File baru:** `assets/css/themes.css` (5 tema via `[data-color-theme]` CSS variables, theme card UI, font/radius override), `assets/js/modules/theme.js` (ThemeSystem: getThemes, applyAll, applyColorTheme, applyFont, applyRadius, setColorTheme, setFont, setRadius, applyFromLocalStorage). **Settings page:** Section baru "Tema & Kustomisasi" dengan live preview card, grid 5 tema warna (Sakura/Zen/Neon Seoul/Bamboo/Midnight), font picker 4 pilihan (DM Sans/Nunito/Playfair/Mono), radius picker 3 pilihan (Tajam/Default/Bulat), tombol Reset ke Default. **Tema Midnight** otomatis mengaktifkan dark mode. **Anti-FOUC:** 30 halaman HTML diupdate dengan inline script tambahan (`nh_color_theme`, `nh_font`, `nh_radius`). **app.js:** `loadTheme()` diperluas memanggil `ThemeSystem.applyAll()` jika user login. **localStorage keys baru:** `nh_color_theme`, `nh_font`, `nh_radius` (global), `nh_user_{id}_customization` (per-user). **SW:** cache bump v10→v11, tambah themes.css + theme.js. | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 
-> **Fase saat ini:** FASE 27 ✅ SELESAI
+> **Fase saat ini:** FASE 28 ✅ SELESAI
 
 ### Konteks Proyek Saat Ini
 

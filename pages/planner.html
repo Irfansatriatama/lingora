@@ -20,6 +20,12 @@
         var theme = localStorage.getItem('nh_last_theme');
         if (!theme) theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', theme);
+        var ct = localStorage.getItem('nh_color_theme') || 'sakura';
+        document.documentElement.setAttribute('data-color-theme', ct);
+        var font = localStorage.getItem('nh_font');
+        if (font && font !== 'default') document.documentElement.setAttribute('data-font', font);
+        var radius = localStorage.getItem('nh_radius') || 'default';
+        document.documentElement.setAttribute('data-radius', radius);
       } catch(e) {}
     })();
   </script>
@@ -123,6 +129,7 @@
 <script src="../assets/js/core/auth.js"></script>
 <script src="../assets/js/core/router.js"></script>
 <script src="../assets/js/core/app.js"></script>
+<script src="../assets/js/modules/theme.js"></script>
 <script src="../assets/js/modules/progress.js"></script>
 <script src="../assets/js/modules/xp.js"></script>
 <script src="../assets/js/modules/challenge.js"></script>

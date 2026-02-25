@@ -4,8 +4,8 @@
  * Data pengguna tetap di localStorage (tidak diurus SW)
  */
 
-const CACHE_NAME = 'lingora-v10';
-const CACHE_VERSION = 8;
+const CACHE_NAME = 'lingora-v11';
+const CACHE_VERSION = 9;
 
 // Semua aset yang perlu di-cache untuk offline
 const ASSETS_TO_CACHE = [
@@ -23,6 +23,7 @@ const ASSETS_TO_CACHE = [
   './assets/css/onboarding.css',
   './assets/css/planner.css',
   './assets/css/games.css',
+  './assets/css/themes.css',
   './assets/css/dashboard.css',
   './assets/css/transitions.css',
   './assets/css/japanese.css',
@@ -97,6 +98,7 @@ const ASSETS_TO_CACHE = [
   './assets/js/pages/game-memory.js',
   './assets/js/pages/game-scramble.js',
   './assets/js/pages/game-falling.js',
+  './assets/js/modules/theme.js',
   './assets/js/pages/settings.js',
   './assets/js/pages/stats.js',
   './assets/js/pages/report.js',

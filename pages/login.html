@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/auth.css">
   <script>
-    // Fase 10: Apply theme sebelum render untuk mencegah FOUC
+    // Fase 10+28: Apply theme & kustomisasi sebelum render untuk mencegah FOUC
     (function() {
       try {
         var theme = localStorage.getItem('nh_last_theme');
@@ -20,6 +20,13 @@
           theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
         document.documentElement.setAttribute('data-theme', theme);
+        // Fase 28: color theme, font, radius
+        var ct = localStorage.getItem('nh_color_theme') || 'sakura';
+        document.documentElement.setAttribute('data-color-theme', ct);
+        var font = localStorage.getItem('nh_font');
+        if (font && font !== 'default') document.documentElement.setAttribute('data-font', font);
+        var radius = localStorage.getItem('nh_radius') || 'default';
+        document.documentElement.setAttribute('data-radius', radius);
       } catch(e) {}
     })();
   </script>
@@ -186,6 +193,7 @@
 <script src="../assets/js/core/auth.js"></script>
 <script src="../assets/js/core/router.js"></script>
 <script src="../assets/js/core/app.js"></script>
+<script src="../assets/js/modules/theme.js"></script>
 <script>
   Router.guestOnly();
 

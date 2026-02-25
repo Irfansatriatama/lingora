@@ -1,5 +1,5 @@
 /**
- * Lingora - Settings Page (Fase 7)
+ * Lingora - Settings Page (Fase 7 + Fase 28 Tema & Kustomisasi)
  */
 document.addEventListener('DOMContentLoaded', () => {
   if (!Router.guard()) return;
@@ -270,6 +270,111 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           App.toast('Gagal menampilkan notifikasi.', 'error', 2000);
         }
+      });
+    }
+  }
+
+  // ── Tema & Kustomisasi (Fase 28) ─────────────────────────
+  if (window.ThemeSystem) {
+    const customization = ThemeSystem.getCustomization(user.id);
+
+    // Render color theme grid
+    const colorGrid = document.getElementById('color-theme-grid');
+    if (colorGrid) {
+      colorGrid.innerHTML = ThemeSystem.getThemes().map(t => `
+        <div class="theme-card ${t.cls} ${customization.colorTheme === t.id ? 'active' : ''}"
+             data-theme-id="${t.id}" title="${t.desc}">
+          <div class="theme-preview">
+            <div class="theme-preview-dot tp-d1"></div>
+            <div class="theme-preview-dot tp-d2"></div>
+            <div class="theme-preview-dot tp-d3"></div>
+            <div class="theme-preview-dot tp-d4"></div>
+          </div>
+          <div class="theme-name">${t.emoji} ${t.name}</div>
+        </div>
+      `).join('');
+
+      colorGrid.addEventListener('click', e => {
+        const card = e.target.closest('[data-theme-id]');
+        if (!card) return;
+        const themeId = card.dataset.themeId;
+        ThemeSystem.setColorTheme(user.id, themeId);
+        colorGrid.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        // Update preview badge name
+        const themedName = ThemeSystem.getThemes().find(t => t.id === themeId);
+        const previewBadge = document.getElementById('preview-theme-name');
+        if (previewBadge && themedName) previewBadge.textContent = themedName.name;
+        App.toast(`Tema ${themedName ? themedName.name : themeId} diterapkan! 🎨`, 'success', 2000);
+      });
+    }
+
+    // Initial preview badge
+    const initTheme = ThemeSystem.getThemes().find(t => t.id === customization.colorTheme);
+    const previewBadge = document.getElementById('preview-theme-name');
+    if (previewBadge && initTheme) previewBadge.textContent = initTheme.name;
+
+    // Render font picker
+    const fontGrid = document.getElementById('font-picker-grid');
+    if (fontGrid) {
+      fontGrid.innerHTML = ThemeSystem.getFonts().map(f => `
+        <div class="font-card font-${f.id} ${(customization.font || 'default') === f.id ? 'active' : ''}"
+             data-font-id="${f.id}" title="${f.desc}">
+          <div class="font-card-preview">${f.preview}</div>
+          <div class="font-card-label">${f.name} — ${f.desc}</div>
+        </div>
+      `).join('');
+
+      fontGrid.addEventListener('click', e => {
+        const card = e.target.closest('[data-font-id]');
+        if (!card) return;
+        const fontId = card.dataset.fontId;
+        ThemeSystem.setFont(user.id, fontId);
+        fontGrid.querySelectorAll('.font-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        App.toast(`Font diubah ke ${fontId}`, 'success', 2000);
+      });
+    }
+
+    // Render radius picker
+    const radiusPicker = document.getElementById('radius-picker');
+    if (radiusPicker) {
+      radiusPicker.innerHTML = ThemeSystem.getRadiusOptions().map(r => `
+        <button class="radius-btn ${(customization.radius || 'default') === r.id ? 'active' : ''}"
+                data-radius-id="${r.id}" title="${r.desc}">${r.label}</button>
+      `).join('');
+
+      radiusPicker.addEventListener('click', e => {
+        const btn = e.target.closest('[data-radius-id]');
+        if (!btn) return;
+        const rid = btn.dataset.radiusId;
+        ThemeSystem.setRadius(user.id, rid);
+        radiusPicker.querySelectorAll('.radius-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        App.toast(`Sudut UI diubah ke: ${rid}`, 'success', 2000);
+      });
+    }
+
+    // Reset theme button
+    const btnResetTheme = document.getElementById('btn-reset-theme');
+    if (btnResetTheme) {
+      btnResetTheme.addEventListener('click', () => {
+        ThemeSystem.setColorTheme(user.id, 'sakura');
+        ThemeSystem.setFont(user.id, 'default');
+        ThemeSystem.setRadius(user.id, 'default');
+
+        // Re-render UI
+        colorGrid && colorGrid.querySelectorAll('.theme-card').forEach(c => {
+          c.classList.toggle('active', c.dataset.themeId === 'sakura');
+        });
+        fontGrid && fontGrid.querySelectorAll('.font-card').forEach(c => {
+          c.classList.toggle('active', c.dataset.fontId === 'default');
+        });
+        radiusPicker && radiusPicker.querySelectorAll('.radius-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.radiusId === 'default');
+        });
+        if (previewBadge) previewBadge.textContent = 'Sakura';
+        App.toast('Tema dikembalikan ke Sakura (default) 🌸', 'success', 2500);
       });
     }
   }
