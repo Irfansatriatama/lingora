@@ -4,7 +4,7 @@
  * Data pengguna tetap di localStorage (tidak diurus SW)
  */
 
-const CACHE_NAME = 'lingora-v12';
+const CACHE_NAME = 'lingora-v13';
 const CACHE_VERSION = 10;
 
 // Semua aset yang perlu di-cache untuk offline

@@ -101,33 +101,68 @@ document.addEventListener('DOMContentLoaded', () => {
     // Suku kata dasar hanya di mode "Semua"
     if (filter === 'all') {
       const syllables = HangulData.getSyllables();
+
+      // Build interactive matrix: group by consonant x vowel
+      const sylMap = {};
+      const consonantOrder = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+      const vowelOrder = ['ㅏ','ㅗ','ㅜ','ㅣ','ㅕ','ㅑ','ㅛ','ㅠ','ㅔ','ㅢ','ㅘ','ㅟ','ㅙ'];
+      const allCons = [], allVowels = [];
+      syllables.forEach(s => {
+        if (!s.batchim) {
+          const key = s.consonant + '|' + s.vowel;
+          sylMap[key] = s;
+          if (!allCons.includes(s.consonant)) allCons.push(s.consonant);
+          if (!allVowels.includes(s.vowel)) allVowels.push(s.vowel);
+        }
+      });
+      const matrixCons = consonantOrder.filter(c => allCons.includes(c));
+      const matrixVowels = vowelOrder.filter(v => allVowels.includes(v));
+      const vowelRoman = {'ㅏ':'a','ㅗ':'o','ㅜ':'u','ㅣ':'i','ㅕ':'yeo','ㅑ':'ya','ㅛ':'yo','ㅠ':'yu','ㅔ':'e','ㅢ':'ui','ㅘ':'wa','ㅟ':'wi','ㅙ':'wae'};
+      const consRoman = {'ㄱ':'g','ㄴ':'n','ㄷ':'d','ㄹ':'r','ㅁ':'m','ㅂ':'b','ㅅ':'s','ㅇ':'–','ㅈ':'j','ㅊ':'ch','ㅋ':'k','ㅌ':'t','ㅍ':'p','ㅎ':'h'};
+
+      const batchimSyls = syllables.filter(s => s.batchim);
+
       html += `
-        <div class="hangul-section-title">📋 Suku Kata Dasar (음절) <span>— contoh kombinasi</span></div>
-        <p style="font-size:0.85rem;color:var(--text-3);margin-bottom:12px">Klik suku kata untuk melihat detail. Jamo Konsonan + Vokal membentuk satu blok suku kata.</p>
-        <div class="syllable-table-wrap">
-          <table class="syllable-table">
-            <thead>
-              <tr>
-                <th>Suku Kata</th>
-                <th>Konsonan</th>
-                <th>Vokal</th>
-                <th>Romanisasi</th>
-                <th>Catatan</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${syllables.map(s => `
-                <tr class="syllable-row${s.batchim ? ' syl-batchim' : ''}" data-syl='${JSON.stringify(s).replace(/'/g,"&#39;")}' style="cursor:pointer">
-                  <td><span class="syl-block">${s.block}</span></td>
-                  <td>${s.consonant}</td>
-                  <td>${s.vowel}</td>
-                  <td><span class="syl-roman">${s.romanization}</span></td>
-                  <td>${s.batchim ? `<span style="font-size:0.75rem;color:var(--text-3)">받침: ${s.batchim}</span>` : ''}</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
+        <div class="hangul-section-title">📋 Matriks Suku Kata (음절) <span>— interaktif</span></div>
+        <p style="font-size:0.85rem;color:var(--text-3);margin-bottom:16px">Hover untuk sorot baris/kolom. Klik sel untuk mendengar & lihat detail.</p>
+        <div class="syl-matrix-wrap">
+          <div class="syl-matrix" id="syl-matrix" style="grid-template-columns: 72px repeat(${matrixVowels.length}, 56px)">
+            <div class="syl-matrix-corner"><span style="font-size:0.65rem;color:var(--text-3)">자음↓ / 모음→</span></div>
+            ${matrixVowels.map(v => `
+              <div class="syl-vowel-header" data-vowel="${v}">
+                <span class="syl-hdr-jamo">${v}</span>
+                <span class="syl-hdr-roman">${vowelRoman[v] || ''}</span>
+              </div>
+            `).join('')}
+            ${matrixCons.map(c => `
+              <div class="syl-cons-header" data-consonant="${c}">
+                <span class="syl-hdr-jamo">${c}</span>
+                <span class="syl-hdr-roman">${consRoman[c] || ''}</span>
+              </div>
+              ${matrixVowels.map(v => {
+                const s = sylMap[c + '|' + v];
+                if (s) {
+                  return '<div class="syl-cell" data-syl=\'' + JSON.stringify(s).replace(/'/g,"&#39;") + '\' data-cons="' + c + '" data-vowel="' + v + '" title="' + s.romanization + '"><span class="syl-cell-block">' + s.block + '</span><span class="syl-cell-roman">' + s.romanization + '</span></div>';
+                }
+                return '<div class="syl-cell syl-cell-empty" data-cons="' + c + '" data-vowel="' + v + '">—</div>';
+              }).join('')}
+            `).join('')}
+          </div>
         </div>
+
+        ${batchimSyls.length > 0 ? `
+          <div class="hangul-section-title" style="margin-top:28px">🔒 Suku Kata dengan Batchim (받침) <span>— konsonan akhir</span></div>
+          <p style="font-size:0.85rem;color:var(--text-3);margin-bottom:12px">Suku kata dengan konsonan penutup. Klik untuk detail & dengar pengucapan.</p>
+          <div class="syl-batchim-grid">
+            ${batchimSyls.map(s => `
+              <div class="syl-batchim-card" data-syl='${JSON.stringify(s).replace(/'/g,"&#39;")}'>
+                <span class="syl-cell-block">${s.block}</span>
+                <span class="syl-cell-roman">${s.romanization}</span>
+                <span class="syl-batchim-tag">받침: ${s.batchim}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
       `;
     }
 
@@ -143,11 +178,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (vGrid) bindGridEvents(vGrid);
     }
 
-    // Bind syllable row clicks
-    tableContent.querySelectorAll('.syllable-row').forEach(row => {
-      row.addEventListener('click', () => {
+    // Bind matrix syl-cell clicks and hover interactions
+    const matrixEl = tableContent.querySelector('#syl-matrix');
+    if (matrixEl) {
+      matrixEl.addEventListener('click', e => {
+        const cell = e.target.closest('.syl-cell:not(.syl-cell-empty)');
+        if (cell) {
+          try {
+            const syl = JSON.parse(cell.getAttribute('data-syl').replace(/&#39;/g,"'"));
+            openSyllableModal(syl);
+          } catch(e2) {}
+        }
+      });
+
+      // Hover highlight: highlight matching row/col headers
+      matrixEl.addEventListener('mouseover', e => {
+        const cell = e.target.closest('.syl-cell');
+        if (!cell || cell.classList.contains('syl-cell-empty')) return;
+        const c = cell.dataset.cons;
+        const v = cell.dataset.vowel;
+        matrixEl.querySelectorAll('.syl-cons-header').forEach(h => h.classList.toggle('hovered', h.dataset.consonant === c));
+        matrixEl.querySelectorAll('.syl-vowel-header').forEach(h => h.classList.toggle('hovered', h.dataset.vowel === v));
+      });
+      matrixEl.addEventListener('mouseleave', () => {
+        matrixEl.querySelectorAll('.syl-cons-header, .syl-vowel-header').forEach(h => h.classList.remove('hovered'));
+      });
+    }
+
+    // Bind batchim cards
+    tableContent.querySelectorAll('.syl-batchim-card').forEach(card => {
+      card.addEventListener('click', () => {
         try {
-          const syl = JSON.parse(row.getAttribute('data-syl').replace(/&#39;/g,"'"));
+          const syl = JSON.parse(card.getAttribute('data-syl').replace(/&#39;/g,"'"));
           openSyllableModal(syl);
         } catch(e) {}
       });

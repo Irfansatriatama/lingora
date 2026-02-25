@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Versi App** | 3.3.2 |
-| **Fase Saat Ini** | FASE 29.2 ✅ Bug Fix Settings & Tema Global |
+| **Versi App** | 3.3.3 |
+| **Fase Saat Ini** | FASE 29.3 ✅ Bug Fix Korea UI + Enhancement Hangul Matriks |
 | **Fase Terakhir** | Backup & Restore Progress (Fase 29) |
 | **Fokus Berikutnya** | 🐛 Bug Fixing — **tidak ada fase baru untuk sementara** |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
@@ -980,7 +980,8 @@ Cache: `lingora-v11` → `lingora-v12`
 | BF-014 | Settings — halaman settings | Element `.backup-status-bar` dan `.auto-backup-list` di dalam `settings-card` tidak punya padding horizontal sehingga teks nempel ke tepi kiri kartu | Fase 29.2 | ✅ Selesai |
 | BF-015 | Settings — halaman settings | Section "Snapshot Otomatis" menggunakan `.settings-row-info` langsung di dalam card tanpa padding — teks nempel ke kiri | Fase 29.2 | ✅ Selesai |
 | BF-016 | Settings — halaman settings | Beberapa section title menggunakan HTML entity icon yang kecil/tidak terlihat jelas (`★`, `⚠`, `ℹ`) — diganti emoji yang lebih jelas | Fase 29.2 | ✅ Selesai |
-| BF-017 | Tema — semua halaman | `themes.css` hanya di-include di `settings.html` sehingga tema warna, font, dan radius hanya berlaku di halaman pengaturan — tidak global | Fase 29.2 | ✅ Selesai — `themes.css` ditambahkan ke semua 32 halaman |
+| BF-018 | Kosakata KR & Grammar KR | `vocabulary.html` dan `grammar.html` Korea tidak meng-include `japanese.css` dan `kanji.css` — menyebabkan `.vocab-grid`, `.vocab-card`, `.theme-tab`, `.grammar-card`, `.vocab-toolbar`, `.grid-count`, dll tidak punya styling sehingga tampilan berantakan | Fase 29.3 | ✅ Selesai — ditambah `japanese.css` + `kanji.css` ke kedua halaman KR |
+| ENH-001 | Hangul — Tab Tabel | Tabel suku kata dasar monoton, scrollable panjang, tidak interaktif — diganti dengan **matriks interaktif konsonan × vokal** yang dapat di-hover untuk highlight baris/kolom, klik per sel untuk audio + detail, serta bagian batchim terpisah dalam grid kartu | Fase 29.3 | ✅ Selesai |
 
 ### Area yang Perlu Diperiksa di Sesi Bug Fixing
 
@@ -1190,6 +1191,7 @@ CSS per fitur   → assets/css/{nama-fitur}.css
 | **v3.1 — Fase 27** | 2026-02-25 | Mini Game 3x: Memory Match (flip 3D), Word Scramble (tile), Falling Kana (Canvas), SW v10 | ✅ |
 | **v3.2 — Fase 28** | 2026-02-25 | Tema & Kustomisasi: 5 tema+4 font+3 radius, themes.css, theme.js, anti-FOUC 30 halaman, SW v11 | ✅ |
 | **v3.3 — Fase 29** | 2026-02-25 | Backup & Restore: BackupSystem export/import JSON, auto-snapshot 3x, drag-drop UI, SW v12 | ✅ |
+| **v3.3.3 — Fase 29.3** | 2026-02-26 | 🐛 Bug Fix Korea UI + Enhancement Hangul: (1) Tambah `japanese.css` + `kanji.css` ke `vocabulary.html` & `grammar.html` Korea — perbaiki layout berantakan (vocab-grid, vocab-card, grammar-card, theme-tabs, toolbar, dll tidak ter-style). (2) Tambah `data-lang="kr"` ke semua halaman Korea + override warna biru di korean.css. (3) Ganti tabel suku kata hangul dengan **matriks interaktif** konsonan × vokal: hover highlight, klik per sel untuk audio+detail, batchim jadi grid kartu terpisah. Cache: `lingora-v12` → `lingora-v13` | ✅ |
 | **v3.3.2 — Fase 29.2** | 2026-02-26 | 🐛 Bug Fix Settings & Tema Global: padding/margin teks nempel kiri di settings (backup-status-bar, auto-backup-list, snapshot otomatis), icon section title diperbaiki, `themes.css` ditambahkan ke semua 32 halaman agar tema berlaku global | ✅ |
 | **v3.3.1 — Fase 29.1** | 2026-02-26 | 🐛 Bug Fix Sidebar: HTML korup di 15+ halaman, Quiz Korea hilang di 4 halaman, link duplikat di bottom-nav (dashboard/quiz-jp/quiz-zh/profile), update template sidebar.html | ✅ |
 | **Bug Fixing** | TBD | 🐛 Review menyeluruh berlanjut — tidak ada fase baru untuk sementara | 🔄 In Progress |

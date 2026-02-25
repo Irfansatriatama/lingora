@@ -418,3 +418,193 @@
   font-size: 1rem;
   line-height: 1;
 }
+
+/* ── Syllable Matrix (Interactive) — Fase 29.3 ── */
+.syl-matrix-wrap {
+  overflow-x: auto;
+  margin-bottom: 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.syl-matrix {
+  display: grid;
+  gap: 4px;
+  width: max-content;
+  min-width: 100%;
+}
+
+.syl-matrix-corner {
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  font-size: 0.6rem;
+  color: var(--text-3);
+  font-weight: 600;
+  text-align: center;
+  min-height: 52px;
+}
+
+.syl-vowel-header,
+.syl-cons-header {
+  background: var(--kr-blue);
+  color: #fff;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 4px;
+  min-height: 52px;
+  min-width: 52px;
+  transition: background var(--dur), transform var(--dur);
+}
+
+.syl-vowel-header.hovered,
+.syl-cons-header.hovered {
+  background: var(--kr-blue-dark);
+  transform: scale(1.06);
+  z-index: 2;
+  position: relative;
+}
+
+.syl-hdr-jamo {
+  font-family: var(--font-cjk);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.syl-hdr-roman {
+  font-size: 0.6rem;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.syl-cell {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 4px;
+  min-height: 52px;
+  min-width: 52px;
+  cursor: pointer;
+  transition: border-color var(--dur), background var(--dur), transform var(--dur), box-shadow var(--dur);
+  position: relative;
+}
+
+.syl-cell:not(.syl-cell-empty):hover {
+  border-color: var(--kr-blue);
+  background: var(--kr-blue-light);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(26, 111, 187, 0.2);
+  z-index: 3;
+}
+
+.syl-cell-empty {
+  background: var(--surface-2);
+  color: var(--text-3);
+  font-size: 0.75rem;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.syl-cell-block {
+  font-family: var(--font-cjk);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  display: block;
+}
+
+.syl-cell-roman {
+  font-size: 0.6rem;
+  color: var(--kr-blue);
+  font-weight: 600;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Batchim grid */
+.syl-batchim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.syl-batchim-card {
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 6px 8px;
+  cursor: pointer;
+  transition: border-color var(--dur), box-shadow var(--dur), transform var(--dur);
+  text-align: center;
+}
+
+.syl-batchim-card:hover {
+  border-color: var(--kr-blue);
+  background: var(--kr-blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 111, 187, 0.15);
+}
+
+.syl-batchim-tag {
+  font-size: 0.58rem;
+  color: var(--text-3);
+  background: var(--surface);
+  border-radius: 99px;
+  padding: 1px 6px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .syl-cell, .syl-vowel-header, .syl-cons-header {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .syl-cell-block { font-size: 1.2rem; }
+  .syl-hdr-jamo { font-size: 1.05rem; }
+}
+
+/* ── Override Japanese filter-btn colors for Korean context ── */
+.module-page-header.kr-header ~ * .filter-btn:hover,
+body .kr-header + div .filter-btn:hover { border-color: var(--kr-blue); color: var(--kr-blue); }
+body .kr-header + div .filter-btn.active { background: var(--kr-blue); border-color: var(--kr-blue); color: #fff; }
+
+/* Scoped overrides: when on a Korean page, make filter-btn use kr-blue */
+.tab-btn {
+  /* inherits from japanese.css — ok */
+}
+
+/* Grammar category tabs on Korean pages use kr-blue */
+.module-page-header.kr-header {
+  /* already defined */
+}
+
+/* ── Scoped color overrides for Korean pages ── */
+/* Korean pages use data-lang="kr" on body for scoped color overrides */
+body[data-lang="kr"] .filter-btn:hover { border-color: var(--kr-blue); color: var(--kr-blue); }
+body[data-lang="kr"] .filter-btn.active { background: var(--kr-blue); border-color: var(--kr-blue); color: #fff; }
+body[data-lang="kr"] .tab-btn.active { background: var(--kr-blue); border-color: var(--kr-blue); }
+body[data-lang="kr"] .tab-btn:hover { border-color: var(--kr-blue); color: var(--kr-blue); }
+body[data-lang="kr"] .theme-tab.active { background: var(--kr-blue); border-color: var(--kr-blue); color: #fff; }
+body[data-lang="kr"] .theme-tab:hover { border-color: var(--kr-blue); }
+body[data-lang="kr"] .vocab-card.learned { border-color: var(--kr-blue); background: var(--kr-blue-light); }
+body[data-lang="kr"] .vocab-card:hover { border-color: var(--kr-blue); }
+body[data-lang="kr"] .grammar-card.learned { border-left-color: var(--kr-blue); }
+body[data-lang="kr"] .grammar-card-header:hover { background: var(--kr-blue-light); }
+body[data-lang="kr"] .grammar-card.expanded .grammar-expand-icon { color: var(--kr-blue); }
