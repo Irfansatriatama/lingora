@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 25 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Onboarding & Placement Test (Fase 25) |
+| **Fase Saat Ini** | FASE 26 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Study Planner - Jadwal Belajar (Fase 26) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -1045,7 +1045,7 @@ assets/js/pages/dashboard.js        [UPDATE]
 
 ---
 
-### FASE 26 — Study Planner / Jadwal Belajar
+### FASE 26 — Study Planner / Jadwal Belajar ✅ SELESAI (2026-02-25)
 
 **Tujuan:** User bisa set target ujian (JLPT N5/N4/N3, HSK 1–4, TOPIK I/II) + tanggal ujian → sistem buatkan jadwal belajar harian otomatis.
 
@@ -1303,8 +1303,11 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.7 — Fase 23** | 2026-02-25 | **Stroke Order Animasi Hiragana & Katakana** — Tab "✍️ Menulis" baru di kedua halaman. **File baru:** `assets/js/data/kana-strokes.js` (data SVG path 46 hiragana + 46 katakana dasar), `assets/js/modules/kana-stroke-ui.js` (KanaStrokeUI: render panel animasi SVG, grid karakter, kontrol play/step/reset, animasi strokeDashoffset, panah arah). **File update:** `pages/japanese/hiragana.html` + `katakana.html` (tab baru + scripts baru), `assets/js/pages/hiragana.js` + `katakana.js` (fungsi `initWritingTab()` dengan lazy-init), `assets/css/japanese.css` (section Fase 23: layout dua kolom, SVG wrap, controls, stroke list, responsive), `sw.js` (cache bump v5→v6, tambah 2 file baru). | ✅ |
 | **v2.8 — Fase 24** | 2026-02-25 | **Vocabulary Builder — Kalimat Kontekstual & Quiz** — Menambahkan 2-3 kalimat kontekstual per kata kunci + tab Kalimat Quiz (fill-in-the-blank). **File baru:** `assets/js/modules/vocab-builder.js` (VocabBuilder: renderSentences, initToggles, startQuiz, buildQuizItems). **Data update:** `jp-vocab.js` (sentences untuk 10 kata: greetings + food + verbs), `zh-vocab.js` (sentences untuk 7 kata: greetings + food), `kr-vocab.js` (sentences untuk 5 kata: greetings). **CSS:** `components.css` (section Fase 24: vb-sentences-wrap, vb-toggle-btn, vb-sentence, vb-quiz-*, dll). **HTML update:** `pages/japanese/vocabulary.html`, `mandarin/vocabulary.html`, `korean/vocabulary.html` (tab "🧩 Kalimat Quiz" baru + panel tab-kalimat + script vocab-builder.js). **Page JS update:** `jp-vocab.js`, `zh-vocab.js`, `kr-vocab.js` (render sentences, initToggles, initKalimatQuizTab). **SW:** cache bump v6→v7 + tambah vocab-builder.js. | ✅ |
 | **v2.9 — Fase 25** | 2026-02-25 | **Onboarding & Placement Test** — Wizard 5 langkah untuk user baru. **File baru:** `pages/onboarding.html` (wizard 5 step), `assets/js/pages/onboarding.js` (logika wizard, bank soal placement 30 soal, 3 bahasa), `assets/css/onboarding.css` (card, step dots, progress bar, lang selector, quiz UI, dark mode). **Fitur:** Step 1 Welcome; Step 2 Pilih bahasa fokus (JP/ZH/KR/Semua); Step 3 Placement Test 10 soal + skip; Step 4 Hasil (level Pemula/Menengah + 3 rekomendasi modul); Step 5 Target harian (5–60 mnt). Data: `nh_user_{id}_onboarding`. Bonus +50 XP saat selesai. **Dashboard:** Section Profil Belajarmu (tampil status atau prompt onboarding). **register.html:** Redirect ke onboarding setelah daftar. **Sidebar:** Link Profil Belajar di 23 halaman. **SW:** cache bump v7→v8. | ✅ |
+| **v3.0 — Fase 26** | 2026-02-25 | **Study Planner / Jadwal Belajar** — Sistem jadwal belajar otomatis berdasarkan target ujian. **File baru:** `pages/planner.html` (halaman planner lengkap), `assets/js/pages/planner.js` (logika halaman: setup wizard, active view, to-do harian, timeline, catch-up), `assets/js/modules/planner.js` (StudyPlanner engine: `calcSchedule`, `calcTodayTodo`, `calcTimeline`, `savePlanner`, `loadPlanner`), `assets/css/planner.css` (semua style planner: exam options grid, preview, todo list, timeline chart, countdown, module breakdown). **Fitur:** 9 target ujian (JLPT N5/N4/N3, HSK 1/2/3/4, TOPIK I/II); kalkulasi kuota item/hari otomatis; daily to-do per modul dengan direct link; Catch-up Mode (jadwal menyesuaikan jika ada hari terlewat); progress timeline chart 7 hari; countdown hari tersisa; overall progress bar; module breakdown per modul. **Data:** `nh_user_{id}_planner` → `{examId, targetDate, startDate, createdAt}`. **Dashboard:** Section "📅 Target Planner Hari Ini" (tampil jika planner aktif) dengan direct link per modul. **Sidebar:** Link Study Planner ditambahkan ke semua 24 halaman HTML. **Manifest:** Shortcut Study Planner ditambahkan. **SW:** cache bump v8→v9, tambah 3 file planner baru. | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
+
+> **Fase saat ini:** FASE 26 ✅ SELESAI
 
 ### Konteks Proyek Saat Ini
 

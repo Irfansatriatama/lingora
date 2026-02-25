@@ -9,7 +9,10 @@
   "background_color": "#ffffff",
   "theme_color": "#C0392B",
   "lang": "id",
-  "categories": ["education", "lifestyle"],
+  "categories": [
+    "education",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "assets/icons/icon-192.png",
@@ -31,28 +34,60 @@
       "short_name": "Home",
       "description": "Buka dashboard belajar",
       "url": "./pages/dashboard.html",
-      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Quiz Jepang",
       "short_name": "Quiz JP",
       "description": "Mulai quiz bahasa Jepang",
       "url": "./pages/japanese/quiz.html",
-      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Quiz Mandarin",
       "short_name": "Quiz ZH",
       "description": "Mulai quiz bahasa Mandarin",
       "url": "./pages/mandarin/quiz.html",
-      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Quiz Korea",
       "short_name": "Quiz KR",
       "description": "Mulai quiz bahasa Korea",
       "url": "./pages/korean/quiz.html",
-      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Study Planner",
+      "short_name": "Planner",
+      "description": "Buat jadwal belajar ujian",
+      "url": "./pages/planner.html",
+      "icons": [
+        {
+          "src": "assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

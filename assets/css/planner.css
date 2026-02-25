@@ -1,0 +1,701 @@
+/* ============================================================
+   LINGORA - Study Planner CSS (Fase 26)
+   ============================================================ */
+
+/* ── Layout ── */
+.planner-page .card {
+  margin-bottom: 20px;
+}
+
+/* ── Setup Card ── */
+.planner-setup-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.planner-setup-icon {
+  font-size: 3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.planner-setup-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.planner-setup-desc {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+/* ── Form ── */
+.planner-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.planner-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.planner-form-label {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.planner-form-select,
+.planner-form-input {
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: var(--text);
+  width: 100%;
+  transition: border-color var(--dur) var(--ease);
+  appearance: auto;
+}
+
+.planner-form-select:focus,
+.planner-form-input:focus {
+  border-color: var(--red);
+  outline: none;
+}
+
+.planner-form-hint {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+/* Exam options grid */
+.exam-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+}
+
+.exam-option {
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all var(--dur) var(--ease);
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.exam-option:hover {
+  border-color: var(--red-light);
+  background: var(--red-soft);
+}
+
+.exam-option.selected {
+  border-color: var(--red);
+  background: var(--red-soft);
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+}
+
+.exam-option-flag {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.exam-option-info {
+  min-width: 0;
+}
+
+.exam-option-label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: block;
+}
+
+.exam-option-desc {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  display: block;
+  margin-top: 1px;
+}
+
+.exam-option-check {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity var(--dur);
+}
+
+.exam-option.selected .exam-option-check {
+  opacity: 1;
+}
+
+/* ── Preview Schedule ── */
+.planner-preview {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-top: 4px;
+  display: none;
+}
+
+.planner-preview.visible {
+  display: block;
+  animation: fadeIn 0.3s var(--ease);
+}
+
+.planner-preview-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.planner-preview-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.planner-preview-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.planner-preview-stat-val {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+}
+
+.planner-preview-stat-lbl {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+.planner-preview-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.planner-breakdown-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.83rem;
+}
+
+.planner-breakdown-name {
+  min-width: 100px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.planner-breakdown-bar-wrap {
+  flex: 1;
+  background: var(--border);
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.planner-breakdown-bar {
+  height: 100%;
+  background: var(--red);
+  border-radius: 3px;
+  transition: width 0.5s var(--ease);
+}
+
+.planner-breakdown-done {
+  background: #27ae60;
+}
+
+.planner-breakdown-info {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  white-space: nowrap;
+  min-width: 70px;
+  text-align: right;
+}
+
+/* ── Active Planner Card ── */
+.planner-active-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.planner-active-goal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.planner-active-flag {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.planner-active-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.planner-active-meta {
+  font-size: 0.82rem;
+  color: var(--text-3);
+}
+
+.planner-countdown {
+  background: linear-gradient(135deg, var(--red-soft), var(--gold-soft));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  text-align: center;
+}
+
+.planner-countdown-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+  font-family: var(--font-display);
+}
+
+.planner-countdown-lbl {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+/* ── Today's To-Do ── */
+.planner-todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.planner-todo-item {
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all var(--dur) var(--ease);
+}
+
+.planner-todo-item:hover {
+  border-color: var(--red-light);
+  background: var(--red-soft);
+  transform: translateX(4px);
+}
+
+.planner-todo-item.done {
+  border-color: #27ae60;
+  background: #f0faf4;
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .planner-todo-item.done {
+  background: rgba(39,174,96,0.1);
+}
+
+.planner-todo-icon {
+  font-size: 1.4rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--surface);
+  flex-shrink: 0;
+  font-family: var(--font-cjk);
+}
+
+.planner-todo-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.planner-todo-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.planner-todo-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.planner-todo-bar-wrap {
+  flex: 1;
+  background: var(--border);
+  height: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.planner-todo-bar {
+  height: 100%;
+  background: var(--red);
+  border-radius: 3px;
+}
+
+.planner-todo-bar.done {
+  background: #27ae60;
+}
+
+.planner-todo-pct {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.planner-todo-target {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--red);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.planner-todo-done-badge {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* ── Overall Progress ── */
+.planner-overall-progress {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.planner-overall-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.planner-overall-label {
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.planner-overall-pct {
+  font-weight: 700;
+  color: var(--red);
+  font-size: 1.1rem;
+}
+
+.planner-overall-bar-wrap {
+  background: var(--border);
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.planner-overall-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--gold));
+  border-radius: 5px;
+  transition: width 0.8s var(--ease);
+}
+
+.planner-overall-sub {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+/* ── Timeline Chart ── */
+.planner-timeline-wrap {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.planner-timeline-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.planner-timeline-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 70px;
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.planner-tl-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  position: relative;
+  gap: 2px;
+}
+
+.planner-tl-bar-ideal {
+  width: 100%;
+  background: var(--border-2);
+  border-radius: 3px 3px 0 0;
+  transition: height 0.5s var(--ease);
+  opacity: 0.6;
+  min-height: 2px;
+}
+
+.planner-tl-bar-actual {
+  width: 100%;
+  background: var(--red);
+  border-radius: 3px 3px 0 0;
+  transition: height 0.5s var(--ease);
+  min-height: 2px;
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+}
+
+.planner-tl-label {
+  position: absolute;
+  bottom: 0;
+  font-size: 0.65rem;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.planner-tl-label.today {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.planner-timeline-legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  flex-wrap: wrap;
+}
+
+.planner-legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* ── Module Breakdown ── */
+.planner-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.planner-module-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all var(--dur) var(--ease);
+  display: block;
+}
+
+.planner-module-card:hover {
+  border-color: var(--red-light);
+  background: var(--red-soft);
+}
+
+.planner-module-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.planner-module-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.planner-module-pct {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--red);
+}
+
+.planner-module-bar-wrap {
+  background: var(--border);
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.planner-module-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--gold-light));
+  border-radius: 3px;
+  transition: width 0.6s var(--ease);
+}
+
+.planner-module-sub {
+  font-size: 0.72rem;
+  color: var(--text-3);
+}
+
+/* ── Action Buttons ── */
+.planner-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Alert / status ── */
+.planner-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--gold-soft);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+  color: var(--text-2);
+}
+
+.planner-alert-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.planner-alert.success {
+  background: #f0faf4;
+  border-color: #27ae60;
+}
+
+.planner-alert.danger {
+  background: var(--red-soft);
+  border-color: var(--red-light);
+}
+
+[data-theme="dark"] .planner-alert.success {
+  background: rgba(39,174,96,0.1);
+}
+
+/* ── Empty State ── */
+.planner-empty {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.planner-empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+}
+
+.planner-empty-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.planner-empty-desc {
+  font-size: 0.85rem;
+  color: var(--text-3);
+  margin-bottom: 20px;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── All Done ── */
+.planner-all-done {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0faf4, #fff);
+  border: 1px solid #27ae60;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+
+[data-theme="dark"] .planner-all-done {
+  background: rgba(39,174,96,0.08);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .planner-active-header { flex-direction: column; }
+  .exam-options-grid { grid-template-columns: repeat(2, 1fr); }
+  .planner-modules-grid { grid-template-columns: 1fr; }
+  .planner-preview-stats { gap: 12px; }
+}
+
+/* ── Dark mode adjustments ── */
+[data-theme="dark"] .planner-form-select,
+[data-theme="dark"] .planner-form-input {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .planner-todo-item.done {
+  border-color: #27ae60;
+}

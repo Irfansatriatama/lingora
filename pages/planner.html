@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#C0392B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Lingora">
+  <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+  <title>Study Planner - Lingora</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/planner.css">
+  <link rel="stylesheet" href="../assets/css/transitions.css">
+  <script>
+    (function() {
+      try {
+        var theme = localStorage.getItem('nh_last_theme');
+        if (!theme) theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch(e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-main">Lingora</div>
+      <div class="logo-sub">Jepang, Mandarin &amp; Korea</div>
+    </div>
+    <div class="sidebar-user">
+      <div class="avatar-circle" data-user-avatar>日</div>
+      <div class="sidebar-user-info">
+        <div class="user-name" data-user-name>Pengguna</div>
+        <div class="user-level" data-user-email>-</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Umum</div>
+      <a class="nav-item" href="dashboard.html" data-page="dashboard"><span class="nav-icon">&#9632;</span>Dashboard</a>
+      <a class="nav-item" href="stats.html" data-page="stats"><span class="nav-icon">&#128202;</span>Statistik</a>
+      <a class="nav-item" href="settings.html" data-page="settings"><span class="nav-icon">&#9881;</span>Pengaturan</a>
+      <a class="nav-item" href="report.html" target="_blank" data-page="report"><span class="nav-icon">&#128438;</span>Ekspor PDF</a>
+
+      <div class="nav-section-label">Bahasa Jepang</div>
+      <a class="nav-item" href="japanese/hiragana.html" data-page="hiragana"><span class="nav-icon cjk">あ</span>Hiragana</a>
+      <a class="nav-item" href="japanese/katakana.html" data-page="katakana"><span class="nav-icon cjk">ア</span>Katakana</a>
+      <a class="nav-item" href="japanese/kanji.html" data-page="kanji"><span class="nav-icon cjk">漢</span>Kanji</a>
+      <a class="nav-item" href="japanese/vocabulary.html" data-page="jp-vocab"><span class="nav-icon">&#128218;</span>Kosakata JP</a>
+      <a class="nav-item" href="japanese/grammar.html" data-page="jp-grammar"><span class="nav-icon">&#128221;</span>Grammar JP</a>
+      <a class="nav-item" href="japanese/dialog.html" data-page="jp-dialog"><span class="nav-icon">&#128172;</span>Dialog JP</a>
+
+      <div class="nav-section-label">Bahasa Mandarin</div>
+      <a class="nav-item" href="mandarin/pinyin.html" data-page="pinyin"><span class="nav-icon cjk">拼</span>Pinyin</a>
+      <a class="nav-item" href="mandarin/tones.html" data-page="tones"><span class="nav-icon">&#9835;</span>Nada (Tones)</a>
+      <a class="nav-item" href="mandarin/hanzi.html" data-page="hanzi"><span class="nav-icon cjk">汉</span>Hanzi</a>
+      <a class="nav-item" href="mandarin/vocabulary.html" data-page="zh-vocab"><span class="nav-icon">&#128218;</span>Kosakata ZH</a>
+      <a class="nav-item" href="mandarin/dialog.html" data-page="zh-dialog"><span class="nav-icon">&#128172;</span>Dialog ZH</a>
+
+      <div class="nav-section-label">Bahasa Korea</div>
+      <a class="nav-item" href="korean/hangul.html" data-page="hangul"><span class="nav-icon cjk">한</span>Hangul</a>
+      <a class="nav-item" href="korean/vocabulary.html" data-page="kr-vocab"><span class="nav-icon">&#128218;</span>Kosakata KR</a>
+      <a class="nav-item" href="korean/grammar.html" data-page="kr-grammar"><span class="nav-icon">&#128221;</span>Grammar KR</a>
+      <a class="nav-item" href="korean/dialog.html" data-page="kr-dialog"><span class="nav-icon">&#128172;</span>Dialog KR</a>
+
+      <div class="nav-section-label">Latihan</div>
+      <a class="nav-item" href="japanese/quiz.html" data-page="quiz-jp"><span class="nav-icon">&#9733;</span>Quiz Jepang</a>
+      <a class="nav-item" href="mandarin/quiz.html" data-page="quiz-zh"><span class="nav-icon">&#9733;</span>Quiz Mandarin</a>
+      <a class="nav-item" href="korean/quiz.html" data-page="quiz-kr"><span class="nav-icon">&#9733;</span>Quiz Korea</a>
+
+      <div class="nav-section-label">Akun</div>
+      <a class="nav-item" href="profile.html" data-page="profile"><span class="nav-icon">&#128100;</span>Profil</a>
+      <a class="nav-item" href="onboarding.html" data-page="onboarding"><span class="nav-icon">&#127919;</span>Profil Belajar</a>
+      <a class="nav-item active" href="planner.html" data-page="planner"><span class="nav-icon">&#128197;</span>Study Planner</a>
+      <a class="nav-item" href="change-password.html" data-page="change-password"><span class="nav-icon">&#128274;</span>Ganti Password</a>
+      <a class="nav-item" href="#" data-action="logout"><span class="nav-icon">&#128682;</span>Keluar</a>
+    </nav>
+  </nav>
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <!-- Main content -->
+  <div class="main-content">
+    <header class="topbar">
+      <button class="sidebar-toggle" id="sidebar-toggle">&#9776;</button>
+      <span class="topbar-title">📅 Study Planner</span>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Beralih Mode">🌙</button>
+    </header>
+
+    <main class="page-content planner-page" id="planner-root">
+      <!-- Rendered by JS -->
+    </main>
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <a class="bottom-nav-item" href="dashboard.html" data-page="dashboard">
+        <span class="bnav-icon">&#9632;</span><span>Dashboard</span>
+      </a>
+      <a class="bottom-nav-item" href="japanese/hiragana.html" data-page="hiragana">
+        <span class="bnav-icon cjk">あ</span><span>Jepang</span>
+      </a>
+      <a class="bottom-nav-item" href="mandarin/pinyin.html" data-page="pinyin">
+        <span class="bnav-icon cjk">拼</span><span>Mandarin</span>
+      </a>
+      <a class="bottom-nav-item active" href="planner.html" data-page="planner">
+        <span class="bnav-icon">&#128197;</span><span>Planner</span>
+      </a>
+    </div>
+  </nav>
+
+</div>
+<div id="toast-container"></div>
+
+<script src="../assets/js/core/storage.js"></script>
+<script src="../assets/js/core/auth.js"></script>
+<script src="../assets/js/core/router.js"></script>
+<script src="../assets/js/core/app.js"></script>
+<script src="../assets/js/modules/progress.js"></script>
+<script src="../assets/js/modules/xp.js"></script>
+<script src="../assets/js/modules/challenge.js"></script>
+<script src="../assets/js/modules/planner.js"></script>
+<script src="../assets/js/pages/planner.js"></script>
+<script src="../assets/js/modules/pwa.js"></script>
+<script>document.addEventListener("DOMContentLoaded", () => PWAManager.init());</script>
+</body>
+</html>

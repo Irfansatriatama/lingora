@@ -442,4 +442,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderChallenge();
 
+  renderChallenge();
+
+
+  // ── Fase 26: Study Planner Dashboard Widget ───────────────
+  (function() {
+    if (typeof StudyPlanner === 'undefined') return;
+    const section = document.getElementById('planner-section');
+    const todoEl  = document.getElementById('planner-dashboard-todo');
+    if (!section || !todoEl) return;
+
+    const planner = StudyPlanner.loadPlanner(user.id);
+    if (!planner || !planner.examId) { section.style.display = 'none'; return; }
+
+    section.style.display = '';
+    const exam     = StudyPlanner.getExam(planner.examId);
+    const todos    = StudyPlanner.calcTodayTodo(planner, progress);
+    const daysLeft = StudyPlanner.daysUntil(planner.targetDate);
+
+    const MODULE_HREFS = {
+      'hiragana': 'japanese/hiragana.html', 'katakana': 'japanese/katakana.html',
+      'kanji': 'japanese/kanji.html', 'jp-vocab': 'japanese/vocabulary.html',
+      'jp-grammar': 'japanese/grammar.html', 'pinyin': 'mandarin/pinyin.html',
+      'tones': 'mandarin/tones.html', 'hanzi': 'mandarin/hanzi.html',
+      'zh-vocab': 'mandarin/vocabulary.html', 'hangul': 'korean/hangul.html',
+      'kr-vocab': 'korean/vocabulary.html', 'kr-grammar': 'korean/grammar.html',
+    };
+    const MODULE_ICONS = {
+      'hiragana': 'あ', 'katakana': 'ア', 'kanji': '漢',
+      'jp-vocab': '語', 'jp-grammar': '文', 'pinyin': '拼',
+      'tones': '声', 'hanzi': '汉', 'zh-vocab': '词',
+      'hangul': '한', 'kr-vocab': '어', 'kr-grammar': '문',
+    };
+
+    if (todos.length === 0) {
+      todoEl.innerHTML = `
+        <div style="text-align:center;padding:16px 0;color:var(--text-3);font-size:0.88rem;">
+          🎉 Semua target ${exam ? exam.label : ''} hari ini sudah selesai!
+        </div>`;
+    } else {
+      const examLabel = exam ? exam.icon + ' ' + exam.label : 'Ujian';
+      todoEl.innerHTML = `
+        <div style="font-size:0.8rem;color:var(--text-3);margin-bottom:10px;">
+          ${examLabel} · <strong style="color:var(--red);">${daysLeft} hari lagi</strong>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${todos.slice(0, 4).map(t => `
+            <a href="${MODULE_HREFS[t.id] || '#'}"
+               style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text);transition:all .2s;">
+              <span style="font-family:var(--font-cjk);font-size:1.1rem;width:28px;text-align:center;">${MODULE_ICONS[t.id] || '📖'}</span>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:600;font-size:0.85rem;">${t.name}</div>
+                <div style="display:flex;align-items:center;gap:6px;margin-top:3px;">
+                  <div style="flex:1;background:var(--border);height:4px;border-radius:2px;overflow:hidden;">
+                    <div style="height:100%;width:${t.pct}%;background:var(--red);border-radius:2px;"></div>
+                  </div>
+                  <span style="font-size:0.7rem;color:var(--text-3);">${t.pct}%</span>
+                </div>
+              </div>
+              <span style="font-size:0.78rem;font-weight:700;color:var(--red);white-space:nowrap;">+${t.todayTarget}</span>
+            </a>
+          `).join('')}
+        </div>
+      `;
+    }
+  })();
+
 });
