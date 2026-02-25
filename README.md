@@ -14,9 +14,9 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 5. [Arsitektur & Pola Kode](#5-arsitektur--pola-kode)
 6. [localStorage Key Reference](#6-localstorage-key-reference)
 7. [Ringkasan Konten](#7-ringkasan-konten)
-8. [Riwayat Fase (1–21.1)](#8-riwayat-fase-1211)
+8. [Riwayat Fase (1–29)](#8-riwayat-fase-129)
 9. [Bug Fix yang Sudah Diperbaiki](#9-bug-fix-yang-sudah-diperbaiki)
-10. [Roadmap Fase 21 ke Atas](#10-roadmap-fase-21-ke-atas)
+10. [Roadmap — Fase Selanjutnya (Di-hold)](#10-roadmap--fase-selanjutnya-di-hold)
 11. [Panduan untuk Claude Selanjutnya](#11-panduan-untuk-claude-selanjutnya)
 12. [Log Pengerjaan & Versi](#12-log-pengerjaan--versi)
 
@@ -26,57 +26,77 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
+| **Versi App** | 3.3 |
 | **Fase Saat Ini** | FASE 29 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Backup & Restore Progress (Fase 29) |
+| **Fase Terakhir** | Backup & Restore Progress (Fase 29) |
+| **Fokus Berikutnya** | 🐛 Bug Fixing — **tidak ada fase baru untuk sementara** |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
-| **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
+| **Nama Baru** | Lingora (JP + ZH + KR) — berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
-| **Fase 21 Lama** | Konten N3/HSK4 — sekarang di-hold, masuk daftar fase lanjutan |
-| **Fase 25 Lama** | Leaderboard Lokal — di-hold, masuk daftar fase lanjutan |
+| **Fase 30+** | Di-hold sampai bug fixing selesai |
 | **Deploy** | GitHub Pages / Netlify (butuh HTTPS agar PWA penuh berfungsi) |
+| **Service Worker Cache** | `lingora-v12` |
 
-> **Catatan Rename:** Mulai Fase 21, nama proyek berubah dari **NihonHan** → **Lingora**.
-> - *Nihon (日本)* = Jepang, *Han (漢)* = Mandarin/Hanzi — nama lama hanya mencerminkan dua bahasa
-> - *Lingora* = Lingua (Latin: bahasa/suara) + -ora — menggambarkan suara dan aksara dari tiga bahasa Asia Timur
-> - Semua referensi kode, manifest, dan aset akan diupdate di Fase 21 bersamaan dengan penambahan modul Korea
+> **⚠️ Fokus Saat Ini: Bug Fixing**  
+> Setelah Fase 29 selesai, pengembangan difokuskan pada **bug fixing** terlebih dahulu sebelum melanjutkan ke fase baru. Tidak ada penambahan fitur sampai app berjalan stabil tanpa bug yang diketahui.
+
+> **Catatan Rename:** Mulai Fase 21.1, nama proyek berubah dari **NihonHan** → **Lingora**.  
+> *Lingua* (Latin: bahasa/suara) + *-ora* — menggambarkan suara dan aksara dari tiga bahasa Asia Timur.
 
 ---
 
 ## 2. Deskripsi Proyek
 
-Lingora adalah aplikasi web belajar bahasa yang berjalan 100% di browser tanpa server, database, atau koneksi internet setelah diunduh. Seluruh data user tersimpan di `localStorage`.
+Lingora adalah aplikasi web belajar bahasa yang berjalan **100% di browser** tanpa server, database, atau koneksi internet setelah diunduh. Seluruh data user tersimpan di `localStorage`.
 
-**Tiga bahasa yang didukung (setelah Fase 21):**
-- 🇯🇵 **Bahasa Jepang** — Hiragana, Katakana, Kanji (N5–N1), Kosakata, Grammar, Dialog
-- 🇨🇳 **Bahasa Mandarin** — Pinyin, Nada, Hanzi (HSK 1–3), Kosakata, Dialog
-- 🇰🇷 **Bahasa Korea** — Hangul, Kosakata, Grammar, Dialog *(baru di Fase 21)*
+### Tiga Bahasa yang Didukung
 
-**Fitur unggulan:**
-- Spaced Repetition System (SM-2) layaknya Anki
-- Gamifikasi: XP, Level, Badge, Challenge Harian, Streak
-- Quiz ganda: mode pilih + mode ketik jawaban
-- Audio pengucapan via Web Speech API
-- Export laporan progress ke PDF
-- PWA: bisa di-install di HP/laptop, berjalan offline
-- Dark mode dengan anti-FOUC
-- Pengingat belajar (browser notification)
-- Multi-user: beberapa akun di device yang sama
+| Bahasa | Modul | Konten |
+|--------|-------|--------|
+| 🇯🇵 **Jepang** | Hiragana, Katakana, Kanji, Kosakata, Grammar, Dialog, Quiz | 104+104 kana, 278 kanji (N5–N1), 225 kata, 35 grammar, 8 dialog |
+| 🇨🇳 **Mandarin** | Pinyin, Nada, Hanzi, Kosakata, Dialog, Quiz | 21+38 pinyin, 5 nada, 208 hanzi (HSK 1–3), 120+ kata, 7 dialog |
+| 🇰🇷 **Korea** | Hangul, Kosakata, Grammar, Dialog, Quiz | 35 jamo, 155 kata (TOPIK I/II), 27 grammar, 6 dialog |
+
+### Fitur Unggulan
+
+- **Spaced Repetition System (SM-2)** — Algoritma hafalan cerdas layaknya Anki
+- **Gamifikasi lengkap** — XP, Level, Badge, Challenge Harian, Streak
+- **Quiz multi-mode** — Pilihan ganda, ketik jawaban, listening mode (audio)
+- **Vocabulary Builder** — 2–3 kalimat kontekstual per kata + quiz fill-in-the-blank
+- **Stroke Order** — Animasi SVG urutan coretan Hiragana, Katakana (46 masing-masing), dan Kanji
+- **Audio pengucapan** — Web Speech API (JP/ZH/KR)
+- **Mini Game** — Memory Match, Word Scramble, Falling Kana (arcade Canvas API)
+- **Study Planner** — Jadwal belajar otomatis berdasarkan target JLPT/HSK/TOPIK
+- **Onboarding & Placement Test** — Wizard 5-langkah untuk user baru
+- **Backup & Restore** — Export/import JSON + auto-snapshot lokal berkala
+- **Tema & Kustomisasi** — 5 tema warna, 4 font, 3 radius UI dengan preview real-time
+- **Export laporan PDF** — Dari semua progress via laporan PDF standalone
+- **PWA** — Install di HP/laptop, berjalan offline penuh
+- **Dark mode** — Anti-FOUC, persistensi per-user
+- **Pengingat belajar** — Browser notification dengan jadwal kustom
+- **Multi-user** — Beberapa akun di satu device
 
 ---
 
 ## 3. Cara Menjalankan
 
-**Lokal (tanpa server):**
-1. Buka folder project di file explorer
-2. Double klik `index.html`
+### Lokal (tanpa server)
+
+```
+1. Buka folder lingora/ di file explorer
+2. Double klik index.html
 3. Daftar akun baru → langsung bisa digunakan
 4. Tidak perlu npm, pip, server, atau koneksi internet
+```
 
-**GitHub Pages / Netlify (untuk PWA penuh):**
-1. Upload folder ke repo GitHub
+### GitHub Pages / Netlify (untuk PWA penuh)
+
+```
+1. Upload folder lingora/ ke repo GitHub
 2. Aktifkan GitHub Pages dari root
 3. Akses via HTTPS → PWA install prompt akan muncul
 4. Service Worker aktif → offline berfungsi penuh
+```
 
 > **Catatan:** Service Worker (`sw.js`) hanya aktif di HTTPS atau `localhost`. Di `file://`, fitur PWA tidak aktif tapi app tetap berfungsi normal.
 
@@ -86,1212 +106,1036 @@ Lingora adalah aplikasi web belajar bahasa yang berjalan 100% di browser tanpa s
 
 ```
 lingora/
-├── index.html                          ← Landing page & redirect
-├── 404.html                            ← Halaman not found
-├── manifest.json                       ← PWA manifest
-├── sw.js                               ← Service Worker (cache-first)
-├── README.md                           ← File ini
+├── index.html                          ← Landing page & redirect ke dashboard/login
+├── 404.html                            ← Halaman not found custom
+├── manifest.json                       ← PWA manifest (v4, 6 shortcuts)
+├── sw.js                               ← Service Worker cache-first (lingora-v12)
+├── README.md                           ← Dokumentasi lengkap proyek (file ini)
 │
 ├── components/
-│   └── sidebar.html                    ← Referensi template sidebar
+│   └── sidebar.html                    ← Template referensi sidebar
 │
 ├── pages/
-│   ├── login.html
-│   ├── register.html
-│   ├── dashboard.html                  ← Hub utama: streak, XP, challenge, SRS due
-│   ├── profile.html                    ← Edit profil, avatar, statistik
-│   ├── change-password.html
-│   ├── settings.html                   ← Semua pengaturan app
-│   ├── stats.html                      ← Statistik lengkap, heatmap, badge, riwayat
-│   ├── report.html                     ← Laporan PDF (standalone, tanpa sidebar)
+│   ├── login.html                      ← Login (dua kolom, hero kiri)
+│   ├── register.html                   ← Daftar akun → redirect ke onboarding
+│   ├── onboarding.html                 ← Wizard 5 langkah untuk user baru [Fase 25]
+│   ├── dashboard.html                  ← Hub utama: streak, XP, challenge, SRS due, planner, game
+│   ├── profile.html                    ← Edit profil, avatar (10 opsi), bio, statistik
+│   ├── change-password.html            ← Ganti password
+│   ├── settings.html                   ← Semua pengaturan app (versi 3.3)
+│   ├── stats.html                      ← Statistik lengkap, heatmap 30 hari, badge, riwayat quiz
+│   ├── report.html                     ← Laporan PDF standalone (tanpa sidebar)
+│   ├── planner.html                    ← Study Planner: target ujian + jadwal otomatis [Fase 26]
+│   ├── games.html                      ← Hub mini game (3 game card) [Fase 27]
+│   │
 │   ├── japanese/
-│   │   ├── hiragana.html               ← Tab: Tabel / Flashcard / SRS
-│   │   ├── katakana.html               ← Tab: Tabel / Flashcard / SRS
+│   │   ├── hiragana.html               ← Tab: Tabel / Flashcard / SRS / Menulis (stroke)
+│   │   ├── katakana.html               ← Tab: Tabel / Flashcard / SRS / Menulis (stroke)
 │   │   ├── kanji.html                  ← Tab: Jelajah / SRS | Filter N5–N1
-│   │   ├── vocabulary.html             ← Tab: Jelajah / SRS | Filter tema & level
-│   │   ├── grammar.html                ← Accordion pola grammar N5–N4
-│   │   ├── dialog.html                 ← Percakapan situasional 8 dialog
-│   │   └── quiz.html                   ← Quiz JP: pilih/ketik, modul pilihan
+│   │   ├── vocabulary.html             ← Tab: Jelajah / SRS / Kalimat Quiz | Filter tema & level
+│   │   ├── grammar.html                ← Accordion 35 pola N5–N4, 5 kategori, search
+│   │   ├── dialog.html                 ← 8 percakapan situasional + playthrough TTS
+│   │   └── quiz.html                   ← Quiz JP: pilih / ketik / listening, modul pilihan
+│   │
 │   ├── mandarin/
-│   │   ├── pinyin.html                 ← Inisial, Final, Kombinasi + audio
-│   │   ├── tones.html                  ← 5 nada + kurva SVG + audio
+│   │   ├── pinyin.html                 ← Tabel inisial/final + audio per kombinasi
+│   │   ├── tones.html                  ← 5 nada + kurva SVG + audio + contoh kata
 │   │   ├── hanzi.html                  ← Tab: Jelajah / SRS | Filter HSK 1–3
-│   │   ├── vocabulary.html             ← Tab: Jelajah / SRS | Filter tema & level
-│   │   ├── dialog.html                 ← Percakapan situasional 7 dialog
-│   │   └── quiz.html                   ← Quiz ZH: pilih/ketik, modul pilihan
-│   └── korean/                         ← [BARU — Fase 21]
-│       ├── hangul.html                 ← Tab: Tabel / Flashcard / SRS (Jamo dasar) ✅
-│       ├── vocabulary.html             ← Tab: Jelajah / SRS | Filter tema & level ✅
-│       ├── grammar.html                ← Accordion pola grammar dasar–menengah ✅
-│       ├── dialog.html                 ← Percakapan situasional 6+ dialog ✅
-│       └── quiz.html                   ← Quiz KR: pilih/ketik, modul pilihan ✅
-│   └── games/                          ← [BARU — Fase 27] Mini Game
-│       ├── memory.html                 ← Memory Match: cocokkan kartu pasangan ✅
-│       ├── scramble.html               ← Word Scramble: susun huruf acak ✅
-│       └── falling-kana.html           ← Falling Kana: ketik romanisasi sebelum jatuh ✅
+│   │   ├── vocabulary.html             ← Tab: Jelajah / SRS / Kalimat Quiz | Filter tema & level
+│   │   ├── dialog.html                 ← 7 percakapan situasional + playthrough TTS
+│   │   └── quiz.html                   ← Quiz ZH: pilih / ketik / listening, modul pilihan
+│   │
+│   ├── korean/
+│   │   ├── hangul.html                 ← Tab: Tabel / Flashcard / SRS (jamo + suku kata)
+│   │   ├── vocabulary.html             ← Tab: Jelajah / SRS / Kalimat Quiz | Filter tema & TOPIK
+│   │   ├── grammar.html                ← Accordion 5 kategori, 27 pola, filter TOPIK I/II
+│   │   ├── dialog.html                 ← 6 dialog TOPIK I + playthrough TTS ko-KR
+│   │   └── quiz.html                   ← Quiz KR: pilih / ketik / listening, modul Hangul & Vocab
+│   │
+│   └── games/
+│       ├── memory.html                 ← Memory Match: kartu pasangan flip 3D [Fase 27]
+│       ├── scramble.html               ← Word Scramble: susun tile huruf acak [Fase 27]
+│       └── falling-kana.html           ← Falling Kana: arcade Canvas API [Fase 27]
 │
-├── assets/
-│   ├── css/
-│   │   ├── main.css                    ← Variabel global, dark mode, toast, XP
-│   │   ├── layout.css                  ← Sidebar, main-content, topbar, responsive
-│   │   ├── components.css              ← Shared: modal, badge, SRS, audio btn, fav
-│   │   ├── auth.css                    ← Login & register (dua kolom)
-│   │   ├── dashboard.css               ← XP bar, challenge, clock, dark mode
-│   │   ├── transitions.css             ← Animasi fade-in halaman
-│   │   ├── japanese.css                ← Hiragana/Katakana/Kanji/Vocab/Grammar JP
-│   │   ├── kanji.css                   ← Grid, modal, badge N5–N1, stroke widget
-│   │   ├── mandarin.css                ← Pinyin, Hanzi, Nada, Vocab ZH
-│   │   ├── korean.css                  ← [BARU — Fase 21] Hangul, Vocab, Grammar KR
-│   │   ├── quiz.css                    ← Quiz engine UI, mode pilih & ketik
-│   │   ├── settings.css                ← Settings page, reminder, dark mode
-│   │   ├── dialog.css                  ← Dialog viewer, playthrough, vocab chip
-│   │   ├── report.css                  ← Laporan PDF, @media print
-│   │   ├── planner.css                 ← Study Planner, exam options, timeline, countdown
-│   │   ├── games.css                   ← [BARU — Fase 27] Memory Match, Scramble, Falling Kana
-│   │   └── themes.css                  ← [BARU — Fase 28] 5 tema warna, font, radius override
-│   │
-│   ├── js/
-│   │   ├── core/
-│   │   │   ├── storage.js              ← Storage wrapper (get/set per user)
-│   │   │   ├── auth.js                 ← Register, login, logout, session, streak
-│   │   │   ├── router.js               ← Guard auth, getBase() path resolver
-│   │   │   └── app.js                  ← Init, sidebar, toast, dark mode toggle
-│   │   │
-│   │   ├── data/
-│   │   │   ├── hiragana.js             ← 104 karakter + metadata
-│   │   │   ├── katakana.js             ← 104 karakter + metadata
-│   │   │   ├── kana-strokes.js         ← [BARU — Fase 23] SVG stroke order 46 hiragana + 46 katakana
-│   │   │   ├── kanji.js                ← 278 kanji (N5–N1) + onyomi/kunyomi/contoh
-│   │   │   ├── jp-vocab.js             ← 225 kata JP, 15 tema
-│   │   │   ├── jp-grammar.js           ← 35 pola grammar N5–N4, 5 kategori
-│   │   │   ├── jp-dialogs.js           ← 8 dialog situasional JP
-│   │   │   ├── pinyin.js               ← 21 inisial + 38 final + kombinasi
-│   │   │   ├── zh-tones.js             ← 5 nada + contoh kata
-│   │   │   ├── hanzi.js                ← 208 karakter HSK 1–3
-│   │   │   ├── zh-vocab.js             ← 120+ kata ZH, 15 tema
-│   │   │   ├── zh-dialogs.js           ← 7 dialog situasional ZH
-│   │   │   ├── hangul.js               ← [BARU — Fase 21] Jamo + suku kata dasar
-│   │   │   ├── kr-vocab.js             ← [BARU — Fase 21] 150+ kata KR, 15 tema
-│   │   │   ├── kr-grammar.js           ← [BARU — Fase 21] 25+ pola grammar dasar
-│   │   │   └── kr-dialogs.js           ← [BARU — Fase 21] 6+ dialog situasional KR
-│   │   │
-│   │   ├── modules/
-│   │   │   ├── audio.js                ← AudioEngine (Web Speech API)
-│   │   │   ├── flashcard.js            ← Flashcard 3D flip engine
-│   │   │   ├── progress.js             ← markLearned, favorites, quiz score
-│   │   │   ├── quiz.js                 ← QuizEngine (multiple choice)
-│   │   │   ├── stroke.js               ← Stroke order widget (SVG, Kanji)
-│   │   │   ├── kana-stroke-ui.js       ← [BARU — Fase 23] KanaStrokeUI (animasi stroke kana)
-│   │   │   ├── srs.js                  ← SRS Engine (SM-2 algorithm)
-│   │   │   ├── srs-ui.js               ← SRS UI renderer (reusable)
-│   │   │   ├── xp.js                   ← XPSystem (level, history, toast)
-│   │   │   ├── challenge.js            ← ChallengeSystem (harian, seed tanggal)
-│   │   │   ├── reminder.js             ← ReminderSystem (notifikasi browser)
-│   │   │   ├── pwa.js                  ← PWA Manager (install, update, offline)
-│   │   │   ├── theme.js                ← [BARU — Fase 28] ThemeSystem (5 tema, font, radius)
-│   │   │   └── backup.js               ← [BARU — Fase 29] BackupSystem (export/import JSON, auto-snapshot)
-│   │   │
-│   │   └── pages/
-│   │       ├── dashboard.js            ← XP, streak, challenge, SRS due, clock
-│   │       ├── stats.js                ← Statistik, heatmap, badge, XP, favorit
-│   │       ├── report.js               ← Generate laporan PDF dari localStorage
-│   │       ├── settings.js             ← Semua toggle & preferensi
-│   │       ├── hiragana.js             ← Grid, flashcard, SRS, favorit, audio
-│   │       ├── katakana.js             ← Grid, flashcard, SRS, favorit, audio
-│   │       ├── kanji.js                ← Grid, modal stroke, SRS, favorit, audio
-│   │       ├── jp-vocab.js             ← Vocab cards, SRS, favorit, audio
-│   │       ├── jp-grammar.js           ← Accordion grammar, filter, tandai hafal
-│   │       ├── jp-dialog.js            ← Dialog grid, viewer, playthrough, TTS
-│   │       ├── quiz-jp.js              ← Quiz JP (pilih + ketik), normalisasi romaji
-│   │       ├── pinyin.js               ← Grid pinyin, modal, audio hover
-│   │       ├── tones.js                ← Kartu nada, SVG, audio
-│   │       ├── hanzi.js                ← Grid hanzi, modal, SRS, favorit, audio
-│   │       ├── zh-vocab.js             ← Vocab cards ZH, SRS, favorit, audio
-│   │       ├── zh-dialog.js            ← Dialog grid ZH, viewer, playthrough, TTS
-│   │       ├── quiz-zh.js              ← Quiz ZH (pilih + ketik), normalisasi pinyin
-│   │       ├── hangul.js               ← [BARU — Fase 21] Grid, flashcard, SRS, audio
-│   │       ├── kr-vocab.js             ← [BARU — Fase 21] Vocab cards KR, SRS, audio
-│   │       ├── kr-grammar.js           ← [BARU — Fase 21] Accordion grammar KR
-│   │       ├── kr-dialog.js            ← [BARU — Fase 21] Dialog viewer KR, TTS
-│   │       └── quiz-kr.js              ← [BARU — Fase 21] Quiz KR (pilih + ketik)
-│   │
-│   └── icons/
-│       ├── icon-192.png                ← Ikon PWA 192×192
-│       └── icon-512.png                ← Ikon PWA 512×512
+└── assets/
+    ├── css/
+    │   ├── main.css                    ← CSS variables global, dark mode, toast, XP bar
+    │   ├── layout.css                  ← Sidebar, main-content, topbar, responsive
+    │   ├── components.css              ← Shared: modal, badge, SRS, audio btn, fav, vocab-builder
+    │   ├── auth.css                    ← Login & register (dua kolom, hero)
+    │   ├── dashboard.css               ← XP bar, challenge, clock, planner section, game quicklink
+    │   ├── transitions.css             ← Animasi fade-in antar halaman
+    │   ├── japanese.css                ← Hiragana/Katakana/Kanji/Vocab/Grammar/Stroke JP
+    │   ├── kanji.css                   ← Kanji grid, modal, badge N5–N1, stroke order widget
+    │   ├── mandarin.css                ← Pinyin, Hanzi, Nada, Vocab ZH
+    │   ├── korean.css                  ← Hangul, Vocab KR, Grammar KR, badge TOPIK I/II
+    │   ├── quiz.css                    ← Quiz engine UI, mode pilih/ketik/listening
+    │   ├── dialog.css                  ← Dialog viewer, playthrough, vocab chip
+    │   ├── settings.css                ← Settings page, reminder, dark mode, tema, backup section
+    │   ├── report.css                  ← Laporan PDF, @media print
+    │   ├── onboarding.css              ← Wizard: card, step dots, progress bar, lang selector
+    │   ├── planner.css                 ← Study Planner: exam grid, timeline, countdown
+    │   ├── games.css                   ← Mini Game: memory-grid, flip 3D, scramble-tile, canvas
+    │   └── themes.css                  ← 5 tema warna, font & radius override [Fase 28]
+    │
+    ├── icons/
+    │   └── [ikon PWA berbagai ukuran]
+    │
+    └── js/
+        ├── core/
+        │   ├── storage.js              ← Storage wrapper: get/set/del per user namespace
+        │   ├── auth.js                 ← Register, login, logout, session, streak harian
+        │   ├── router.js               ← Guard auth, getBase() path resolver
+        │   └── app.js                  ← Init app, sidebar, toast, dark mode, theme
+        │
+        ├── data/
+        │   ├── hiragana.js             ← 104 karakter hiragana + metadata (row/col, romaji)
+        │   ├── katakana.js             ← 104 karakter katakana + metadata
+        │   ├── kana-strokes.js         ← SVG path stroke order 46 hiragana + 46 katakana dasar
+        │   ├── kanji.js                ← 278 kanji (N5–N1): onyomi/kunyomi/contoh/radikal/stroke count
+        │   ├── jp-vocab.js             ← 225 kata JP, 15 tema, field `sentences` di kata kunci
+        │   ├── jp-grammar.js           ← 35 pola grammar N5–N4, 5 kategori
+        │   ├── jp-dialogs.js           ← 8 dialog situasional JP
+        │   ├── pinyin.js               ← 21 inisial + 38 final + kombinasi tabel
+        │   ├── zh-tones.js             ← 5 nada + kurva SVG path + contoh kata
+        │   ├── hanzi.js                ← 208 karakter HSK 1–3
+        │   ├── zh-vocab.js             ← 120+ kata ZH, 15 tema, field `sentences` di kata kunci
+        │   ├── zh-dialogs.js           ← 7 dialog situasional ZH
+        │   ├── hangul.js               ← 14 konsonan + 21 vokal + 70 suku kata dasar
+        │   ├── kr-vocab.js             ← 155 kata KR, 15 tema, TOPIK I/II, field `sentences`
+        │   ├── kr-grammar.js           ← 27 pola grammar, 5 kategori, level TOPIK I/II
+        │   └── kr-dialogs.js           ← 6 dialog situasional TOPIK I
+        │
+        ├── modules/
+        │   ├── audio.js                ← AudioEngine: Web Speech API (JP/ZH/KR voice)
+        │   ├── flashcard.js            ← Flashcard engine: 3D flip CSS, navigasi prev/next
+        │   ├── progress.js             ← markLearned, getLearned, favorites, quiz score
+        │   ├── quiz.js                 ← QuizEngine: multiple choice, shuffle, BadgeSystem
+        │   ├── stroke.js               ← Stroke order widget Kanji (SVG animasi)
+        │   ├── kana-stroke-ui.js       ← KanaStrokeUI: animasi stroke Hiragana/Katakana SVG
+        │   ├── srs.js                  ← SRS Engine: SM-2 algorithm (quality 0–5)
+        │   ├── srs-ui.js               ← SRS UI renderer: card flip, rating buttons (reusable)
+        │   ├── xp.js                   ← XPSystem: addXP, level calc, history, toast XP
+        │   ├── challenge.js            ← ChallengeSystem: challenge harian, seed tanggal
+        │   ├── reminder.js             ← ReminderSystem: browser notification, jadwal kustom
+        │   ├── pwa.js                  ← PWA Manager: install prompt, update SW, offline banner
+        │   ├── vocab-builder.js        ← VocabBuilder: kalimat kontekstual, quiz fill-in-blank
+        │   ├── planner.js              ← StudyPlanner engine: calcSchedule, calcTodayTodo
+        │   ├── theme.js                ← ThemeSystem: 5 tema, font, radius, anti-FOUC helper
+        │   └── backup.js               ← BackupSystem: export JSON, import, auto-snapshot
+        │
+        └── pages/
+            ├── dashboard.js            ← XP bar, streak, challenge, SRS due, planner today, clock
+            ├── stats.js                ← Statistik, heatmap 30 hari, badge, XP history, favorit
+            ├── report.js               ← Generate laporan PDF dari localStorage
+            ├── settings.js             ← Semua toggle, preferensi, tema picker, backup UI
+            ├── onboarding.js           ← Wizard 5 langkah, bank soal placement 30 soal
+            ├── planner.js              ← Halaman planner: setup, active view, catch-up
+            ├── hiragana.js             ← Grid, flashcard, SRS, favorit, audio, stroke tab (lazy-init)
+            ├── katakana.js             ← Grid, flashcard, SRS, favorit, audio, stroke tab (lazy-init)
+            ├── kanji.js                ← Grid, modal detail, SRS, favorit, audio, stroke order
+            ├── jp-vocab.js             ← Grid kartu, SRS, favorit, sentences, kalimat quiz
+            ├── jp-grammar.js           ← Accordion, mark hafal, search, filter level
+            ├── jp-dialog.js            ← Grid dialog, viewer step, playthrough TTS, XP
+            ├── quiz-jp.js              ← QuizEngine JP: kana/kanji/vocab, listening mode
+            ├── hanzi.js                ← Grid, modal, SRS, favorit, audio
+            ├── pinyin.js               ← Tabel inisial/final, audio per sel
+            ├── tones.js                ← 5 nada, kurva SVG, audio, contoh kata
+            ├── zh-vocab.js             ← Grid kartu, SRS, favorit, sentences, kalimat quiz
+            ├── zh-dialog.js            ← Grid dialog, viewer step, playthrough TTS, XP
+            ├── quiz-zh.js              ← QuizEngine ZH: pinyin/hanzi/vocab, listening mode
+            ├── hangul.js               ← Grid jamo, modal, flashcard, SRS, favorit, audio
+            ├── kr-vocab.js             ← Grid kartu, SRS, favorit, sentences, kalimat quiz
+            ├── kr-grammar.js           ← Accordion, mark hafal, search, filter TOPIK
+            ├── kr-dialog.js            ← Grid dialog, viewer step, playthrough TTS ko-KR, XP
+            ├── quiz-kr.js              ← QuizEngine KR: hangul/vocab, listening mode
+            ├── game-memory.js          ← Memory Match: flip 3D CSS, timer, skor, XP
+            ├── game-scramble.js        ← Word Scramble: tile klik susun/ambil, 3 bahasa, XP
+            └── game-falling.js         ← Falling Kana: Canvas requestAnimationFrame, arcade, nyawa
 ```
 
 ---
 
 ## 5. Arsitektur & Pola Kode
 
-### Prinsip Utama
+### Stack Teknologi
 
-- **Offline-first, pure localStorage** — tidak ada API call, tidak ada database eksternal
-- **Multi-user** — setiap user punya namespace `nh_user_{id}_*` di localStorage
-- **Modular** — setiap fitur di module terpisah, halaman hanya pakai modul yang diperlukan
-- **Vanilla JS** — tidak ada framework; hanya HTML, CSS, dan JavaScript murni
+**100% Vanilla** — HTML5 + CSS3 + JavaScript ES6+. Tidak ada framework, tidak ada build tool, tidak ada npm. Buka `index.html` langsung berjalan.
 
 ### Pola Inisialisasi Halaman
 
 Setiap halaman authenticated mengikuti pola ini:
 
-```javascript
-// Di atas setiap script halaman:
-Router.guard();                          // Redirect ke login jika belum auth
-const user = Auth.getActiveUser();       // Ambil user aktif
-App.init('nama-halaman');                // Init sidebar, toast, dark mode, topbar
-
-// Lalu load data dan render:
-const data = Progress.getLearned('modul-id');
-renderGrid(data);
+```html
+<!-- Di <head>: Anti-FOUC dark mode + tema lengkap -->
+<script>
+  (function() {
+    const dm = localStorage.getItem('nh_dark_mode');
+    if (dm === 'true') document.documentElement.setAttribute('data-theme', 'dark');
+    const ct = localStorage.getItem('nh_color_theme');
+    if (ct) document.documentElement.setAttribute('data-color-theme', ct);
+    const fn = localStorage.getItem('nh_font');
+    if (fn) document.documentElement.setAttribute('data-font', fn);
+    const rd = localStorage.getItem('nh_radius');
+    if (rd) document.documentElement.setAttribute('data-radius', rd);
+  })();
+</script>
 ```
 
-### Pola Path Resolution
-
-`router.js` dan `auth.js` menggunakan `getBase()` untuk menghitung path relatif secara dinamis agar berfungsi di semua level kedalaman folder (lokal maupun GitHub Pages subdirectory):
-
 ```javascript
-function getBase() {
-  const parts = window.location.pathname.split('/');
-  const pagesIdx = parts.indexOf('pages');
-  if (pagesIdx === -1) return '';
-  const afterPages = parts.slice(pagesIdx + 1).filter(p => p && !p.includes('.'));
-  const depth = 1 + afterPages.length;
-  return '../'.repeat(depth);
-}
+// Di script halaman
+Router.guard();          // Redirect ke login jika tidak authenticated
+App.init('page-id');    // Init sidebar, toast, dark mode toggle, theme toggle
 ```
 
-> **Penting:** Semua halaman di bawah `pages/korean/` akan berada di kedalaman 2 (sama seperti `pages/japanese/` dan `pages/mandarin/`). `getBase()` sudah menangani ini secara otomatis.
+### Module Pattern
 
-### Pola Storage
-
-```javascript
-// Baca data user
-const progress = Storage.getUser(userId, 'progress', {});
-const settings = Storage.getUser(userId, 'settings', { showRomaji: true });
-
-// Simpan data user
-Storage.setUser(userId, 'progress', updatedProgress);
-
-// Tandai item dipelajari (otomatis update stats, XP, challenge)
-Progress.markLearned('hangul', 'ㄱ');
-
-// Favorit
-Progress.toggleFavorite('kr-vocab', '안녕하세요');
-const isFav = Progress.isFavorite('kr-vocab', '안녕하세요');
-
-// SRS
-SRS.rate(userId, 'hangul', 'ㄱ', 2);  // rating: 0=lupa, 1=sulit, 2=mudah, 3=hafal
-const due = SRS.getDueIds(userId, 'hangul');
-
-// XP
-XPSystem.addXP(userId, 'learn_item', 5, 'Hafal ㄱ');
-const lvl = XPSystem.getLevelInfo(userId);
-```
-
-### Pola Toast Notifikasi
+Semua module JS menggunakan IIFE atau object literal untuk namespace:
 
 ```javascript
-App.toast('Berhasil disimpan!', 'success');  // hijau
-App.toast('Ada kesalahan', 'error');          // merah
-App.toastXP('+5 XP', 'Hafal karakter baru'); // ungu (XP)
-// Level up otomatis di-handle oleh XPSystem.addXP()
-```
-
-### Pola Modul Quiz
-
-Quiz engine (`quiz.js`) menerima config dan callbacks:
-
-```javascript
-QuizEngine.start({
-  items: filteredItems,
-  mode: 'choice' | 'input',
-  timer: 20,
-  onAnswer: (item, isCorrect) => { /* update progress */ },
-  onComplete: (score, total) => { /* simpan skor */ }
-});
-```
-
-### Pola Penambahan Bahasa Baru
-
-Saat menambahkan bahasa baru (seperti Korea), ikuti pola yang sudah ada:
-
-```javascript
-// 1. Data file: assets/js/data/kr-vocab.js
-const KrVocabData = (() => {
-  const themes = [ /* sama dengan JpVocabData */ ];
-  const vocab = [
-    {
-      word: '안녕하세요',
-      romanization: 'annyeonghaseyo',  // romanisasi RR (Revised Romanization)
-      meaning: 'halo (formal)',
-      theme: 'greetings',
-      level: 'TOPIK1',
-      example: { kr: '선생님, 안녕하세요.', roman: 'Seonsaengnim, annyeonghaseyo.', id: 'Halo, Pak/Bu Guru.' }
-    }
-  ];
-  return { getAll: () => vocab, getThemes: () => themes };
+const ModuleName = (function() {
+  // private state
+  return {
+    init() {},
+    publicMethod() {}
+  };
 })();
+```
 
-// 2. Module ID baru:
-// 'hangul', 'kr-vocab', 'kr-grammar', 'kr-dialog'
-// Tambahkan ke Progress.validModules jika ada validasi
+### Storage Pattern
 
-// 3. Audio — AudioEngine sudah support 'ko-KR':
-AudioEngine.speak('안녕하세요', 'ko-KR');
+**WAJIB** menggunakan wrapper — **JANGAN** akses `localStorage` langsung:
+
+```javascript
+// ✅ Benar
+const userData = Storage.getUser(userId, 'progress');
+Storage.setUser(userId, 'progress', newData);
+
+// ❌ Salah — jangan lakukan ini
+const raw = localStorage.getItem('nh_user_123_progress');
+```
+
+### Sistem XP & Progress
+
+```javascript
+// Tambah XP
+XPSystem.addXP(userId, amount, 'source-label');
+
+// Mark item hafal
+Progress.markLearned(userId, moduleId, itemId);
+const learned = Progress.getLearned(userId, moduleId);
+
+// Challenge System
+ChallengeSystem.onLearnItem(userId, moduleId);
+ChallengeSystem.onModuleVisit(userId, moduleId);
 ```
 
 ---
 
 ## 6. localStorage Key Reference
 
-```
-nh_users                          → semua akun user terdaftar (array)
-nh_session                        → session aktif { userId, loginAt }
-nh_last_theme                     → 'light' | 'dark' (global, sebelum login)
-```
+### Keys Global (tidak per-user)
 
-> **Catatan prefix `nh_`:** Prefix localStorage tetap menggunakan `nh_` (dari NihonHan) untuk menjaga kompatibilitas data user yang sudah ada. Tidak perlu diganti ke `lingora_` karena akan menghapus semua progress user lama.
+| Key | Nilai | Keterangan |
+|-----|-------|------------|
+| `nh_dark_mode` | `'true'` / `'false'` | Dark mode status |
+| `nh_color_theme` | `'sakura'` / `'zen'` / `'neon-seoul'` / `'bamboo'` / `'midnight'` | Tema warna aktif |
+| `nh_font` | `'default'` / `'rounded'` / `'serif'` / `'mono'` | Font aktif |
+| `nh_radius` | `'sharp'` / `'default'` / `'rounded'` | Sudut UI aktif |
+| `nh_current_user` | userId string | User yang sedang login |
+| `nh_users` | JSON array | Daftar semua user terdaftar |
 
-```
-nh_user_{id}_settings             → { showRomaji, showPinyin, showRomanization,
-                                      animationEnabled, timerEnabled, audioAutoPlay,
-                                      theme, reminder: { enabled, hour, minute } }
-nh_user_{id}_progress             → { [moduleId]: { learned: [], quiz_scores: [] } }
-nh_user_{id}_streak               → { count, best, lastDate }
-nh_user_{id}_stats                → { totalLearned, quizCompleted,
-                                      totalCorrect, totalQuestions }
-nh_user_{id}_badges               → { [badgeId]: { earnedAt } }
-nh_user_{id}_activity             → { "YYYY-MM-DD": jumlah_sesi }
-nh_user_{id}_xp                   → { total, history: [{action, amount, label,
-                                      date, totalAfter}] }
-nh_user_{id}_srs_{moduleId}       → { [itemId]: { interval, repetitions,
-                                      easeFactor, nextReview, lastRating,
-                                      lastReview } }
-nh_user_{id}_favorites            → { [moduleId]: [itemId, ...] }
-nh_user_{id}_challenges           → { byDate: { "YYYY-MM-DD": [challenge...] },
-                                      history: [{id, title, icon, xp, date}] }
-nh_user_{id}_reminder             → { enabled: bool, hour: int, minute: int }
-```
+### Keys Per-User (`nh_user_{id}_...`)
 
-> **Catatan Fase 21:** Key `nh_user_{id}_settings` akan ditambah field `showRomanization` (boolean) untuk mengontrol tampilan romanisasi Hangul (Revised Romanization), konsisten dengan `showRomaji` dan `showPinyin` yang sudah ada.
+| Key Suffix | Tipe | Keterangan |
+|------------|------|------------|
+| `profile` | Object | `{name, username, email, avatar, bio, createdAt}` |
+| `progress` | Object | Progress belajar semua modul (learned items) |
+| `favorites` | Object | Bookmark per modul |
+| `quiz_scores` | Array | Riwayat skor quiz |
+| `xp` | Number | Total XP |
+| `xp_history` | Array | Riwayat XP `{amount, source, date}` |
+| `level` | Number | Level user saat ini |
+| `streak` | Number | Streak hari berturut-turut |
+| `last_active` | ISO date string | Tanggal terakhir aktif |
+| `activity_log` | Array | Log aktivitas `{date, modules[]}` |
+| `badges` | Array | Badge yang diraih |
+| `challenge` | Object | Challenge harian `{date, tasks[], completed}` |
+| `srs_{moduleId}` | Object | Data SRS per modul (SM-2) |
+| `settings` | Object | Semua preferensi app |
+| `onboarding` | Object | `{completed, focusLang, level, dailyGoal}` |
+| `planner` | Object | `{examId, targetDate, startDate, createdAt}` |
+| `customization` | Object | `{colorTheme, font, radius, compactSidebar}` |
+| `last_backup` | Object | `{timestamp, date}` info backup terakhir |
+| `last_restore` | Object | `{timestamp, fromDate, fromUser}` |
 
-**Module ID yang valid untuk progress, SRS, dan favorites:**
+### Keys Auto-Backup
 
-| Module ID | Halaman |
-|-----------|---------|
-| `hiragana` | pages/japanese/hiragana.html |
-| `katakana` | pages/japanese/katakana.html |
-| `kanji` | pages/japanese/kanji.html |
-| `jp-vocab` | pages/japanese/vocabulary.html |
-| `jp-grammar` | pages/japanese/grammar.html |
-| `jp-dialog` | pages/japanese/dialog.html |
-| `hanzi` | pages/mandarin/hanzi.html |
-| `zh-vocab` | pages/mandarin/vocabulary.html |
-| `zh-dialog` | pages/mandarin/dialog.html |
-| `hangul` | pages/korean/hangul.html *(baru — Fase 21)* |
-| `kr-vocab` | pages/korean/vocabulary.html *(baru — Fase 21)* |
-| `kr-grammar` | pages/korean/grammar.html *(baru — Fase 21)* |
-| `kr-dialog` | pages/korean/dialog.html *(baru — Fase 21)* |
+| Key | Tipe | Keterangan |
+|-----|------|------------|
+| `auto_backups_{userId}` | Array | Max 3 snapshot: `[{timestamp, data: BackupObj}]` |
+
+### Module IDs (untuk Progress & SRS)
+
+| Module ID | Bahasa | Konten |
+|-----------|--------|--------|
+| `hiragana` | JP | 104 karakter hiragana |
+| `katakana` | JP | 104 karakter katakana |
+| `kanji` | JP | 278 kanji N5–N1 |
+| `jp-vocab` | JP | 225 kosakata Jepang |
+| `jp-grammar` | JP | 35 pola grammar |
+| `pinyin` | ZH | 59 unit pinyin |
+| `hanzi` | ZH | 208 karakter HSK 1–3 |
+| `zh-vocab` | ZH | 120+ kosakata Mandarin |
+| `hangul` | KR | 35 jamo + suku kata |
+| `kr-vocab` | KR | 155 kosakata Korea |
+| `kr-grammar` | KR | 27 pola grammar |
 
 ---
 
 ## 7. Ringkasan Konten
 
-### Kondisi Saat Ini (Fase 20.4)
+### 🇯🇵 Bahasa Jepang
 
-| Modul | Jumlah | Level / Cakupan |
-|-------|--------|-----------------|
-| Hiragana | 104 karakter | Dasar + dakuten + kombinasi |
-| Katakana | 104 karakter | Dasar + dakuten + kombinasi |
-| Kanji | 278 karakter | N5 (105) / N4 (30) / N3 (20) / N2 (93) / N1 (30) |
-| Kosakata JP | 225 kata | N5/N4, 15 tema |
-| Grammar JP | 35 pola | N5/N4, 5 kategori |
-| Dialog JP | 8 dialog | N5–N4, 8 situasi |
-| Pinyin | 59 elemen | 21 inisial + 38 final + kombinasi |
-| Nada Mandarin | 5 nada | + kurva SVG + contoh kata |
-| Hanzi | 208 karakter | HSK 1 / HSK 2 / HSK 3 |
-| Kosakata ZH | 120+ kata | HSK 1–3, 15 tema |
-| Dialog ZH | 7 dialog | HSK 1–3, 7 situasi |
-| **Total** | **~1.200+ item** | |
+| Modul | Jumlah | Detail |
+|-------|--------|--------|
+| Hiragana | 104 karakter | Gojūon + dakuten + kombinasi; animasi stroke 46 dasar |
+| Katakana | 104 karakter | Gojūon + dakuten + kombinasi; animasi stroke 46 dasar |
+| Kanji | 278 karakter | N5 (103) + N4 (55) + N3 (70) + N2 (30) + N1 (20); onyomi/kunyomi/contoh |
+| Kosakata | 225 kata | 15 tema; 2–3 kalimat kontekstual per kata kunci |
+| Grammar | 35 pola | N5 + N4; 5 kategori: Dasar, Tenses, Partikel, Negatif, Pertanyaan |
+| Dialog | 8 percakapan | Salam, Toko, Restoran, Arah, Hotel, Rumah Sakit, dll |
 
-### Target Setelah Fase 21 (dengan Korea)
+### 🇨🇳 Bahasa Mandarin
 
-| Modul Baru | Target Jumlah | Level / Cakupan |
-|------------|---------------|-----------------|
-| Hangul | 40 Jamo + 140 suku kata | Konsonan dasar + vokal + konsonan akhir (받침) |
-| Kosakata KR | 150+ kata | TOPIK I, 15 tema |
-| Grammar KR | 25+ pola | Pola dasar–menengah (copula, partikel, honorifik) |
-| Dialog KR | 6+ dialog | TOPIK I, 6 situasi |
-| **Tambahan** | **~360+ item** | |
+| Modul | Jumlah | Detail |
+|-------|--------|--------|
+| Pinyin | 59 unit | 21 inisial + 38 final + tabel kombinasi + audio |
+| Nada | 5 nada | Kurva SVG + contoh kata + audio tiap nada |
+| Hanzi | 208 karakter | HSK 1 (150) + HSK 2 (38) + HSK 3 (20) |
+| Kosakata | 120+ kata | 15 tema; kalimat kontekstual per kata kunci |
+| Dialog | 7 percakapan | Perkenalan, Belanja, Makan, Transportasi, dll |
 
-**12 Badge Saat Ini + Rencana Badge Korea:**
+### 🇰🇷 Bahasa Korea
 
-| Badge | Kondisi |
-|-------|---------|
-| 🌸 Pemula | Daftar pertama kali |
-| 📚 Rajin | Hafal 10 item |
-| 🔥 Streaker | Streak 3 hari |
-| ⚡ Kilat | Selesaikan quiz pertama |
-| 🎯 Tepat | Akurasi quiz ≥90% |
-| 🏆 Juara | Akurasi quiz 100% |
-| 💎 Berlian | Streak 7 hari |
-| 🌟 Bintang | Hafal 50 item |
-| 🦅 Elang | Hafal 100 item |
-| 👑 Raja | Level 5 (Mahir) |
-| 🎌 Samurai | Selesaikan semua modul JP |
-| 🐉 Naga | Selesaikan semua modul ZH |
-| 🌙 Haŋŭl | *(Baru — Fase 21)* Selesaikan semua modul KR |
-| 🌏 Poliglot | *(Baru — Fase 21)* Selesaikan modul dari 3 bahasa |
+| Modul | Jumlah | Detail |
+|-------|--------|--------|
+| Hangul | 35+ unit | 14 konsonan + 21 vokal + 70 suku kata dasar |
+| Kosakata | 155 kata | 15 tema; TOPIK I + TOPIK II; kalimat kontekstual |
+| Grammar | 27 pola | 5 kategori; level TOPIK I + TOPIK II |
+| Dialog | 6 percakapan | Situasional TOPIK I: Salam, Perkenalan, Belanja, dll |
 
-**7 Level XP:**
+### 🎮 Mini Game
 
-| Level | Nama JP | Nama ID | XP Butuh | Warna |
-|-------|---------|---------|----------|-------|
-| 1 | 入門 | Pemula | 0 | Abu |
-| 2 | 初級 | Dasar | 100 | Hijau |
-| 3 | 中級 | Menengah | 300 | Biru |
-| 4 | 上級 | Lanjutan | 700 | Ungu |
-| 5 | 達人 | Mahir | 1.500 | Oranye |
-| 6 | 師範 | Ahli | 3.000 | Merah |
-| 7 | 名人 | Master | 6.000 | Emas |
+| Game | Konten | XP per sesi |
+|------|--------|-------------|
+| Memory Match | Hiragana/Katakana/Hangul/Kanji N5; 8–18 pasang kartu | +20 + skor/20 |
+| Word Scramble | JP/ZH/KR; 5–15 soal; tile klik susun | +3 per kata benar |
+| Falling Kana | Hiragana/Katakana/Hangul; arcade Canvas; leveling adaptif | +1 per karakter + bonus |
+
+### 🏆 Badge System
+
+| Badge | ID | Cara Dapat |
+|-------|----|-----------|
+| 🌸 Kana Master | `kana_master` | Hafal semua hiragana + katakana |
+| ⛩️ Kanji Novice | `kanji_novice` | Hafal 50 kanji |
+| 📚 Kanji Scholar | `kanji_scholar` | Hafal 150 kanji |
+| 🎌 Nihongo | `nihongo` | Hafal 100+ item JP |
+| 🌙 Hanŭl | `hangul_master` | Hafal item dari semua modul KR |
+| 🌏 Poliglot | `polyglot` | Hafal item dari JP + ZH + KR |
+| 🔥 Streak 7 | `streak_7` | Streak 7 hari berturut-turut |
+| ⚡ Streak 30 | `streak_30` | Streak 30 hari berturut-turut |
+| 🎯 Quiz Perfect | `quiz_perfect` | Skor sempurna di 1 quiz |
+| 📖 Vocab Master | `vocab_master` | Hafal 100 kosakata |
 
 ---
 
-## 8. Riwayat Fase (1–21.1)
+## 8. Riwayat Fase (1–29)
 
 ### FASE 1 — Fondasi & Autentikasi ✅
-Register, login, logout, session aktif, streak harian, dashboard awal, profil, ganti password, sidebar navigasi, toast notifikasi, layout responsif.
+
+Fondasi teknis proyek: struktur folder, autentikasi multi-user, routing, localStorage wrapper, komponen UI dasar.
+
+**File yang dibuat:**
+- `assets/js/core/storage.js` — namespace per-user di localStorage (`nh_user_{id}_*`)
+- `assets/js/core/auth.js` — register, login, logout, session management, streak
+- `assets/js/core/router.js` — guard autentikasi, `getBase()` path resolver
+- `assets/js/core/app.js` — init sidebar, toast notification, dark mode toggle
+- `index.html` — landing page + redirect otomatis
+- `pages/login.html`, `pages/register.html` — form autentikasi
+
+---
 
 ### FASE 2 — Transisi & 404 ✅
-Halaman `404.html`, `transitions.css` dengan animasi fade-in antar halaman.
+
+Transisi halaman (fade-in CSS), halaman 404 custom, perbaikan redirect flow.
+
+**File:**
+- `assets/css/transitions.css` — animasi fade-in antar halaman
+- `404.html` — halaman not found dengan link kembali ke dashboard
+
+---
 
 ### FASE 3 — Hiragana & Katakana ✅
-104 hiragana + 104 katakana. Tiga tab: Tabel (grid dengan filter row), Flashcard (3D flip), Quiz Mini. Filter romaji on/off.
 
-### FASE 4 — Kanji ✅
-153 kanji awal (N5/N4/N3). Filter JLPT. Search real-time. Stroke order widget (SVG animasi). Modal detail (onyomi, kunyomi, contoh kata).
+Dua modul kana lengkap dengan tiga mode belajar.
 
-### FASE 5 — Mandarin ✅
-Pinyin (21 inisial + 38 final + kombinasi), Nada (5 tone + kurva SVG), Hanzi (HSK 1–3 = 208 karakter), Kosakata ZH (120+ kata, 15 tema).
+**Fitur per modul:**
+- **Tab Tabel** — grid 10×10 per baris, hover detail, klik untuk audio
+- **Tab Flashcard** — engine 3D flip CSS, navigasi prev/next, shuffle
+- **Tab SRS** — SM-2 algorithm, rating 1–5, interval adaptif
+- Favorit, audio Web Speech API `ja-JP`
+
+---
+
+### FASE 4 — Kanji N5–N1 ✅
+
+278 kanji dari lima level JLPT dengan data lengkap.
+
+**Data per kanji:** karakter, makna, onyomi, kunyomi, contoh kata, radikal, jumlah stroke, level (N5/N4/N3/N2/N1)
+
+**Fitur:** grid filter N5–N1, modal detail, SRS, stroke order widget (SVG animasi), favorit, audio
+
+---
+
+### FASE 5 — Bahasa Mandarin ✅
+
+Empat modul Mandarin: Pinyin, Nada, Hanzi, Kosakata.
+
+**Fitur:**
+- `pinyin.html` — tabel inisial + final + audio per kombinasi
+- `tones.html` — 5 nada + kurva SVG + audio contoh
+- `hanzi.html` — 208 karakter HSK 1–3, grid + SRS
+- `vocabulary.html` ZH — 120+ kata, 15 tema
+
+---
 
 ### FASE 6 — Quiz & Gamifikasi Awal ✅
-QuizEngine (multiple choice, timer, feedback), BadgeSystem (12 badge), halaman Quiz JP dan Quiz ZH fungsional penuh.
+
+Sistem quiz multi-modul dan fondasi gamifikasi (BadgeSystem dasar).
+
+**Fitur:** pilihan ganda 4 opsi, acak soal, timer, review jawaban, modul: Hiragana/Katakana/Kanji/Vocab JP & ZH
+
+---
 
 ### FASE 7 — Polish & Pengaturan ✅
-Bug fix dashboard chart. Halaman Settings (toggle romaji/pinyin/animasi/timer, reset progress). Halaman Statistik (progress bar modul, riwayat quiz, badge grid, heatmap 28 hari). Sidebar update semua halaman.
 
-### FASE 8 — Konten Lengkap & Finalisasi ✅
-- `jp-vocab.js` — 225 kata JP, 15 tema
-- `jp-grammar.js` — 35 pola grammar N5–N4 dalam 5 kategori
-- Halaman `vocabulary.html` dan `grammar.html` JP fungsional
-- Integrasi setting `showRomaji`/`showPinyin`
+Halaman pengaturan, profil user, stats awal.
 
-### FASE 8.1 — Redesign Login & Register ✅
-Layout dua kolom (panel dekoratif + form). Live validation. Password strength indicator. Success state button. Mobile responsive.
+**File:** `settings.html` + `settings.js`, `profile.html` (avatar 10 opsi, bio), `stats.html`
 
-### FASE 8.2 — Bug Fix Quiz JP ✅
-Fix bug kritis: `bindQuizControls()` tidak terdefinisi → Quiz JP sama sekali tidak bisa digunakan. Fix closure di `retryBtn`.
+---
 
-### FASE 8.3 — Kanji N2 & N1 ✅
-Tambah ~96 kanji N2 dan 30 kanji N1. Total kanji: 278. Badge level N2 (hijau) dan N1 (ungu) di halaman Kanji.
+### FASE 8 — Konten Lengkap JP + Sub-fase ✅
 
-### FASE 8.3.1 — Hapus Duplikat Kanji ✅
-Hapus 4 duplikat: `聞`, `況`, `的`, `悲`. Koreksi penghitungan N5 = 105 (bukan 103).
+**8** — Vocab JP 225 kata (15 tema), Grammar JP 35 pola (5 kategori, N5–N4)  
+**8.1** — Redesign login/register (dua kolom, hero image kiri)  
+**8.2** — Bug fix quiz JP (opsi duplikat, timer tidak reset antar soal)  
+**8.3** — Kanji N2 + N1 (total 278), hapus duplikat kanji  
+**8.4** — Enhance profil: bio, detail stats, edit inline
 
-### FASE 8.4 — Enhance Profil ✅
-Profile hero bergradient dengan achievement badges dinamis, stats strip 4 kolom, layout dua kolom, avatar grid dengan hover animasi.
+---
 
 ### FASE 9 — Audio & Pelafalan ✅
-`AudioEngine` (`modules/audio.js`) via Web Speech API. Tombol 🔊 di modal (hiragana, katakana, kanji), kartu vocab (JP & ZH), nada Mandarin. Auto-play on open. Settings toggle audio. Fallback graceful jika browser tidak support.
 
-### FASE 9.2 — Pelengkap Audio Mandarin ✅
-Tombol 🔊 hover di grid cell Pinyin dan Hanzi. Modal Pinyin + contoh kata audio. Cakupan audio kini lengkap di semua 8 modul.
+Web Speech API terintegrasi di semua modul yang relevan.
 
-### FASE 10 — Dark Mode ✅
-CSS custom properties `[data-theme="dark"]`. Toggle di topbar (🌙/☀️) dan Settings. Default ikut `prefers-color-scheme` OS. Anti-FOUC: tema diapply sebelum body render via inline script di `<head>`. Disimpan per-user di settings.
+**`audio.js` — AudioEngine:**
+- `speakJP(text)` — voice `ja-JP`
+- `speakZH(text)` — voice `zh-CN`
+- `speakKR(text)` — voice `ko-KR` (ditambah Fase 21.3)
+- `getVoices()`, `hasJPVoice()`, `hasZHVoice()`, `hasKRVoice()`
+- Fallback graceful jika suara tidak tersedia di OS/browser
 
-### FASE 11 — Spaced Repetition System (SRS) ✅
-Algoritma SM-2. Modul: `srs.js` (engine) + `srs-ui.js` (UI renderer reusable). Tab SRS di Hiragana, Katakana, Kanji, Vocab JP, Hanzi, Vocab ZH. Rating 4 tingkat (Lupa/Sulit/Mudah/Hafal). Preview interval di tombol. Queue: due → baru (max 20/sesi). Dashboard section "🔁 Kartu SRS Hari Ini".
+**9.2** — Pelengkap audio Mandarin: tones + dialog ZH
+
+---
+
+### FASE 10 — Dark Mode + Anti-FOUC ✅
+
+Dark mode lengkap dengan anti-flash-of-unstyled-content.
+
+**Implementasi:**
+- CSS variables `[data-theme="dark"]` di `main.css` — semua elemen mengikuti
+- Inline script `<head>` di semua halaman — apply sebelum render (cegah flash)
+- Toggle tombol 🌙/☀️ di topbar setiap halaman
+- Persistensi di `localStorage` → `nh_dark_mode`
+
+---
+
+### FASE 11 — Spaced Repetition System (SM-2) ✅
+
+Algoritma hafalan cerdas terintegrasi ke semua modul.
+
+**`srs.js` — SRS Engine:**
+- Algoritma SM-2: kualitas 0–5 → hitung interval + EF (easiness factor)
+- `getReviewItems(userId, moduleId, data)` — ambil item jatuh tempo
+- `updateCard(userId, moduleId, itemId, quality)` — update setelah review
+- `getStats(userId, moduleId)` — statistik SRS (due, new, learned)
+
+**`srs-ui.js` — SRS UI (reusable):**
+- Kartu flip 3D (front: pertanyaan / back: jawaban)
+- Rating buttons: Lagi / Susah / Oke / Mudah
+- Progress session, counter item
+
+---
 
 ### FASE 12 — Favorit & Bookmark ✅
-Tombol ★ hover di setiap sel/kartu. Toggle favorit di modal header. Filter "★ Favorit" per halaman. Flashcard mode favorit (Hiragana & Katakana). Section favorit di halaman Statistik.
 
-### FASE 13 — Mode Input Jawaban (Quiz) ✅
-Toggle "🔘 Pilih / ⌨️ Ketik" sebelum mulai quiz. Input field dengan fokus otomatis. Submit via tombol atau Enter. Tombol "Lewati". Normalisasi romaji (ā→a) dan pinyin (ā→a). Alternatif jawaban didukung. Timer diperpanjang 30 detik di mode ketik. Berlaku untuk Quiz JP dan Quiz ZH.
+Sistem bookmark untuk semua item di semua modul.
 
-### FASE 14 — Gamifikasi Lanjutan: XP & Level ✅
-`xp.js`: `addXP()`, `getLevelInfo()`, `getAllLevels()`. XP bar bergradient di dashboard. Level progression dots (7 level). Toast `+X XP` (ungu). Toast Level Naik. Sidebar menampilkan level saat ini. XP per aktivitas: hafal item (+5), selesai quiz (+10), akurasi 100% (+25), streak (+15), badge baru (+30), SRS session (+8), modul pertama kali (+20).
+- Tombol ❤️ per item (karakter, kata, kanji)
+- Filter "Tampilkan Favorit" di grid
+- Data: `nh_user_{id}_favorites` (object per moduleId)
+- Statistik favorit di halaman Stats
+
+---
+
+### FASE 13 — Mode Quiz Ketik Jawaban ✅
+
+Mode quiz kedua: user mengetik jawaban (bukan memilih).
+
+**Fitur:**
+- Toggle mode di selector: Pilihan Ganda ↔ Ketik Jawaban
+- Normalisasi input (huruf kecil, strip spasi ekstra)
+- Romanisasi diterima selain karakter asli (JP/KR)
+- Feedback langsung setelah submit
+
+---
+
+### FASE 14 — XPSystem & Level ✅
+
+Sistem poin pengalaman dan level terintegrasi ke seluruh app.
+
+**`xp.js` — XPSystem:**
+- `addXP(userId, amount, source)` — tambah XP + toast animasi
+- `getLevel(xp)` — hitung level (threshold non-linear)
+- `getLevelProgress(xp)` — persentase ke level berikutnya
+- XP bar animated di dashboard
+- Riwayat XP di `xp_history`
+
+---
 
 ### FASE 15 — Challenge Harian ✅
-`challenge.js`: generate 3 challenge/hari deterministik (seed dari tanggal, algoritma LCG). 6 tipe challenge: `learn_items`, `quiz_complete`, `quiz_accuracy`, `srs_review`, `multi_module`, `streak_active`. Tombol "Klaim XP". Konfeti 40 partikel CSS-only saat semua challenge diklaim. Badge "X/3 Selesai". Riwayat di halaman Statistik.
 
-### FASE 16 — Di-hold ⏸️
-Konten lanjutan N3/N2/N1/HSK4 — effort terlalu besar, ditunda. Masuk sebagai **Fase Lanjutan (TBD)** di roadmap.
+Tantangan belajar harian yang di-generate otomatis berdasarkan tanggal.
 
-### FASE 17 — Dialog & Percakapan ✅
-8 dialog JP (situasi N5–N4): restoran, stasiun, berkenalan, belanja, arah, dokter, kantor, telepon. 7 dialog ZH (HSK 1–3). Filter per level. Viewer dengan warna A/B berbeda. Toggle romaji/pinyin & terjemahan. Mode Playthrough (highlight per baris + TTS). Tombol 🔊 per baris dan per kosakata kunci.
+**`challenge.js` — ChallengeSystem:**
+- Seed tanggal → challenge deterministik (sama untuk semua user di hari yang sama)
+- 3 tugas per hari dari 30+ template (JP + ZH + KR)
+- Progress real-time per task
+- Reward XP saat semua task selesai
+- Hooks: `onLearnItem()`, `onModuleVisit()`, `onQuizComplete()`
 
-### FASE 18 — Streak Reminder ✅
-`reminder.js`: `ReminderSystem` dengan `init()`, `schedule()`, `cancel()`, `preview()`. Web Notifications API + `setTimeout`. Set jam pengingat di Settings (default 20:00). Smart skip: tidak notif jika sudah belajar hari itu. 5 pesan motivasi berbeda (acak).
+---
 
-### FASE 19 — Export Progress ke PDF ✅
-`window.print()` + CSS `@media print`. Halaman `report.html` standalone (tanpa sidebar). Konten: header bergradient, kartu user, ringkasan 8 pencapaian, XP progress dots, progress per modul, heatmap 28 hari, badge grid 12, tabel 15 quiz terbaru, item dipelajari per modul (max 20).
+### FASE 16 — [DI-HOLD] ⏸️
 
-### FASE 20 — PWA (Progressive Web App) ✅
-`manifest.json` lengkap (shortcuts: Dashboard, Quiz JP, Quiz ZH). `sw.js` dengan dual strategy: Cache-First (CSS/JS/gambar) + Network-First (HTML). `pwa.js`: install prompt banner, update banner, offline indicator. Ikon app 192×192 dan 512×512.
+Konten lanjutan N3/N2 JP. Di-hold karena effort besar; dikerjakan setelah bug fixing.
 
-### FASE 20.4 — Live Clock di Topbar Dashboard ✅
-Tampilan jam real-time (HH:MM:SS WIB) di topbar kanan dashboard. Format dua baris: tanggal (atas) + jam merah besar (bawah). `updateClock()` + `setInterval(updateClock, 1000)`. Hidden di mobile. Fix sidebar Katakana + fix layout `.main-content` dan `.page-body`.
+---
 
-### FASE 21.1 — Rename & Rebranding: NihonHan → Lingora ✅
-Rename resmi proyek dari **NihonHan** ke **Lingora**. 23 file HTML, 43 file JS, `manifest.json`, `sw.js` (cache bump `nihonhan-v2` → `lingora-v3`), `index.html` semuanya diupdate. Tagline sidebar diupdate ke `"Jepang, Mandarin & Korea"`. Folder project: `nihonhan/` → `lingora/`. Prefix localStorage `nh_` tetap dipertahankan untuk kompatibilitas data user.
+### FASE 17 — Dialog & Percakapan (JP + ZH) ✅
+
+Modul dialog situasional interaktif untuk Jepang dan Mandarin.
+
+**Fitur:**
+- Grid dialog dengan kategori situasi dan level
+- Viewer percakapan: balon chat A/B (alternating)
+- Playthrough otomatis: setiap baris dibaca TTS dengan jeda natural
+- Toggle romanisasi (furigana JP / pinyin ZH) dan terjemahan Indonesia
+- Vocab chip: kata sulit di-highlight, klik → popup arti
+- XP +5 per dialog diselesaikan
+
+---
+
+### FASE 18 — Streak Reminder (Browser Notification) ✅
+
+Pengingat belajar via browser notification.
+
+**`reminder.js` — ReminderSystem:**
+- `Notification.requestPermission()` — minta izin
+- Jadwal kustom: hari dalam seminggu + jam notifikasi
+- Pesan notifikasi kustom per user
+- Cek streak saat app dibuka → peringatan jika streak terancam putus
+
+---
+
+### FASE 19 — Export Laporan Progress ke PDF ✅
+
+Laporan progress lengkap yang bisa dicetak atau disimpan sebagai PDF.
+
+**`pages/report.html` + `report.js`:**
+- Standalone tanpa sidebar → layout bersih untuk cetak
+- Mencakup: profil, XP/level, semua modul JP/ZH/KR, badge, riwayat quiz
+- `@media print` — optimasi layout untuk kertas A4
+- `window.print()` → cetak atau simpan sebagai PDF via browser
+
+---
+
+### FASE 20 — PWA (Service Worker, Install, Offline) ✅
+
+Progressive Web App lengkap.
+
+**`sw.js` — Service Worker (cache-first):**
+- Pre-cache semua asset saat install
+- Update detection → tombol "Perbarui App"
+- Offline fallback ke cache
+
+**`manifest.json`:** ikon berbagai ukuran, shortcuts ke halaman utama
+
+**`pwa.js` — PWA Manager:**
+- `beforeinstallprompt` → tombol install kustom
+- SW registration + update flow
+- Offline banner saat koneksi terputus
+
+**20.4** — Live clock di topbar dashboard (update tiap detik via `setInterval`)
+
+---
+
+### FASE 21 — Korea + Rebranding Lingora ✅ (2026-02-25)
+
+Fase terbesar: rename proyek + 5 sub-fase penambahan modul Korea lengkap.
+
+**21.1 — Rename & Rebranding (v2.0):**
+- NihonHan → Lingora di semua 23 HTML, 43 JS, manifest, sw.js
+- Tagline diupdate ke tiga bahasa
+
+**21.2 — Data Korea (v2.1):**
+- `hangul.js` — 14 konsonan + 21 vokal + 70 suku kata dasar Korea
+- `kr-vocab.js` — 155 kata, 15 tema, level TOPIK I/II
+- `kr-grammar.js` — 27 pola grammar, 5 kategori
+- `kr-dialogs.js` — 6 dialog situasional TOPIK I
+
+**21.3 — Modul Hangul (v2.2):**
+- `pages/korean/hangul.html` — Tab Tabel/Flashcard/SRS
+- `AudioEngine.speakKR()` — TTS ko-KR
+- Sidebar 20 halaman: section 🇰🇷 Korea + Quiz Korea ditambahkan
+
+**21.4 — Vocab & Grammar Korea (v2.3):**
+- `pages/korean/vocabulary.html` — Jelajah + SRS + Kalimat Quiz
+- `pages/korean/grammar.html` — Accordion + filter TOPIK I/II
+- Badge TOPIK I/II di `korean.css`
+
+**21.5 — Dialog & Quiz Korea (v2.4):**
+- `pages/korean/dialog.html` — viewer A/B, playthrough TTS ko-KR
+- `pages/korean/quiz.html` — mode pilih/ketik, modul Hangul & Vocab KR
+
+**21.6 — Integrasi Penuh Korea (v2.6):**
+- Dashboard: section Korea + 4 progress bar modul
+- Stats: 4 modul KR + badge Hanŭl & Poliglot
+- Settings: toggle romanisasi Hangul (Revised Romanization)
+- Report PDF: 4 modul KR + badge baru
+- BadgeSystem: `hangul_master` + `polyglot` (check logic berbasis progress)
+- Challenge: 3 template task KR baru
+- Manifest: shortcut Quiz Korea
+- SW: `lingora-v4` → `lingora-v5`
+
+---
+
+### FASE 22 — Listening Mode (Audio Quiz) ✅ (2026-02-25)
+
+Mode belajar via audio — karakter disembunyikan, user jawab berdasarkan pendengaran.
+
+**Fitur:**
+- Tombol 🎧 Listening di selector mode (JP/ZH/KR)
+- Karakter soal diblur CSS → terungkap setelah menjawab
+- Tombol 🔊 besar + animasi pulse → auto-play audio saat soal muncul
+- User pilih arti dari 4 opsi
+- Timer 25 detik (5 detik lebih panjang dari mode normal)
+- Bonus XP +5 per soal benar di Listening mode
+- Badge UI `listening_mode` di layar hasil
+
+**File diupdate:** `quiz.css` (`.quiz-char-hidden`, `.listening-play-btn`, animasi `listenPulse`), `pages/japanese/quiz.html`, `pages/mandarin/quiz.html`, `pages/korean/quiz.html`, `assets/js/pages/quiz-jp.js`, `quiz-zh.js`, `quiz-kr.js`
+
+Cache: `lingora-v3` → `lingora-v4`
+
+---
+
+### FASE 23 — Stroke Order Animasi Kana ✅ (2026-02-25)
+
+Tab "✍️ Menulis" baru di Hiragana dan Katakana dengan animasi SVG step-by-step.
+
+**File baru:**
+- `assets/js/data/kana-strokes.js` — SVG path stroke order 46 hiragana dasar + 46 katakana dasar (92 karakter total)
+- `assets/js/modules/kana-stroke-ui.js` — `KanaStrokeUI`: render panel animasi, grid karakter, kontrol
+
+**Fitur:**
+- Grid 46 karakter di panel kiri, klik → animasi di panel kanan
+- Kontrol: ▶ Play / ⏸ Pause / ← Prev Stroke / → Next Stroke / 🔄 Reset
+- Animasi per path via `strokeDashoffset` CSS transition
+- Panah arah stroke di overlay SVG
+- Lazy-init (hanya load saat tab Menulis diklik)
+
+Cache: `lingora-v5` → `lingora-v6`
+
+---
+
+### FASE 24 — Vocabulary Builder (Kalimat Kontekstual) ✅ (2026-02-25)
+
+Kalimat contoh kontekstual per kata kunci + tab quiz fill-in-the-blank.
+
+**File baru:**
+- `assets/js/modules/vocab-builder.js` — `VocabBuilder` module:
+  - `renderSentences(vocab, lang)` — section expandable per vocab card
+  - `buildQuizItems(vocabArray)` — ekstrak soal fill-in-the-blank
+  - `startQuiz(container, vocabArray, lang, onDone)` — jalankan quiz
+
+**Data ditambah** (field `sentences` di vocab):
+- JP: 10 kata kunci (greetings + food + verbs), 2–3 kalimat per kata
+- ZH: 7 kata kunci (greetings + food), 2–3 kalimat per kata
+- KR: 5 kata kunci (greetings), 2–3 kalimat per kata
+
+**Format field `sentences`:**
+```javascript
+sentences: [
+  {
+    original: '毎日ご飯を食べます。',
+    romanization: 'Mainichi gohan wo tabemasu.',
+    translation: 'Saya makan nasi setiap hari.',
+    level: 'N5'
+  }
+]
+```
+
+**Fitur Kalimat Quiz (tab "🧩 Kalimat Quiz"):**
+- Kalimat dengan satu kata dikosongkan `___`
+- Hint: huruf pertama + terakhir kata
+- 10 soal per sesi, feedback langsung, skor + XP
+
+Cache: `lingora-v6` → `lingora-v7`
+
+---
+
+### FASE 25 — Onboarding & Placement Test ✅ (2026-02-25)
+
+Wizard 5 langkah agar user baru tidak overwhelmed saat pertama buka app.
+
+**Alur:**
+1. Welcome screen (karakter dari tiga bahasa)
+2. Pilih bahasa fokus: 🇯🇵 Jepang / 🇨🇳 Mandarin / 🇰🇷 Korea / Semua
+3. Placement Test: 10 soal acak (bank 30 soal, mencakup 3 bahasa) → Pemula / Menengah
+4. Hasil + 3 rekomendasi modul berdasarkan bahasa & level
+5. Set target harian (5, 15, 30, atau 60 menit/hari)
+
+**File baru:**
+- `pages/onboarding.html` — wizard HTML multi-step
+- `assets/js/pages/onboarding.js` — logika wizard + bank soal
+- `assets/css/onboarding.css` — card, step dots, progress bar
+
+**Integrasi:**
+- `register.html` → redirect ke onboarding setelah daftar berhasil
+- Dashboard: section "Profil Belajarmu" (prompt atau status)
+- Sidebar: link "Profil Belajar" di 23 halaman
+- Bonus +50 XP saat wizard selesai
+
+Cache: `lingora-v7` → `lingora-v8`
+
+---
+
+### FASE 26 — Study Planner ✅ (2026-02-25)
+
+Jadwal belajar otomatis berdasarkan target ujian bahasa.
+
+**9 target ujian didukung:**
+- Jepang: JLPT N5, N4, N3
+- Mandarin: HSK 1, 2, 3, 4
+- Korea: TOPIK I, TOPIK II
+
+**Fitur:**
+- Setup wizard: pilih ujian + tanggal ujian
+- Auto-kalkulasi kuota item/hari berdasarkan sisa hari
+- Daily To-Do: modul apa saja hari ini + direct link ke halaman modul
+- Progress timeline chart 7 hari (progress nyata vs jadwal ideal)
+- Countdown hari tersisa ke ujian
+- Overall progress bar per modul
+- Catch-up Mode: jadwal menyesuaikan jika ada hari terlewat
+
+**File baru:** `pages/planner.html`, `assets/js/pages/planner.js`, `assets/js/modules/planner.js` (`StudyPlanner` engine), `assets/css/planner.css`
+
+**Integrasi:** Dashboard section "📅 Target Planner Hari Ini", sidebar 24 halaman, manifest shortcut
+
+Cache: `lingora-v8` → `lingora-v9`
+
+---
+
+### FASE 27 — Mini Game ✅ (2026-02-25)
+
+3 game interaktif sebagai variasi belajar yang menyenangkan.
+
+**Game 1 — Memory Match (`pages/games/memory.html`):**
+- Grid kartu terbalik (8/12/18 pasang = 4×4 / 4×3 / 6×3)
+- Cocokkan: karakter asli ↔ artinya dalam bahasa Indonesia
+- Kategori: Hiragana / Katakana / Hangul / Kanji N5
+- Animasi flip 3D CSS, shake on mismatch, glow on match
+- Timer berjalan + skor combo
+
+**Game 2 — Word Scramble (`pages/games/scramble.html`):**
+- Huruf romanisasi diacak → tile klik untuk susun jawaban
+- Klik tile di area jawaban → kembalikan ke bawah; Clear → reset semua
+- 3 bahasa (JP/ZH/KR), 5/10/15 soal per sesi
+
+**Game 3 — Falling Kana (`pages/games/falling-kana.html`):**
+- Canvas API + `requestAnimationFrame` — karakter jatuh dari atas
+- Ketik romanisasi + Enter untuk menembak karakter
+- Leveling: speed bertambah tiap 10 jawaban benar
+- Pilih nyawa (3/5/10) dan kategori kana
+- Game over overlay + skor akhir
+
+**File baru:** `pages/games.html`, 3 HTML game, `game-memory.js`, `game-scramble.js`, `game-falling.js`, `assets/css/games.css`
+
+**Integrasi:** Dashboard quick-access, sidebar 24 halaman, manifest shortcut
+
+Cache: `lingora-v9` → `lingora-v10`
+
+---
+
+### FASE 28 — Tema & Kustomisasi UI ✅ (2026-02-25)
+
+5 tema warna + pilihan font dan sudut UI dengan preview real-time di settings.
+
+**5 tema:**
+
+| Tema | Warna Utama | Aksen | Karakter |
+|------|-------------|-------|---------|
+| 🌸 Sakura *(default)* | #C0392B | #D4AF37 | Tradisional Jepang |
+| 🍃 Zen | #4A7C59 | Sage muted | Minimalis |
+| 🌆 Neon Seoul | #7C3AED | #06B6D4 | Futuristik K-Pop |
+| 🎋 Bamboo | #2D6A4F | #D4A017 | Alam Asia Timur |
+| 🌙 Midnight | #0A0A0F | #FF6B35 | Dark mode kuat |
+
+**Pilihan font:** DM Sans (default) / Nunito (bulat) / Playfair Display (serif) / Monospace
+
+**Pilihan radius:** Tajam / Default / Bulat
+
+**Implementasi teknis:**
+- `[data-color-theme]` di `<html>` → CSS variables otomatis mengikuti via `themes.css`
+- `[data-font]` dan `[data-radius]` attribute → override variable global
+- Anti-FOUC: semua 30+ halaman HTML punya inline script 4-property di `<head>`
+- Tema Midnight otomatis toggle dark mode
+- Per-user storage: `nh_user_{id}_customization`
+
+**File baru:** `assets/css/themes.css`, `assets/js/modules/theme.js`
+
+**Diupdate:** `settings.html` (section baru), `settings.js`, `app.js` (loadTheme diperluas), 30 halaman HTML
+
+Cache: `lingora-v10` → `lingora-v11`
+
+---
+
+### FASE 29 — Backup & Restore Progress ✅ (2026-02-25)
+
+Perlindungan data user: export/import JSON + auto-snapshot lokal.
+
+**`assets/js/modules/backup.js` — BackupSystem:**
+
+| Method | Fungsi |
+|--------|--------|
+| `exportData(userId)` | Kumpulkan semua data user ke satu object terstruktur |
+| `downloadBackup(userId)` | Generate + trigger download `lingora-backup-YYYY-MM-DD.json` |
+| `validate(backupObj)` | Cek format: `appName`, `version`, integritas data |
+| `importData(userId, backupObj)` | Timpa data user aktif dengan data backup |
+| `readFile(file)` | Parse file JSON dari file input (Promise) |
+| `autoBackup(userId)` | Buat snapshot lokal jika sudah 7+ hari (max 3 tersimpan) |
+| `getAutoBackups(userId)` | Ambil list snapshot + metadata |
+| `restoreAutoBackup(userId, idx)` | Restore dari snapshot indeks tertentu |
+| `formatDate(ts)` | Format timestamp ke tanggal Indonesia |
+
+**Isi file backup (JSON):**
+- Profil user
+- Progress semua modul (SRS 11 modul, XP, badge, activity log, streak)
+- Challenge state, settings, onboarding, planner, customization
+
+**Fitur UI di Settings:**
+- Tombol "📥 Download Backup" → unduh file JSON
+- Area drag-and-drop atau klik untuk pilih file backup
+- Validasi otomatis → konfirmasi modal sebelum restore
+- Status bar: info backup & restore terakhir (tanggal format ID)
+- Auto-backup list: tampil 3 snapshot + tombol Restore/Download per snapshot
+
+**File diupdate:** `settings.html` (versi → 3.3), `settings.js`, `settings.css`, `sw.js`
+
+Cache: `lingora-v11` → `lingora-v12`
 
 ---
 
 ## 9. Bug Fix yang Sudah Diperbaiki
 
-### BF-1 — Missing closing brace di `progress.js` ✅
-Fungsi `saveQuizScore()` kehilangan `}` → seluruh modul Progress gagal load → semua halaman modul tidak bisa render.
+> ⚠️ Sesi berikutnya difokuskan untuk bug fixing menyeluruh. Daftar ini akan diperbarui seiring bug ditemukan dan diperbaiki.
 
-### BF-2 — Salah path di `pwa.js` ✅
-Kalkulasi path relatif ke `sw.js` salah → Service Worker tidak terdaftar.
+| ID | Lokasi | Deskripsi | Fase Fix | Status |
+|----|--------|-----------|----------|--------|
+| BF-001 | Quiz JP | Opsi pilihan ganda bisa duplikat jika pool data kecil | Fase 8.2 | ✅ Selesai |
+| BF-002 | Quiz JP | Timer tidak reset saat pindah ke soal berikutnya | Fase 8.2 | ✅ Selesai |
+| BF-003 | Kanji | Duplikat kanji antar level N5–N1 | Fase 8.3.1 | ✅ Selesai |
+| BF-004 | SRS | Interval tidak terupdate saat quality=0 (Again) | Fase 11 | ✅ Selesai |
+| BF-005 | Audio | Voice tidak ditemukan di beberapa browser/OS | Fase 9.2 | ✅ Fallback ditambah |
+| BF-006 | Dark mode | Flash putih (FOUC) saat halaman pertama load | Fase 10 | ✅ Anti-FOUC inline script |
+| BF-007 | Path | File tidak ditemukan di GitHub Pages (path relatif salah) | Fase 20 | ✅ `getBase()` universal |
+| BF-008 | Service Worker | App versi lama masih terserve setelah update | Fase 20 | ✅ Update detection flow |
 
-### BF-3 — GitHub Pages: Hiragana/Katakana/Kanji tidak muncul ✅
-**Root cause:** `getBase()` lama tidak menghitung kedalaman subfolder. Halaman di `/pages/japanese/hiragana.html` butuh `'../../'` tapi hanya dapat `'../'` → redirect ke path salah → 404.
+### Area yang Perlu Diperiksa di Sesi Bug Fixing
 
-**Fix:** `getBase()` baru menghitung depth secara dinamis dengan `parts.indexOf('pages')`. Diapply ke `router.js`, `auth.js`, dan `pwa.js`.
-
-**Kenapa tidak ketahuan lokal:** Lokal, user biasanya sudah login → `Router.guard()` tidak trigger redirect.
-
-> **Catatan untuk Fase 21:** Halaman `pages/korean/*.html` berada di kedalaman yang sama dengan Japanese dan Mandarin. `getBase()` sudah menangani ini — tidak perlu modifikasi tambahan.
-
-### BF-4 — Quiz JP tidak bisa digunakan ✅
-`bindQuizControls()` dipanggil tapi tidak terdefinisi → script crash → semua event listener quiz tidak terpasang.
-
-### BF-5 — Duplikat Kanji ✅
-4 kanji duplikat ditemukan dan dihapus/digabung: `聞`, `況`, `的`, `悲`.
-
-### BF-6 — Sidebar Katakana: dua menu aktif sekaligus ✅
-Nav-item Hiragana di `katakana.html` punya class `active` dan `href` salah → fix: hapus `active`, perbaiki href.
-
-### BF-7 — Konten tidak ter-center di area main ✅
-`.main-content` tidak punya `align-items: center` dan `.page-body` tidak punya `margin: 0 auto` → konten menempel kiri.
-
----
-
-## 10. Roadmap Fase 21 ke Atas
-
-> **Prinsip tetap:** Lingora selalu **offline-first, pure localStorage, tanpa server**.
-
-### Gambaran Urutan Prioritas
-
-```
-Fase 21 (Penambahan Korea + Rename Proyek)  ← ✅ SELESAI
-  ↓
-Fase 22 (Listening Quiz)                    ← ✅ SELESAI
-  ↓
-Fase 23 (Stroke Animasi Kana)               ← ✅ SELESAI
-  ↓
-Fase 24 (Kalimat Kontekstual Vocab)         ← ✅ SELESAI
-  ↓
-Fase 25 (Onboarding & Placement Test)       ← ✅ SELESAI
-  ↓
-Fase 26 (Study Planner)                     ← ✅ SELESAI
-  ↓
-Fase 27 (Mini Game)                         ← ✅ SELESAI
-  ↓
-Fase 28 (Tema & Kustomisasi)                ← ✅ SELESAI
-  ↓
-Fase 29 (Backup & Restore)                  ← ✅ SELESAI
-  ↓
-Fase 30 (Konten Lanjutan JP — eks Fase 16)  ← Dulu di-hold
-Fase 31 (Konten Lanjutan ZH — eks Fase 21) ← Dulu di-hold
-Fase 32 (Leaderboard — eks Fase lama)        ← Dulu di-hold
-```
-
-| Prioritas | Fase | Nama | Kategori | Estimasi Effort |
-|-----------|------|------|----------|-----------------|
-| 🔴 Tinggi | 21 | Bahasa Korea (Hangul) + Rename Proyek | Bahasa Baru + Revamp | Besar |
-| 🔴 Tinggi | 22 | Listening Mode (Audio Quiz) | Fitur Belajar | Sedang |
-| 🔴 Tinggi | 23 | Stroke Order Animasi (Hiragana/Katakana) | UX | Sedang-Besar |
-| 🟡 Sedang | 24 | Vocabulary Builder (Kalimat Kontekstual) | Konten | Sedang |
-| 🟡 Sedang | 25 | Onboarding & Placement Test | UX | Sedang | ✅ |
-| 🟡 Sedang | 26 | Study Planner / Jadwal Belajar | Produktivitas | Sedang-Besar |
-| 🟢 Rendah | 27 | Mini Game | Gamifikasi | Sedang | ✅ |
-| 🟢 Rendah | 28 | Tema & Kustomisasi UI | UX | Kecil-Sedang | ✅ |
-| 🟢 Rendah | 29 | Backup & Restore Progress | Data | Kecil | ✅ |
-| ⏸️ Hold | 30 | Konten Lanjutan JP N3 (eks Fase 16) | Konten | Besar |
-| ⏸️ Hold | 31 | Konten Lanjutan ZH HSK4 (eks Fase 21) | Konten | Besar |
-| ⏸️ Hold | 32 | Leaderboard Lokal (eks Fase lama) | Gamifikasi | Sedang |
+1. **Listening Mode (Fase 22)** — Autoplay audio bisa diblokir di Safari/iOS (policy ketat)
+2. **Stroke Order Kana (Fase 23)** — Animasi SVG di browser lama (Edge legacy, Firefox <70)
+3. **Kalimat Quiz (Fase 24)** — Normalisasi input: aksara CJK vs romanisasi, case sensitivity
+4. **Onboarding redirect (Fase 25)** — Flow jika user sudah onboarding tapi `localStorage` clear
+5. **Study Planner (Fase 26)** — Kalkulasi jadwal jika tanggal ujian sudah lewat atau hari ini
+6. **Falling Kana Canvas (Fase 27)** — Performance throttle di device lemah / layar kecil
+7. **Anti-FOUC tema (Fase 28)** — Verifikasi semua 30+ halaman punya 4-property inline script
+8. **Backup Import (Fase 29)** — Validasi backward compatibility dari versi app sebelumnya (v3.0, v3.1, v3.2)
+9. **SRS modul Korea** — Pastikan `srs_{moduleId}` tidak tumpang tindih antar modul KR yang ditambah belakangan
+10. **Challenge KR (Fase 21.6)** — Verifikasi trigger `onLearnItem` + `onModuleVisit` di halaman KR berjalan benar
+11. **Badge Polyglot** — Pastikan logic `check()` membaca progress dari 3 bahasa dengan benar
+12. **Service Worker Cache** — Verifikasi `lingora-v12` mencakup semua file yang ditambah di Fase 27–29
 
 ---
 
-### FASE 21 — Bahasa Korea (Hangul) + Rename Proyek ke Lingora
+## 10. Roadmap — Fase Selanjutnya (Di-hold)
 
-**Tujuan:** Memperluas Lingora menjadi platform tiga bahasa — Jepang, Mandarin, dan Korea — sekaligus melakukan rename resmi proyek dari NihonHan ke Lingora.
+> ⏸️ **Semua fase berikut di-hold sampai sesi bug fixing selesai.**
 
-**Status keseluruhan Fase 21:**
+### FASE 30 — Konten Lanjutan JP: Kosakata & Grammar N3
 
-| Sub-Fase | Nama | Isi | Status |
-|----------|------|-----|--------|
-| **21.1** | Rename & Rebranding | Update nama di semua file (HTML, JS, manifest, sw.js) | ✅ SELESAI |
-| **21.2** | Data Korea | 4 file data: `hangul.js`, `kr-vocab.js`, `kr-grammar.js`, `kr-dialogs.js` | ✅ SELESAI |
-| **21.3** | Modul Hangul | `hangul.html` + `hangul.js` + `korean.css` (3 tab: Tabel, Flashcard, SRS) | ✅ SELESAI |
-| **21.4** | Modul Vocab & Grammar | `vocabulary.html` + `kr-vocab.js`, `grammar.html` + `kr-grammar.js` | ✅ SELESAI |
-| **21.5** | Modul Dialog & Quiz | `dialog.html` + `kr-dialog.js`, `quiz.html` + `quiz-kr.js` | ✅ SELESAI |
-| **21.6** | Integrasi Penuh | Sidebar semua halaman, Dashboard KR, Stats, Settings, Badge, Challenge | ✅ SELESAI |
-
----
-
-#### FASE 21.1 — Rename & Rebranding ✅ SELESAI (2026-02-25)
-
-Seluruh referensi `NihonHan`/`nihonhan` di-rename ke `Lingora`/`lingora` sebelum penambahan modul Korea, agar basis kode konsisten lebih dulu.
-
-**Yang dikerjakan:**
-- 23 file HTML: `<title>`, `<meta apple-mobile-web-app-title>`, sidebar logo (`.logo-main`, `.logo-sub`), topbar logo, auth pages, report page
-- 43 file JS: semua header komentar + semua string user-facing (notifikasi reminder, PWA banner, offline indicator)
-- `manifest.json`: `name` → `"Lingora — Belajar Jepang, Mandarin & Korea"`, `short_name` → `"Lingora"`, `description` diupdate ke 3 bahasa
-- `sw.js`: cache bump `nihonhan-v2` → `lingora-v3`, CACHE_VERSION 2 → 3 (force refresh cache lama)
-- `index.html`: splash logo, title, meta description, tagline
-- Tagline seluruh sidebar: `"Jepang & Mandarin"` → `"Jepang, Mandarin & Korea"`
-- Folder project: `nihonhan/` → `lingora/`
-
-> **Catatan:** Prefix localStorage `nh_` **sengaja dipertahankan** untuk kompatibilitas data user yang sudah ada. Tidak diganti ke `lingora_`.
-
----
-
-#### FASE 21.2 — Data Korea ✅ SELESAI (2026-02-25)
-
-Buat 4 file data Korea murni (belum ada halaman UI). Semua data di `assets/js/data/`.
-
-**File baru:**
-
-**`hangul.js`** — Jamo konsonan (14) + vokal (21) + suku kata contoh (~100):
-```javascript
-const HangulData = (() => {
-  const consonants = [
-    { jamo: 'ㄱ', romanization: 'g/k', name: 'giyeok',
-      example: { syllable: '가', word: '가방', meaning: 'tas' } },
-    // ... 13 lainnya
-  ];
-  const vowels = [
-    { jamo: 'ㅏ', romanization: 'a', name: 'a',
-      example: { syllable: '아', word: '아버지', meaning: 'ayah' } },
-    // ... 20 lainnya
-  ];
-  const syllables = [
-    { block: '가', consonant: 'ㄱ', vowel: 'ㅏ', romanization: 'ga' },
-    // ...
-  ];
-  return { getConsonants: () => consonants, getVowels: () => vowels, getSyllables: () => syllables };
-})();
-```
-
-**`kr-vocab.js`** — 150+ kata, 15 tema, level TOPIK1/TOPIK2:
-```javascript
-const KrVocabData = (() => {
-  const themes = [
-    { id: 'greetings', label: 'Salam & Sapaan', icon: '👋' },
-    // ... 14 tema lainnya
-  ];
-  const vocab = [
-    {
-      word: '안녕하세요', romanization: 'annyeonghaseyo',
-      meaning: 'halo (formal)', theme: 'greetings', level: 'TOPIK1',
-      example: { kr: '안녕하세요, 선생님.', roman: 'Annyeonghaseyo, seonsaengnim.', id: 'Halo, Pak/Bu Guru.' }
-    },
-    // ...
-  ];
-  return { getAll: () => vocab, getThemes: () => themes };
-})();
-```
-
-**`kr-grammar.js`** — 25+ pola, 5 kategori (Copula, Partikel, Verba, Honorifik, Waktu):
-```javascript
-const KrGrammarData = (() => {
-  const patterns = [
-    {
-      id: 'kr-g-01', pattern: '~이에요/예요', category: 'copula',
-      meaning: 'adalah (bentuk sopan informal)', level: 'TOPIK1',
-      example: { kr: '저는 학생이에요.', roman: 'Jeoneun haksaengieyo.', id: 'Saya adalah pelajar.' },
-      notes: 'Pakai 이에요 setelah konsonan, 예요 setelah vokal'
-    },
-    // ...
-  ];
-  const categories = [
-    { id: 'copula', label: 'Copula & Keberadaan', icon: '🔵' },
-    // ...
-  ];
-  return { getAll: () => patterns, getCategories: () => categories };
-})();
-```
-
-**`kr-dialogs.js`** — 6 dialog situasional TOPIK I:
-
-| # | Situasi | Level |
-|---|---------|-------|
-| 1 | Perkenalan diri | TOPIK I |
-| 2 | Di restoran | TOPIK I |
-| 3 | Arah & transportasi | TOPIK I |
-| 4 | Belanja | TOPIK I |
-| 5 | Di klinik/rumah sakit | TOPIK I |
-| 6 | Percakapan di kampus | TOPIK I–II |
-
----
-
-#### FASE 21.3 — Modul Hangul ✅ SELESAI (2026-02-25)
-
-**File baru:**
-- `pages/korean/hangul.html` — halaman Hangul lengkap dengan 3 tab (Tabel, Flashcard, SRS)
-- `assets/js/pages/hangul.js` — grid jamo, modal detail suku kata, flashcard 3D, SRS, favorit, audio ko-KR
-- `assets/css/korean.css` — seluruh style modul Korea (dipakai semua halaman KR ke depan)
-
-**Update:**
-- `assets/js/modules/audio.js` — tambah `koVoice` (ko-KR), `speakKR()`, `hasKRVoice()`. Update `loadVoices()` dan exports.
-- 20 halaman HTML (semua kecuali login/register/report) — sidebar update: tambah section 🇰🇷 Bahasa Korea (Hangul, Kosakata KR, Grammar KR, Dialog KR) + link Quiz Korea di section Latihan.
-
-**Fitur Tab "Tabel":**
-- Grid konsonan (14 jamo, biru) + grid vokal (21 jamo, merah)
-- Tabel suku kata dasar dengan visualisasi struktur C+V+(받침)
-- Klik suku kata → modal detail: visualisasi komponen, audio ko-KR
-- Tombol ★ favorit per jamo
-- Filter: Semua / Konsonan / Vokal / Favorit
-
-**Fitur Tab "Flashcard":**
-- 3D flip — depan: jamo besar, belakang: nama + romanisasi + contoh kata
-- Filter konsonan/vokal/semua/belum hafal/favorit
-- Integrasi `Progress.markLearned()` dan `XPSystem`
-
-**Fitur Tab "SRS":**
-- SRS Engine SM-2 untuk semua 35 jamo
-- Rating Lupa/Sulit/Mudah/Hafal
-- Audio ko-KR di sisi belakang kartu
-
----
-
-#### FASE 21.4 — Modul Kosakata & Grammar Korea 🔲
-
-**File baru:**
-```
-pages/korean/vocabulary.html      ← Tab: Jelajah / SRS | Filter tema & level
-assets/js/pages/kr-vocab.js       ← Vocab cards KR, SRS, favorit, audio ko-KR
-pages/korean/grammar.html         ← Accordion pola grammar dasar–menengah
-assets/js/pages/kr-grammar.js     ← Accordion, search, filter level, tandai hafal
-```
-
-**Vocabulary:** Konsisten dengan Vocab JP dan ZH — Tab Jelajah (kartu dengan word/romanisasi/arti/contoh) dan Tab SRS. Filter per tema dan level TOPIK. Tombol ★ favorit. Audio `ko-KR`.
-
-**Grammar:** Accordion per 5 kategori. Search real-time. Filter TOPIK I / TOPIK II. Tombol "Tandai Hafal" per pola. Integrasi `Progress.markLearned('kr-grammar', id)` dan `XPSystem.addXP()`.
-
----
-
-#### FASE 21.5 — Modul Dialog & Quiz Korea 🔲
-
-**File baru:**
-```
-pages/korean/dialog.html          ← Viewer dialog A/B, playthrough, TTS
-assets/js/pages/kr-dialog.js      ← Dialog grid KR, viewer, toggle romanisasi
-pages/korean/quiz.html            ← Quiz KR: pilih/ketik, modul pilihan
-assets/js/pages/quiz-kr.js        ← Quiz KR, normalisasi romanisasi RR
-```
-
-**Dialog:** Konsisten dengan Dialog JP dan ZH — viewer A/B berwarna berbeda, toggle romanisasi (`showRomanization`) dan terjemahan, Mode Playthrough (highlight per baris + TTS `ko-KR`), tombol 🔊 per baris.
-
-**Quiz:** Mode pilih + mode ketik. Normalisasi romanisasi (abaikan tanda diakritik). Dua jenis soal: lihat kata Korea → pilih arti, atau lihat arti → ketik romanisasi.
-
----
-
-#### FASE 21.6 — Integrasi Penuh ✅ SELESAI (2026-02-25)
-
-Update semua bagian app yang sudah ada agar mengenal modul Korea sepenuhnya.
-
-**File yang diupdate:**
-
-```
-pages/dashboard.html              ← Tambah section 🇰🇷 Korea (4 modul KR)
-assets/js/pages/dashboard.js     ← krModules array, renderModules KR, kutipan Korea
-pages/stats.html                  ← (sidebar sudah ada KR dari Fase 21.3)
-assets/js/pages/stats.js          ← MODULES +4 KR, ALL_BADGES +Hanŭl+Poliglot, quiz name map KR
-pages/settings.html               ← Toggle showRomanization (Hangul)
-assets/js/pages/settings.js      ← bindToggle romanization, MODULES +4 KR di reset grid
-pages/report.html                 ← (render via JS, otomatis)
-assets/js/pages/report.js        ← MODULES +4 KR, ALL_BADGES +2, MODULE_NAME_MAP +KR
-assets/js/modules/quiz.js         ← Badge 🌙 hangul_master + 🌏 polyglot, checkAndAward pass progress
-assets/js/modules/progress.js    ← Panggil BadgeSystem.checkAndAward() di markLearned()
-assets/js/modules/challenge.js   ← 3 template KR baru (Hangul, Kosakata KR, Grammar Korea)
-manifest.json                     ← Shortcut Quiz Korea
-sw.js                             ← Cache bump v4→v5, tambah 4 data KR + 5 page JS KR + 5 HTML KR
-```
-
-**Badge baru:**
-
-| Badge | Kondisi | Sistem |
-|-------|---------|--------|
-| 🌙 Hanŭl | Hafal item di semua modul KR (hangul, kr-vocab, kr-grammar, kr-dialog) | BadgeSystem di `quiz.js` |
-| 🌏 Poliglot | Hafal item dari 3 bahasa (JP + ZH + KR) | BadgeSystem di `quiz.js` |
-
-**Setting baru:** `showRomanization` (boolean, default: `true`) di `nh_user_{id}_settings` — konsisten dengan `showRomaji` (JP) dan `showPinyin` (ZH).
-
-**Challenge baru:** 3 template Korea ditambahkan ke pool harian: Kuasai Hangul (5 karakter, +35 XP), Kosakata KR (5 kata, +50 XP), Grammar Korea (3 pola, +40 XP).
-
----
-
-**Catatan penting Fase 21:**
-- Urutan wajib: 21.1 → 21.2 → 21.3 → 21.4 → 21.5 → 21.6
-- Gunakan **Revised Romanization (표준 로마자 표기법)**, bukan McCune–Reischauer
-- Verifikasi audio `ko-KR` di Chrome dan Safari — kualitas TTS berbeda per browser
-- Prioritaskan akurasi konten (arti, partikel, honorifik) di atas kuantitas
-- `getBase()` di `router.js` sudah menangani kedalaman `pages/korean/` secara otomatis
----
-
-### FASE 22 — Listening Mode (Audio Quiz)
-
-**Tujuan:** Mode quiz baru di mana soal berupa audio. User mendengar kata lalu memilih/mengetik artinya — melatih kemampuan listening, bukan hanya reading.
-
-**Cara kerja:**
-1. Quiz dimulai dalam "Listening Mode"
-2. Karakter/kata **disembunyikan** — hanya ada tombol 🔊
-3. Audio di-play otomatis saat soal muncul
-4. User memilih arti yang benar (atau mengetik romanisasi)
-5. Setelah jawab, karakter baru terungkap
-6. Skor bonus +5 XP tiap soal Listening yang benar
-
-**Berlaku untuk:** Quiz JP, Quiz ZH, dan Quiz KR (Fase 22 dierjakan setelah Fase 21 selesai).
-
-| | Quiz Normal | Listening Mode |
-|--|-------------|----------------|
-| Soal | Teks karakter | Audio (tersembunyi) |
-| Skill | Reading | Listening |
-| Timer | 20 detik | 25 detik |
-
-**File yang diupdate:**
-```
-pages/japanese/quiz.html          [UPDATE] — tambah pilihan mode "Listening"
-pages/mandarin/quiz.html          [UPDATE]
-pages/korean/quiz.html            [UPDATE]
-assets/js/pages/quiz-jp.js        [UPDATE] — listening mode logic
-assets/js/pages/quiz-zh.js        [UPDATE]
-assets/js/pages/quiz-kr.js        [UPDATE]
-assets/css/quiz.css               [UPDATE] — UI hidden-character card
-```
-
-**Catatan:** Gunakan `AudioEngine` yang sudah ada. Fallback graceful jika browser tidak punya voice `ko-KR`.
-
-### FASE 23 — Stroke Order Animasi (Hiragana & Katakana) ✅ SELESAI (2026-02-25)
-
-**Tujuan:** Menambahkan tab "✍️ Menulis" di halaman Hiragana dan Katakana yang menampilkan animasi urutan coretan (stroke order) interaktif.
-
-**Yang dikerjakan:**
-- `assets/js/data/kana-strokes.js` [BARU] — Data SVG path urutan stroke untuk **46 hiragana dasar** + **46 katakana dasar** (92 karakter total). Format: `{ strokes: [{d: 'SVG path', tip: 'deskripsi'}], tips: 'tips umum' }`. ViewBox 100×100.
-- `assets/js/modules/kana-stroke-ui.js` [BARU] — `KanaStrokeUI` module dengan:
-  - `render(container, strokeData, char, script)` — render panel animasi SVG untuk satu karakter
-  - `renderWritingTab(tabEl, characters, script)` — render tab Menulis lengkap dengan grid pilihan karakter
-  - Animasi SVG `strokeDashoffset` — setiap stroke muncul satu per satu dengan garis berwarna berbeda
-  - Kontrol: ▶ Animasi (auto-play), ◀ / ▶ (manual step), ↺ Reset
-  - Karakter guide transparan di belakang SVG (referensi visual)
-  - Panah arah (`marker-end`) di setiap stroke untuk menunjukkan arah coretan
-  - Klik item di daftar stroke untuk loncat ke step tertentu
-  - Fallback pesan jika karakter (dakuten/kombinasi) belum punya data
-- `pages/japanese/hiragana.html` [UPDATE] — Tambah tab "✍️ Menulis" + script `kana-strokes.js` + `kana-stroke-ui.js`
-- `pages/japanese/katakana.html` [UPDATE] — Idem untuk katakana
-- `assets/js/pages/hiragana.js` [UPDATE] — Tambah `initWritingTab()` yang dipanggil saat tab Writing aktif (lazy-init)
-- `assets/js/pages/katakana.js` [UPDATE] — Idem untuk katakana
-- `assets/css/japanese.css` [UPDATE] — Tambah section Fase 23: `.kana-writing-layout`, `.kana-stroke-panel`, `.kana-stroke-svg-wrap`, `.kana-stroke-controls`, `.kana-stroke-list`, `.kana-stroke-item`, animasi, responsive
-- `sw.js` [UPDATE] — Cache bump `lingora-v5` → `lingora-v6`, tambah `kana-strokes.js` + `kana-stroke-ui.js`
-
-**Fitur Tab "✍️ Menulis":**
-- Layout dua kolom: sidebar daftar karakter + area animasi utama
-- Grid 4 kolom karakter yang tersedia (46 hiragana / 46 katakana dasar)
-- Karakter aktif di-highlight dengan warna aksen
-- Panel animasi: SVG 160×160px dengan guide karakter di belakang
-- Setiap stroke diberi warna unik (merah, biru, hijau, ungu, ...)
-- Daftar stroke dengan nomor dan deskripsi — klik untuk navigasi
-- Tips menulis per karakter dan per stroke
-- Responsive: grid kolaps di mobile
-
----
-
-**Tujuan:** Animasi urutan coretan (stroke order) untuk semua hiragana dan katakana. Kanji sudah punya stroke widget (Fase 4) — sekarang gilirannya kana.
-
-**Rencana implementasi:**
-- Data SVG stroke order untuk 46 hiragana dasar + dakuten + kombinasi
-- Data SVG stroke order untuk 46 katakana dasar + dakuten + kombinasi
-- Tab "✍️ Menulis" baru di halaman Hiragana dan Katakana
-- Animasi: stroke muncul satu per satu, panah arah + nomor urutan
-- Mode latihan (Fase 23.2): canvas kosong, user trace dengan mouse/finger
-
-**File yang diupdate:**
-```
-assets/js/data/hiragana-strokes.js   [BARU] — data SVG stroke order
-assets/js/data/katakana-strokes.js   [BARU]
-pages/japanese/hiragana.html         [UPDATE] — tab Menulis
-pages/japanese/katakana.html         [UPDATE]
-assets/js/pages/hiragana.js          [UPDATE]
-assets/js/pages/katakana.js          [UPDATE]
-assets/css/japanese.css              [UPDATE] — animasi stroke + canvas trace
-```
-
-**Catatan:** Data SVG stroke open-source tersedia (format KanjiVG). Prioritaskan animasi dulu; mode trace (Canvas API) bisa jadi Fase 23.2.
-
----
-
-### FASE 24 — Vocabulary Builder (Kalimat Kontekstual) ✅ SELESAI (2026-02-25)
-
-**Tujuan:** Setiap kata kosakata punya 2–3 contoh kalimat dengan level kesulitan berbeda, memperlihatkan kata dalam konteks nyata. Ditambah Kalimat Quiz (fill-in-the-blank) sebagai mode latihan baru.
-
-**Yang dikerjakan:**
-- `assets/js/data/jp-vocab.js` [UPDATE] — Tambah field `sentences` ke kata-kata kunci: greetings (おはよう, こんにちは, ありがとう, すみません), food (ご飯, パン, 魚), verbs (食べる, 飲む, 行く). Format: `[{ original, romanization, translation, level }]`
-- `assets/js/data/zh-vocab.js` [UPDATE] — Tambah `sentences` ke kata kunci: greetings (你好, 你好吗, 谢谢, 对不起), food (早饭, 午饭, 晚饭)
-- `assets/js/data/kr-vocab.js` [UPDATE] — Tambah `sentences` ke kata kunci: greetings (안녕하세요, 안녕, 감사합니다, 고마워요, 죄송합니다)
-- `assets/js/modules/vocab-builder.js` [BARU] — `VocabBuilder` module:
-  - `renderSentences(vocab, lang)` — render HTML expandable section "📖 Kalimat Kontekstual" (collapsible, dengan audio button per kalimat)
-  - `initToggles(container)` — init event listener toggle & audio di container
-  - `buildQuizItems(vocabArray)` — ekstrak soal fill-in-the-blank dari vocab dengan sentences
-  - `startQuiz(container, vocabArray, lang, onDone)` — mulai Kalimat Quiz
-  - UI quiz: progress bar, petunjuk, input jawaban, hint button, feedback benar/salah, navigasi
-- `assets/css/components.css` [UPDATE] — Tambah section Fase 24: `.vb-sentences-wrap`, `.vb-toggle-btn`, `.vb-sentence`, `.vb-quiz-*`, animasi, responsive
-- `pages/japanese/vocabulary.html` [UPDATE] — Tab baru "🧩 Kalimat Quiz", panel `#tab-kalimat`, script `vocab-builder.js`
-- `assets/js/pages/jp-vocab.js` [UPDATE] — Render `VocabBuilder.renderSentences()` di setiap vocab card, `initToggles()` setelah render, `initKalimatQuizTab()` (lazy-init)
-- `pages/mandarin/vocabulary.html` [UPDATE] — Idem untuk ZH
-- `assets/js/pages/zh-vocab.js` [UPDATE] — Idem untuk ZH
-- `pages/korean/vocabulary.html` [UPDATE] — Idem untuk KR
-- `assets/js/pages/kr-vocab.js` [UPDATE] — Idem untuk KR
-- `sw.js` [UPDATE] — Cache bump `lingora-v6` → `lingora-v7`, tambah `vocab-builder.js`
-
-**Fitur Section "Kalimat Kontekstual" di vocab card:**
-- Tombol expandable "📖 Kalimat Kontekstual (N)" — klik untuk expand/collapse
-- Setiap kalimat menampilkan: kalimat asli (CJK), romanisasi, terjemahan Indonesia, badge level
-- Tombol 🔊 per kalimat untuk dengar audio (JP/ZH/KR)
-- Desain clean: border-left accent, numbered badge per kalimat
-
-**Fitur Kalimat Quiz (Tab "🧩 Kalimat Quiz"):**
-- Soal: kalimat dengan satu kata dikosongkan (___), romanisasi ditampilkan sebagai panduan
-- User mengetik jawaban (kata asli atau romanisasi diterima)
-- Tombol "💡 Tampilkan petunjuk" — tampilkan huruf pertama dan terakhir kata
-- Feedback langsung: ✅ Benar / ❌ Salah + tampilkan kalimat lengkap
-- Progress bar, skor real-time, 10 soal per sesi (diacak)
-- Layar hasil: emoji, skor, pesan motivasi, tombol Coba Lagi
-- XP +5 per soal benar dikurangi (diberikan saat selesai)
-
-**Tujuan:** Setiap kata kosakata punya 2–3 contoh kalimat dengan level kesulitan berbeda, memperlihatkan kata dalam konteks nyata.
-
-**Fitur:**
-- Section "Contoh Kalimat" di modal kosakata (expandable)
-- 2–3 kalimat per kata (dari sederhana ke kompleks)
-- Setiap kalimat: kata asli + romanisasi + terjemahan + tombol 🔊
-- "Kalimat Quiz": kalimat dengan satu kata dikosongkan, user isi
-
-**Format data yang ditambahkan ke vocab yang ada:**
-```javascript
-{
-  word: '食べる',
-  // ... field yang sudah ada ...
-  sentences: [
-    {
-      original: '毎日ご飯を食べます。',
-      romanization: 'Mainichi gohan wo tabemasu.',
-      translation: 'Saya makan nasi setiap hari.',
-      level: 'N5'
-    },
-    {
-      original: '友達と一緒に食べるのが好きです。',
-      romanization: 'Tomodachi to issho ni taberu no ga suki desu.',
-      translation: 'Saya suka makan bersama teman.',
-      level: 'N4'
-    }
-  ]
-}
-```
-
-**Berlaku untuk:** `jp-vocab.js`, `zh-vocab.js`, dan `kr-vocab.js` (Fase 24 setelah Fase 21).
-
-**File yang diupdate:**
-```
-assets/js/data/jp-vocab.js          [UPDATE] — tambah field 'sentences'
-assets/js/data/zh-vocab.js          [UPDATE]
-assets/js/data/kr-vocab.js          [UPDATE]
-assets/js/pages/jp-vocab.js         [UPDATE] — render sentences di modal
-assets/js/pages/zh-vocab.js         [UPDATE]
-assets/js/pages/kr-vocab.js         [UPDATE]
-assets/css/japanese.css             [UPDATE] — sentence list styling
-assets/css/mandarin.css             [UPDATE]
-assets/css/korean.css               [UPDATE]
-```
-
----
-
-### FASE 25 — Onboarding & Placement Test ✅ SELESAI (2026-02-25)
-
-**Tujuan:** User baru tidak langsung "nyemplung" ke semua konten. Ada proses onboarding yang menentukan level awal dan memberikan rekomendasi modul.
-
-**Alur (5 langkah — wizard multi-step):**
-1. Welcome screen dengan animasi karakter dari tiga bahasa
-2. Pilih bahasa fokus: Jepang / Mandarin / Korea / Semua
-3. Placement Test: 10 soal singkat → tentukan Pemula / Menengah
-4. Rekomendasi modul berdasarkan hasil test + bahasa pilihan
-5. Set target harian (menit/hari) → Dashboard tampilkan modul rekomendasi
-
-**localStorage keys baru:**
-```
-nh_user_{id}_onboarding   → {
-  completed: bool,
-  focusLang: 'jp' | 'zh' | 'kr' | 'all',
-  level: 'beginner' | 'intermediate',
-  dailyGoal: 15
-}
-```
-
-**File yang diupdate:**
-```
-pages/onboarding.html               [BARU] — multi-step wizard
-assets/js/pages/onboarding.js       [BARU]
-assets/css/onboarding.css           [BARU]
-assets/js/core/auth.js              [UPDATE] — redirect ke onboarding setelah register
-pages/dashboard.html                [UPDATE] — section "Modul Direkomendasikan"
-assets/js/pages/dashboard.js        [UPDATE]
-```
-
----
-
-### FASE 26 — Study Planner / Jadwal Belajar ✅ SELESAI (2026-02-25)
-
-**Tujuan:** User bisa set target ujian (JLPT N5/N4/N3, HSK 1–4, TOPIK I/II) + tanggal ujian → sistem buatkan jadwal belajar harian otomatis.
-
-**Fitur:**
-- Goal Setting: pilih target ujian + tanggal ujian
-- Auto Schedule: sistem hitung berapa item perlu dipelajari/hari
-- Daily To-Do: dashboard tampilkan "hari ini: 5 kanji + 3 grammar + 1 quiz"
-- Progress Timeline: grafik progress vs jadwal ideal
-- Catch-up Mode: jadwal menyesuaikan jika ada hari terlewat
-
-**Ujian yang didukung:**
-- Jepang: JLPT N5, N4, N3, N2, N1
-- Mandarin: HSK 1, 2, 3, 4
-- Korea: TOPIK I, TOPIK II *(tersedia setelah Fase 21)*
-
-**localStorage keys baru:**
-```
-nh_user_{id}_planner   → { goal, targetDate, dailyQuota, schedule: {...} }
-```
-
-**File yang diupdate:**
-```
-pages/planner.html                  [BARU]
-assets/js/pages/planner.js          [BARU]
-assets/js/modules/planner.js        [BARU] — schedule calculation engine
-assets/css/planner.css              [BARU]
-pages/dashboard.html                [UPDATE] — daily to-do dari planner
-assets/js/pages/dashboard.js        [UPDATE]
-```
-
----
-
-### FASE 27 — Mini Game ✅ SELESAI (2026-02-25)
-
-**Tujuan:** Variasi belajar melalui game ringan yang tetap melatih hafalan.
-
-**Yang dikerjakan:**
-
-**Game 1 — Memory Match (Kartu Pasangan):**
-- Grid 4×4, 4×3, atau 6×3 kartu terbalik
-- Klik 2 kartu: cocok (karakter + artinya) → menghilang
-- Timer + skor combo, level Hiragana / Katakana / Hangul / Kanji N5
-- XP: 20 + skor/20 per sesi
-
-**Game 2 — Word Scramble:**
-- Huruf romanisasi diacak, user klik tile untuk menyusun jawaban
-- Klik jawaban untuk mengambil kembali, Clear untuk reset
-- 3 bahasa (JP/ZH/KR), 5/10/15 soal per sesi
-- XP: +3 per kata benar
-
-**Game 3 — Falling Kana (Arcade):**
-- Karakter hiragana/katakana/hangul jatuh dari atas layar via Canvas API
-- User ketik romanisasi, Enter untuk cek
-- Nyawa (3/5/10), leveling (speed naik setiap 10 benar)
-- XP: +1 per karakter benar + bonus dari skor
-
-**File baru:**
-```
-pages/games.html                    [BARU] — Hub game dengan 3 game card
-pages/games/memory.html             [BARU] — Memory Match
-pages/games/scramble.html           [BARU] — Word Scramble
-pages/games/falling-kana.html       [BARU] — Falling Kana
-assets/js/pages/game-memory.js      [BARU] — Logic Memory Match
-assets/js/pages/game-scramble.js    [BARU] — Logic Word Scramble
-assets/js/pages/game-falling.js     [BARU] — Logic Falling Kana (Canvas API)
-assets/css/games.css                [BARU] — Semua style game
-```
-
-**File diupdate:**
-```
-pages/dashboard.html                [UPDATE] — Tambah mini game quick-access card (3 icon)
-pages/planner.html                  [UPDATE] — Tambah Mini Game link di sidebar
-pages/dashboard.html + stats.html + settings.html + profile.html + change-password.html  [UPDATE] — Sidebar +Mini Game
-pages/japanese/*.html (7 file)      [UPDATE] — Sidebar +Mini Game
-pages/mandarin/*.html (6 file)      [UPDATE] — Sidebar +Mini Game
-pages/korean/*.html (5 file)        [UPDATE] — Sidebar +Mini Game
-manifest.json                       [UPDATE] — Shortcut Mini Game
-sw.js                               [UPDATE] — Cache bump v9→v10, tambah games.css + 3 game JS + 4 game HTML
-```
-
----
-
-### FASE 28 — Tema & Kustomisasi UI ✅ SELESAI (2026-02-25)
-
-**Tujuan:** User bisa ganti tema warna sesuai preferensi, lengkap dengan pilihan font, sudut UI, dan preview real-time.
-
-**5 tema yang diimplementasikan:**
-
-| Tema | Warna Utama | Aksen | Vibe |
-|------|-------------|-------|------|
-| 🌸 Sakura (default) | Merah #C0392B | Gold #D4AF37 | Tradisional Jepang |
-| 🍃 Zen | Hijau sage #4A7C59 | Sage muted | Minimalis |
-| 🌆 Neon Seoul | Ungu #7C3AED | Cyan #06B6D4 | Futuristik |
-| 🎋 Bamboo | Hijau tua #2D6A4F | Kuning #D4A017 | Alam Asia Timur |
-| 🌙 Midnight | Hitam #0A0A0F | Oranye #FF6B35 | Dark mode kuat |
-
-**Fitur kustomisasi:**
-- Color theme picker dengan preview 4 warna per tema + nama
-- Font picker: DM Sans (default), Nunito (bulat), Playfair (serif elegan), Monospace
-- Sudut UI: Tajam / Default / Bulat (via `data-radius`)
-- Live preview real-time di bagian atas settings
-- Reset ke default (Sakura) dengan 1 klik
-- Tema Midnight otomatis mengaktifkan dark mode
-
-**Implementasi teknis:**
-- CSS custom properties `[data-color-theme]` di `themes.css` — semua elemen otomatis mengikuti
-- `data-radius` attribute mengoverride `--radius`, `--radius-lg`, `--radius-xl` global
-- `data-font` attribute mengoverride `--font-body` global
-- Anti-FOUC: semua tema disimpan di `localStorage` (`nh_color_theme`, `nh_font`, `nh_radius`) dan diapply inline script `<head>` sebelum render
-- Per-user storage: `nh_user_{id}_customization` → `{colorTheme, font, radius, compactSidebar}`
-- Kompatibel penuh dengan dark mode — dark mode + color theme berjalan independen
-
-**File baru:**
-```
-assets/css/themes.css               ← 5 tema CSS variables, theme picker UI, font/radius override
-assets/js/modules/theme.js          ← ThemeSystem: getThemes, applyAll, setColorTheme, setFont, setRadius
-```
-
-**File diupdate:**
-```
-pages/settings.html                 ← Section "Tema & Kustomisasi" baru (color picker, font, radius, preview, reset)
-assets/js/pages/settings.js        ← Logika render & interaksi theme picker, font picker, radius picker
-assets/js/core/app.js              ← loadTheme() diperluas: apply color theme + font + radius dari ThemeSystem
-30 file HTML (semua pages)         ← Anti-FOUC script diupdate: tambah nh_color_theme, nh_font, nh_radius
-sw.js                               ← Cache bump v10→v11, tambah themes.css + theme.js
-```
-
-**localStorage keys baru:**
-```
-nh_color_theme                     → 'sakura' | 'zen' | 'neon-seoul' | 'bamboo' | 'midnight' (global)
-nh_font                            → 'default' | 'rounded' | 'serif' | 'mono' (global)
-nh_radius                          → 'sharp' | 'default' | 'rounded' (global)
-nh_user_{id}_customization         → { colorTheme, font, radius, compactSidebar }
-nh_user_{id}_last_backup           → { timestamp, date } — info backup terakhir (Fase 29)
-nh_user_{id}_last_restore          → { timestamp, fromDate, fromUser } — info restore terakhir (Fase 29)
-auto_backups_{userId}              → [ { timestamp, data: BackupObj }, ... ] — max 3 snapshot (Fase 29)
-```
-
----
-
-### FASE 29 — Backup & Restore Progress ✅ SELESAI (2026-02-25)
-
-**Tujuan:** User bisa export semua data progress ke file JSON dan import kembali di device lain — mengatasi ketakutan kehilangan progress jika localStorage terhapus.
-
-**Yang dikerjakan:**
-
-**File baru:**
-- `assets/js/modules/backup.js` — BackupSystem module lengkap
-
-**File diupdate:**
-- `pages/settings.html` — Section "Backup & Restore Progress" baru (export, import drag-drop, auto-snapshot list). Versi diupdate ke 3.3.
-- `assets/js/pages/settings.js` — Logika interaksi backup: render status, export, file select & drag-drop, validasi, restore dengan konfirmasi, render auto-backup list
-- `assets/css/settings.css` — Style section backup (status bar, file label, auto-backup-item, dark mode)
-- `sw.js` — Cache bump `lingora-v11` → `lingora-v12`, tambah `backup.js`
-
----
-
-### FASE 30 — Konten Lanjutan JP: Kosakata & Grammar N3 (eks Fase 16)
-
-> ⏸️ **Di-hold** — dikerjakan setelah Fase 29 selesai dan app sudah stabil dengan tiga bahasa.
-
-**Tujuan:** Membuka konten intermediate untuk pelajar Jepang yang sudah kuasai N5/N4.
+**Tujuan:** Buka konten intermediate untuk pelajar JP yang sudah kuasai N5/N4.
 
 **Target konten:**
-- `jp-vocab-n3.js` — 300+ kata kosakata N3, 15 tema (berita, emosi, masyarakat, teknologi, dll)
-- `jp-grammar-n3.js` — 30+ pola grammar N3: 〜ば, 〜ようだ, 〜らしい, 〜ことにする, 〜てしまう, dll
+- `assets/js/data/jp-vocab-n3.js` — 300+ kata N3, 15 tema (berita, emosi, masyarakat, teknologi)
+- `assets/js/data/jp-grammar-n3.js` — 30+ pola N3 (〜ば、〜ようだ、〜らしい、〜ことにする、〜てしまう)
 
 **File yang diupdate:**
-```
-assets/js/data/jp-vocab-n3.js       [BARU]
-assets/js/data/jp-grammar-n3.js     [BARU]
-pages/japanese/vocabulary.html      [UPDATE] — filter tambah N3
-pages/japanese/grammar.html         [UPDATE] — filter tambah N3
-pages/dashboard.html                [UPDATE] — progress card N3
-```
-
-**Catatan:** Pisahkan file data per level agar tidak berat. Verifikasi akurasi konten sebelum commit.
+- `pages/japanese/vocabulary.html` — filter tambah N3
+- `pages/japanese/grammar.html` — filter tambah N3
+- `pages/dashboard.html` — progress card N3
 
 ---
 
-### FASE 31 — Konten Lanjutan ZH: Hanzi & Kosakata HSK 4 (eks Fase 21 lama)
+### FASE 31 — Konten Lanjutan ZH: Hanzi & Kosakata HSK 4
 
-> ⏸️ **Di-hold** — dikerjakan bersamaan atau setelah Fase 30.
-
-**Tujuan:** Membuka konten intermediate untuk pelajar Mandarin yang sudah kuasai HSK 1–3.
+**Tujuan:** Buka konten intermediate untuk pelajar ZH yang sudah kuasai HSK 1–3.
 
 **Target konten:**
-- `hanzi-hsk4.js` — 300 karakter baru HSK 4
-- `zh-vocab-hsk4.js` — 300+ kata kosakata HSK 4
-
-**File yang diupdate:**
-```
-assets/js/data/hanzi-hsk4.js        [BARU]
-assets/js/data/zh-vocab-hsk4.js     [BARU]
-pages/mandarin/hanzi.html           [UPDATE] — filter tambah HSK4
-pages/mandarin/vocabulary.html      [UPDATE] — filter tambah HSK4
-pages/dashboard.html                [UPDATE] — progress card HSK4
-```
+- `assets/js/data/hanzi-hsk4.js` — 300 karakter HSK 4
+- `assets/js/data/zh-vocab-hsk4.js` — 300+ kata kosakata HSK 4
 
 ---
 
-### FASE 32 — Leaderboard Lokal & Tantangan Teman (eks Fase 24-lama)
+### FASE 32 — Leaderboard Lokal & Tantangan Teman
 
-> ⏸️ **Di-hold** — dikerjakan setelah tiga bahasa stabil dan konten lanjutan ada.
-
-**Tujuan:** Beberapa user di device yang sama bisa lihat progress masing-masing dan bersaing (cocok untuk HP keluarga atau lab sekolah).
+**Tujuan:** Persaingan antar user di device yang sama (cocok untuk HP keluarga atau lab sekolah).
 
 **Fitur:**
-- Leaderboard: tabel peringkat semua user di device (XP, streak, badge, tiga bahasa)
-- Perbandingan Progress: side-by-side chart dua user
+- Leaderboard: peringkat semua user di device (XP, streak, badge, 3 bahasa)
+- Perbandingan progress: side-by-side chart dua user
 - Challenge Teman: user A tantang user B dengan target spesifik
 
-**Catatan:** Semua data multi-user sudah ada di localStorage sejak Fase 1 — hanya perlu halaman visualisasi baru. Tidak butuh server.
-
-**File yang dibuat:**
-```
-pages/leaderboard.html              [BARU]
-assets/js/pages/leaderboard.js      [BARU]
-assets/css/leaderboard.css          [BARU]
-pages/dashboard.html                [UPDATE] — link ke leaderboard
-```
+*Data multi-user sudah ada di localStorage sejak Fase 1 — hanya butuh halaman visualisasi baru.*
 
 ---
 
-### FASE BONUS — Ide Jangka Panjang
+### Ide Jangka Panjang
 
-**B1 — Text-to-Speech Custom Voice:** Integrasi API TTS yang lebih natural (Google TTS atau OpenAI TTS) sebagai pengganti/pelengkap Web Speech API yang kualitas suaranya bergantung OS. Penting terutama untuk Korea.
-
-**B2 — OCR: Scan & Terjemah:** User foto teks Jepang/Mandarin/Korea → app kenali karakter dan tampilkan arti. Implementasi via Tesseract.js (OCR offline, tidak butuh server).
-
-**B3 — Kamus Inline:** Tap/klik kata di dialog atau teks untuk muncul popup arti langsung. Butuh database kamus yang lebih lengkap untuk ketiga bahasa.
-
-**B4 — Konten Korea Lanjutan (TOPIK II):** Setelah TOPIK I stabil, tambahkan kosakata dan grammar TOPIK II — konsisten dengan pola N3/HSK4 di JP dan ZH.
-
-**B5 — Multi-Platform Sync:** Jika suatu saat ada backend, progress bisa sync antar device. Saat ini di luar prinsip "offline-first pure localStorage".
+| Kode | Fitur | Keterangan |
+|------|-------|------------|
+| B1 | TTS Custom Voice | Google TTS / OpenAI TTS lebih natural dari Web Speech API |
+| B2 | OCR: Scan & Terjemah | Foto teks JP/ZH/KR → kenali karakter via Tesseract.js (offline) |
+| B3 | Kamus Inline | Tap kata di dialog/teks → popup arti langsung |
+| B4 | Konten Korea TOPIK II | Kosakata + grammar tingkat lanjut Korea |
+| B5 | Multi-Platform Sync | Backend + sync antar device (keluar dari prinsip offline-first) |
 
 ---
+
+## 11. Panduan untuk Claude Selanjutnya
+
+### Konteks Penting
+
+Kamu sedang melanjutkan pengembangan **Lingora** — aplikasi belajar bahasa Asia Timur yang berjalan **100% di browser tanpa server**. App sudah selesai Fase 29 (dari 29 fase) dengan tiga bahasa lengkap (JP + ZH + KR).
+
+**Fokus saat ini: Bug Fixing.** Tidak ada penambahan fitur atau fase baru sampai bug fixing selesai. Prioritas adalah memastikan semua fitur yang sudah ada berjalan benar di berbagai browser dan kondisi edge case.
+
+### Stack Teknologi
+
+Vanilla HTML + CSS + JavaScript ES6+. **Tidak ada** framework, build tool, atau npm. Semua berjalan dengan buka `index.html` di browser. Tidak ada `package.json`, tidak ada node_modules.
+
+### Sebelum Mulai Bug Fixing
+
+1. **Baca README ini dulu** secara keseluruhan — pahami apa yang sudah ada
+2. **Baca file yang akan diperbaiki** sebelum mengubahnya — jangan asumsikan isinya
+3. **Test di Chrome** (dukungan Web Speech API paling lengkap) dan **Firefox**
+4. **Test di GitHub Pages juga** — bug path sering tidak terlihat di file://
+
+### Aturan Wajib
+
+- ✅ **WAJIB** gunakan `Storage.getUser()` / `Storage.setUser()` — **JANGAN** `localStorage` langsung
+- ✅ Gunakan `Progress.markLearned()` / `Progress.getLearned()` untuk tracking hafalan
+- ✅ Gunakan `getBase()` untuk semua path relatif — jangan hardcode `/lingora/` atau `./`
+- ✅ Ikuti pola `App.init('page-id')` dan `Router.guard()` di setiap halaman
+- ✅ Tambahkan `ChallengeSystem.onLearnItem()` / `onModuleVisit()` di modul dengan aktivitas belajar
+- ✅ Tambahkan `XPSystem.addXP()` di modul yang relevan
+
+### Anti-Pattern yang Harus Dihindari
+
+- ❌ Jangan gunakan `localStorage` langsung — selalu pakai `Storage.getUser()`
+- ❌ Jangan hardcode path — selalu gunakan `getBase()` untuk path relatif
+- ❌ Jangan gabungkan data konten besar ke 1 file — pisah per level/modul
+- ❌ Jangan lupa update sidebar di SEMUA halaman saat ada link/halaman baru
+- ❌ Jangan lupa bump cache di `sw.js` dan tambahkan file baru ke `ASSETS_TO_CACHE`
+- ❌ Jangan hardcode nama "NihonHan" — gunakan "Lingora"
+
+### Anti-FOUC Script Wajib (4 property)
+
+Setiap halaman authenticated **wajib** punya script ini di `<head>` sebelum CSS:
+
+```html
+<script>
+  (function() {
+    const dm = localStorage.getItem('nh_dark_mode');
+    if (dm === 'true') document.documentElement.setAttribute('data-theme', 'dark');
+    const ct = localStorage.getItem('nh_color_theme');
+    if (ct) document.documentElement.setAttribute('data-color-theme', ct);
+    const fn = localStorage.getItem('nh_font');
+    if (fn) document.documentElement.setAttribute('data-font', fn);
+    const rd = localStorage.getItem('nh_radius');
+    if (rd) document.documentElement.setAttribute('data-radius', rd);
+  })();
+</script>
+```
+
+### Naming Convention
+
+```
+Halaman HTML    → pages/{bahasa}/{nama-modul}.html
+Script halaman  → assets/js/pages/{nama-halaman}.js
+Data konten     → assets/js/data/{prefix}-{keterangan}.js
+Modul reusable  → assets/js/modules/{nama-modul}.js
+CSS per fitur   → assets/css/{nama-fitur}.css
+```
+
+**Prefix bahasa:**
+- Jepang: `jp-` (vocab, grammar, dialog) atau tanpa prefix (hiragana, katakana, kanji)
+- Mandarin: `zh-` (vocab, dialog) atau tanpa prefix (pinyin, hanzi)
+- Korea: `kr-` (vocab, grammar, dialog) atau tanpa prefix (hangul)
+
+### Checklist Halaman Baru (untuk fase mendatang)
+
+- [ ] Anti-FOUC 4-property di `<head>`
+- [ ] `<link rel="manifest" href="...manifest.json">`
+- [ ] Meta PWA (`apple-mobile-web-app-capable`, `theme-color`, dll)
+- [ ] Script `pwa.js` sebelum `</body>`
+- [ ] Tombol `.theme-toggle-btn` di topbar
+- [ ] `Router.guard()` + `App.init('nama-halaman')`
+- [ ] Link halaman di sidebar **semua** halaman lain
+- [ ] Script `challenge.js` jika ada aktivitas belajar
+- [ ] Script `xp.js` jika ada aktivitas yang memberi XP
+- [ ] Tambah file ke `ASSETS_TO_CACHE` di `sw.js` + bump versi cache
+
+### Setelah Setiap Bug Fix / Fase Selesai
+
+1. Update section **Bug Fix** di README (tambah baris baru di tabel)
+2. Update **Log Pengerjaan** di bagian bawah README
+3. Update **Struktur Folder** jika ada file baru/dihapus
+4. Update **localStorage Key Reference** jika ada key baru
+5. Buat zip baru: `lingora_bugfix_{N}.zip` atau `lingora_fase{N}.zip`
 
 ---
 
@@ -1299,131 +1143,51 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 
 | Versi / Fase | Tanggal | Yang Dikerjakan | Status |
 |---|---|---|---|
-| **v1.0 — Fase 1** | — | Fondasi & Autentikasi | ✅ |
-| **v1.1 — Fase 2** | — | Transisi & 404 | ✅ |
-| **v1.2 — Fase 3** | — | Hiragana & Katakana | ✅ |
-| **v1.3 — Fase 4** | — | Kanji (278 karakter, N5–N1) | ✅ |
-| **v1.4 — Fase 5** | — | Mandarin (Pinyin, Nada, Hanzi, Vocab ZH) | ✅ |
-| **v1.5 — Fase 6** | — | Quiz & Gamifikasi Awal | ✅ |
-| **v1.6 — Fase 7** | — | Polish & Pengaturan | ✅ |
-| **v1.7 — Fase 8** | — | Konten Lengkap JP (Vocab 225, Grammar 35) | ✅ |
-| **v1.7.1 — Fase 8.1** | — | Redesign Login & Register | ✅ |
-| **v1.7.2 — Fase 8.2** | — | Bug Fix Quiz JP | ✅ |
-| **v1.7.3 — Fase 8.3** | — | Kanji N2 & N1 (total 278) | ✅ |
-| **v1.7.4 — Fase 8.3.1** | — | Hapus Duplikat Kanji | ✅ |
-| **v1.7.5 — Fase 8.4** | — | Enhance Profil | ✅ |
-| **v1.8 — Fase 9** | — | Audio & Pelafalan (Web Speech API) | ✅ |
-| **v1.8.1 — Fase 9.2** | — | Pelengkap Audio Mandarin | ✅ |
-| **v1.9 — Fase 10** | — | Dark Mode + Anti-FOUC | ✅ |
-| **v1.10 — Fase 11** | — | Spaced Repetition System (SM-2) | ✅ |
-| **v1.11 — Fase 12** | — | Favorit & Bookmark | ✅ |
-| **v1.12 — Fase 13** | — | Mode Input Jawaban (Quiz Ketik) | ✅ |
-| **v1.13 — Fase 14** | — | Gamifikasi Lanjutan: XP & Level | ✅ |
-| **v1.14 — Fase 15** | — | Challenge Harian | ✅ |
-| **v1.15 — Fase 17** | — | Dialog & Percakapan (JP + ZH) | ✅ |
-| **v1.16 — Fase 18** | — | Streak Reminder (Browser Notification) | ✅ |
-| **v1.17 — Fase 19** | — | Export Progress ke PDF | ✅ |
-| **v1.18 — Fase 20** | — | PWA (Service Worker, Install, Offline) | ✅ |
-| **v1.19 — Fase 20.4** | — | Live Clock di Topbar Dashboard | ✅ |
-| **v2.0 — Fase 21.1** | 2026-02-25 | Rename & Rebranding NihonHan → Lingora. Update: semua 23 HTML, 43 JS, manifest.json (v3 bump), sw.js (lingora-v3), index.html, 404.html. Tagline diupdate ke 3 bahasa. Folder proyek: `lingora/`. | ✅ |
-| **v2.1 — Fase 21.2** | 2026-02-25 | Data Korea: `hangul.js` (14 konsonan + 21 vokal + 70 suku kata), `kr-vocab.js` (155 kata, 15 tema, TOPIK1/2), `kr-grammar.js` (27 pola, 5 kategori), `kr-dialogs.js` (6 dialog situasional TOPIK I). | ✅ |
-| **v2.2 — Fase 21.3** | 2026-02-25 | Modul Hangul: `pages/korean/hangul.html` (3 tab: Tabel/Flashcard/SRS), `assets/js/pages/hangul.js` (grid jamo, modal detail, flashcard, SRS, favorit, audio ko-KR), `assets/css/korean.css` (semua style Korea). Update `audio.js`: tambah `koVoice`, `speakKR()`, `hasKRVoice()`. Update sidebar 20 halaman: tambah section 🇰🇷 Korea + Quiz Korea. | ✅ |
-| **v2.3 — Fase 21.4** | 2026-02-25 | Modul Vocab & Grammar Korea. **File baru:** `pages/korean/vocabulary.html` (Tab Jelajah + SRS, filter tema & TOPIK, favorit, audio ko-KR), `assets/js/pages/kr-vocab.js` (grid kartu, toggle learned, SRS, event delegation), `pages/korean/grammar.html` (accordion 5 kategori, search, filter TOPIK), `assets/js/pages/kr-grammar.js` (accordion expand, mark hafal, search, XP). **Update:** `assets/css/korean.css` (badge TOPIK I/II, kr-word, kr-pattern, kr-ex-kr, kr-romanization, kr-srs-char). | ✅ |
-| **v2.4 — Fase 21.5** | 2026-02-25 | Modul Dialog & Quiz Korea. **File baru:** `pages/korean/dialog.html` (viewer dialog A/B, filter level TOPIK, playthrough dengan TTS ko-KR, toggle romanisasi & terjemahan), `assets/js/pages/kr-dialog.js` (grid dialog, viewer, step prev/next, auto-speak TTS, XP), `pages/korean/quiz.html` (quiz KR: pilih/ketik, modul Hangul & Vocab KR, pilih jumlah soal & level TOPIK), `assets/js/pages/quiz-kr.js` (2 modul: hangul & kr-vocab, 3 tipe soal, normalisasi romanisasi, timer, feedback, review akhir). | ✅ |
-| **v2.5 — Fase 22** | 2026-02-25 | **Listening Mode (Audio Quiz)** untuk semua 3 quiz (JP, ZH, KR). **Perubahan utama:** Tombol mode baru `🎧 Listening` di selector mode setiap halaman quiz. Mode Listening: karakter soal **disembunyikan** (blur CSS), tombol 🔊 besar beranimasi pulse auto-play audio saat soal muncul, user jawab pilihan arti. Karakter terungkap setelah menjawab. Bonus XP **+5 per soal benar** di Listening mode, terakumulasi ditampilkan di layar hasil. Timer 25 detik (lebih panjang dari mode normal 20 detik). **File baru:** Tidak ada (semua update). **File diupdate:** `assets/css/quiz.css` (Fase 22 section: `.quiz-char-hidden`, `.listening-play-btn`, `.listening-mode-badge`, `.listening-bonus-badge`, `.listening-stat`, animasi `listenPulse`), `pages/japanese/quiz.html` (mode btn + `listeningWrap` + `statListeningXP` + audio.js), `pages/mandarin/quiz.html` (idem), `pages/korean/quiz.html` (idem), `assets/js/pages/quiz-jp.js` (listening state, `playListeningAudio`, `onAnswerListening`, update `buildKanaQuestion` + `buildKanjiQuestion`), `assets/js/pages/quiz-zh.js` (listening penuh, update `buildHanziQuestion` + `buildVocabQuestion`), `assets/js/pages/quiz-kr.js` (listening penuh, `renderListeningChoices`, `onAnswerListening`), `sw.js` (cache bump `lingora-v3` → `lingora-v4`). | ✅ |
-| **v2.6 — Fase 21.6** | 2026-02-25 | **Integrasi Penuh Korea** — menghubungkan semua modul KR ke sistem inti app. **Dashboard:** Tambah section Bahasa Korea (4 modul: Hangul, Kosakata KR, Grammar KR, Dialog KR) dengan progress bar di `dashboard.html` + `dashboard.js`. Tambah kutipan motivasi Korea (꿈). **Stats:** Update `stats.js` MODULES (tambah 4 modul KR) + ALL_BADGES (tambah 🌙 Hanŭl + 🌏 Poliglot) + quiz history name map KR. **Settings:** Tambah toggle `showRomanization` (romanisasi Hangul/Revised Romanization) di `settings.html` + `settings.js`. Update MODULES reset list (tambah 4 modul KR). **Report/PDF:** Update `report.js` MODULES (tambah 4 modul KR), ALL_BADGES (tambah 🌙 + 🌏), MODULE_NAME_MAP (KR + quiz-kr). **Badge System:** Tambah badge 🌙 `hangul_master` (hafal item di semua modul KR) + 🌏 `polyglot` (hafal item dari 3 bahasa JP+ZH+KR) ke `quiz.js` BadgeSystem.BADGES dengan `check()` function berbasis progress data. Update `checkAndAward()` untuk pass `progress` object ke check functions. **Progress:** Tambah panggilan `BadgeSystem.checkAndAward()` di `progress.js` `markLearned()` agar badge KR dicek saat belajar (bukan hanya saat quiz). **Challenge:** Tambah 3 template KR (Hangul, Kosakata KR, Grammar Korea) ke `challenge.js` TEMPLATES. **Manifest:** Tambah shortcut Quiz Korea di `manifest.json`. **SW:** Cache bump `lingora-v4` → `lingora-v5`. Tambah 4 data file KR, 5 page JS KR, 5 HTML KR ke `ASSETS_TO_CACHE`. | ✅ |
-| **v2.7 — Fase 23** | 2026-02-25 | **Stroke Order Animasi Hiragana & Katakana** — Tab "✍️ Menulis" baru di kedua halaman. **File baru:** `assets/js/data/kana-strokes.js` (data SVG path 46 hiragana + 46 katakana dasar), `assets/js/modules/kana-stroke-ui.js` (KanaStrokeUI: render panel animasi SVG, grid karakter, kontrol play/step/reset, animasi strokeDashoffset, panah arah). **File update:** `pages/japanese/hiragana.html` + `katakana.html` (tab baru + scripts baru), `assets/js/pages/hiragana.js` + `katakana.js` (fungsi `initWritingTab()` dengan lazy-init), `assets/css/japanese.css` (section Fase 23: layout dua kolom, SVG wrap, controls, stroke list, responsive), `sw.js` (cache bump v5→v6, tambah 2 file baru). | ✅ |
-| **v2.8 — Fase 24** | 2026-02-25 | **Vocabulary Builder — Kalimat Kontekstual & Quiz** — Menambahkan 2-3 kalimat kontekstual per kata kunci + tab Kalimat Quiz (fill-in-the-blank). **File baru:** `assets/js/modules/vocab-builder.js` (VocabBuilder: renderSentences, initToggles, startQuiz, buildQuizItems). **Data update:** `jp-vocab.js` (sentences untuk 10 kata: greetings + food + verbs), `zh-vocab.js` (sentences untuk 7 kata: greetings + food), `kr-vocab.js` (sentences untuk 5 kata: greetings). **CSS:** `components.css` (section Fase 24: vb-sentences-wrap, vb-toggle-btn, vb-sentence, vb-quiz-*, dll). **HTML update:** `pages/japanese/vocabulary.html`, `mandarin/vocabulary.html`, `korean/vocabulary.html` (tab "🧩 Kalimat Quiz" baru + panel tab-kalimat + script vocab-builder.js). **Page JS update:** `jp-vocab.js`, `zh-vocab.js`, `kr-vocab.js` (render sentences, initToggles, initKalimatQuizTab). **SW:** cache bump v6→v7 + tambah vocab-builder.js. | ✅ |
-| **v2.9 — Fase 25** | 2026-02-25 | **Onboarding & Placement Test** — Wizard 5 langkah untuk user baru. **File baru:** `pages/onboarding.html` (wizard 5 step), `assets/js/pages/onboarding.js` (logika wizard, bank soal placement 30 soal, 3 bahasa), `assets/css/onboarding.css` (card, step dots, progress bar, lang selector, quiz UI, dark mode). **Fitur:** Step 1 Welcome; Step 2 Pilih bahasa fokus (JP/ZH/KR/Semua); Step 3 Placement Test 10 soal + skip; Step 4 Hasil (level Pemula/Menengah + 3 rekomendasi modul); Step 5 Target harian (5–60 mnt). Data: `nh_user_{id}_onboarding`. Bonus +50 XP saat selesai. **Dashboard:** Section Profil Belajarmu (tampil status atau prompt onboarding). **register.html:** Redirect ke onboarding setelah daftar. **Sidebar:** Link Profil Belajar di 23 halaman. **SW:** cache bump v7→v8. | ✅ |
-| **v3.0 — Fase 26** | 2026-02-25 | **Study Planner / Jadwal Belajar** — Sistem jadwal belajar otomatis berdasarkan target ujian. **File baru:** `pages/planner.html` (halaman planner lengkap), `assets/js/pages/planner.js` (logika halaman: setup wizard, active view, to-do harian, timeline, catch-up), `assets/js/modules/planner.js` (StudyPlanner engine: `calcSchedule`, `calcTodayTodo`, `calcTimeline`, `savePlanner`, `loadPlanner`), `assets/css/planner.css` (semua style planner: exam options grid, preview, todo list, timeline chart, countdown, module breakdown). **Fitur:** 9 target ujian (JLPT N5/N4/N3, HSK 1/2/3/4, TOPIK I/II); kalkulasi kuota item/hari otomatis; daily to-do per modul dengan direct link; Catch-up Mode (jadwal menyesuaikan jika ada hari terlewat); progress timeline chart 7 hari; countdown hari tersisa; overall progress bar; module breakdown per modul. **Data:** `nh_user_{id}_planner` → `{examId, targetDate, startDate, createdAt}`. **Dashboard:** Section "📅 Target Planner Hari Ini" (tampil jika planner aktif) dengan direct link per modul. **Sidebar:** Link Study Planner ditambahkan ke semua 24 halaman HTML. **Manifest:** Shortcut Study Planner ditambahkan. **SW:** cache bump v8→v9, tambah 3 file planner baru. | ✅ |
-| **v3.1 — Fase 27** | 2026-02-25 | **Mini Game** — 3 game interaktif untuk belajar sambil bermain. **File baru:** `pages/games.html` (hub 3 game), `pages/games/memory.html` (Memory Match), `pages/games/scramble.html` (Word Scramble), `pages/games/falling-kana.html` (Falling Kana arcade), `assets/js/pages/game-memory.js` (logika kartu pasangan: flip 3D CSS, timer, skor, XP +20/sesi), `assets/js/pages/game-scramble.js` (logika susun huruf: klik tile, cek jawaban, JP/ZH/KR, XP +3/kata), `assets/js/pages/game-falling.js` (arcade Canvas API: karakter jatuh, level speed, nyawa, XP per karakter), `assets/css/games.css` (semua style: memory-grid, kartu flip 3D, scramble-tile, falling canvas, dark mode support). **Game 1 Memory Match:** kategori Hiragana/Katakana/Hangul/Kanji N5, ukuran 8/12/18 pasang, animasi flip 3D CSS, shake on mismatch, glow on match. **Game 2 Word Scramble:** romanisasi diacak per karakter, tile klik untuk susun/ambil kembali, 3 bahasa, 5/10/15 soal. **Game 3 Falling Kana:** Canvas requestAnimationFrame, spawn karakter dengan interval adaptif, leveling setiap 10 benar, nyawa 3/5/10, gameover overlay. **Dashboard:** Quick-access card 3 icon game. **Sidebar:** Link Mini Game ditambahkan ke 24 halaman. **Manifest:** Shortcut Mini Game. **SW:** cache bump v9→v10, tambah games.css + 3 game JS + 4 game HTML. | ✅ |
-| **v3.2 — Fase 28** | 2026-02-25 | **Tema & Kustomisasi UI** — 5 tema warna + font picker + radius picker dengan preview real-time. **File baru:** `assets/css/themes.css` (5 tema via `[data-color-theme]` CSS variables, theme card UI, font/radius override), `assets/js/modules/theme.js` (ThemeSystem: getThemes, applyAll, applyColorTheme, applyFont, applyRadius, setColorTheme, setFont, setRadius, applyFromLocalStorage). **Settings page:** Section baru "Tema & Kustomisasi" dengan live preview card, grid 5 tema warna (Sakura/Zen/Neon Seoul/Bamboo/Midnight), font picker 4 pilihan (DM Sans/Nunito/Playfair/Mono), radius picker 3 pilihan (Tajam/Default/Bulat), tombol Reset ke Default. **Tema Midnight** otomatis mengaktifkan dark mode. **Anti-FOUC:** 30 halaman HTML diupdate dengan inline script tambahan (`nh_color_theme`, `nh_font`, `nh_radius`). **app.js:** `loadTheme()` diperluas memanggil `ThemeSystem.applyAll()` jika user login. **localStorage keys baru:** `nh_color_theme`, `nh_font`, `nh_radius` (global), `nh_user_{id}_customization` (per-user). **SW:** cache bump v10→v11, tambah themes.css + theme.js. | ✅ |
-
-| **v3.3 — Fase 29** | 2026-02-25 | **Backup & Restore Progress** — Keamanan data user dengan export/import JSON + auto-snapshot. **File baru:** `assets/js/modules/backup.js` (BackupSystem: `exportData`, `downloadBackup`, `validate`, `importData`, `readFile`, `autoBackup`, `getAutoBackups`, `restoreAutoBackup`, `getLastBackupInfo`, `getLastRestoreInfo`, `formatDate`). **Fitur Export:** Tombol "Download Backup" → unduh file `lingora-backup-{tanggal}.json` berisi semua progress, SRS (11 modul), XP, badge, activity, streak, challenge, settings, onboarding, planner, customization. **Fitur Import:** Drag-drop atau klik untuk pilih file JSON → validasi otomatis (appName, version, data integrity) → konfirmasi sebelum restore → data ditimpa ke user aktif. **Auto-backup:** Snapshot lokal otomatis setiap 7 hari (max 3), tersimpan di localStorage. Tiap snapshot bisa di-restore atau diunduh langsung dari UI. **Status bar:** Tampil info backup & restore terakhir dengan format tanggal ID. **CSS:** Section baru di `settings.css` (backup-status-bar, backup-import-wrap, backup-file-label, auto-backup-list, auto-backup-item, dark mode support). **localStorage keys baru:** `auto_backups_{userId}` (snapshot list), `nh_user_{id}_last_backup`, `nh_user_{id}_last_restore`. **SW:** cache bump `lingora-v11` → `lingora-v12`, tambah `backup.js`. Versi app: 3.2 → 3.3. | ✅ |
-
-
-
-> **Fase saat ini:** FASE 29 ✅ SELESAI
-
-### Konteks Proyek Saat Ini
-
-Kamu sedang melanjutkan pengembangan **Lingora** (sebelumnya Lingora), aplikasi web belajar bahasa Asia Timur yang berjalan **100% di browser tanpa server**. App sudah berjalan stabil di Fase 20.4 dengan dua bahasa (JP + ZH). Fase 21 adalah langkah besar berikutnya: menambahkan Korea dan merename proyek.
-
-**Stack:** Vanilla HTML + CSS + JavaScript. Tidak ada framework, tidak ada build tool, tidak ada npm. Semua berjalan dengan buka `index.html` di browser.
-
-### Sebelum Mulai Fase Baru
-
-1. **Baca README ini dulu** secara keseluruhan — pahami struktur, pola kode, dan bug fix yang sudah ada
-2. **Baca kode file yang akan diubah** sebelum mulai coding — jangan asumsikan isi file
-3. **Tentukan fase yang dikerjakan** berdasarkan Roadmap di atas
-
-### Aturan Wajib
-
-- Ikuti pola `App.init('page-id')` dan `Router.guard()` di setiap halaman baru
-- Gunakan `Storage.getUser()` / `Storage.setUser()` untuk semua data persisten — **JANGAN** gunakan `localStorage` langsung
-- Gunakan `Progress.markLearned()` / `Progress.getLearned()` untuk tracking hafalan
-- Tambahkan `ChallengeSystem.onLearnItem()` / `onModuleVisit()` di setiap modul baru
-- Tambahkan `XPSystem.addXP()` di modul yang relevan
-- Setiap halaman authenticated **wajib** punya: anti-FOUC script di head, link manifest PWA, script `pwa.js`, dan tombol theme toggle di topbar
-
-### Naming Convention
-
-```
-Halaman HTML    → pages/{bahasa}/{nama-modul}.html   (bahasa: japanese/mandarin/korean)
-Script halaman  → assets/js/pages/{nama-halaman}.js
-Data konten     → assets/js/data/{modul}-{keterangan}.js
-Modul reusable  → assets/js/modules/{nama-modul}.js
-CSS per fitur   → assets/css/{nama-fitur}.css
-```
-
-**Prefix bahasa untuk file data dan module ID:**
-- Jepang: `jp-` (vocab, grammar, dialog) atau tanpa prefix (hiragana, katakana, kanji)
-- Mandarin: `zh-` (vocab, dialog) atau tanpa prefix (pinyin, hanzi)
-- Korea: `kr-` (vocab, grammar, dialog) atau tanpa prefix (hangul)
-
-### Anti-Pattern yang Harus Dihindari
-
-- ❌ Jangan gunakan `localStorage` langsung — selalu pakai `Storage.getUser()`
-- ❌ Jangan hardcode path — selalu gunakan `getBase()` untuk path relatif
-- ❌ Jangan gabungkan data konten besar ke 1 file — pisah per level/modul
-- ❌ Jangan lupa tambahkan script baru ke semua halaman yang relevan (termasuk sidebar update)
-- ❌ Jangan lupa test di GitHub Pages (bukan hanya lokal) — bug path sering tidak ketahuan lokal
-- ❌ Untuk Fase 21: jangan hardcode nama "NihonHan" di file baru — gunakan "Lingora"
-
-### Checklist Halaman Baru
-
-Untuk setiap halaman authenticated baru, pastikan memiliki:
-- [ ] Anti-FOUC script di `<head>` untuk dark mode
-- [ ] `<link rel="manifest" href="...manifest.json">`
-- [ ] Meta PWA (`apple-mobile-web-app-capable`, `theme-color`, dll)
-- [ ] Script `pwa.js` sebelum closing `</body>`
-- [ ] Tombol `.theme-toggle-btn` di topbar
-- [ ] `Router.guard()` di script halaman
-- [ ] `App.init('nama-halaman')` di script halaman
-- [ ] Link halaman ini di sidebar semua halaman lain
-- [ ] Script `challenge.js` jika halaman punya aktivitas belajar
-- [ ] Script `xp.js` jika halaman punya aktivitas yang memberi XP
-
-### Setelah Setiap Fase Selesai
-
-1. Update section **Riwayat Fase** di README ini
-2. Update section **Struktur Folder** jika ada file baru
-3. Update **localStorage Key Reference** jika ada key baru
-4. Update **Ringkasan Konten** jika ada konten baru
-5. Buat zip baru dengan nama `lingora_fase{N}.zip`
-
-### Catatan Khusus untuk Fase 21
-
-Fase 21 adalah fase terbesar sejak Fase 1 karena mencakup:
-1. Rename seluruh proyek (branding, manifest, ikon)
-2. Penambahan satu bahasa baru lengkap (Hangul + Vocab + Grammar + Dialog + Quiz)
-3. Update semua sidebar (jumlahnya banyak)
-4. Penambahan badge baru (Hanŭl + Poliglot) ke BadgeSystem
-
-**Disarankan dikerjakan per sub-fase:** 21.A dulu (rename) → verifikasi semua berjalan → 21.B (Hangul) → verifikasi → dst. Jangan kerjakan semua sekaligus dalam satu sesi.
+| **v1.0 — Fase 1** | — | Fondasi & Autentikasi: storage, auth, router, app, login, register | ✅ |
+| **v1.1 — Fase 2** | — | Transisi halaman fade-in, 404 custom, perbaikan redirect | ✅ |
+| **v1.2 — Fase 3** | — | Hiragana & Katakana: grid, flashcard 3D flip, SRS, favorit, audio | ✅ |
+| **v1.3 — Fase 4** | — | Kanji 278 karakter N5–N1: grid, modal, SRS, stroke order SVG | ✅ |
+| **v1.4 — Fase 5** | — | Mandarin: Pinyin (59 unit), Nada (5 nada SVG), Hanzi (208), Vocab ZH (120+) | ✅ |
+| **v1.5 — Fase 6** | — | Quiz multi-modul pilihan ganda + BadgeSystem dasar | ✅ |
+| **v1.6 — Fase 7** | — | Settings, profil user (avatar 10 opsi, bio), stats awal | ✅ |
+| **v1.7 — Fase 8** | — | Vocab JP (225 kata, 15 tema), Grammar JP (35 pola, N5–N4) | ✅ |
+| **v1.7.1 — Fase 8.1** | — | Redesign login/register dua kolom dengan hero image | ✅ |
+| **v1.7.2 — Fase 8.2** | — | Bug fix: duplikat opsi quiz, timer tidak reset antar soal | ✅ |
+| **v1.7.3 — Fase 8.3** | — | Kanji N2 + N1 (total 278), hapus duplikat, validasi data | ✅ |
+| **v1.7.5 — Fase 8.4** | — | Enhance profil: bio, detail stats, avatar picker, edit inline | ✅ |
+| **v1.8 — Fase 9** | — | AudioEngine Web Speech API JP + ZH di semua modul | ✅ |
+| **v1.8.1 — Fase 9.2** | — | Pelengkap audio Mandarin: nada + dialog ZH | ✅ |
+| **v1.9 — Fase 10** | — | Dark mode + anti-FOUC inline script di semua halaman | ✅ |
+| **v1.10 — Fase 11** | — | SRS Engine SM-2, SRS UI renderer reusable, tab SRS semua modul | ✅ |
+| **v1.11 — Fase 12** | — | Sistem favorit/bookmark: tombol ❤️, filter, stats favorit | ✅ |
+| **v1.12 — Fase 13** | — | Mode quiz Ketik Jawaban: normalisasi input, romanisasi diterima | ✅ |
+| **v1.13 — Fase 14** | — | XPSystem: addXP, level calc, XP bar dashboard, riwayat XP | ✅ |
+| **v1.14 — Fase 15** | — | ChallengeSystem: seed tanggal, 30+ template task JP/ZH | ✅ |
+| **v1.15 — Fase 17** | — | Dialog JP (8) + ZH (7): viewer A/B, playthrough TTS, vocab chip | ✅ |
+| **v1.16 — Fase 18** | — | ReminderSystem: browser notification, jadwal kustom hari + jam | ✅ |
+| **v1.17 — Fase 19** | — | Laporan PDF: report.html standalone, semua modul, @media print | ✅ |
+| **v1.18 — Fase 20** | — | PWA: Service Worker cache-first, manifest, install prompt, offline | ✅ |
+| **v1.19 — Fase 20.4** | — | Live clock topbar dashboard, update tiap detik | ✅ |
+| **v2.0 — Fase 21.1** | 2026-02-25 | Rename NihonHan → Lingora: 23 HTML, 43 JS, manifest v3, SW lingora-v3 | ✅ |
+| **v2.1 — Fase 21.2** | 2026-02-25 | Data Korea: hangul.js (35 jamo+suku kata), kr-vocab.js (155), kr-grammar.js (27), kr-dialogs.js (6) | ✅ |
+| **v2.2 — Fase 21.3** | 2026-02-25 | Modul Hangul: 3 tab, audio ko-KR, sidebar 20 halaman diupdate | ✅ |
+| **v2.3 — Fase 21.4** | 2026-02-25 | Vocab KR + Grammar KR: halaman, page JS, CSS badge TOPIK I/II | ✅ |
+| **v2.4 — Fase 21.5** | 2026-02-25 | Dialog KR + Quiz KR: viewer TTS ko-KR, mode pilih/ketik | ✅ |
+| **v2.5 — Fase 22** | 2026-02-25 | Listening Mode 3 quiz (JP/ZH/KR): blur char, auto-play TTS, +5 XP bonus, SW v4 | ✅ |
+| **v2.6 — Fase 21.6** | 2026-02-25 | Integrasi penuh Korea: dashboard, stats, settings, report, badge (Hanŭl+Poliglot), challenge KR, SW v5 | ✅ |
+| **v2.7 — Fase 23** | 2026-02-25 | Stroke order animasi kana: kana-strokes.js (92 path SVG), kana-stroke-ui.js, tab Menulis, SW v6 | ✅ |
+| **v2.8 — Fase 24** | 2026-02-25 | Vocabulary Builder: vocab-builder.js, kalimat kontekstual JP/ZH/KR, tab Kalimat Quiz, SW v7 | ✅ |
+| **v2.9 — Fase 25** | 2026-02-25 | Onboarding wizard 5 langkah: placement test 30 soal, rekomendasi modul, target harian, SW v8 | ✅ |
+| **v3.0 — Fase 26** | 2026-02-25 | Study Planner: 9 ujian, kalkulasi kuota/hari, catch-up mode, timeline 7 hari, SW v9 | ✅ |
+| **v3.1 — Fase 27** | 2026-02-25 | Mini Game 3x: Memory Match (flip 3D), Word Scramble (tile), Falling Kana (Canvas), SW v10 | ✅ |
+| **v3.2 — Fase 28** | 2026-02-25 | Tema & Kustomisasi: 5 tema+4 font+3 radius, themes.css, theme.js, anti-FOUC 30 halaman, SW v11 | ✅ |
+| **v3.3 — Fase 29** | 2026-02-25 | Backup & Restore: BackupSystem export/import JSON, auto-snapshot 3x, drag-drop UI, SW v12 | ✅ |
+| **Bug Fixing** | TBD | 🐛 Review menyeluruh — tidak ada fase baru untuk sementara | 🔄 In Progress |
 
 ---
 
-*Lingora — 日本語も、中文も、한국어도. Belajar itu indah, satu karakter dalam satu waktu.*
-
-*Dokumen ini adalah README tunggal yang mencakup semua informasi proyek — dari konteks, arsitektur, riwayat pengembangan, hingga roadmap lengkap fase 21 dan seterusnya. Perbarui dokumen ini setiap selesai fase.*
+> **Fase saat ini:** Fase 29 ✅ SELESAI → **Bug Fixing** 🐛 (fokus berikutnya)
+>
+> *Lingora — 日本語も、中文も、한국어도. Belajar itu indah, satu karakter dalam satu waktu.*
+>
+> *Dokumen ini adalah sumber kebenaran tunggal untuk proyek Lingora — mencakup arsitektur, semua 29 fase, localStorage reference, checklist, dan panduan pengembangan. Perbarui dokumen ini setiap selesai bug fix atau fase baru.*
