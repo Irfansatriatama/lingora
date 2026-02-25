@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 21.4 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Modul Vocab & Grammar KR (Fase 21.4) |
+| **Fase Saat Ini** | FASE 21.5 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Modul Dialog & Quiz KR (Fase 21.5) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -121,10 +121,10 @@ lingora/
 │   │   └── quiz.html                   ← Quiz ZH: pilih/ketik, modul pilihan
 │   └── korean/                         ← [BARU — Fase 21]
 │       ├── hangul.html                 ← Tab: Tabel / Flashcard / SRS (Jamo dasar) ✅
-│       ├── vocabulary.html             ← Tab: Jelajah / SRS | Filter tema & level
-│       ├── grammar.html                ← Accordion pola grammar dasar–menengah
-│       ├── dialog.html                 ← Percakapan situasional 6+ dialog
-│       └── quiz.html                   ← Quiz KR: pilih/ketik, modul pilihan
+│       ├── vocabulary.html             ← Tab: Jelajah / SRS | Filter tema & level ✅
+│       ├── grammar.html                ← Accordion pola grammar dasar–menengah ✅
+│       ├── dialog.html                 ← Percakapan situasional 6+ dialog ✅
+│       └── quiz.html                   ← Quiz KR: pilih/ketik, modul pilihan ✅
 │
 ├── assets/
 │   ├── css/
@@ -628,7 +628,7 @@ Fase 33 (Leaderboard — eks Fase 25)        ← Dulu di-hold
 | **21.2** | Data Korea | 4 file data: `hangul.js`, `kr-vocab.js`, `kr-grammar.js`, `kr-dialogs.js` | ✅ SELESAI |
 | **21.3** | Modul Hangul | `hangul.html` + `hangul.js` + `korean.css` (3 tab: Tabel, Flashcard, SRS) | ✅ SELESAI |
 | **21.4** | Modul Vocab & Grammar | `vocabulary.html` + `kr-vocab.js`, `grammar.html` + `kr-grammar.js` | ✅ SELESAI |
-| **21.5** | Modul Dialog & Quiz | `dialog.html` + `kr-dialog.js`, `quiz.html` + `quiz-kr.js` | 🔲 Belum |
+| **21.5** | Modul Dialog & Quiz | `dialog.html` + `kr-dialog.js`, `quiz.html` + `quiz-kr.js` | ✅ SELESAI |
 | **21.6** | Integrasi Penuh | Sidebar semua halaman, Dashboard KR, Stats, Settings, Badge, Challenge | 🔲 Belum |
 
 ---
@@ -1228,6 +1228,7 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.1 — Fase 21.2** | 2026-02-25 | Data Korea: `hangul.js` (14 konsonan + 21 vokal + 70 suku kata), `kr-vocab.js` (155 kata, 15 tema, TOPIK1/2), `kr-grammar.js` (27 pola, 5 kategori), `kr-dialogs.js` (6 dialog situasional TOPIK I). | ✅ |
 | **v2.2 — Fase 21.3** | 2026-02-25 | Modul Hangul: `pages/korean/hangul.html` (3 tab: Tabel/Flashcard/SRS), `assets/js/pages/hangul.js` (grid jamo, modal detail, flashcard, SRS, favorit, audio ko-KR), `assets/css/korean.css` (semua style Korea). Update `audio.js`: tambah `koVoice`, `speakKR()`, `hasKRVoice()`. Update sidebar 20 halaman: tambah section 🇰🇷 Korea + Quiz Korea. | ✅ |
 | **v2.3 — Fase 21.4** | 2026-02-25 | Modul Vocab & Grammar Korea. **File baru:** `pages/korean/vocabulary.html` (Tab Jelajah + SRS, filter tema & TOPIK, favorit, audio ko-KR), `assets/js/pages/kr-vocab.js` (grid kartu, toggle learned, SRS, event delegation), `pages/korean/grammar.html` (accordion 5 kategori, search, filter TOPIK), `assets/js/pages/kr-grammar.js` (accordion expand, mark hafal, search, XP). **Update:** `assets/css/korean.css` (badge TOPIK I/II, kr-word, kr-pattern, kr-ex-kr, kr-romanization, kr-srs-char). | ✅ |
+| **v2.4 — Fase 21.5** | 2026-02-25 | Modul Dialog & Quiz Korea. **File baru:** `pages/korean/dialog.html` (viewer dialog A/B, filter level TOPIK, playthrough dengan TTS ko-KR, toggle romanisasi & terjemahan), `assets/js/pages/kr-dialog.js` (grid dialog, viewer, step prev/next, auto-speak TTS, XP), `pages/korean/quiz.html` (quiz KR: pilih/ketik, modul Hangul & Vocab KR, pilih jumlah soal & level TOPIK), `assets/js/pages/quiz-kr.js` (2 modul: hangul & kr-vocab, 3 tipe soal, normalisasi romanisasi, timer, feedback, review akhir). | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 
