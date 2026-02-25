@@ -97,6 +97,7 @@
         <button class="tab-btn" data-tab="flashcard">Flashcard</button>
         <button class="tab-btn" data-tab="quiz">Quiz Mini</button>
         <button class="tab-btn" data-tab="srs">🔁 SRS</button>
+        <button class="tab-btn" data-tab="writing">✍️ Menulis</button>
       </div>
 
       <div class="tab-panel active" id="tab-table">
@@ -130,6 +131,10 @@
 
       <div class="tab-panel" id="tab-srs">
         <!-- Rendered by JS -->
+      </div>
+
+      <div class="tab-panel" id="tab-writing">
+        <!-- Rendered by JS (KanaStrokeUI.renderWritingTab) -->
       </div>
     </main>
   </div>
@@ -167,12 +172,14 @@
 <script src="../../assets/js/core/app.js"></script>
 <script src="../../assets/js/modules/audio.js"></script>
 <script src="../../assets/js/data/hiragana.js"></script>
+<script src="../../assets/js/data/kana-strokes.js"></script>
 <script src="../../assets/js/modules/progress.js"></script>
 <script src="../../assets/js/modules/xp.js"></script>
 <script src="../../assets/js/modules/challenge.js"></script>
 <script src="../../assets/js/modules/srs.js"></script>
 <script src="../../assets/js/modules/srs-ui.js"></script>
 <script src="../../assets/js/modules/flashcard.js"></script>
+<script src="../../assets/js/modules/kana-stroke-ui.js"></script>
 <script src="../../assets/js/pages/hiragana.js"></script>
 <script src="../../assets/js/modules/pwa.js"></script>
 <script>document.addEventListener("DOMContentLoaded", () => PWAManager.init());</script>

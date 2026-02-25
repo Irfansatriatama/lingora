@@ -4,8 +4,8 @@
  * Data pengguna tetap di localStorage (tidak diurus SW)
  */
 
-const CACHE_NAME = 'lingora-v5';
-const CACHE_VERSION = 5;
+const CACHE_NAME = 'lingora-v6';
+const CACHE_VERSION = 6;
 
 // Semua aset yang perlu di-cache untuk offline
 const ASSETS_TO_CACHE = [
@@ -64,6 +64,7 @@ const ASSETS_TO_CACHE = [
   './assets/js/data/kr-vocab.js',
   './assets/js/data/kr-grammar.js',
   './assets/js/data/kr-dialogs.js',
+  './assets/js/data/kana-strokes.js',
 
   // Page JS
   './assets/js/pages/dashboard.js',
@@ -83,6 +84,7 @@ const ASSETS_TO_CACHE = [
   './assets/js/pages/hangul.js',
   './assets/js/pages/kr-vocab.js',
   './assets/js/pages/kr-grammar.js',
+  './assets/js/modules/kana-stroke-ui.js',
   './assets/js/pages/kr-dialog.js',
   './assets/js/pages/quiz-kr.js',
   './assets/js/pages/settings.js',

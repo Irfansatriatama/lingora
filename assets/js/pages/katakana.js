@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tab === 'flashcard') initFlashcard('all');
       if (tab === 'quiz')      initQuizMini();
       if (tab === 'srs')       initSrsTab();
+      if (tab === 'writing')   initWritingTab();
       if (tab !== 'flashcard' && fcInstance) { fcInstance.destroy(); fcInstance = null; }
     });
   });
@@ -304,6 +305,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ${AudioEngine.isSupported() ? AudioEngine.btnHTML(item.char, 'jp', 'audio-btn') : ''}
       `,
     });
+  }
+
+  // ── WRITING TAB (Fase 23) ─────────────────────────────────
+  let _writingTabInited = false;
+  function initWritingTab() {
+    if (_writingTabInited) return;
+    _writingTabInited = true;
+    const tabEl = document.getElementById('tab-writing');
+    if (!tabEl) return;
+    KanaStrokeUI.renderWritingTab(tabEl, KatakanaData.all, 'katakana');
   }
 
 });

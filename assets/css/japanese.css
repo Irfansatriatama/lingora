@@ -754,3 +754,289 @@
   display: flex;
   justify-content: flex-end;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   FASE 23 — Kana Stroke Order (Writing Tab)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Layout utama tab Menulis */
+.kana-writing-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: start;
+  min-height: 420px;
+}
+@media (max-width: 720px) {
+  .kana-writing-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sidebar pilih karakter */
+.kana-writing-sidebar {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+}
+.kana-writing-sidebar-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.kana-writing-char-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  max-height: 380px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.kana-writing-char-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 4px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface-1);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.kana-writing-char-btn:hover {
+  border-color: var(--accent);
+  background: var(--gold-soft);
+}
+.kana-writing-char-btn.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.kana-writing-char-btn .cjk {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+.kana-writing-romaji {
+  font-size: 0.6rem;
+  color: var(--text-3);
+  font-family: var(--font-mono, monospace);
+}
+.kana-writing-char-btn.active .kana-writing-romaji {
+  color: rgba(255,255,255,0.8);
+}
+.kana-writing-unavail-note {
+  font-size: 0.7rem;
+  color: var(--text-3);
+  line-height: 1.4;
+}
+
+/* Area utama stroke */
+.kana-writing-main {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Placeholder (belum dipilih karakter) */
+.kana-stroke-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--text-3);
+}
+.kana-stroke-placeholder-icon {
+  font-size: 3rem;
+  opacity: 0.4;
+}
+.kana-stroke-placeholder-text {
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 240px;
+}
+
+/* Panel stroke */
+.kana-stroke-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.kana-stroke-top {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* SVG area */
+.kana-stroke-svg-wrap {
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  background: var(--surface-2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+@media (max-width: 480px) {
+  .kana-stroke-svg-wrap { width: 120px; height: 120px; }
+}
+.kana-stroke-svg {
+  width: 100%;
+  height: 100%;
+}
+.kana-stroke-path {
+  transition: opacity 0.2s;
+}
+
+/* Info samping SVG */
+.kana-stroke-info {
+  flex: 1;
+}
+.kana-stroke-char-display {
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--text-1);
+  margin-bottom: 6px;
+}
+.kana-stroke-count-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.kana-stroke-step-label {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.4;
+  min-height: 2.2em;
+}
+
+/* Kontrol */
+.kana-stroke-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.kana-stroke-btn {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text-1);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.kana-stroke-btn:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.kana-stroke-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+.kana-stroke-play {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.kana-stroke-play:hover {
+  opacity: 0.88;
+}
+
+/* Daftar stroke */
+.kana-stroke-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.kana-stroke-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--surface-2);
+  cursor: pointer;
+  transition: all 0.15s;
+  opacity: 0.5;
+}
+.kana-stroke-item:hover {
+  border-color: var(--accent);
+  opacity: 0.9;
+}
+.kana-stroke-item.active {
+  border-color: var(--accent);
+  background: var(--gold-soft);
+  opacity: 1;
+}
+.kana-stroke-item.done {
+  opacity: 0.75;
+}
+.kana-stroke-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.kana-stroke-tip {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+
+/* Tips */
+.kana-stroke-tips {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--gold-soft);
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+/* Unavailable */
+.kana-stroke-unavailable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-3);
+}
+.kana-stroke-unavail-icon { font-size: 2.5rem; }
+.kana-stroke-unavail-msg { font-size: 0.9rem; color: var(--text-2); }
+.kana-stroke-unavail-hint { font-size: 0.78rem; }

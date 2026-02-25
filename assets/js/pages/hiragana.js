@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tab === 'flashcard') initFlashcard('all');
       if (tab === 'quiz')      initQuizMini();
       if (tab === 'srs')       initSrsTab();
+      if (tab === 'writing')   initWritingTab();
 
       // Destroy flashcard keyboard listener when not on flashcard tab
       if (tab !== 'flashcard' && fcInstance) {
@@ -365,6 +366,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ${AudioEngine.isSupported() ? AudioEngine.btnHTML(item.char, 'jp', 'audio-btn') : ''}
       `,
     });
+  }
+
+  // ── WRITING TAB (Fase 23) ─────────────────────────────────
+  let _writingTabInited = false;
+  function initWritingTab() {
+    if (_writingTabInited) return;
+    _writingTabInited = true;
+    const tabEl = document.getElementById('tab-writing');
+    if (!tabEl) return;
+    KanaStrokeUI.renderWritingTab(tabEl, HiraganaData.all, 'hiragana');
   }
 
 });

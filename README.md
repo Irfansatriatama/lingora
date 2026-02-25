@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 21.6 ✅ + FASE 22 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Integrasi Penuh Korea (Fase 21.6) — dikerjakan setelah Fase 22 |
+| **Fase Saat Ini** | FASE 23 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Stroke Order Animasi Hiragana & Katakana (Fase 23) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -153,6 +153,7 @@ lingora/
 │   │   ├── data/
 │   │   │   ├── hiragana.js             ← 104 karakter + metadata
 │   │   │   ├── katakana.js             ← 104 karakter + metadata
+│   │   │   ├── kana-strokes.js         ← [BARU — Fase 23] SVG stroke order 46 hiragana + 46 katakana
 │   │   │   ├── kanji.js                ← 278 kanji (N5–N1) + onyomi/kunyomi/contoh
 │   │   │   ├── jp-vocab.js             ← 225 kata JP, 15 tema
 │   │   │   ├── jp-grammar.js           ← 35 pola grammar N5–N4, 5 kategori
@@ -173,6 +174,7 @@ lingora/
 │   │   │   ├── progress.js             ← markLearned, favorites, quiz score
 │   │   │   ├── quiz.js                 ← QuizEngine (multiple choice)
 │   │   │   ├── stroke.js               ← Stroke order widget (SVG, Kanji)
+│   │   │   ├── kana-stroke-ui.js       ← [BARU — Fase 23] KanaStrokeUI (animasi stroke kana)
 │   │   │   ├── srs.js                  ← SRS Engine (SM-2 algorithm)
 │   │   │   ├── srs-ui.js               ← SRS UI renderer (reusable)
 │   │   │   ├── xp.js                   ← XPSystem (level, history, toast)
@@ -867,9 +869,39 @@ assets/css/quiz.css               [UPDATE] — UI hidden-character card
 
 **Catatan:** Gunakan `AudioEngine` yang sudah ada. Fallback graceful jika browser tidak punya voice `ko-KR`.
 
----
+### FASE 23 — Stroke Order Animasi (Hiragana & Katakana) ✅ SELESAI (2026-02-25)
 
-### FASE 23 — Stroke Order Animasi (Hiragana & Katakana)
+**Tujuan:** Menambahkan tab "✍️ Menulis" di halaman Hiragana dan Katakana yang menampilkan animasi urutan coretan (stroke order) interaktif.
+
+**Yang dikerjakan:**
+- `assets/js/data/kana-strokes.js` [BARU] — Data SVG path urutan stroke untuk **46 hiragana dasar** + **46 katakana dasar** (92 karakter total). Format: `{ strokes: [{d: 'SVG path', tip: 'deskripsi'}], tips: 'tips umum' }`. ViewBox 100×100.
+- `assets/js/modules/kana-stroke-ui.js` [BARU] — `KanaStrokeUI` module dengan:
+  - `render(container, strokeData, char, script)` — render panel animasi SVG untuk satu karakter
+  - `renderWritingTab(tabEl, characters, script)` — render tab Menulis lengkap dengan grid pilihan karakter
+  - Animasi SVG `strokeDashoffset` — setiap stroke muncul satu per satu dengan garis berwarna berbeda
+  - Kontrol: ▶ Animasi (auto-play), ◀ / ▶ (manual step), ↺ Reset
+  - Karakter guide transparan di belakang SVG (referensi visual)
+  - Panah arah (`marker-end`) di setiap stroke untuk menunjukkan arah coretan
+  - Klik item di daftar stroke untuk loncat ke step tertentu
+  - Fallback pesan jika karakter (dakuten/kombinasi) belum punya data
+- `pages/japanese/hiragana.html` [UPDATE] — Tambah tab "✍️ Menulis" + script `kana-strokes.js` + `kana-stroke-ui.js`
+- `pages/japanese/katakana.html` [UPDATE] — Idem untuk katakana
+- `assets/js/pages/hiragana.js` [UPDATE] — Tambah `initWritingTab()` yang dipanggil saat tab Writing aktif (lazy-init)
+- `assets/js/pages/katakana.js` [UPDATE] — Idem untuk katakana
+- `assets/css/japanese.css` [UPDATE] — Tambah section Fase 23: `.kana-writing-layout`, `.kana-stroke-panel`, `.kana-stroke-svg-wrap`, `.kana-stroke-controls`, `.kana-stroke-list`, `.kana-stroke-item`, animasi, responsive
+- `sw.js` [UPDATE] — Cache bump `lingora-v5` → `lingora-v6`, tambah `kana-strokes.js` + `kana-stroke-ui.js`
+
+**Fitur Tab "✍️ Menulis":**
+- Layout dua kolom: sidebar daftar karakter + area animasi utama
+- Grid 4 kolom karakter yang tersedia (46 hiragana / 46 katakana dasar)
+- Karakter aktif di-highlight dengan warna aksen
+- Panel animasi: SVG 160×160px dengan guide karakter di belakang
+- Setiap stroke diberi warna unik (merah, biru, hijau, ungu, ...)
+- Daftar stroke dengan nomor dan deskripsi — klik untuk navigasi
+- Tips menulis per karakter dan per stroke
+- Responsive: grid kolaps di mobile
+
+---
 
 **Tujuan:** Animasi urutan coretan (stroke order) untuk semua hiragana dan katakana. Kanji sudah punya stroke widget (Fase 4) — sekarang gilirannya kana.
 
@@ -1232,6 +1264,7 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v2.4 — Fase 21.5** | 2026-02-25 | Modul Dialog & Quiz Korea. **File baru:** `pages/korean/dialog.html` (viewer dialog A/B, filter level TOPIK, playthrough dengan TTS ko-KR, toggle romanisasi & terjemahan), `assets/js/pages/kr-dialog.js` (grid dialog, viewer, step prev/next, auto-speak TTS, XP), `pages/korean/quiz.html` (quiz KR: pilih/ketik, modul Hangul & Vocab KR, pilih jumlah soal & level TOPIK), `assets/js/pages/quiz-kr.js` (2 modul: hangul & kr-vocab, 3 tipe soal, normalisasi romanisasi, timer, feedback, review akhir). | ✅ |
 | **v2.5 — Fase 22** | 2026-02-25 | **Listening Mode (Audio Quiz)** untuk semua 3 quiz (JP, ZH, KR). **Perubahan utama:** Tombol mode baru `🎧 Listening` di selector mode setiap halaman quiz. Mode Listening: karakter soal **disembunyikan** (blur CSS), tombol 🔊 besar beranimasi pulse auto-play audio saat soal muncul, user jawab pilihan arti. Karakter terungkap setelah menjawab. Bonus XP **+5 per soal benar** di Listening mode, terakumulasi ditampilkan di layar hasil. Timer 25 detik (lebih panjang dari mode normal 20 detik). **File baru:** Tidak ada (semua update). **File diupdate:** `assets/css/quiz.css` (Fase 22 section: `.quiz-char-hidden`, `.listening-play-btn`, `.listening-mode-badge`, `.listening-bonus-badge`, `.listening-stat`, animasi `listenPulse`), `pages/japanese/quiz.html` (mode btn + `listeningWrap` + `statListeningXP` + audio.js), `pages/mandarin/quiz.html` (idem), `pages/korean/quiz.html` (idem), `assets/js/pages/quiz-jp.js` (listening state, `playListeningAudio`, `onAnswerListening`, update `buildKanaQuestion` + `buildKanjiQuestion`), `assets/js/pages/quiz-zh.js` (listening penuh, update `buildHanziQuestion` + `buildVocabQuestion`), `assets/js/pages/quiz-kr.js` (listening penuh, `renderListeningChoices`, `onAnswerListening`), `sw.js` (cache bump `lingora-v3` → `lingora-v4`). | ✅ |
 | **v2.6 — Fase 21.6** | 2026-02-25 | **Integrasi Penuh Korea** — menghubungkan semua modul KR ke sistem inti app. **Dashboard:** Tambah section Bahasa Korea (4 modul: Hangul, Kosakata KR, Grammar KR, Dialog KR) dengan progress bar di `dashboard.html` + `dashboard.js`. Tambah kutipan motivasi Korea (꿈). **Stats:** Update `stats.js` MODULES (tambah 4 modul KR) + ALL_BADGES (tambah 🌙 Hanŭl + 🌏 Poliglot) + quiz history name map KR. **Settings:** Tambah toggle `showRomanization` (romanisasi Hangul/Revised Romanization) di `settings.html` + `settings.js`. Update MODULES reset list (tambah 4 modul KR). **Report/PDF:** Update `report.js` MODULES (tambah 4 modul KR), ALL_BADGES (tambah 🌙 + 🌏), MODULE_NAME_MAP (KR + quiz-kr). **Badge System:** Tambah badge 🌙 `hangul_master` (hafal item di semua modul KR) + 🌏 `polyglot` (hafal item dari 3 bahasa JP+ZH+KR) ke `quiz.js` BadgeSystem.BADGES dengan `check()` function berbasis progress data. Update `checkAndAward()` untuk pass `progress` object ke check functions. **Progress:** Tambah panggilan `BadgeSystem.checkAndAward()` di `progress.js` `markLearned()` agar badge KR dicek saat belajar (bukan hanya saat quiz). **Challenge:** Tambah 3 template KR (Hangul, Kosakata KR, Grammar Korea) ke `challenge.js` TEMPLATES. **Manifest:** Tambah shortcut Quiz Korea di `manifest.json`. **SW:** Cache bump `lingora-v4` → `lingora-v5`. Tambah 4 data file KR, 5 page JS KR, 5 HTML KR ke `ASSETS_TO_CACHE`. | ✅ |
+| **v2.7 — Fase 23** | 2026-02-25 | **Stroke Order Animasi Hiragana & Katakana** — Tab "✍️ Menulis" baru di kedua halaman. **File baru:** `assets/js/data/kana-strokes.js` (data SVG path 46 hiragana + 46 katakana dasar), `assets/js/modules/kana-stroke-ui.js` (KanaStrokeUI: render panel animasi SVG, grid karakter, kontrol play/step/reset, animasi strokeDashoffset, panah arah). **File update:** `pages/japanese/hiragana.html` + `katakana.html` (tab baru + scripts baru), `assets/js/pages/hiragana.js` + `katakana.js` (fungsi `initWritingTab()` dengan lazy-init), `assets/css/japanese.css` (section Fase 23: layout dua kolom, SVG wrap, controls, stroke list, responsive), `sw.js` (cache bump v5→v6, tambah 2 file baru). | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 
