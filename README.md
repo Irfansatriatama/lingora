@@ -625,7 +625,7 @@ Fase 33 (Leaderboard — eks Fase 25)        ← Dulu di-hold
 | Sub-Fase | Nama | Isi | Status |
 |----------|------|-----|--------|
 | **21.1** | Rename & Rebranding | Update nama di semua file (HTML, JS, manifest, sw.js) | ✅ SELESAI |
-| **21.2** | Data Korea | 4 file data: `hangul.js`, `kr-vocab.js`, `kr-grammar.js`, `kr-dialogs.js` | 🔲 Belum |
+| **21.2** | Data Korea | 4 file data: `hangul.js`, `kr-vocab.js`, `kr-grammar.js`, `kr-dialogs.js` | ✅ SELESAI |
 | **21.3** | Modul Hangul | `hangul.html` + `hangul.js` + `korean.css` (3 tab: Tabel, Flashcard, SRS) | 🔲 Belum |
 | **21.4** | Modul Vocab & Grammar | `vocabulary.html` + `kr-vocab.js`, `grammar.html` + `kr-grammar.js` | 🔲 Belum |
 | **21.5** | Modul Dialog & Quiz | `dialog.html` + `kr-dialog.js`, `quiz.html` + `quiz-kr.js` | 🔲 Belum |
@@ -650,7 +650,7 @@ Seluruh referensi `NihonHan`/`nihonhan` di-rename ke `Lingora`/`lingora` sebelum
 
 ---
 
-#### FASE 21.2 — Data Korea 🔲
+#### FASE 21.2 — Data Korea ✅ SELESAI (2026-02-25)
 
 Buat 4 file data Korea murni (belum ada halaman UI). Semua data di `assets/js/data/`.
 
@@ -1214,6 +1214,7 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v1.18 — Fase 20** | — | PWA (Service Worker, Install, Offline) | ✅ |
 | **v1.19 — Fase 20.4** | — | Live Clock di Topbar Dashboard | ✅ |
 | **v2.0 — Fase 21.1** | 2026-02-25 | Rename & Rebranding NihonHan → Lingora. Update: semua 23 HTML, 43 JS, manifest.json (v3 bump), sw.js (lingora-v3), index.html, 404.html. Tagline diupdate ke 3 bahasa. Folder proyek: `lingora/`. | ✅ |
+| **v2.1 — Fase 21.2** | 2026-02-25 | Data Korea: `hangul.js` (14 konsonan + 21 vokal + 70 suku kata), `kr-vocab.js` (155 kata, 15 tema, TOPIK1/2), `kr-grammar.js` (27 pola, 5 kategori), `kr-dialogs.js` (6 dialog situasional TOPIK I). | ✅ |
 
 ## 11. Panduan untuk Claude Selanjutnya
 
