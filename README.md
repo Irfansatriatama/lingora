@@ -26,8 +26,8 @@ Aplikasi web interaktif untuk mempelajari Bahasa Jepang, Mandarin, dan Korea.
 
 | Info | Detail |
 |------|--------|
-| **Fase Saat Ini** | FASE 28 ✅ SELESAI |
-| **Fase Terakhir Dikerjakan** | Tema & Kustomisasi UI (Fase 28) |
+| **Fase Saat Ini** | FASE 29 ✅ SELESAI |
+| **Fase Terakhir Dikerjakan** | Backup & Restore Progress (Fase 29) |
 | **Nama Lama** | NihonHan (hanya JP + ZH) |
 | **Nama Baru** | Lingora (JP + ZH + KR) — ✅ berlaku mulai Fase 21.1 |
 | **Fase 16** | Di-hold (konten N3/N2 lanjutan — effort besar) |
@@ -188,7 +188,8 @@ lingora/
 │   │   │   ├── challenge.js            ← ChallengeSystem (harian, seed tanggal)
 │   │   │   ├── reminder.js             ← ReminderSystem (notifikasi browser)
 │   │   │   ├── pwa.js                  ← PWA Manager (install, update, offline)
-│   │   │   └── theme.js                ← [BARU — Fase 28] ThemeSystem (5 tema, font, radius)
+│   │   │   ├── theme.js                ← [BARU — Fase 28] ThemeSystem (5 tema, font, radius)
+│   │   │   └── backup.js               ← [BARU — Fase 29] BackupSystem (export/import JSON, auto-snapshot)
 │   │   │
 │   │   └── pages/
 │   │       ├── dashboard.js            ← XP, streak, challenge, SRS due, clock
@@ -602,7 +603,7 @@ Fase 27 (Mini Game)                         ← ✅ SELESAI
   ↓
 Fase 28 (Tema & Kustomisasi)                ← ✅ SELESAI
   ↓
-Fase 29 (Backup & Restore)                  ← Keamanan data
+Fase 29 (Backup & Restore)                  ← ✅ SELESAI
   ↓
 Fase 30 (Konten Lanjutan JP — eks Fase 16)  ← Dulu di-hold
 Fase 31 (Konten Lanjutan ZH — eks Fase 21) ← Dulu di-hold
@@ -619,7 +620,7 @@ Fase 32 (Leaderboard — eks Fase lama)        ← Dulu di-hold
 | 🟡 Sedang | 26 | Study Planner / Jadwal Belajar | Produktivitas | Sedang-Besar |
 | 🟢 Rendah | 27 | Mini Game | Gamifikasi | Sedang | ✅ |
 | 🟢 Rendah | 28 | Tema & Kustomisasi UI | UX | Kecil-Sedang | ✅ |
-| 🟢 Rendah | 29 | Backup & Restore Progress | Data | Kecil |
+| 🟢 Rendah | 29 | Backup & Restore Progress | Data | Kecil | ✅ |
 | ⏸️ Hold | 30 | Konten Lanjutan JP N3 (eks Fase 16) | Konten | Besar |
 | ⏸️ Hold | 31 | Konten Lanjutan ZH HSK4 (eks Fase 21) | Konten | Besar |
 | ⏸️ Hold | 32 | Leaderboard Lokal (eks Fase lama) | Gamifikasi | Sedang |
@@ -1187,47 +1188,27 @@ nh_color_theme                     → 'sakura' | 'zen' | 'neon-seoul' | 'bamboo
 nh_font                            → 'default' | 'rounded' | 'serif' | 'mono' (global)
 nh_radius                          → 'sharp' | 'default' | 'rounded' (global)
 nh_user_{id}_customization         → { colorTheme, font, radius, compactSidebar }
+nh_user_{id}_last_backup           → { timestamp, date } — info backup terakhir (Fase 29)
+nh_user_{id}_last_restore          → { timestamp, fromDate, fromUser } — info restore terakhir (Fase 29)
+auto_backups_{userId}              → [ { timestamp, data: BackupObj }, ... ] — max 3 snapshot (Fase 29)
 ```
 
 ---
 
-### FASE 29 — Backup & Restore Progress
+### FASE 29 — Backup & Restore Progress ✅ SELESAI (2026-02-25)
 
 **Tujuan:** User bisa export semua data progress ke file JSON dan import kembali di device lain — mengatasi ketakutan kehilangan progress jika localStorage terhapus.
 
-**Fitur:**
-- Export: tombol "Backup Data" → download `lingora-backup-[tanggal].json`
-- Import: tombol "Restore Data" → pilih file → semua progress pulih
-- Auto-backup lokal: setiap 7 hari simpan snapshot ke localStorage (max 3 snapshot)
-- Validasi: cek integritas file backup sebelum import
+**Yang dikerjakan:**
 
-**Format backup:**
-```json
-{
-  "version": "2.0",
-  "appName": "Lingora",
-  "exportDate": "2026-02-25",
-  "userId": "usr_xxx",
-  "userName": "Nama User",
-  "data": {
-    "progress": {},
-    "srs": {},
-    "favorites": {},
-    "xp": {},
-    "badges": {},
-    "activity": {},
-    "streak": {},
-    "challenges": {}
-  }
-}
-```
+**File baru:**
+- `assets/js/modules/backup.js` — BackupSystem module lengkap
 
-**File yang diupdate:**
-```
-assets/js/modules/backup.js         [BARU] — BackupSystem: export(), import(), validate()
-pages/settings.html                 [UPDATE] — section "Backup & Restore"
-assets/js/pages/settings.js         [UPDATE]
-```
+**File diupdate:**
+- `pages/settings.html` — Section "Backup & Restore Progress" baru (export, import drag-drop, auto-snapshot list). Versi diupdate ke 3.3.
+- `assets/js/pages/settings.js` — Logika interaksi backup: render status, export, file select & drag-drop, validasi, restore dengan konfirmasi, render auto-backup list
+- `assets/css/settings.css` — Style section backup (status bar, file label, auto-backup-item, dark mode)
+- `sw.js` — Cache bump `lingora-v11` → `lingora-v12`, tambah `backup.js`
 
 ---
 
@@ -1358,9 +1339,11 @@ pages/dashboard.html                [UPDATE] — link ke leaderboard
 | **v3.1 — Fase 27** | 2026-02-25 | **Mini Game** — 3 game interaktif untuk belajar sambil bermain. **File baru:** `pages/games.html` (hub 3 game), `pages/games/memory.html` (Memory Match), `pages/games/scramble.html` (Word Scramble), `pages/games/falling-kana.html` (Falling Kana arcade), `assets/js/pages/game-memory.js` (logika kartu pasangan: flip 3D CSS, timer, skor, XP +20/sesi), `assets/js/pages/game-scramble.js` (logika susun huruf: klik tile, cek jawaban, JP/ZH/KR, XP +3/kata), `assets/js/pages/game-falling.js` (arcade Canvas API: karakter jatuh, level speed, nyawa, XP per karakter), `assets/css/games.css` (semua style: memory-grid, kartu flip 3D, scramble-tile, falling canvas, dark mode support). **Game 1 Memory Match:** kategori Hiragana/Katakana/Hangul/Kanji N5, ukuran 8/12/18 pasang, animasi flip 3D CSS, shake on mismatch, glow on match. **Game 2 Word Scramble:** romanisasi diacak per karakter, tile klik untuk susun/ambil kembali, 3 bahasa, 5/10/15 soal. **Game 3 Falling Kana:** Canvas requestAnimationFrame, spawn karakter dengan interval adaptif, leveling setiap 10 benar, nyawa 3/5/10, gameover overlay. **Dashboard:** Quick-access card 3 icon game. **Sidebar:** Link Mini Game ditambahkan ke 24 halaman. **Manifest:** Shortcut Mini Game. **SW:** cache bump v9→v10, tambah games.css + 3 game JS + 4 game HTML. | ✅ |
 | **v3.2 — Fase 28** | 2026-02-25 | **Tema & Kustomisasi UI** — 5 tema warna + font picker + radius picker dengan preview real-time. **File baru:** `assets/css/themes.css` (5 tema via `[data-color-theme]` CSS variables, theme card UI, font/radius override), `assets/js/modules/theme.js` (ThemeSystem: getThemes, applyAll, applyColorTheme, applyFont, applyRadius, setColorTheme, setFont, setRadius, applyFromLocalStorage). **Settings page:** Section baru "Tema & Kustomisasi" dengan live preview card, grid 5 tema warna (Sakura/Zen/Neon Seoul/Bamboo/Midnight), font picker 4 pilihan (DM Sans/Nunito/Playfair/Mono), radius picker 3 pilihan (Tajam/Default/Bulat), tombol Reset ke Default. **Tema Midnight** otomatis mengaktifkan dark mode. **Anti-FOUC:** 30 halaman HTML diupdate dengan inline script tambahan (`nh_color_theme`, `nh_font`, `nh_radius`). **app.js:** `loadTheme()` diperluas memanggil `ThemeSystem.applyAll()` jika user login. **localStorage keys baru:** `nh_color_theme`, `nh_font`, `nh_radius` (global), `nh_user_{id}_customization` (per-user). **SW:** cache bump v10→v11, tambah themes.css + theme.js. | ✅ |
 
-## 11. Panduan untuk Claude Selanjutnya
+| **v3.3 — Fase 29** | 2026-02-25 | **Backup & Restore Progress** — Keamanan data user dengan export/import JSON + auto-snapshot. **File baru:** `assets/js/modules/backup.js` (BackupSystem: `exportData`, `downloadBackup`, `validate`, `importData`, `readFile`, `autoBackup`, `getAutoBackups`, `restoreAutoBackup`, `getLastBackupInfo`, `getLastRestoreInfo`, `formatDate`). **Fitur Export:** Tombol "Download Backup" → unduh file `lingora-backup-{tanggal}.json` berisi semua progress, SRS (11 modul), XP, badge, activity, streak, challenge, settings, onboarding, planner, customization. **Fitur Import:** Drag-drop atau klik untuk pilih file JSON → validasi otomatis (appName, version, data integrity) → konfirmasi sebelum restore → data ditimpa ke user aktif. **Auto-backup:** Snapshot lokal otomatis setiap 7 hari (max 3), tersimpan di localStorage. Tiap snapshot bisa di-restore atau diunduh langsung dari UI. **Status bar:** Tampil info backup & restore terakhir dengan format tanggal ID. **CSS:** Section baru di `settings.css` (backup-status-bar, backup-import-wrap, backup-file-label, auto-backup-list, auto-backup-item, dark mode support). **localStorage keys baru:** `auto_backups_{userId}` (snapshot list), `nh_user_{id}_last_backup`, `nh_user_{id}_last_restore`. **SW:** cache bump `lingora-v11` → `lingora-v12`, tambah `backup.js`. Versi app: 3.2 → 3.3. | ✅ |
 
-> **Fase saat ini:** FASE 28 ✅ SELESAI
+
+
+> **Fase saat ini:** FASE 29 ✅ SELESAI
 
 ### Konteks Proyek Saat Ini
 

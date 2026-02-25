@@ -404,6 +404,57 @@
         </div>
       </div>
 
+      <!-- Backup & Restore (Fase 29) -->
+      <div class="settings-section">
+        <div class="settings-section-title">&#128190; Backup &amp; Restore Progress</div>
+        <div class="settings-card">
+
+          <!-- Status bar -->
+          <div class="backup-status-bar" id="backup-status-bar">
+            <span id="backup-last-info">Memeriksa riwayat backup...</span>
+          </div>
+
+          <!-- Export -->
+          <div class="settings-row" style="align-items:center; flex-wrap:wrap; gap:8px;">
+            <div class="settings-row-info">
+              <div class="settings-row-label">&#128229; Export / Backup Data</div>
+              <div class="settings-row-desc">Unduh semua progress, SRS, XP, badge, dan pengaturan sebagai file <code>.json</code>. Simpan di tempat aman untuk restore nanti.</div>
+            </div>
+            <button class="btn btn-primary btn-sm" id="btn-backup-export">&#128229; Download Backup</button>
+          </div>
+
+          <div class="settings-divider"></div>
+
+          <!-- Import -->
+          <div class="settings-row" style="align-items:flex-start; flex-wrap:wrap; gap:8px;">
+            <div class="settings-row-info">
+              <div class="settings-row-label">&#128228; Import / Restore Data</div>
+              <div class="settings-row-desc">Pulihkan progress dari file backup. Data saat ini akan ditimpa oleh isi file. Pastikan file berasal dari Lingora.</div>
+            </div>
+            <div class="backup-import-wrap" id="backup-import-wrap">
+              <label class="backup-file-label" for="backup-file-input">
+                <span class="backup-file-icon">&#128196;</span>
+                <span id="backup-file-name">Klik atau seret file .json ke sini</span>
+              </label>
+              <input type="file" id="backup-file-input" accept=".json,application/json" style="display:none;">
+              <button class="btn btn-outline btn-sm" id="btn-backup-restore" disabled>&#128228; Restore</button>
+            </div>
+          </div>
+
+          <div class="settings-divider"></div>
+
+          <!-- Auto-backup list -->
+          <div class="settings-row-info" style="margin-bottom:10px;">
+            <div class="settings-row-label">&#128204; Snapshot Otomatis</div>
+            <div class="settings-row-desc">Lingora menyimpan snapshot otomatis setiap 7 hari (maks 3). Gunakan untuk restore darurat tanpa perlu file eksternal.</div>
+          </div>
+          <div id="auto-backup-list" class="auto-backup-list">
+            <!-- rendered by JS -->
+          </div>
+
+        </div>
+      </div>
+
       <!-- Tentang -->
       <div class="settings-section">
         <div class="settings-section-title">&#8505; Tentang Aplikasi</div>
@@ -412,7 +463,7 @@
             <div class="about-logo cjk">日</div>
             <div class="about-info">
               <div class="about-name">Lingora</div>
-              <div class="about-version">Versi 3.2 — Fase 28 (Tema & Kustomisasi UI)</div>
+              <div class="about-version">Versi 3.3 — Fase 29 (Backup &amp; Restore)</div>
               <div class="about-desc">Aplikasi belajar Bahasa Jepang, Mandarin &amp; Korea offline. Pure localStorage, tanpa server.</div>
             </div>
           </div>
@@ -467,6 +518,7 @@
 <script src="../assets/js/modules/theme.js"></script>
 <script src="../assets/js/modules/audio.js"></script>
 <script src="../assets/js/modules/reminder.js"></script>
+<script src="../assets/js/modules/backup.js"></script>
 <script src="../assets/js/pages/settings.js"></script>
 <script src="../assets/js/modules/pwa.js"></script>
 <script>document.addEventListener("DOMContentLoaded", () => PWAManager.init());</script>

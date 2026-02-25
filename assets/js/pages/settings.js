@@ -379,6 +379,195 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ── Backup & Restore (Fase 29) ─────────────────────────
+  (function initBackupSection() {
+    if (!window.BackupSystem) return;
+
+    // Trigger auto-backup jika sudah waktunya
+    BackupSystem.autoBackup(user.id);
+
+    // Tampilkan status backup terakhir
+    const backupStatusBar = document.getElementById('backup-status-bar');
+    const backupLastInfo  = document.getElementById('backup-last-info');
+
+    function renderBackupStatus() {
+      const info = BackupSystem.getLastBackupInfo(user.id);
+      const restoreInfo = BackupSystem.getLastRestoreInfo(user.id);
+      if (!backupLastInfo) return;
+      if (info) {
+        backupLastInfo.innerHTML = `
+          ✅ Backup terakhir: <strong>${BackupSystem.formatDate(info.timestamp)}</strong>
+          ${restoreInfo ? ` &nbsp;|&nbsp; 🔁 Restore terakhir: <strong>${BackupSystem.formatDate(restoreInfo.timestamp)}</strong>` : ''}
+        `;
+        if (backupStatusBar) backupStatusBar.className = 'backup-status-bar status-ok';
+      } else {
+        backupLastInfo.textContent = '⚠ Belum ada backup. Disarankan backup sekarang untuk keamanan data.';
+        if (backupStatusBar) backupStatusBar.className = 'backup-status-bar status-warn';
+      }
+    }
+    renderBackupStatus();
+
+    // Tombol Download Backup
+    const btnExport = document.getElementById('btn-backup-export');
+    if (btnExport) {
+      btnExport.addEventListener('click', () => {
+        const result = BackupSystem.downloadBackup(user.id);
+        if (result.ok) {
+          App.toast(`✅ Backup berhasil diunduh! (${result.date})`, 'success', 3000);
+          renderBackupStatus();
+        } else {
+          App.toast('Gagal membuat backup: ' + (result.reason || 'error'), 'error', 3000);
+        }
+      });
+    }
+
+    // File input & drag-drop
+    const fileInput     = document.getElementById('backup-file-input');
+    const fileNameEl    = document.getElementById('backup-file-name');
+    const btnRestore    = document.getElementById('btn-backup-restore');
+    const importWrap    = document.getElementById('backup-import-wrap');
+    let pendingBackup   = null;
+
+    function handleFileSelect(file) {
+      if (!file) return;
+      BackupSystem.readFile(file).then(obj => {
+        const check = BackupSystem.validate(obj);
+        if (!check.valid) {
+          App.toast('File tidak valid: ' + check.reason, 'error', 4000);
+          if (fileNameEl) fileNameEl.textContent = 'Klik atau seret file .json ke sini';
+          if (btnRestore) btnRestore.disabled = true;
+          pendingBackup = null;
+          return;
+        }
+        pendingBackup = obj;
+        if (fileNameEl) fileNameEl.textContent = `📁 ${file.name} — Backup: ${obj.exportDate} (${obj.userName})`;
+        if (btnRestore) btnRestore.disabled = false;
+        App.toast('File valid! Klik Restore untuk memulihkan.', 'success', 3000);
+      }).catch(err => {
+        App.toast('Gagal membaca file: ' + err.message, 'error', 3000);
+      });
+    }
+
+    if (fileInput) {
+      fileInput.addEventListener('change', () => handleFileSelect(fileInput.files[0]));
+      // Make label clickable
+      const fileLabel = fileInput.previousElementSibling;
+      if (fileLabel) fileLabel.addEventListener('click', () => fileInput.click());
+    }
+
+    // Drag-drop ke wrap
+    if (importWrap) {
+      importWrap.addEventListener('dragover', e => {
+        e.preventDefault();
+        importWrap.classList.add('drag-over');
+      });
+      importWrap.addEventListener('dragleave', () => importWrap.classList.remove('drag-over'));
+      importWrap.addEventListener('drop', e => {
+        e.preventDefault();
+        importWrap.classList.remove('drag-over');
+        handleFileSelect(e.dataTransfer.files[0]);
+      });
+    }
+
+    // Tombol Restore
+    if (btnRestore) {
+      btnRestore.addEventListener('click', () => {
+        if (!pendingBackup) return;
+        showConfirm(
+          'Restore Data?',
+          `Data progress saat ini akan ditimpa oleh backup dari <strong>${pendingBackup.exportDate}</strong> (${pendingBackup.userName}). Proses ini tidak bisa dibatalkan.`,
+          () => {
+            const result = BackupSystem.importData(user.id, pendingBackup);
+            if (result.ok) {
+              App.toast(`✅ Data berhasil dipulihkan dari backup ${result.exportDate}! Harap refresh halaman.`, 'success', 5000);
+              renderBackupStatus();
+              pendingBackup = null;
+              if (fileNameEl) fileNameEl.textContent = 'Klik atau seret file .json ke sini';
+              if (btnRestore) btnRestore.disabled = true;
+              if (fileInput) fileInput.value = '';
+            } else {
+              App.toast('Gagal restore: ' + result.reason, 'error', 4000);
+            }
+          }
+        );
+      });
+    }
+
+    // Render daftar auto-backup
+    const autoBackupList = document.getElementById('auto-backup-list');
+    function renderAutoBackups() {
+      if (!autoBackupList) return;
+      const list = BackupSystem.getAutoBackups(user.id);
+      if (!list.length) {
+        autoBackupList.innerHTML = '<p class="auto-backup-empty">Belum ada snapshot otomatis.</p>';
+        return;
+      }
+      autoBackupList.innerHTML = list.map((b, i) => `
+        <div class="auto-backup-item">
+          <div class="auto-backup-info">
+            <span class="auto-backup-icon">&#128204;</span>
+            <div>
+              <div class="auto-backup-date">Snapshot ${i + 1} — ${BackupSystem.formatDate(b.timestamp)}</div>
+              <div class="auto-backup-user">User: ${b.data.userName || '-'} | Backup: ${b.data.exportDate || '-'}</div>
+            </div>
+          </div>
+          <div class="auto-backup-actions">
+            <button class="btn btn-sm btn-outline" data-auto-restore="${i}">&#128228; Restore</button>
+            <a href="#" class="btn btn-sm btn-outline" data-auto-download="${i}">&#128229; Unduh</a>
+          </div>
+        </div>
+      `).join('');
+
+      // Bind restore auto-backup
+      autoBackupList.querySelectorAll('[data-auto-restore]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.autoRestore);
+          const snap = BackupSystem.getAutoBackups(user.id)[idx];
+          showConfirm(
+            'Restore Snapshot Otomatis?',
+            `Data saat ini akan ditimpa oleh snapshot dari <strong>${BackupSystem.formatDate(snap && snap.timestamp)}</strong>.`,
+            () => {
+              const result = BackupSystem.restoreAutoBackup(user.id, idx);
+              if (result.ok) {
+                App.toast('✅ Snapshot berhasil dipulihkan! Harap refresh halaman.', 'success', 5000);
+                renderBackupStatus();
+              } else {
+                App.toast('Gagal restore snapshot: ' + result.reason, 'error', 3000);
+              }
+            }
+          );
+        });
+      });
+
+      // Bind download auto-backup
+      autoBackupList.querySelectorAll('[data-auto-download]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const idx = parseInt(btn.dataset.autoDownload);
+          const list2 = BackupSystem.getAutoBackups(user.id);
+          if (!list2[idx]) return;
+          const obj = list2[idx].data;
+          try {
+            const json = JSON.stringify(obj, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `lingora-snapshot-${obj.exportDate}-${idx + 1}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            App.toast('Snapshot diunduh.', 'success', 2000);
+          } catch {
+            App.toast('Gagal mengunduh snapshot.', 'error', 2000);
+          }
+        });
+      });
+    }
+    renderAutoBackups();
+  })();
+
   // ── Confirm dialog ────────────────────────────────────────
   const backdrop   = document.getElementById('confirm-backdrop');
   const titleEl    = document.getElementById('confirm-title');
